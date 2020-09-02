@@ -1,43 +1,32 @@
 <template>
   <div id="app">
-    <div id="mainbar">
-      <menubar/>
-      <loginbar></loginbar>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
     </div>
-    <div id="content">
-
-    </div>
+    <router-view/>
   </div>
 </template>
 
-<script>
-import menubar from './components/menubar.vue'
-import loginbar from './components/loginbar.vue'
-
-export default {
-  name: 'App',
-  components: {
-    menubar,
-    loginbar
-  }
-}
-</script>
-
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F4F9FA;
-}
-#mainbar {
-  background: #FFFFFF;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-#content {
   text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
