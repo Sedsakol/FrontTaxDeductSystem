@@ -1,10 +1,13 @@
 <template>
   <div id="app">
+    <div id="background">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view />
+    </div>
   </div>
 </template>
 
@@ -15,8 +18,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  
 }
-
+#background{
+  background: #E5E5E5;
+  width : 100%;
+  height : 100%;
+}
 #nav {
   padding: 30px;
 }
