@@ -4,7 +4,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/regis">Regis</router-link>
     </div>
     <router-view />
     </div>
@@ -12,8 +13,16 @@
 </template>
 
 <style>
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Prompt', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat&family=Prompt&display=swap');
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
