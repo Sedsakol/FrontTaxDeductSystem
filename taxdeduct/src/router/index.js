@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Regis from "../views/Regis.vue";
+import TaxCalculate from "../views/TaxCalculate.vue";
 
 
 Vue.use(VueRouter);
@@ -31,6 +32,11 @@ const routes = [
     path: "/regis",
     name: "Regis",
     component: Regis
+  },
+  {
+    path: "/taxCalculate",
+    name: "TaxCalculate",
+    component: TaxCalculate
   },
 ];
 
