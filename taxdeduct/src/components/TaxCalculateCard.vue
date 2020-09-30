@@ -2,7 +2,7 @@
     <div>
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
-        <div class="card-body ">
+        <div class="card-body">
           <h4 class="card-title mb-4 mt-1">คำนวณภาษี</h4>
           <form>
             <div class="form-group row">

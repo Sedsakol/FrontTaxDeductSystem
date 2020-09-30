@@ -6,7 +6,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/regis">Regis</router-link> |
-      <router-link to="/taxCalculate">คำนวณภาษี</router-link>
+      <router-link to="/taxCalculate">คำนวณภาษี</router-link> |
+      <router-link to="/taxDeduct">ลดหย่อนภาษี</router-link>
     </div>
     <router-view />
     </div>
