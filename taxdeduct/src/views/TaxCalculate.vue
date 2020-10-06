@@ -1,16 +1,13 @@
 <template>
     <div>
-        <Bar/>
         <TaxCalculateCard/>
     </div>
 </template>
 <script>
-import Bar from "../components/Bar"
-import TaxCalculateCard from "../components/TaxCalculateCard"
+import TaxCalculateCard from "@/components/TaxCalculateCard.vue"
 export default {
     name : 'TaxCalculate',
     components : {
-        Bar,
         TaxCalculateCard,
     }
 }

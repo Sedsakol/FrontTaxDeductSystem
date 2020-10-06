@@ -55,9 +55,9 @@
                 </div>
                 <label class="col-sm-2 col-form-label">คน</label>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <router-link to="/taxDeduct"><button type="submit" class="btn btn-primary btn-block">
               ถัดไป
-            </button>
+            </button></router-link>
           </form>
         </div>
       </div>

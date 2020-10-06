@@ -1,16 +1,13 @@
 <template>
     <div>
-        <Bar/>
         <RegisCard/>
     </div>
 </template>
 <script>
-import Bar from "../components/Bar"
-import RegisCard from "../components/RegisCard"
+import RegisCard from "@/components/RegisCard.vue"
 export default {
     name : 'Regis',
     components : {
-        Bar,
         RegisCard,
     }
 }

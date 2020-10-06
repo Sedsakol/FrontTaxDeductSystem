@@ -14,7 +14,9 @@
                   เข้าสู่ระบบด้วย Facebook
                   </a> -->
             </div>
-            <hr />
+            <div class='hr'>
+              <span class='hr-title'>หรือ</span>
+            </div>
             <div class="form-group">
               <input
                 type="text"
