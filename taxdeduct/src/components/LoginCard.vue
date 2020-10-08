@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="card">
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body ">
@@ -10,46 +10,48 @@
                 ><i class="fa fa-facebook"></i>
                 เข้าสู่ระบบด้วย Facebook
               </a>
-              <!-- <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>
-                  เข้าสู่ระบบด้วย Facebook
-                  </a> -->
             </div>
             <div class='hr'>
               <span class='hr-title'>หรือ</span>
             </div>
-            <div class="form-group">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="อีเมล"
+            <b-form-group>
+              <b-form-input 
+                v-model = "email" 
+                type = "email"
+                placeholder = "อีเมล"
+                lazy-formatter
+                :formatter = "formatter"
                 required
               />
-            </div>
-            <div class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                placeholder="รหัสผ่าน"
+            </b-form-group>
+
+            <b-form-group>
+              <b-form-input 
+                v-model = "password" 
+                type = "password"
+                placeholder = "รหัสผ่าน"
                 required
               />
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" />
-              <label class="form-check-label"
-                >ยอมรับข้อตกลงและเงื่อนไขการใช้งาน</label
-              >
-            </div>
-            <!-- <input
-                  type="submit"
-                  class="btn btn-primary btn-block"
-                  value="เข้าสู่ระบบ"
-                  /> -->
+            </b-form-group>
+
+            <b-form-checkbox
+              v-model = "term_status"
+              value = "accepted"
+              unchecked-value = "not_accepted"
+            >
+              ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
+            </b-form-checkbox>
+
+            <!-- status debug-->
+            <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
+            <div>State: <strong>{{ email }}</strong></div>
+
             <button type="submit" class="btn btn-primary btn-block">
               เข้าสู่ระบบ
             </button>
             <div class="d-flex justify-content-center links">
               ยังไม่มีบัญชีผู้ใช้งาน?
-              <a href="#" class="ml-2">สร้างบัญชีตอนนี้</a>
+              <router-link to="/regis"><a href="#" class="ml-2">สร้างบัญชีตอนนี้</a></router-link>
             </div>
           </form>
         </div>
@@ -59,9 +61,34 @@
 </template>
 
 <script>
+
 export default {
   name: "LoginCard",
+
+  data(){
+    return{
+      // user: {
+      //   email: '',
+      //   password: '',
+      // },
+      email: '',
+      password: '',
+      term_status: 'not_accepted',
+    }
+  },
+
+  methods: {
+    // comment* to format email -> lowercase
+    formatter(value) {
+        return value.toLowerCase()
+    }
+  }
+
 };
+
+
 </script>
 
-<style></style>
+<style>
+
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="card">
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body ">
@@ -13,42 +13,55 @@
             <div class='hr'>
               <span class='hr-title'>หรือ</span>
             </div>
-            <div class="form-group">
-              <input
-                type="email"
-                class="form-control"
-                placeholder="อีเมล"
+            <b-form-group>
+              <b-form-input 
+                v-model = "email" 
+                type = "email"
+                placeholder = "อีเมล"
+                lazy-formatter
+                :formatter = "formatter"
                 required
               />
-            </div>
-            <div class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                placeholder="รหัสผ่าน"
+            </b-form-group>
+
+            <b-form-group>
+              <b-form-input 
+                v-model = "password" 
+                type = "password"
+                placeholder = "รหัสผ่าน"
+                :state = "password_match"
                 required
               />
-            </div>
-            <div class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                placeholder="ยืนยันรหัสผ่าน"
+            </b-form-group>
+            <b-form-group>
+              <b-form-input 
+                v-model = "confirm_password" 
+                type = "password"
+                placeholder = "ยืนยันรหัสผ่าน"
+                :invalid-feedback = "input-live-feedback"
+                :state = "password_match"
                 required
               />
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck" />
-              <!-- ### COMMENT ###  -->
-              <!-- id="dropdownCheck" and for="dropdownCheck" make it can check by click text -->
-              <label class="form-check-label" for="dropdownCheck">ยอมรับข้อตกลงและเงื่อนไขการใช้งาน</label>
-            </div>
+              <!-- This will only be shown if the preceding input has an invalid state -->
+              <b-form-invalid-feedback id = "input-live-feedback">
+                รหัสผ่านไม่ตรงกัน
+              </b-form-invalid-feedback>
+            </b-form-group>
+
+            <b-form-checkbox
+              v-model = "term_status"
+              value = "accepted"
+              unchecked-value = "not_accepted"
+            >
+              ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
+            </b-form-checkbox>
+
             <button type="submit" class="btn btn-primary btn-block">
               สร้างบัญชี
             </button>
             <div class="d-flex justify-content-center links">
               มีบัญชีผู้ใช้งานอยู่แล้ว?
-              <a href="#" class="ml-2">เข้าสู่ระบบตอนนี้</a>
+              <router-link to="/login"><a href="#" class="ml-2">เข้าสู่ระบบตอนนี้</a></router-link>
             </div>
           </form>
         </div>
@@ -58,18 +71,33 @@
 </template>
 
 <script>
+
 export default {
-  name: "LoginCard",
+  name: "RegisCard",
+
+  computed: {
+    password_match(){
+      return null
+    }
+  },
+
+  data(){
+    return{
+      email: '',
+      password: '',
+      confirm_password: '',
+      term_status: 'not_accepted',
+    }
+  }
 };
 </script>
 
 <style>
-
 div.hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #bdbdbd;
   text-align: center;
   height: 0px;
   line-height: 0px;
@@ -78,6 +106,4 @@ div.hr {
   background-color: #fff;
   padding: 0 8px;
 }
-
-
 </style>

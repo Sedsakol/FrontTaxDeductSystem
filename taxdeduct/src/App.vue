@@ -33,15 +33,8 @@ export default {
   width: 100%;
   height: 100%;
 }
-#nav {
-  padding: 30px;
+#card{
+    padding: 56px 0px 56px 0px;
 }
 
-#nav a {
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #57A3B3;
-}
 </style>

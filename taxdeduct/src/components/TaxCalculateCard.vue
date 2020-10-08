@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="card">
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body">
@@ -8,14 +8,14 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">เงินเดือน (ต่อเดือน)</label>
                 <div>
-                    <input type="text" class="form-control" placeholder="0">
+                    <input type="number" class="form-control" placeholder="0">
                 </div>
                 <label class="col-sm-2 col-form-label">บาท</label>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">รายได้อื่น ๆ (ต่อปี)</label>
                 <div>
-                    <input type="text" class="form-control" placeholder="0">
+                    <input type="number" class="form-control" placeholder="0">
                 </div>
                 <label class="col-sm-2 col-form-label">บาท</label>
             </div>
