@@ -37,4 +37,40 @@ export default {
     padding: 56px 0px 56px 0px;
 }
 
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #175E7A !important;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #57A3B3 !important;
+  width: 100%;
+  /* width: 300px; */
+  border: none;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus{
+  background-color: #ffffff !important;
+  border-color: #175E7A !important;
+  color: #175E7A ;
+}
+
+.btn-outline-primary{
+  border-color: #57A3B3 !important;
+  color: #57A3B3;
+  width: 100%;
+  /* width: 300px; */
+}
+
+.form-control{
+  width: 100%;
+  /* width: 300px; */
+}
+.form-control:focus {
+  border-color: #57A3B3;
+  box-shadow: 0 0 0 0.2rem #87D7DE;
+}
+
 </style>

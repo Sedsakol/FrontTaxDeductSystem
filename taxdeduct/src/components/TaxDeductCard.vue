@@ -85,10 +85,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-primary btn-block">
+                        <router-link to="/taxCalculate"><button type="button" class="btn btn-outline-primary">
                             ย้อนกลับ
-                        </button>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        </button></router-link>
+                        <button type="submit" class="btn btn-primary">
                             ถัดไป
                         </button>
                     </form>

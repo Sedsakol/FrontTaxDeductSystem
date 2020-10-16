@@ -2,14 +2,11 @@
   <div id="card">
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
-        <div class="card-body ">
+        <div class="card-body">
           <h4 class="card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
           <form>
-            <div class="form-group social-btn">
-              <a href="#" class="btn btn-primary btn-block btn-facebook"
-                ><i class="fa fa-facebook"></i>
-                เข้าสู่ระบบด้วย Facebook
-              </a>
+            <div class="form-group">
+              <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
             <div class='hr'>
               <span class='hr-title'>หรือ</span>
@@ -34,19 +31,11 @@
               />
             </b-form-group>
 
-            <b-form-checkbox
-              v-model = "term_status"
-              value = "accepted"
-              unchecked-value = "not_accepted"
-            >
-              ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
-            </b-form-checkbox>
-
             <!-- status debug-->
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
-            <div>State: <strong>{{ email }}</strong></div>
+            <!-- <div>State: <strong>{{ email }}</strong></div> -->
 
-            <button type="submit" class="btn btn-primary btn-block">
+            <button type="submit" class="btn btn-primary" block>
               เข้าสู่ระบบ
             </button>
             <div class="d-flex justify-content-center links">

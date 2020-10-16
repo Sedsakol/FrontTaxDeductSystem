@@ -9,9 +9,9 @@
           <b-nav-item><router-link to="/suggestion">แนะนำการลงทุน</router-link></b-nav-item>
           <b-nav-item><router-link to="/about">เกี่ยวกับเรา</router-link></b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav id="item" class="ml-auto">
           <b-nav-item><router-link to="/login">เข้าสู่ระบบ</router-link></b-nav-item>
-          <b-nav-item><router-link to="/regis"><b-button variant="info">สร้างบัญชี</b-button></router-link></b-nav-item>
+          <b-nav-item><router-link to="/regis"><button class="btn btn-primary">สร้างบัญชี</button></router-link></b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -36,12 +36,15 @@ export default {
 
 #bar a {
   color: #2c3e50;
-  /* text-decoration: none; */
   padding-left: 16px;
 }
 
+#bar a:hover,
+/* #bar a.router-link-active, */
 #bar a.router-link-exact-active {
   color: #57A3B3;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 

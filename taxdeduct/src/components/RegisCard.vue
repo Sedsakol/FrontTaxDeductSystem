@@ -2,13 +2,11 @@
   <div id="card">
     <div class="d-flex justify-content-md-center"> 
       <div class="card text-center w-50 col-md-auto">
-        <div class="card-body ">
+        <div class="card-body">
           <h4 class="card-title mb-4 mt-1">สร้างบัญชี</h4>
           <form>
-            <div class="form-group social-btn">
-              <a href="#" class="btn btn-primary btn-block btn-facebook"><i class="fa fa-facebook"></i>
-              เข้าสู่ระบบด้วย Facebook
-              </a>
+            <div class="form-group">
+              <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
             <div class='hr'>
               <span class='hr-title'>หรือ</span>
@@ -52,16 +50,16 @@
               v-model = "term_status"
               value = "accepted"
               unchecked-value = "not_accepted"
+              required
             >
               ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
             </b-form-checkbox>
 
-            <button type="submit" class="btn btn-primary btn-block">
-              สร้างบัญชี
-            </button>
+            <button block class="btn btn-primary" type="submit">สร้างบัญชี</button>
+
             <div class="d-flex justify-content-center links">
               มีบัญชีผู้ใช้งานอยู่แล้ว?
-              <router-link to="/login"><a href="#" class="ml-2">เข้าสู่ระบบตอนนี้</a></router-link>
+              <router-link to="/login"><a class="ml-2">เข้าสู่ระบบตอนนี้</a></router-link>
             </div>
           </form>
         </div>
@@ -101,9 +99,19 @@ div.hr {
   text-align: center;
   height: 0px;
   line-height: 0px;
+  /* width: 300px; */
 }
 .hr-title {
   background-color: #fff;
   padding: 0 8px;
 }
+.fullwidth {
+  width: 300px;
+  align-items: center;
+}
+#card a {
+  color: #57A3B3;
+}
+
+
 </style>
