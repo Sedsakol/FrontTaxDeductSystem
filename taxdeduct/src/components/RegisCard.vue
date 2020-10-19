@@ -4,7 +4,7 @@
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body">
           <h4 class="card-title mb-4 mt-1">สร้างบัญชี</h4>
-          <form>
+          <form @submit.prevent = "user_regis">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
@@ -36,14 +36,9 @@
                 v-model = "confirm_password" 
                 type = "password"
                 placeholder = "ยืนยันรหัสผ่าน"
-                :invalid-feedback = "input-live-feedback"
                 :state = "password_match"
                 required
               />
-              <!-- This will only be shown if the preceding input has an invalid state -->
-              <b-form-invalid-feedback id = "input-live-feedback">
-                รหัสผ่านไม่ตรงกัน
-              </b-form-invalid-feedback>
             </b-form-group>
 
             <b-form-checkbox
@@ -72,21 +67,41 @@
 
 export default {
   name: "RegisCard",
-
-  computed: {
-    password_match(){
-      return null
-    }
-  },
-
   data(){
     return{
       email: '',
       password: '',
       confirm_password: '',
-      term_status: 'not_accepted',
+      term_status: '',
     }
-  }
+  },
+  computed: {
+    password_match(){
+      if(this.password !== '' && this.confirm_password !== '' && this.password === this.confirm_password){
+        return true
+      }
+      else if(this.password !== this.confirm_password){
+        return false
+      }
+      return null
+    },
+
+  },
+  methods: {
+    user_regis(){
+      if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
+        this.$router.push('/login')
+        // this.dispatch('user_regis',{email: this.email, password: this.password})
+      }
+      if(this.password_match !== true){
+        return
+      }
+      return
+      
+    }
+  },
+
+  
 };
 </script>
 
