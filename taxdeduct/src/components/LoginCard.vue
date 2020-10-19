@@ -4,7 +4,7 @@
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body">
           <h4 class="card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
-          <form>
+          <form @submit.prevent = "user_login">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
@@ -70,6 +70,11 @@ export default {
     // comment* to format email -> lowercase
     formatter(value) {
         return value.toLowerCase()
+    },
+    user_login(){
+      if(this.email == 'numtan@gmail.com' && this.password == 'nnn333'){
+        this.$router.push('/')
+      } 
     }
   }
 
