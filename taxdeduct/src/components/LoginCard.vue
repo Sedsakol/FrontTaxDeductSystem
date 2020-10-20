@@ -1,9 +1,10 @@
 <template>
   <div id="card">
     <div class="d-flex justify-content-md-center"> 
-      <div class="card text-center w-50 col-md-auto">
+      <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
+          <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
+          
           <form @submit.prevent = "user_login" id = "login">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
@@ -38,9 +39,9 @@
             <button type="submit" class="btn btn-primary" block>
               เข้าสู่ระบบ
             </button>
-            <div class="d-flex justify-content-center links">
+            <div class="text-center">
               ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/regis"><a href="#" class="ml-2">สร้างบัญชีตอนนี้</a></router-link>
+              <router-link to="/login">สร้างบัญชีตอนนี้</router-link>
             </div>
           </form>
         </div>
@@ -85,7 +86,6 @@ export default {
 <style>
 .card-body{
   align-self: center;
-  
 }
 .card-body #login{
   width: 300px;

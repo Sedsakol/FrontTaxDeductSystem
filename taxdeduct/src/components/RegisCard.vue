@@ -1,9 +1,10 @@
 <template>
   <div id="card">
     <div class="d-flex justify-content-md-center"> 
-      <div class="card text-center w-50 col-md-auto">
+      <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="card-title mb-4 mt-1">สร้างบัญชี</h4>
+          <h4 class="text-center card-title mb-4 mt-1">สร้างบัญชี</h4>
+
           <form @submit.prevent = "user_regis" id = "login">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
@@ -43,7 +44,7 @@
             </b-form-group>
 
             <b-form-checkbox
-             class = "checkbox"
+             class = "checkbox text-center"
               v-model = "term_status"
               value = "accepted"
               unchecked-value = "not_accepted"
@@ -55,9 +56,9 @@
 
             <button block class="btn btn-primary" type="submit">สร้างบัญชี</button>
 
-            <div class="d-flex justify-content-center links">
+            <div class="text-center">
               มีบัญชีผู้ใช้งานอยู่แล้ว?
-              <router-link to="/login"><a class="ml-2">เข้าสู่ระบบตอนนี้</a></router-link>
+              <router-link to="/login">เข้าสู่ระบบตอนนี้</router-link>
             </div>
           </form>
         </div>
@@ -94,9 +95,11 @@ export default {
     user_regis(){
       if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
         this.$router.push('/login')
+        console.log('submit');
         // this.dispatch('user_regis',{email: this.email, password: this.password})
       }
       if(this.password_match !== true){
+        console.log('password not match');
         return
       }
       return
