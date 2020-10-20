@@ -6,7 +6,8 @@ import Regis from "../views/Regis.vue";
 import TaxCalculate from "../views/TaxCalculate.vue";
 import TaxDeduct from "../views/TaxDeduct.vue";
 import Suggestion from "../views/Suggestion.vue";
-
+import About from "../views/About.vue";
+import Profile from "../views/Profile.vue";
 
 Vue.use(VueRouter);
 
@@ -19,11 +20,7 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    component: About
   },
   {
     path: "/login",
@@ -49,6 +46,11 @@ const routes = [
     path: "/suggestion",
     name: "Suggestion",
     component: Suggestion
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   },
 ];
 
