@@ -4,7 +4,7 @@
       <div class="card text-center w-50 col-md-auto">
         <div class="card-body">
           <h4 class="card-title mb-4 mt-1">สร้างบัญชี</h4>
-          <form @submit.prevent = "user_regis">
+          <form @submit.prevent = "user_regis" id = "login">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
@@ -31,7 +31,8 @@
                 required
               />
             </b-form-group>
-            <b-form-group>
+            <b-form-group
+            invalid-feedback = "">
               <b-form-input 
                 v-model = "confirm_password" 
                 type = "password"
@@ -42,10 +43,12 @@
             </b-form-group>
 
             <b-form-checkbox
+             class = "checkbox"
               v-model = "term_status"
               value = "accepted"
               unchecked-value = "not_accepted"
               required
+              plain
             >
               ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
             </b-form-checkbox>
@@ -97,7 +100,6 @@ export default {
         return
       }
       return
-      
     }
   },
 
@@ -127,6 +129,5 @@ div.hr {
 #card a {
   color: #57A3B3;
 }
-
 
 </style>
