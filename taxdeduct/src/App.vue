@@ -38,7 +38,7 @@ export default {
 
 .btn-primary:hover{
   background-color: #175E7A !important;
-  border: none;
+  border-color: #175E7A !important;
 }
 
 .btn-primary,
@@ -46,7 +46,7 @@ export default {
   background-color: #57A3B3 !important;
   width: 100%;
   /* width: 300px; */
-  border: none;
+  border-color: #57A3B3 !important;
   box-shadow: none;
 }
 

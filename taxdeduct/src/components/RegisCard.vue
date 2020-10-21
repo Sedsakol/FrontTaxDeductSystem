@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="text-center card-title mb-4 mt-1">สร้างบัญชี</h4>
 
-          <form @submit.prevent = "user_regis" id = "login">
+          <form @submit.prevent = "user_regis" id = "form-regis">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>

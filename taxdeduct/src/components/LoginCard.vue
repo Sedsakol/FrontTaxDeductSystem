@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
           
-          <form @submit.prevent = "user_login" id = "login">
+          <form @submit.prevent = "user_login" id = "form-login">
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
@@ -87,7 +87,8 @@ export default {
 .card-body{
   align-self: center;
 }
-.card-body #login{
+.card-body #form-login,
+.card-body #form-regis{
   width: 300px;
 }
 
