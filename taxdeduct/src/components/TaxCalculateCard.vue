@@ -9,7 +9,8 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                  <b-col><b-form-input type="number" class="form-control" placeholder="0" 
+                  v-model= "salary" min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -17,7 +18,8 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                  <b-col><b-form-input type="number" class="form-control" placeholder="0" 
+                  v-model= "other_income" min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -26,7 +28,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">สถานะภาพการสมรส</label></b-col>
                   <b-col cols = "5">
-                    <select class="form-control">
+                    <select class="form-control" v-model= "marital"> 
                       <option selected>โสด</option>
                       <option>สมรสแล้ว (แยกยื่น)</option>
                       <option>สมรสแล้ว (คู่สมรสไม่มีเงินได้)</option>
@@ -39,7 +41,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">ลดหย่อนบิดา-มารดาตนเอง</label></b-col>
                   <b-col>
-                    <select id="" class="form-control">
+                    <select id="" class="form-control" v-model= "parent_num">
                       <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
@@ -53,7 +55,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label></b-col>
                   <b-col>
-                    <select id="" class="form-control">
+                    <select id="" class="form-control" v-model= "child_num">
                       <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
@@ -79,6 +81,15 @@
 <script>
 export default {
   name: "TaxCalculateCard",
+  data() {
+    return {
+      salary:'',
+      other_income: '',
+      marital: '',
+      parent_num: '',
+      child_num: '',
+    }
+  },
 };
 </script>
 

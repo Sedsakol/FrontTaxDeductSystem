@@ -2,17 +2,20 @@
     <div id="app">
       <div id="background">
         <Bar/>
-        <router-view></router-view>
+        <Content/>
+        
       </div>
     </div>
 </template>
 
 <script>
 import Bar from "@/components/Bar.vue"
+import Content from "@/components/Content.vue"
 export default {
   name: "app",
   components : {
         Bar,
+        Content,
     }
 }
 </script>
@@ -79,5 +82,6 @@ export default {
   border-color: #57A3B3 !important;
   box-shadow: none !important;
 }
+
 
 </style>

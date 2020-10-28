@@ -7,79 +7,79 @@
                 <form id="form-deduct">
                     <b-row>
                         <b-col cols = "6">
-                            <p>การลงทุน</p>
+                            <b>การลงทุน</b>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ลงทุน RMF</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ลงทุน SSF</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
-                            <p>ประกันชีวิต</p>
+                            <b>ประกันชีวิต</b>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิตแบบบำนาญ</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
-                            <p>บริจาค</p>
+                            <b>บริจาค</b>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ยอดบริจาคทั่วไป</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>    
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ยอดบริจาคเพื่อการศึกษา</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                         </b-col>
                         <b-col cols = "6">
-                            <p>อื่น ๆ</p>
+                            <b>อื่น ๆ</b>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ค่าดอกเบี้ยกู้บ้าน</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">กองทุนสำรองเลี้ยงชีพ</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ประกันสังคม</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">อื่น ๆ (ต่อปี)</label></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>

@@ -6,32 +6,38 @@
           <h4 class="text-center card-title mb-4 mt-1">โปรไฟล์</h4>
           
           <form @submit.prevent = "user_login" id = "form-profile">
-            <b-form-group 
+            <!-- <b-form-group 
              label-cols = "4" 
              label-cols-lg = "6" 
              label = "อีเมล">
                 <b-form-input disabled/>
+            </b-form-group> -->
+            <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
+                  <b-col cols = "5"><b-form-input readonly/></b-col>
+              </b-form-row> 
             </b-form-group>
 
-            <b-form-group 
-             label-cols = "4" 
-             label-cols-lg = "6" 
-             label = "ผูกบัญชีกับ Facebook">
-                <b-form-input disabled/>
+            <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
+                  <b-col cols = "5"><b-form-input disabled/></b-col>
+              </b-form-row> 
             </b-form-group>
 
-            <b-form-group 
-             label-cols = "4" 
-             label-cols-lg = "6" 
-             label = "เพศ">
-                <b-form-input disabled/>
+            <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
+                  <b-col cols = "5"><b-form-input disabled/></b-col>
+              </b-form-row> 
             </b-form-group>
 
-            <b-form-group 
-             label-cols = "4" 
-             label-cols-lg = "6" 
-             label = "วันเดือนปีเกิด">
-                <b-form-input disabled/>
+            <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">วันเดือนปีเกิด</label></b-col>
+                  <b-col cols = "5"><b-form-input disabled/></b-col>
+              </b-form-row> 
             </b-form-group>
 
             <b-form-group>
@@ -50,18 +56,18 @@
                 </b-form-row>
             </b-form-group>
 
-            <b-form-group 
-             label-cols = "4" 
-             label-cols-lg = "6" 
-             label = "สถานะการสมรส">
-                <b-form-input disabled/>
+            <b-form-group>
+                <b-form-row>
+                    <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
+                    <b-col cols = "5"><b-form-input placeholder="" disabled/></b-col>
+                </b-form-row>
             </b-form-group>
 
-            <b-form-group 
-             label-cols = "4" 
-             label-cols-lg = "6" 
-             label = "พิการ/ทุพพลภาพ">
-                <b-form-input disabled/>
+            <b-form-group>
+                <b-form-row>
+                    <b-col cols = "6"><label class="col-form-label">พิการ/ทุพพลภาพ</label></b-col>
+                    <b-col cols = "5"><b-form-input placeholder="" disabled/></b-col>
+                </b-form-row>
             </b-form-group>
 
             <b-form-group>

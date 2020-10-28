@@ -1,9 +1,11 @@
 <template>
-  <div id="card">
+  <div id="card-template">
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
+          <slot name="header">
           <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
+          </slot>
           
           <form @submit.prevent = "user_login" id = "form-login">
             <div class="form-group">
@@ -12,10 +14,9 @@
             <div class='hr'>
               <span class='hr-title'>หรือ</span>
             </div>
-            
             <b-form-group>
               <b-form-input 
-                v-model = "user.email" 
+                v-model = "email" 
                 type = "email"
                 placeholder = "อีเมล"
                 lazy-formatter
@@ -26,12 +27,14 @@
 
             <b-form-group>
               <b-form-input 
-                v-model = "user.password" 
+                v-model = "password" 
                 type = "password"
                 placeholder = "รหัสผ่าน"
                 required
               />
             </b-form-group>
+
+            <slot name="form"></slot>
 
             <!-- status debug-->
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
@@ -54,14 +57,17 @@
 <script>
 
 export default {
-  name: "LoginCard",
+  name: "CardTemplate",
 
   data(){
     return{
-      user: {
-        email: '',
-        password: '',
-      },
+      // user: {
+      //   email: '',
+      //   password: '',
+      // },
+      email: '',
+      password: '',
+      term_status: 'not_accepted',
     }
   },
 
@@ -71,7 +77,7 @@ export default {
         return value.toLowerCase()
     },
     user_login(){
-      if(this.user.email == 'user@test.com' && this.user.password == 'test123'){
+      if(this.email == 'user@test.com' && this.password == 'test123'){
         this.$router.push('/')
       } 
     }

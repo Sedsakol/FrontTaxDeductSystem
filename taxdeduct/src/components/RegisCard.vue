@@ -14,7 +14,7 @@
             </div>
             <b-form-group>
               <b-form-input 
-                v-model = "email" 
+                v-model = "user.email" 
                 type = "email"
                 placeholder = "อีเมล"
                 lazy-formatter
@@ -25,7 +25,7 @@
 
             <b-form-group>
               <b-form-input 
-                v-model = "password" 
+                v-model = "user.password" 
                 type = "password"
                 placeholder = "รหัสผ่าน"
                 :state = "password_match"
@@ -35,7 +35,7 @@
             <b-form-group
             invalid-feedback = "">
               <b-form-input 
-                v-model = "confirm_password" 
+                v-model = "user.confirm_password" 
                 type = "password"
                 placeholder = "ยืนยันรหัสผ่าน"
                 :state = "password_match"
@@ -45,7 +45,7 @@
 
             <b-form-checkbox
              class = "checkbox text-center"
-              v-model = "term_status"
+              v-model = "user.term_status"
               value = "accepted"
               unchecked-value = "not_accepted"
               required
@@ -73,18 +73,21 @@ export default {
   name: "RegisCard",
   data(){
     return{
-      email: '',
-      password: '',
-      confirm_password: '',
-      term_status: '',
+      user: {
+        email: '',
+        password: '',
+        confirm_password: '',
+        term_status: '',
+      }
     }
   },
   computed: {
     password_match(){
-      if(this.password !== '' && this.confirm_password !== '' && this.password === this.confirm_password){
+      // if(this.password !== '' && this.confirm_password !== '' && this.password === this.confirm_password){
+      if(this.user.password !== '' && this.user.confirm_password !== '' && this.user.password === this.user.confirm_password){
         return true
       }
-      else if(this.password !== this.confirm_password){
+      else if(this.user.password !== this.user.confirm_password){
         return false
       }
       return null
@@ -93,7 +96,8 @@ export default {
   },
   methods: {
     user_regis(){
-      if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
+      // if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
+      if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
         this.$router.push('/login')
         console.log('submit');
         // this.dispatch('user_regis',{email: this.email, password: this.password})
