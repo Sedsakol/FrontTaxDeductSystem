@@ -85,9 +85,18 @@ export default {
 .card-body{
   align-self: center;
 }
+
 .card-body #form-login,
 .card-body #form-regis{
   width: 300px;
+}
+
+#form-profile .form-row,
+#form-result .form-row,
+#form-calculate .form-row,
+#form-deduct .form-row{
+/* background: coral; */
+width: 406px;
 }
 
 </style>

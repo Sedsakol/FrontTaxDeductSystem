@@ -94,10 +94,5 @@ export default {
 </script>
 
 <style>
-#form-profile .form-row,
-#form-calculate .form-row,
-#form-deduct .form-row{
-/* background: coral; */
-width: 406px;
-}
+
 </style>

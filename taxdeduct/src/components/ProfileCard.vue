@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="text-center card-title mb-4 mt-1">โปรไฟล์</h4>
           
-          <form @submit.prevent = "user_login" id = "form-profile">
+          <form @submit.prevent = "" id = "form-profile">
             <!-- <b-form-group 
              label-cols = "4" 
              label-cols-lg = "6" 
