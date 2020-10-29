@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-.content-wrapper{
+/* .content-wrapper{
   background-color: cornflowerblue;
-}
+} */
 </style>

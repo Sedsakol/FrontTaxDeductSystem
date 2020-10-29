@@ -26,7 +26,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="-60,000" disabled/></b-col>
+                    <b-col><b-form-input class="text-danger" type="number" placeholder="-60,000" disabled/></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -34,21 +34,26 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="-100,000" disabled/></b-col>
+                    <b-col><b-form-input class="text-danger" type="number" placeholder="-100,000" disabled/></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
-            <h4 class="text-center">รวมเงินได้สุทธิ <span>{{ salary }} 1,040,000</span> บาท</h4>
-            <h4 class="text-center">ภาษีที่ต้องจ่าย <span>{{ tax }} 125,000</span> บาท</h4>
+            <h4 class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ salary }} 1,040,000</span> บาท</h4>
+            <h4 class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ tax }} 125,000</span> บาท</h4>
 
             <!-- status debug-->
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
 
-            <button type="submit" class="btn btn-primary" block>
-              แก้ไข
-            </button>
+            <b-row>
+              <b-col><router-link to="/taxDeduct"><button type="button" class="btn btn-outline-primary">
+                  ย้อนกลับ
+              </button></router-link></b-col>
+              <b-col><router-link to=""><button type="submit" class="btn btn-primary">
+                  ลงทุนเพื่อลดหย่อนภาษี
+              </button></router-link></b-col>
+            </b-row>
           </form>
           
           
@@ -79,7 +84,25 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 input[type=number] { 
-  text-align:right 
-  
-  }
+  text-align:right ;
+}
+
+/* override text color*/
+.text-danger,
+.text-danger::-webkit-input-placeholder {
+  color: #F43240 !important;
+}
+
+.text-success{
+  color: #689F39 !important;
+}
+
+.text-primary{
+  color: #49474A !important;
+}
+
+.text-mainblue{
+  color: #175E7A !important;
+}
+
 </style>

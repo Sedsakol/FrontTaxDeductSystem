@@ -89,7 +89,7 @@
                         <b-col><router-link to="/taxCalculate"><button type="button" class="btn btn-outline-primary">
                             ย้อนกลับ
                         </button></router-link></b-col>
-                        <b-col><router-link to=""><button type="submit" class="btn btn-primary">
+                        <b-col><router-link to="/result"><button type="submit" class="btn btn-primary">
                             ถัดไป
                         </button></router-link></b-col>
                     </b-row>

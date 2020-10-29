@@ -8,6 +8,7 @@ import TaxDeduct from "../views/TaxDeduct.vue";
 import Suggestion from "../views/Suggestion.vue";
 import About from "../views/About.vue";
 import Profile from "../views/Profile.vue";
+import Result from "../views/Result.vue";
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/result",
+    name: "Result",
+    component: Result
   },
 ];
 

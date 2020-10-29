@@ -3,7 +3,6 @@
       <div id="background">
         <Bar/>
         <Content/>
-        
       </div>
     </div>
 </template>
