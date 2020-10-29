@@ -51,7 +51,7 @@
               required
               plain
             >
-              ยอมรับข้อตกลงและเงื่อนไขการใช้งาน
+            ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
             </b-form-checkbox>
 
             <button block class="btn btn-primary" type="submit">สร้างบัญชี</button>

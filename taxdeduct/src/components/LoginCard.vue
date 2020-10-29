@@ -42,7 +42,7 @@
             </button>
             <div class="text-center">
               ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/login">สร้างบัญชีตอนนี้</router-link>
+              <router-link to="/regis">สร้างบัญชีตอนนี้</router-link>
             </div>
           </form>
         </div>
@@ -66,12 +66,12 @@ export default {
   },
 
   methods: {
-    // comment* to format email -> lowercase
+    // to format email -> lowercase
     formatter(value) {
         return value.toLowerCase()
     },
     user_login(){
-      if(this.user.email == 'user@test.com' && this.user.password == 'test123'){
+      if(this.user.email == 'admin@test.com' && this.user.password == 'test123'){
         this.$router.push('/')
       } 
     }

@@ -72,37 +72,10 @@ export default {
         mainProps: { blank: true, blankColor: '#D0D0D0', width: 406, height: 162}
       }
     },
-
 }
+
 </script>
 
 <style>
-/* remove up-down arrow in number type input  */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type=number] { 
-  text-align:right ;
-}
-
-/* override text color*/
-.text-danger,
-.text-danger::-webkit-input-placeholder {
-  color: #F43240 !important;
-}
-
-.text-success{
-  color: #689F39 !important;
-}
-
-.text-primary{
-  color: #49474A !important;
-}
-
-.text-mainblue{
-  color: #175E7A !important;
-}
 
 </style>

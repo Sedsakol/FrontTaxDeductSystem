@@ -81,6 +81,38 @@ export default {
   border-color: #57A3B3 !important;
   box-shadow: none !important;
 }
+/* remove up-down arrow in number type input  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] { 
+  text-align:right ;
+}
+
+/* override text color*/
+.text-danger,
+.text-danger::-webkit-input-placeholder {
+  color: #F43240 !important;
+}
+
+.text-success{
+  color: #689F39 !important;
+}
+
+.text-primary{
+  color: #49474A !important;
+}
+
+.text-mainblue{
+  color: #175E7A !important;
+}
+
+.text-subblue{
+  color: #57A3B3 !important;
+}
+
 
 
 </style>

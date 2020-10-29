@@ -28,11 +28,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">สถานะภาพการสมรส</label></b-col>
                   <b-col cols = "5">
-                    <select class="form-control" v-model= "marital"> 
-                      <option selected>โสด</option>
-                      <option>สมรสแล้ว (แยกยื่น)</option>
-                      <option>สมรสแล้ว (คู่สมรสไม่มีเงินได้)</option>
-                    </select>
+                    <b-form-select class="form-control" v-model= "marital" :options= "marital_ops"/>
                   </b-col>
               </b-form-row>
             </b-form-group>
@@ -41,11 +37,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">ลดหย่อนบิดา-มารดาตนเอง</label></b-col>
                   <b-col>
-                    <select id="" class="form-control" v-model= "parent_num">
-                      <option selected>0</option>
-                      <option>1</option>
-                      <option>2</option>
-                    </select>
+                    <b-form-select class="form-control" v-model= "parent_num" :options= "parent_ops" />
                   </b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -55,15 +47,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label></b-col>
                   <b-col>
-                    <select id="" class="form-control" v-model= "child_num">
-                      <option selected>0</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>...</option>
-                    </select>
+                    <b-form-select class="form-control" v-model= "child_num" :options= "child_ops" />
                   </b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -85,9 +69,28 @@ export default {
     return {
       salary:'',
       other_income: '',
-      marital: '',
-      parent_num: '',
-      child_num: '',
+      marital: null,
+      parent_num: null,
+      child_num: null,
+      marital_ops: [
+        { value: '', text: 'โสด' },
+        { value: '', text: 'สมรสแล้ว (แยกยื่น)' },
+        { value: '', text: 'สมรสแล้ว (คู่สมรสไม่มีเงินได้)' }
+      ],
+      parent_ops: [
+        { value: '', text: '0' },
+        { value: '', text: '1' },
+        { value: '', text: '2' }
+      ],
+      child_ops: [
+        { value: '', text: '0' },
+        { value: '', text: '1' },
+        { value: '', text: '2' },
+        { value: '', text: '3' },
+        { value: '', text: '4' },
+        { value: '', text: '5' },
+        { value: '', text: '...' }
+      ]
     }
   },
 };
