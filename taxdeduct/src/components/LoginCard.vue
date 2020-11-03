@@ -9,7 +9,7 @@
             <div class="form-group">
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
-            <div class='hr'>
+            <div class='hr' id="or">
               <span class='hr-title'>หรือ</span>
             </div>
             
@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-primary" block>
               เข้าสู่ระบบ
             </button>
-            <div class="text-center">
+            <div class="text-center" id="noAccount">
               ยังไม่มีบัญชีผู้ใช้งาน?
               <router-link to="/regis">สร้างบัญชีตอนนี้</router-link>
             </div>
@@ -99,4 +99,12 @@ export default {
 width: 406px;
 }
 
+#or{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#noAccount{
+  margin-top: 20px;
+}
 </style>
