@@ -39,9 +39,10 @@
                 </b-form-row>
             </b-form-group>
 
-            <h4 class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ salary }} 1,040,000</span> บาท</h4>
-            <h4 class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ tax }} 125,000</span> บาท</h4>
-
+            <div id="space">
+              <h4 class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ salary }} 1,040,000</span> บาท</h4>
+              <h4 class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ tax }} 125,000</span> บาท</h4>
+            </div>
             <!-- status debug-->
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
@@ -76,6 +77,9 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style scoped>
+  #space{
+    margin-top:30px;
+    margin-bottom: 30px;
+  }
+</style>>

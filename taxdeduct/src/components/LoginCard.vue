@@ -5,13 +5,16 @@
         <div class="card-body">
           <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
           
+          <div class="form-group">
+            <button block class="btn btn-primary">
+              เข้าสู่ระบบด้วย Facebook
+            </button>
+          </div>
+          <div class='hr' id="or">
+            <span class='hr-title'>หรือ</span>
+          </div>
+
           <form @submit.prevent = "user_login" id = "form-login">
-            <div class="form-group">
-              <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
-            </div>
-            <div class='hr' id="or">
-              <span class='hr-title'>หรือ</span>
-            </div>
             
             <b-form-group>
               <b-form-input 
