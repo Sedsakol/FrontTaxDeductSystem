@@ -37,6 +37,7 @@ export default {
   /* top right bottom left */
   padding: 0px 40px 0px 40px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 900;
 }
 
 #bar a {
