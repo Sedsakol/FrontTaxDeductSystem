@@ -43,11 +43,11 @@
             <button type="submit" class="btn btn-primary" block>
               เข้าสู่ระบบ
             </button>
-            <div class="text-center" id="noAccount">
-              ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/regis">สร้างบัญชีตอนนี้</router-link>
-            </div>
           </form>
+          <div class="text-center" id="noAccount">
+            ยังไม่มีบัญชีผู้ใช้งาน?
+            <router-link to="/regis">สร้างบัญชีตอนนี้</router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -73,10 +73,24 @@ export default {
     formatter(value) {
         return value.toLowerCase()
     },
-    user_login(){
+    user_login(e){
+      e.preventDefault();
+      let currentObj = this;
+      this.axios.post('http://161.246.5.140:8000/auth/obtain_token/', {
+          email: this.user.email,
+          password: this.user.password
+      })
+      .then(function (response) {
+          currentObj.output = response.data;
+          console.log(response.data);
+      })
+      .catch(function (error) {
+          currentObj.output = error;
+      });
+
       if(this.user.email == 'admin@test.com' && this.user.password == 'test123'){
         this.$router.push('/')
-      } 
+      }
     }
   }
 };

@@ -4,14 +4,13 @@
       <div class="card w-50 col-md-auto">
         <div class="card-body">
           <h4 class="text-center card-title mb-4 mt-1">สร้างบัญชี</h4>
-
+          <div class="form-group">
+            <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
+          </div>
+          <div class='hr' id='or'>
+            <span class='hr-title'>หรือ</span>
+          </div>
           <form @submit.prevent = "user_regis" id = "form-regis">
-            <div class="form-group">
-              <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
-            </div>
-            <div class='hr'>
-              <span class='hr-title'>หรือ</span>
-            </div>
             <b-form-group>
               <b-form-input 
                 v-model = "user.email" 
@@ -55,12 +54,11 @@
             </b-form-checkbox>
 
             <button block class="btn btn-primary" type="submit">สร้างบัญชี</button>
-
-            <div class="text-center">
-              มีบัญชีผู้ใช้งานอยู่แล้ว?
-              <router-link to="/login">เข้าสู่ระบบตอนนี้</router-link>
-            </div>
           </form>
+          <div class="text-center">
+            มีบัญชีผู้ใช้งานอยู่แล้ว?
+            <router-link to="/login">เข้าสู่ระบบตอนนี้</router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -95,9 +93,23 @@ export default {
 
   },
   methods: {
-    user_regis(){
+    user_regis(e){
       // if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
       if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
+        e.preventDefault();
+        let currentObj = this;
+        this.axios.post('http://161.246.5.140:8000/register/', {
+            username: this.user.email,
+            password: this.user.password
+        })
+        .then(function (response) {
+            currentObj.output = response.data;
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            currentObj.output = error;
+        });
+
         this.$router.push('/login')
         console.log('submit');
         // this.dispatch('user_regis',{email: this.email, password: this.password})
