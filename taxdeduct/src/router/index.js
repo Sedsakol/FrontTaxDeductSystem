@@ -57,7 +57,7 @@ const routes = [
     path: "/result",
     name: "Result",
     component: Result
-  },
+  }
 ];
 
 const router = new VueRouter({

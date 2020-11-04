@@ -93,36 +93,55 @@ export default {
 
   },
   methods: {
-    user_regis(e){
+    async user_regis(e){
       // if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
+      let currentObj = this;
       if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
         e.preventDefault();
-        let currentObj = this;
-        this.axios.post('http://161.246.5.140:8000/register/', {
+        await this.axios.post('http://161.246.5.140:8000/register/', {
             username: this.user.email,
             password: this.user.password
         })
         .then(function (response) {
-            currentObj.output = response.data;
+            currentObj.msg = response.data.msg;
             console.log(response.data);
         })
         .catch(function (error) {
-            currentObj.output = error;
+            currentObj.msg = error;
         });
-
-        this.$router.push('/login')
         console.log('submit');
         // this.dispatch('user_regis',{email: this.email, password: this.password})
       }
-      if(this.password_match !== true){
+      else if(this.password_match !== true){
         console.log('password not match');
-        return
       }
-      return
+
+      if(currentObj.msg === 'created user'){
+        await this.axios.post('http://161.246.5.140:8000/auth/obtain_token/', {
+              email: this.user.email,
+              password: this.user.password
+        })
+        .then(function (res) {
+            currentObj.output = res.data.token;
+        })
+        .catch(function () {
+            currentObj.output = 'error';
+        });
+        if (currentObj.output !== 'error'){
+          this.$cookies.set("token",currentObj.output);
+          this.$router.push('/');
+        }
+      }
+      else if(currentObj.msg === 'email is already')
+      {
+        console.log(currentObj.msg)
+      }
+      else if(currentObj.msg === 'field not complete')
+      {
+        console.log(currentObj.msg)
+      }
     }
   },
-
-  
 };
 </script>
 
