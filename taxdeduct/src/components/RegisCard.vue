@@ -102,44 +102,41 @@ export default {
             username: this.user.email,
             password: this.user.password
         })
-        .then(function (response) {
+        .then(async function (response) {
             currentObj.msg = response.data.msg;
             console.log(response.data);
+            if(currentObj.msg === 'created user'){
+              await currentObj.axios.post('http://161.246.5.140:8000/auth/obtain_token/', {
+                    email: this.user.email,
+                    password: this.user.password
+              })
+              .then(function (res) {
+                  currentObj.output = res.data.token;
+                  currentObj.$cookies.set("token",currentObj.output);
+                  currentObj.$router.push('/');
+              })
+              .catch(function () {
+                  currentObj.output = 'error';
+              });
+            }
+            else if(currentObj.msg === 'email is already')
+            {
+              console.log(currentObj.msg)
+            }
+            else if(currentObj.msg === 'field not complete')
+            {
+              console.log(currentObj.msg)
+            }
         })
         .catch(function (error) {
             currentObj.msg = error;
         });
-        console.log('submit');
         // this.dispatch('user_regis',{email: this.email, password: this.password})
       }
       else if(this.password_match !== true){
         console.log('password not match');
       }
 
-      if(currentObj.msg === 'created user'){
-        await this.axios.post('http://161.246.5.140:8000/auth/obtain_token/', {
-              email: this.user.email,
-              password: this.user.password
-        })
-        .then(function (res) {
-            currentObj.output = res.data.token;
-        })
-        .catch(function () {
-            currentObj.output = 'error';
-        });
-        if (currentObj.output !== 'error'){
-          this.$cookies.set("token",currentObj.output);
-          this.$router.push('/');
-        }
-      }
-      else if(currentObj.msg === 'email is already')
-      {
-        console.log(currentObj.msg)
-      }
-      else if(currentObj.msg === 'field not complete')
-      {
-        console.log(currentObj.msg)
-      }
     }
   },
 };

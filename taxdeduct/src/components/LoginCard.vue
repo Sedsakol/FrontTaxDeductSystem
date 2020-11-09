@@ -81,18 +81,18 @@ export default {
         })
         .then(function(response) {
           currentObj.output = response.data.token;
+          currentObj.$cookies.set("token", currentObj.output,{httpOnly: true});
           console.log("Login Success");
+          currentObj.$router.push("/");
+          
+          
         })
         .catch(function() {
           currentObj.output = "error";
           console.log("Username or Password is invalid.");
           //แสดงข้อความ Username or Password is invalid.
         });
-      if (currentObj.output !== "error") {
-        this.$cookies.set("token", currentObj.output);
-        this.$router.push("/");
-      }
-    }
+    },
   }
 };
 </script>
