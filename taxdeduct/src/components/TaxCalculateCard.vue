@@ -36,21 +36,37 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">ลดหย่อนบิดา-มารดา</label>
-                    <b-icon class="ml-2" id="popover-1" icon="exclamation-circle"/>
-                      <b-popover target="popover-1" triggers="hover" placement= "rightbottom">
-                        พ่อแม่ของตนเอง
-                        <ul>
-                          <li>ต้องมีอายุมากกว่า 60 ปี</li>
-                          <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
-                        </ul>
-                        พ่อแม่ของคู่สมรส
-                        <ul>
-                          <li>คู่สมรสไม่มีเงินได้</li>
-                          <li>ต้องมีอายุมากกว่า 60 ปี</li>
-                          <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
-                        </ul>
-                      </b-popover>
+                    <b-icon  class="ml-2" id="popover-parent" icon="exclamation-circle"/>
+                    <b-popover target="popover-parent" triggers="hover" placement= "rightbottom">
+                      พ่อแม่ของตนเอง
+                      <ul>
+                        <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                        <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                      </ul>
+                      พ่อแม่ของคู่สมรส
+                      <ul>
+                        <li>คู่สมรสไม่มีเงินได้</li>
+                        <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                        <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                      </ul>
+                    </b-popover>
                   </b-col>
+                  <!-- <b-col cols = "1" align-self="center">
+                    <b-icon class="ml-2" id="popover-1" icon="exclamation-circle"/>
+                    <b-popover target="popover-1" triggers="hover" placement= "rightbottom">
+                      พ่อแม่ของตนเอง
+                      <ul>
+                        <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                        <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                      </ul>
+                      พ่อแม่ของคู่สมรส
+                      <ul>
+                        <li>คู่สมรสไม่มีเงินได้</li>
+                        <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                        <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                      </ul>
+                    </b-popover>
+                  </b-col> -->
                   <b-col>
                     <b-form-select class="form-control" v-model= "parent_num" :options= "parent_ops" />
                   </b-col>
@@ -61,8 +77,8 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label>
-                    <b-icon class="ml-2" id="popover-2" icon="exclamation-circle"/>
-                      <b-popover target="popover-2" triggers="hover" placement= "rightbottom">
+                    <b-icon font-scale="0.8" class="ml-2" id="popover-child" icon="exclamation-circle"/>
+                      <b-popover target="popover-child" triggers="hover" placement= "rightbottom">
                         คำอธิบาย
                       </b-popover>
                   </b-col>

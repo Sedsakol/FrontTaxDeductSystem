@@ -9,6 +9,7 @@ import VueAxios from "vue-axios";
 import VueCookies from "vue-cookies";
 import './axios'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import './assets/styles/main.css';
 
 // import Vuelidate from 'vuelidate';
 // Vue.use(Vuelidate);

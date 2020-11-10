@@ -20,7 +20,5 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Prompt&display=swap');
-@import './assets/styles/main.css';
 
 </style>

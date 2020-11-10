@@ -2,14 +2,30 @@
   background-color: #b17377;
 }
 
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Prompt&display=swap'); */
+
 /*------------- overall -------------*/
 #app {
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Sukhumvitset';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+@font-face {
+  font-family: 'Sukhumvitset';
+  src: 
+    url('../fonts/Sukhumvitset/Sukhumvitset-text.ttf')
+    format('truetype');
+}
+
+@font-face {
+  font-family: 'TTInterfaces';
+  src: 
+    url('../fonts/TTInterfaces/TTInterfaces-Regular.ttf')
+    format('truetype');
+}
+
 #background {
   background: #F4F9FA;
   width: 100%;
@@ -18,7 +34,6 @@
 #card{
   padding: 120px 0px 120px 0px;
 }
-
 
 /*------------- bar -------------*/
 #bar {
@@ -151,6 +166,13 @@ input::-webkit-inner-spin-button {
 input[type=number] { 
   text-align:right ;
 }
+
+.popover-body {
+  font-family: 'Sukhumvitset';
+}
+
+
+$b-icon-animation-spin-duration: 2s !default;
 
 /*------------- override text color -------------*/
 .text-danger,
