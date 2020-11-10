@@ -3,14 +3,17 @@
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="text-center card-title mb-4 mt-1">สร้างบัญชี</h4>
-          <div class="form-group">
-            <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
-          </div>
-          <div class='hr' id='or'>
-            <span class='hr-title'>หรือ</span>
-          </div>
+          <h4 class="text-center card-title">สร้างบัญชี</h4>
           <form @submit.prevent = "user_regis" id = "form-regis">
+            <b-form-group>
+              <button id="facebook" block class="btn btn-primary">
+              เข้าสู่ระบบด้วย Facebook</button>
+            </b-form-group>
+
+            <div class="hr" id="or">
+              <span class="hr-title">หรือ</span>
+            </div>
+            
             <b-form-group>
               <b-form-input 
                 v-model = "user.email" 
@@ -31,6 +34,7 @@
                 required
               />
             </b-form-group>
+
             <b-form-group
             invalid-feedback = "">
               <b-form-input 
@@ -53,12 +57,14 @@
             ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
             </b-form-checkbox>
 
-            <button block class="btn btn-primary" type="submit">สร้างบัญชี</button>
+            <button block class="btn btn-primary mt-3" type="submit">สร้างบัญชี</button>
+
+            <div class="text-center mt-2">
+              มีบัญชีผู้ใช้งานอยู่แล้ว?
+              <router-link to="/login" class="text-subblue">เข้าสู่ระบบตอนนี้</router-link>
+            </div>
           </form>
-          <div class="text-center">
-            มีบัญชีผู้ใช้งานอยู่แล้ว?
-            <router-link to="/login">เข้าสู่ระบบตอนนี้</router-link>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -81,7 +87,6 @@ export default {
   },
   computed: {
     password_match(){
-      // if(this.password !== '' && this.confirm_password !== '' && this.password === this.confirm_password){
       if(this.user.password !== '' && this.user.confirm_password !== '' && this.user.password === this.user.confirm_password){
         return true
       }
@@ -93,12 +98,16 @@ export default {
 
   },
   methods: {
-    async user_regis(e){
-      // if(this.email !== '' && this.password_match === true && this.term_status === 'accepted'){
+    // to format email -> lowercase
+    formatter(value) {
+      return value.toLowerCase();
+    },
+
+    async user_regis(){
       let currentObj = this;
       if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
-        e.preventDefault();
-        await this.axios.post('http://161.246.5.140:8000/register/', {
+        await 
+        this.axios.post('register/', {
             username: this.user.email,
             password: this.user.password
         })
@@ -142,30 +151,11 @@ export default {
       }
     }
   },
+  
 };
 </script>
 
 <style>
-div.hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 0;
-  border-top: 1px solid #bdbdbd;
-  text-align: center;
-  height: 0px;
-  line-height: 0px;
-  /* width: 300px; */
-}
-.hr-title {
-  background-color: #fff;
-  padding: 0 8px;
-}
-.fullwidth {
-  width: 300px;
-  align-items: center;
-}
-#card a {
-  color: #57A3B3;
-}
+
 
 </style>

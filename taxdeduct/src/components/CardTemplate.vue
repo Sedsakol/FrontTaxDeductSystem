@@ -3,12 +3,12 @@
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <slot name="header">
-          <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
-          </slot>
-          
+          <h4 class="text-center card-title">
+            <slot name="header">เข้าสู่ระบบ</slot>
+          </h4>
+
           <form @submit.prevent = "user_login" id = "form-login">
-            <div class="form-group">
+            <div class="form-group">]
               <button block class="btn btn-primary">เข้าสู่ระบบด้วย Facebook</button>
             </div>
             <div class='hr'>
@@ -34,18 +34,21 @@
               />
             </b-form-group>
 
-            <slot name="form"></slot>
-
-            <!-- status debug-->
-            <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
-            <!-- <div>State: <strong>{{ email }}</strong></div> -->
+            <b-form-group>
+              <b-form-input 
+                v-model = "password" 
+                type = "password"
+                placeholder = "รหัสผ่าน"
+                required
+              />
+            </b-form-group>
 
             <button type="submit" class="btn btn-primary" block>
-              เข้าสู่ระบบ
+              <slot>เข้าสู่ระบบ</slot>
             </button>
             <div class="text-center">
-              ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/login">สร้างบัญชีตอนนี้</router-link>
+              <slot>ยังไม่มีบัญชีผู้ใช้งาน?</slot>
+              <slot><router-link to="/login">สร้างบัญชีตอนนี้</router-link></slot>
             </div>
           </form>
         </div>
@@ -88,12 +91,5 @@ export default {
 </script>
 
 <style>
-.card-body{
-  align-self: center;
-}
-.card-body #form-login,
-.card-body #form-regis{
-  width: 300px;
-}
 
 </style>

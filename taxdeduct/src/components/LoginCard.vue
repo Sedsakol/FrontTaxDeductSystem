@@ -3,18 +3,18 @@
     <div class="d-flex justify-content-md-center">
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="text-center card-title mb-4 mt-1">เข้าสู่ระบบ</h4>
-
-          <div class="form-group">
-            <button block class="btn btn-primary">
-              เข้าสู่ระบบด้วย Facebook
-            </button>
-          </div>
-          <div class="hr" id="or">
-            <span class="hr-title">หรือ</span>
-          </div>
+          <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
           <form @submit.prevent="user_login" id="form-login">
+            <b-form-group>
+              <button id="facebook" block class="btn btn-primary">
+              เข้าสู่ระบบด้วย Facebook</button>
+            </b-form-group>
+
+            <div class="hr" id="or">
+              <span class="hr-title">หรือ</span>
+            </div>
+
             <b-form-group>
               <b-form-input
                 v-model="user.email"
@@ -35,18 +35,17 @@
               />
             </b-form-group>
 
-            <!-- status debug-->
-            <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
-            <!-- <div>State: <strong>{{ email }}</strong></div> -->
-
             <button type="submit" class="btn btn-primary" block>
               เข้าสู่ระบบ
             </button>
+
+            <div class="text-center mt-2">
+              <p>ยังไม่มีบัญชีผู้ใช้งาน?
+              <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
+            </div>
+
           </form>
-          <div class="text-center" id="noAccount">
-            ยังไม่มีบัญชีผู้ใช้งาน?
-            <router-link to="/regis">สร้างบัญชีตอนนี้</router-link>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -71,8 +70,8 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
-    async user_login(e) {
-      e.preventDefault();
+
+    async user_login() {
       let currentObj = this;
       await this.axios
         .post("http://161.246.5.140:8000/auth/obtain_token/", {
@@ -98,29 +97,9 @@ export default {
 </script>
 
 <style>
-.card-body {
-  align-self: center;
-}
-
-.card-body #form-login,
-.card-body #form-regis {
-  width: 300px;
-}
-
-#form-profile .form-row,
-#form-result .form-row,
-#form-calculate .form-row,
-#form-deduct .form-row {
-  /* background: coral; */
-  width: 406px;
-}
-
-#or {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
 #noAccount {
   margin-top: 20px;
 }
+
 </style>

@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="text-center card-title mb-4 mt-1">คำนวณภาษี</h4>
+          <h4 class="text-center card-title">คำนวณภาษี</h4>
 
           <form id = "form-calculate">
             <b-form-group>
@@ -35,7 +35,22 @@
 
             <b-form-group>
               <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">ลดหย่อนบิดา-มารดาตนเอง</label></b-col>
+                  <b-col cols = "6"><label class="col-form-label">ลดหย่อนบิดา-มารดา</label>
+                    <b-icon class="ml-2" id="popover-1" icon="exclamation-circle"/>
+                      <b-popover target="popover-1" triggers="hover" placement= "rightbottom">
+                        พ่อแม่ของตนเอง
+                        <ul>
+                          <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                          <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                        </ul>
+                        พ่อแม่ของคู่สมรส
+                        <ul>
+                          <li>คู่สมรสไม่มีเงินได้</li>
+                          <li>ต้องมีอายุมากกว่า 60 ปี</li>
+                          <li>รายได้ทั้งปีไม่เกิน 30,000 บาท</li>
+                        </ul>
+                      </b-popover>
+                  </b-col>
                   <b-col>
                     <b-form-select class="form-control" v-model= "parent_num" :options= "parent_ops" />
                   </b-col>
@@ -45,7 +60,12 @@
 
             <b-form-group>
               <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label></b-col>
+                  <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label>
+                    <b-icon class="ml-2" id="popover-2" icon="exclamation-circle"/>
+                      <b-popover target="popover-2" triggers="hover" placement= "rightbottom">
+                        คำอธิบาย
+                      </b-popover>
+                  </b-col>
                   <b-col>
                     <b-form-select class="form-control" v-model= "child_num" :options= "child_ops" />
                   </b-col>
@@ -63,8 +83,12 @@
 </template>
 
 <script>
+// import PopoverTemplate from "@/components/PopoverTemplate.vue";
 export default {
   name: "TaxCalculateCard",
+  components : {
+        // PopoverTemplate,
+    },
   data() {
     return {
       salary:'',
@@ -80,7 +104,9 @@ export default {
       parent_ops: [
         { value: '', text: '0' },
         { value: '', text: '1' },
-        { value: '', text: '2' }
+        { value: '', text: '2' },
+        { value: '', text: '3' },
+        { value: '', text: '4' }
       ],
       child_ops: [
         { value: '', text: '0' },
@@ -97,5 +123,7 @@ export default {
 </script>
 
 <style>
+
+
 
 </style>

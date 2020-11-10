@@ -10,15 +10,22 @@
           <b-nav-item><router-link to="/about">เกี่ยวกับเรา</router-link></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item><span>{{username}}</span></b-nav-item>
-          <b-nav-item><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>
-          <b-nav-item><router-link to="/regis"><button class="btn btn-primary">สร้างบัญชี</button></router-link></b-nav-item>
+
+          <b-nav-item v-if = "user"><span>{{user.firstname}} {{user.lastname}}</span></b-nav-item>
+
+          <!-- <div v-if!="user"> -->
+            <b-nav-item><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>
+            <b-nav-item><router-link to="/regis"><button class="btn btn-primary">สร้างบัญชี</button></router-link></b-nav-item>
+          <!-- </div> -->
+          
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
 </template>
+
 <script>
+// import axios from 'axios'
 export default {
   name: "Bar",
     data() {
@@ -26,32 +33,11 @@ export default {
       username: "admin",
     }
   },
+
+
 };
 </script>
 
-<style scoped>
-#bar {
-  background: #ffffff;
-  width: 100%;
-  position: fixed;
-  /* top right bottom left */
-  padding: 0px 40px 0px 40px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-  z-index: 900;
-}
-
-#bar a {
-  color: #2c3e50;
-  padding-left: 16px;
-}
-
-#bar a:hover,
-/* #bar a.router-link-active, */
-#bar a.router-link-exact-active {
-  color: #57A3B3;
-  cursor: pointer;
-  text-decoration: none;
-}
-
+<style>
 
 </style>

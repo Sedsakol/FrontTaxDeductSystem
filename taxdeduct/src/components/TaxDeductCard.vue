@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-md-center">
         <div class="card col-md-auto">
             <div class="card-body">
-                <h4 class="text-center card-title mb-4 mt-1">ลดหย่อนภาษี</h4>
+                <h4 class="text-center card-title">ลดหย่อนภาษี</h4>
                 <form id="form-deduct">
                     <b-row>
                         <b-col cols = "6">
@@ -105,6 +105,7 @@ export default {
     name: "TaxDeductCard",
 };
 </script>
+
 <style>
 
 </style>

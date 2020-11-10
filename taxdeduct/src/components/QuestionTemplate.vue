@@ -18,7 +18,12 @@
 
 <script>
 export default {
+  name: "QuestionTemplate",
+  data() {
+    return{
 
+    }
+  }
 }
 </script>
 

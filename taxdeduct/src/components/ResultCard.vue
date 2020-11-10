@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="text-center card-title mb-4 mt-1">ผลการคำนวณภาษี</h4>
+          <h4 class="text-center card-title">ผลการคำนวณภาษี</h4>
           <!-- example position of tax step -->
           <b-img v-bind = "mainProps"></b-img> <p>
           <form @submit.prevent = "" id = "form-result">
