@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="text-center card-title">โปรไฟล์</h4>
           
-          <form @submit.prevent = "edit_profile" id = "form-profile">
+          <form @submit.prevent = "" id = "form-profile">
             <!-- <b-form-group 
              label-cols = "4" 
              label-cols-lg = "6" 
@@ -15,14 +15,14 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
-                  <b-col cols = "5"><b-form-input value="admin@test.com" :disabled= "disabled"/></b-col>
+                  <b-col cols = "5"><b-form-input value="admin@test.com"/></b-col>
               </b-form-row> 
             </b-form-group>
 
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
-                  <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" :disabled= "disabled"/></b-col>
+                  <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" /></b-col>
               </b-form-row> 
             </b-form-group>
 
@@ -30,7 +30,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model= "gender" :disabled= "disabled"/>
+                    <b-form-select class="form-control" v-model= "gender" :options= "gender_ops"/>
                   </b-col>
               </b-form-row> 
             </b-form-group>
@@ -50,14 +50,14 @@
                     label-next-month = "เดือนถัดไป"
                     label-next-year = "ปีถัดไป"
                     label-help = ""
-                    :disabled= "disabled"></b-form-datepicker></b-col>
+                    ></b-form-datepicker></b-col>
               </b-form-row> 
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled= "disabled"/></b-col>
+                    <b-col><b-form-input type="number" placeholder="" value="0" /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -65,7 +65,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled= "disabled"/></b-col>
+                    <b-col><b-form-input type="number" placeholder="" value="0" /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -74,7 +74,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "marital" :disabled= "disabled"/>
+                      <b-form-select class="form-control" v-model= "marital" :options= "marital_ops"/>
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -92,7 +92,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "parent_num" :disabled= "disabled"/>
+                      <b-form-select class="form-control" v-model= "parent_num" :options= "parent_ops"/>
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -102,7 +102,8 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "child_num" :disabled= "disabled"/>
+                      <b-form-input type="number" class="form-control" placeholder="0" 
+                        v-model= "child_num" min ="0" />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -112,7 +113,7 @@
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
 
-            <button @click= "edit_profile" class="btn btn-primary" block>
+            <button type="submit" class="btn btn-primary" block>
               แก้ไข
             </button>
           </form>
@@ -134,18 +135,25 @@ export default {
         marital: 'โสด',
         parent_num: '0',
         child_num: '0',
-        state_edit: 'disabled'
-      }
-    },
-    computed: {
-      disabled() {
-        return this.state_edit === 'disabled';
-      },
-    },
-    
-    methods: {
-      edit_profile() {
-        return this.state_edit === 'normal';
+
+        gender_ops: [
+            { value: '', text: 'ชาย'  },
+            { value: '', text: 'หญิง'  },
+        ],
+
+        marital_ops: [
+        { value: '', text: 'โสด' },
+        { value: '', text: 'สมรสแล้ว (แยกยื่น)' },
+        { value: '', text: 'สมรสแล้ว (คู่สมรสไม่มีเงินได้)' }
+        ],
+
+        parent_ops: [
+        { value: '', text: '0' },
+        { value: '', text: '1' },
+        { value: '', text: '2' },
+        ],
+
+
       }
     }
 }

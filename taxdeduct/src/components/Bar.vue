@@ -11,11 +11,12 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
 
-          <b-nav-item v-if = "user"><span>{{user.firstname}} {{user.lastname}}</span></b-nav-item>
+          <!-- {{user.email}}  -->
+          <b-nav-item v-if = "user"><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item>
 
           <!-- <div v-if!="user"> -->
-            <b-nav-item><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>
-            <b-nav-item><router-link to="/regis"><button class="btn btn-primary">สร้างบัญชี</button></router-link></b-nav-item>
+          <b-nav-item v-if!="user"><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>
+          <b-nav-item v-if!="user"><router-link to="/regis"><button class="btn btn-primary">สร้างบัญชี</button></router-link></b-nav-item>
           <!-- </div> -->
           
         </b-navbar-nav>
@@ -30,9 +31,11 @@ export default {
   name: "Bar",
     data() {
     return {
-      username: "admin",
+      user: null,
     }
   },
+  props: ['user'],
+
   methods: {
     async get_profile(){
       let currentObj = this

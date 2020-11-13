@@ -6,7 +6,7 @@ import Regis from "../views/Regis.vue";
 import TaxCalculate from "../views/TaxCalculate.vue";
 import TaxDeduct from "../views/TaxDeduct.vue";
 import Suggestion from "../views/Suggestion.vue";
-import About from "../views/About.vue";
+import Question from "../views/Question.vue";
 import Profile from "../views/Profile.vue";
 import Result from "../views/Result.vue";
 
@@ -19,9 +19,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/about",
-    name: "About",
-    component: About
+    path: "/question",
+    name: "Question",
+    component: Question
   },
   {
     path: "/login",
