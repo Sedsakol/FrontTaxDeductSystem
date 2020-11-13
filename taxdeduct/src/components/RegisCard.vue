@@ -106,8 +106,7 @@ export default {
     async user_regis(){
       let currentObj = this;
       if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
-        await 
-        this.axios.post('register/', {
+        await this.axios.post('register/', {
             username: this.user.email,
             password: this.user.password
         })

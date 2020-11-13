@@ -18,7 +18,7 @@
                                             <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col><b-form-input type="number" class="form-control" placeholder="0" 
+                                    <b-col><b-form-input type="number" class="form-control"  
                                     v-model= "rmf" min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
@@ -161,15 +161,22 @@
                             </b-form-group>
                         </b-col>
                     </b-row>
-                    <b-row>
-                        <b-col><router-link to="/taxCalculate"><button type="button" class="btn btn-outline-primary">
-                            ย้อนกลับ
-                        </button></router-link></b-col>
-                        <b-col><router-link to="/result"><button type="submit" class="btn btn-primary">
-                            ถัดไป
-                        </button></router-link></b-col>
-                    </b-row>
+                    
                 </form>
+                <b-row>
+                    <!-- to="/taxCalculate" -->
+                    <b-col to = "/taxCalculate">
+                        <button type="button" class="btn btn-outline-primary">
+                            ย้อนกลับ
+                        </button>
+                    </b-col>
+                    <!-- to="/result" -->
+                    <b-col >
+                        <button @click="next"  class="btn btn-primary">
+                            ถัดไป
+                        </button>
+                    </b-col>
+                </b-row>
             </div>
         </div>
     </div>
@@ -177,22 +184,83 @@
 </template>
 
 <script>
+import store from "../store/index.js"
 export default {
     name: "TaxDeductCard",
     data() {
         return {
-            rmf:'',
-            ssf:'',
-            life_insurance:'',
-            pension_insurance:'',
-            donation:'',
-            edu_donation:'',
-            home_loans:'',
-            provident_fund:'',
-            social_security:'',
-            other:'',
+            rmf: 0,
+            ssf: 0,
+            life_insurance: 0,
+            pension_insurance: 0,
+            donation: 0,
+            edu_donation: 0,
+            home_loans: 0,
+            provident_fund: 0,
+            social_security: 0,
+            other: 0,
+
+            tax : store.state.tax,
+            allowance : store.state.allowance,
         }
     },
+    methods: {
+    async next() {
+        let new_allowance = {
+            rmf: this.rmf,
+            ssf: this.ssf,
+            life_insurance: this.life_insurance,
+            pension_insurance: this.pension_insurance,
+            donation: this.donation,
+            edu_donation: this.edu_donation,
+            home_loans: this.home_loans,
+            provident_fund: this.provident_fund,
+            social_security: this.social_security,
+            other: this.other,
+        }
+        
+
+        store.commit('allowance_change', new_allowance)
+        this.allowance = store.state.allowance
+        console.log(this.tax[0])
+        
+        let a = {
+            salary: this.tax[0].salary,
+            other_income: this.tax[0].other_income,
+            marital: this.tax[0].marital,
+            parent_num_dis: this.tax[0].parent_num_dis,
+            child_before_2561: this.tax[0].child_before_2561,
+            child_after_2561: this.tax[0].child_after_2561,
+            protege: this.tax[0].protege,
+
+            rmf: this.allowance[0].rmf,
+            ssf: this.allowance[0].ssf,
+            life_insurance: this.allowance[0].life_insurance,
+            pension_insurance: this.allowance[0].pension_insurance,
+            donation: this.allowance[0].donation,
+            edu_donation: this.allowance[0].edu_donation,
+            home_loans: this.allowance[0].home_loans,
+            provident_fund: this.allowance[0].provident_fund,
+            social_security: this.allowance[0].social_security,
+            other: this.allowance[0].other
+
+        }
+        console.log(a)
+        let currentObj = this;
+        this.axios.post('tax/', a)
+        .then(async function (response) {
+            currentObj.output = response.data;
+            console.log('55555555555555555555555555555555555555555555555555555555',currentObj.output);
+            store.commit('result_tax_change', currentObj.output)
+            currentObj.$router.push("/result")
+            
+        })
+        .catch(function (error) {
+            currentObj.msg = error;
+        });
+        
+    }
+  }
 };
 </script>
 

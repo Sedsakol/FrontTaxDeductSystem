@@ -15,14 +15,16 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
-                  <b-col cols = "5"><b-form-input :value=user[0].email  :disabled=disable_edit /></b-col>
+                  <b-col cols = "5"><b-form-input :value=user[0].email disabled /></b-col>
               </b-form-row> 
             </b-form-group>
 
             <b-form-group>
               <b-form-row>
+                  
                   <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
-                  <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" /></b-col>
+                  <b-col cols = "5"><button id="facebook" size="sm" block class="btn btn-primary">เชื่อมต่อ Facebook</button></b-col>
+                  <!-- <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" /></b-col> -->
               </b-form-row> 
             </b-form-group>
 
@@ -30,7 +32,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model= "gender" >
+                    <b-form-select class="form-control" v-model="gender" :disabled=disable_edit >
                       
                     </b-form-select>
                   </b-col>
@@ -39,10 +41,10 @@
 
             <b-form-group>
               <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">วันเดือนปีเกิด</label></b-col>
+                  <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
                   <b-col cols = "5"><b-form-datepicker
-                    value = "13/02/1999"
-                    placeholder="วัน/เดือน/ปี"
+                    :value = user[0].birthdate
+                    :placeholder= user[0].birthdate
                     :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}"
                     locale="th"
                     hide-header = "true"
@@ -51,15 +53,16 @@
                     label-current-month = "เดือนนี้"
                     label-next-month = "เดือนถัดไป"
                     label-next-year = "ปีถัดไป"
-                    label-help = ""
-                    :disabled= "disabled"></b-form-datepicker></b-col>
+                    v-model = "birthdate"
+                    :max=maxDate
+                    :disabled=disable_edit></b-form-datepicker></b-col>
               </b-form-row> 
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -67,7 +70,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -76,7 +79,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "marital" />
+                      <b-form-select class="form-control" v-model= "marital" :disabled=disable_edit />
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -94,7 +97,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "parent_num" />
+                      <b-form-select class="form-control" v-model= "parent_num" :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -104,7 +107,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "child_num" />
+                      <b-form-select class="form-control" v-model= "child_num" :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -125,7 +128,7 @@
               </button>
             </b-col>
             <b-col>
-              <button class="btn btn-primary" block>
+              <button @click="save_profile" class="btn btn-primary" block>
                 บันทึก
               </button>
             </b-col>
@@ -143,20 +146,25 @@ import store from "../store/index.js"
 export default {
     name: "ProfileCard",
     data() {
+      const now = new Date()
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
       return {
-        gender: 'หญิง',
-        birthdate: '01/01/1999',
-        salary: '10,000',
-        other_income: '0',
-        marital: 'โสด',
+        gender: '',
+        birthdate: '',
+        salary: '',
+        other_income: '',
+        marital: '0',
         parent_num: '0',
         child_num: '0',
         disable_edit: true,
+        maxDate: today,
+        // disabledDates: maxdate,
         user: store.state.user
       }
     },
     computed: {
-      profile() {
+      profile_update() {
         return store.state.user
       }
     },
@@ -171,21 +179,20 @@ export default {
         }
         return this.disable_edit
       },
-      save_profile(){
-        store.commit('profile_change', 
-          {
-        email: '1234@12374.com',
-        gender: 'dsd',
-        birthdate : 'asdasd',
-        salary : 'asdasd',
-        other_income : 'asdasd',
-        parent_num: '0',
-        child_num : '0',
-        infirm : 'sdasd',
-        risk : '8',
-        facebook_id : 'asdasd'
+      async save_profile(){
+        let new_user = {
+          gender: this.gender,
+          birthdate : this.birthdate,
+          salary : this.salary,
+          other_income : this.other_income,
+          parent_num: this.parent_num,
+          child_num : this.child_num
         }
-        )
+
+        await store.commit('profile_change', new_user)
+        await this.edit_profile_change()
+        
+        
       }
     }
 }

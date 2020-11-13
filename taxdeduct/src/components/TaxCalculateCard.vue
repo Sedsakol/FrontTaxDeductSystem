@@ -9,7 +9,7 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0" 
+                  <b-col><b-form-input type="number" class="form-control" :value=salary
                   v-model= "salary" min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
@@ -18,7 +18,7 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0" 
+                  <b-col><b-form-input type="number" class="form-control" placeholder="0" :value=other_income
                   v-model= "other_income" min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
@@ -60,7 +60,7 @@
                     </b-popover>
                   </b-col> -->
                   <b-col>
-                    <b-form-select class="form-control" v-model= "parent_num" :options= "parent_ops" />
+                    <b-form-select class="form-control" v-model= "parent_num_dis" :options= "parent_ops" />
                   </b-col>
                   <b-col cols = "0.75"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -188,10 +188,10 @@
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
             </b-form-group>
-            <router-link to="/taxDeduct"><button type="submit" class="btn btn-primary">
-                        ถัดไป
-            </button></router-link>
           </form>
+          <button @click="next"  class="btn btn-primary">
+            ถัดไป
+          </button>
         </div>
       </div>
     </div>
@@ -199,6 +199,7 @@
 </template>
 
 <script>
+import store from "../store/index.js"
 // import PopoverTemplate from "@/components/PopoverTemplate.vue";
 export default {
   name: "TaxCalculateCard",
@@ -207,11 +208,15 @@ export default {
     },
   data() {
     return {
-      salary:'',
-      other_income: '',
-      marital: null,
-      parent_num: null,
-      child_num: null,
+      salary: 0,
+      other_income: 0,
+      marital: 1,
+      parent_num_dis: 0,
+      child_before_2561: 0,
+      child_after_2561: 0,
+      protege: 0,
+
+      tax : store.state.tax,
 
       marital_ops: [
         { value: '1', text: 'โสด' },
@@ -219,20 +224,39 @@ export default {
         { value: '3', text: 'สมรสแล้ว (คู่สมรสไม่มีเงินได้)' }
       ],
       parent_ops: [
-        { value: '', text: '0' },
-        { value: '', text: '1' },
-        { value: '', text: '2' },
-        { value: '', text: '3' },
-        { value: '', text: '4' }
+        { value: '0', text: '0' },
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+        { value: '4', text: '4' }
       ],
       protege_ops: [
-        { value: '', text: '0' },
-        { value: '', text: '1' },
-        { value: '', text: '2' },
-        { value: '', text: '3' }
-      ]
+        { value: '0', text: '0' },
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' }
+      ],
+      
     }
   },
+  methods: {
+    next() {
+      
+      let new_tax = {
+          salary: this.salary,
+          other_income: this.other_income,
+          marital: this.marital,
+          parent_num_dis: this.parent_num_dis,
+          child_before_2561: this.child_before_2561,
+          child_after_2561: this.child_after_2561,
+          protege: this.protege,
+        }
+      
+      store.commit('tax_change', new_tax)
+      console.log(store.state.tax[0])
+      this.$router.push("/taxDeduct");
+    }
+  }
 };
 </script>
 

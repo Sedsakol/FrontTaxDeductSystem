@@ -109,8 +109,10 @@
 }
 
 #facebook {
-  background-color: #3B5998 !important;
-  border-color: #3B5998 !important;
+  background-color: #1877f2!important;
+  border-color: #1877f2!important;
+  /* background-color: #3B5998 !important;
+  border-color: #3B5998 !important; */
 }
 
 /*------------- input and form control -------------*/
@@ -170,9 +172,6 @@ input[type=number] {
 .popover-body {
   font-family: 'Sukhumvitset';
 }
-
-
-$b-icon-animation-spin-duration: 2s !default;
 
 /*------------- override text color -------------*/
 .text-danger,
