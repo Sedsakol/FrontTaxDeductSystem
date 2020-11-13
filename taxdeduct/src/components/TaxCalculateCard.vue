@@ -214,9 +214,9 @@ export default {
       child_num: null,
 
       marital_ops: [
-        { value: '', text: 'โสด' },
-        { value: '', text: 'สมรสแล้ว (แยกยื่น)' },
-        { value: '', text: 'สมรสแล้ว (คู่สมรสไม่มีเงินได้)' }
+        { value: '1', text: 'โสด' },
+        { value: '2', text: 'สมรสแล้ว (แยกยื่น)' },
+        { value: '3', text: 'สมรสแล้ว (คู่สมรสไม่มีเงินได้)' }
       ],
       parent_ops: [
         { value: '', text: '0' },

@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <ProfileCard/>
-    <ProfileCardE/>
+    
     <!-- <ResultCard/> -->
   </div>
 </template>
