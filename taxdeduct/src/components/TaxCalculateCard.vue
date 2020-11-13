@@ -180,11 +180,11 @@
                         </ul>
                   </b-popover>
                   </b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model= "protege" min ="0" /></b-col>
-                  <!-- <b-col>
-                    <b-form-select class="form-control" v-model= "protege" :options= "child_ops" />
-                  </b-col> -->
+                  <b-col>
+                  <!-- <b-form-input type="number" class="form-control" placeholder="0" 
+                  v-model= "protege" min ="0" /></b-col> -->
+                    <b-form-select class="form-control" v-model= "protege" :options= "protege_ops" />
+                  </b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -225,7 +225,7 @@ export default {
         { value: '', text: '3' },
         { value: '', text: '4' }
       ],
-      child_ops: [
+      protege_ops: [
         { value: '', text: '0' },
         { value: '', text: '1' },
         { value: '', text: '2' },
