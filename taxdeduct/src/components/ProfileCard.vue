@@ -79,18 +79,18 @@
                 </b-form-row>
             </b-form-group>
 
-            <b-form-group>
+            <!-- <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พิการ/ทุพพลภาพ</label></b-col>
                     <b-col cols = "5">
                       <b-form-select class="form-control" disabled/>
                     </b-col>
                 </b-form-row>
-            </b-form-group>
+            </b-form-group> -->
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">บิดา-มารดาตนเอง</label></b-col>
+                    <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
                       <b-form-select class="form-control" v-model= "parent_num" disabled/>
                     </b-col>
@@ -100,7 +100,7 @@
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">จำนวนบุตร</label></b-col>
+                    <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
                       <b-form-select class="form-control" v-model= "child_num" disabled/>
                     </b-col>
