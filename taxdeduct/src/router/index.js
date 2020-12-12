@@ -9,6 +9,9 @@ import Suggestion from "../views/Suggestion.vue";
 import Question from "../views/Question.vue";
 import Profile from "../views/Profile.vue";
 import Result from "../views/Result.vue";
+import Term from "../views/Term.vue";
+import Policy from "../views/Policy.vue";
+import About from "../views/About.vue";
 
 Vue.use(VueRouter);
 
@@ -57,7 +60,22 @@ const routes = [
     path: "/result",
     name: "Result",
     component: Result
-  }
+  },
+  {
+    path: "/term",
+    name: "Term",
+    component: Term
+  },
+  {
+    path: "/policy",
+    name: "Policy",
+    component: Policy
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: About
+  },
 ];
 
 const router = new VueRouter({
