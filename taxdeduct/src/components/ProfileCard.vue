@@ -191,7 +191,7 @@ export default {
 
         await store.commit('profile_change', new_user)
         await this.edit_profile_change()
-        
+
         
       }
     }
