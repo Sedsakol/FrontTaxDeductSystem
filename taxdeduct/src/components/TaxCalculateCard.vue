@@ -189,7 +189,7 @@
               </b-form-row>
             </b-form-group>
           </form>
-          <button @click="next"  class="btn btn-primary">
+          <button @click="next" class="btn btn-primary">
             ถัดไป
           </button>
         </div>
@@ -241,7 +241,6 @@ export default {
   },
   methods: {
     next() {
-      
       let new_tax = {
           salary: this.salary,
           other_income: this.other_income,

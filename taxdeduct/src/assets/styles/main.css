@@ -19,12 +19,12 @@
     format('truetype');
 }
 
-@font-face {
+/* @font-face {
   font-family: 'TTInterfaces';
   src: 
     url('../fonts/TTInterfaces/TTInterfaces-Regular.ttf')
     format('truetype');
-}
+} */
 
 #background {
   background: #F4F9FA;

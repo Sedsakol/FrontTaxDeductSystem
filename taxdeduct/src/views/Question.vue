@@ -1,29 +1,22 @@
 <template>
     <div>
         <!-- <ResultCard/> -->
-        <QuestionTemplate>
+        <!-- <QuestionTemplate v-for="q in question" :key="q.number">
+            <template v-slot:header>
+                <span>คำถามความเสี่ยง</span>
+            </template>
             <template v-slot:question>
-                <span>ข้อ1</span>
+                <span>ข้อ {{q.number}}. {{q.ask}}</span>
             </template>
             <template v-slot:choice>
                 <ul>
-                    <li v-for="(choice) in choice" :key="choice">{{choice}}</li>
+                    <li v-for="c in q.choice" :key="c">{{q.choice.indexOf(c)+1}}. {{c}}</li>
                 </ul>
             </template>
-        </QuestionTemplate>
+        </QuestionTemplate> -->
 
-        <QuestionTemplate>
-            <template v-slot:question>
-                <span>ข้อ2</span>
-            </template>
-            <template v-slot:choice>
-                <ul>
-                    <li v-for="(choice) in choice" :key="choice">{{choice}}</li>
-                </ul>
-            </template>
-        </QuestionTemplate>
+        <QuestionTemplate v-bind:question=question></QuestionTemplate>
 
-        <QuestionTemplate/>
     </div>
 </template>
 
@@ -38,7 +31,18 @@ export default {
     },
     data(){
         return{
-            choice:['1','2','3','4']
+            question:[
+                {
+                    number: 1,
+                    ask: 'คำถาม1',
+                    choice: ['1','2','3','4']
+                },
+                {
+                    number: 2,
+                    ask: 'คำถาม2',
+                    choice: ['1','2','3','4']
+                }
+            ]
         }
     }
 }

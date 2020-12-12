@@ -165,14 +165,14 @@
                 </form>
                 <b-row>
                     <!-- to="/taxCalculate" -->
-                    <b-col to = "/taxCalculate">
+                    <b-col><router-link to="/taxCalculate">
                         <button type="button" class="btn btn-outline-primary">
                             ย้อนกลับ
                         </button>
-                    </b-col>
+                    </router-link></b-col>
                     <!-- to="/result" -->
                     <b-col >
-                        <button @click="next"  class="btn btn-primary">
+                        <button @click="next" class="btn btn-primary">
                             ถัดไป
                         </button>
                     </b-col>
@@ -250,7 +250,7 @@ export default {
         this.axios.post('tax/', a)
         .then(async function (response) {
             currentObj.output = response.data;
-            console.log('55555555555555555555555555555555555555555555555555555555',currentObj.output);
+            console.log('555555555555555',currentObj.output);
             store.commit('result_tax_change', currentObj.output)
             currentObj.$router.push("/result")
             
