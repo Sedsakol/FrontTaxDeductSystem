@@ -165,11 +165,13 @@
                 </form>
                 <b-row>
                     <!-- to="/taxCalculate" -->
-                    <b-col><router-link to="/taxCalculate">
-                        <button type="button" class="btn btn-outline-primary">
-                            ย้อนกลับ
-                        </button>
-                    </router-link></b-col>
+                    <b-col>
+                        <router-link to = "/taxCalculate">
+                            <button type="button" class="btn btn-outline-primary">
+                                ย้อนกลับ
+                            </button>
+                        </router-link>  
+                    </b-col>
                     <!-- to="/result" -->
                     <b-col >
                         <button @click="next" class="btn btn-primary">
