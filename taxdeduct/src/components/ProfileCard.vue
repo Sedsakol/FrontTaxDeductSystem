@@ -174,7 +174,7 @@ export default {
         }
         return this.disable_edit
       },
-      save_profile(){
+      async save_profile(){
         let new_user = {
           gender: this.gender,
           birthdate : this.birthdate,
