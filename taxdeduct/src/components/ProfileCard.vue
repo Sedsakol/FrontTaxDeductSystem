@@ -32,7 +32,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model="gender" :disabled=disable_edit >
+                    <b-form-select class="form-control" v-model="gender" :value=user[0].gender :disabled=disable_edit >
                       
                     </b-form-select>
                   </b-col>
@@ -62,7 +62,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" :value=user[0].salary  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -70,7 +70,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" value="0" :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" :value=user[0].other_income  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -79,7 +79,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "marital" :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "marital" :value=user[0].marital :disabled=disable_edit />
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -97,7 +97,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "parent_num" :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "parent_num" :value=user[0].parent_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -107,7 +107,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "child_num" :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "child_num" :value=user[0].child_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -163,11 +163,6 @@ export default {
         user: store.state.user
       }
     },
-    computed: {
-      profile_update() {
-        return store.state.user
-      }
-    },
     
     methods: {
       edit_profile_change() {
@@ -179,7 +174,7 @@ export default {
         }
         return this.disable_edit
       },
-      async save_profile(){
+      save_profile(){
         let new_user = {
           gender: this.gender,
           birthdate : this.birthdate,
@@ -189,8 +184,7 @@ export default {
           child_num : this.child_num
         }
 
-        await store.commit('profile_change', new_user)
-        await this.edit_profile_change()
+        store.commit('profile_change', new_user)
         
         
       }

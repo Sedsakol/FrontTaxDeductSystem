@@ -12,7 +12,7 @@
         <b-navbar-nav class="ml-auto">
 
           <!-- {{user.email}}  -->
-          <b-nav-item ><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item>
+          <!-- <b-nav-item ><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item> -->
 
           <!-- <div v-if!="user"> -->
           <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>

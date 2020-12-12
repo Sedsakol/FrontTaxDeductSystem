@@ -80,11 +80,9 @@ export default {
         })
         .then(function(response) {
           currentObj.output = response.data.token;
-          currentObj.$cookies.set("token", currentObj.output,{httpOnly: true});
+          currentObj.$cookies.set("token", currentObj.output);
           console.log("Login Success");
           currentObj.$router.push("/");
-          
-          
         })
         .catch(function() {
           currentObj.output = "error";
