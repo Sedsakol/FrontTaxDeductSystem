@@ -7,7 +7,7 @@
 
           <form @submit.prevent="user_login" id="form-login">
             <b-form-group>
-              <button id="facebook" block class="btn btn-primary">
+              <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
               เข้าสู่ระบบด้วย Facebook</button>
             </b-form-group>
 
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   name: "LoginCard",
 
@@ -90,6 +91,28 @@ export default {
           //แสดงข้อความ Username or Password is invalid.
         });
     },
+    async facebook_login() {
+      console.log('facebook login')
+      const provide = new firebase.auth.FacebookAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provide)
+        .then(result => {
+          // create user in db
+          console.log(result)
+          let obj = {
+            facebook_id: result.additionalUserInfo.profile.id,
+            fullname: result.additionalUserInfo.profile.name,
+            email: result.additionalUserInfo.profile.email,
+            profile_image: result.user.photoURL + "?height=500",
+            user_type_id: 1
+          };
+          console.log(obj);
+        })
+        .catch(err => {
+          alert("Oops. " + err.message);
+        });
+    }
   }
 };
 </script>
