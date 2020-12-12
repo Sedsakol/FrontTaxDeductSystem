@@ -1,7 +1,7 @@
 <template>
   <div class = "align-content-center" id="bar">
     <b-navbar variant="faded" class="mx-auto">
-      <b-navbar-brand >TaxDeduct</b-navbar-brand>
+      <b-navbar-brand ><b-img src="../assets/images/logo3.svg"></b-img></b-navbar-brand>
       <b-collapse is-nav>
         <b-navbar-nav>
           <b-nav-item><router-link to="/">หน้าแรก</router-link></b-nav-item>
@@ -12,7 +12,7 @@
         <b-navbar-nav class="ml-auto">
 
           <!-- {{user.email}}  -->
-          <b-nav-item ><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item>
+          <!-- <b-nav-item ><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item> -->
 
           <!-- <div v-if!="user"> -->
           <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary">เข้าสู่ระบบ</button></router-link></b-nav-item>

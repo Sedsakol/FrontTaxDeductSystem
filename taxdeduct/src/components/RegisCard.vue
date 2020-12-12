@@ -98,6 +98,10 @@ export default {
 
   },
   methods: {
+    validateState(value) {
+      const { $dirty, $error } = this.$v.form[value];
+      return $dirty ? !$error : null;
+    },
     // to format email -> lowercase
     formatter(value) {
       return value.toLowerCase();
