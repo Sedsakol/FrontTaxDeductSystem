@@ -5,16 +5,15 @@
         <div class="card-body">
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-          <form @submit.prevent="user_login" id="form-login">
-            <b-form-group>
-              <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
-              เข้าสู่ระบบด้วย Facebook</button>
-            </b-form-group>
+          <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
+              เข้าสู่ระบบด้วย Facebook
+          </button>
 
-            <div class="hr" id="or">
+          <div class="hr" id="or">
               <span class="hr-title">หรือ</span>
-            </div>
+          </div>
 
+          <form @submit.prevent="user_login" id="form-login">
             <b-form-group>
               <b-form-input
                 v-model="user.email"
@@ -56,7 +55,6 @@
 import firebase from "firebase";
 export default {
   name: "LoginCard",
-
   data() {
     return {
       user: {
@@ -93,25 +91,32 @@ export default {
     },
     async facebook_login() {
       console.log('facebook login')
-      const provide = new firebase.auth.FacebookAuthProvider();
+      var provide = new firebase.auth.FacebookAuthProvider();
       firebase
         .auth()
         .signInWithPopup(provide)
         .then(result => {
           // create user in db
-          console.log(result)
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          
           let obj = {
             facebook_id: result.additionalUserInfo.profile.id,
             fullname: result.additionalUserInfo.profile.name,
             email: result.additionalUserInfo.profile.email,
+            birthday: result.additionalUserInfo.profile.birthday,
             profile_image: result.user.photoURL + "?height=500",
             user_type_id: 1
           };
-          console.log(obj);
+          console.log(result);
         })
         .catch(err => {
-          alert("Oops. " + err.message);
+          console.log('fail')
+          console.log(err)
         });
+
+
     }
   }
 };
