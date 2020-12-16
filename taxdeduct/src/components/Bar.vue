@@ -1,7 +1,9 @@
 <template>
-  <div class = "align-content-center" id="bar">
+  <div class="align-content-center" id="bar">
     <b-navbar variant="faded" class="mx-auto">
-      <b-navbar-brand ><b-img src="../assets/images/logo3.svg"></b-img></b-navbar-brand>
+      <b-navbar-brand>
+        <router-link to="/"><b-img src="../assets/images/logo.svg"></b-img></router-link>
+      </b-navbar-brand>
       <b-collapse is-nav>
         <b-navbar-nav>
           <b-nav-item><router-link to="/">หน้าแรก</router-link></b-nav-item>
