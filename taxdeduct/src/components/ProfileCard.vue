@@ -117,18 +117,18 @@
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
           </form>
-          <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block>
+          <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
             แก้ไข
           </button>
           
           <b-row v-else>
             <b-col>
-              <button @click="edit_profile_change" class="btn btn-outline-primary" block>
+              <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
                 ยกเลิก
               </button>
             </b-col>
             <b-col>
-              <button @click="save_profile" class="btn btn-primary" block>
+              <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
                 บันทึก
               </button>
             </b-col>

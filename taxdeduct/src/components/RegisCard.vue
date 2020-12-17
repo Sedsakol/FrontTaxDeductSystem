@@ -7,7 +7,7 @@
           <form @submit.prevent = "user_regis" id = "form-regis">
             <b-form-group>
               <button id="facebook" block class="btn btn-primary">
-              เข้าสู่ระบบด้วย Facebook</button>
+              Login with Facebook</button>
             </b-form-group>
 
             <div class="hr" id="or">
@@ -57,7 +57,7 @@
             ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
             </b-form-checkbox>
 
-            <button block class="btn btn-primary mt-3" type="submit">สร้างบัญชี</button>
+            <button block class="btn btn-primary mt-3" type="submit" id="fullbutton">สร้างบัญชี</button>
 
             <div class="text-center mt-2">
               มีบัญชีผู้ใช้งานอยู่แล้ว?

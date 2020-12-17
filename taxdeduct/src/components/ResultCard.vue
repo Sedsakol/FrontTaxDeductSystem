@@ -56,17 +56,20 @@
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
 
-            <b-row>
-              <b-col><router-link to="/taxDeduct"><button type="button" class="btn btn-outline-primary">
-                  ย้อนกลับ
-              </button></router-link></b-col>
-              <b-col><router-link to=""><button type="submit" class="btn btn-primary">
-                  ลงทุนเพื่อลดหย่อนภาษี
-              </button></router-link></b-col>
-            </b-row>
+            <div class="d-flex justify-content-md-center">
+              <router-link to = "/taxDeduct" class="pr-4">
+                  <button type="button" class="btn btn-outline-primary" id="regularbutton">
+                      ย้อนกลับ
+                  </button>
+              </router-link>  
+              <!-- @click="next" -->
+              <router-link to = "/suggestion">
+                <button class="btn btn-primary" id="regularbutton">
+                    ลงทุนเพื่อลดหย่อนภาษี
+                </button>
+              </router-link> 
+            </div>
           </form>
-          
-          
 
         </div>
       </div>

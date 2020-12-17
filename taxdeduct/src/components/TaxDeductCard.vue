@@ -163,8 +163,8 @@
                     </b-row>
                     
                 </form>
-                <b-row>
-                    <!-- to="/taxCalculate" -->
+
+                <!-- <b-row>
                     <b-col>
                         <router-link to = "/taxCalculate">
                             <button type="button" class="btn btn-outline-primary">
@@ -172,13 +172,24 @@
                             </button>
                         </router-link>  
                     </b-col>
-                    <!-- to="/result" -->
                     <b-col >
                         <button @click="next" class="btn btn-primary">
                             ถัดไป
                         </button>
                     </b-col>
-                </b-row>
+                </b-row> -->
+
+                <div class="d-flex justify-content-md-center">
+                    <router-link to = "/taxCalculate" class="pr-4">
+                        <button type="button" class="btn btn-outline-primary" id="regularbutton">
+                            ย้อนกลับ
+                        </button>
+                    </router-link>  
+                    <button @click="next" class="btn btn-primary" id="regularbutton">
+                        ถัดไป
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>

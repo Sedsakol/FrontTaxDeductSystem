@@ -189,7 +189,7 @@
               </b-form-row>
             </b-form-group>
           </form>
-          <button @click="next" class="btn btn-primary">
+          <button @click="next" class="btn btn-primary" id="fullbutton">
             ถัดไป
           </button>
         </div>

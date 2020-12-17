@@ -6,7 +6,7 @@
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
           <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
-              เข้าสู่ระบบด้วย Facebook
+              Login with Facebook
           </button>
 
           <div class="hr" id="or">
@@ -34,7 +34,7 @@
               />
             </b-form-group>
 
-            <button type="submit" class="btn btn-primary" block>
+            <button type="submit" class="btn btn-primary" block id="fullbutton">
               เข้าสู่ระบบ
             </button>
 
