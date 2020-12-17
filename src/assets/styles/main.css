@@ -133,6 +133,14 @@ h6 { font-size: 18px; }
   width: 406px;
 }
 
+#regularbutton {
+  width: 180px;
+}
+
+#fullbutton {
+  width: 100%;
+}
+
 .btn-primary:hover {
   background-color: #175E7A !important;
   border-color: #175E7A !important;
@@ -142,7 +150,7 @@ h6 { font-size: 18px; }
 .btn-primary,
 .btn-primary:focus {
   background-color: #57A3B3;
-  width: 100%;
+  width: 180px;
   border-color: #57A3B3;
   box-shadow: none;
 }
@@ -165,6 +173,7 @@ h6 { font-size: 18px; }
 #facebook {
   background-color: #1877f2!important;
   border-color: #1877f2!important;
+  width: 100%;
   /* background-color: #3B5998 !important;
   border-color: #3B5998 !important; */
 }

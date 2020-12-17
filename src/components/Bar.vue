@@ -22,7 +22,7 @@
           </b-dropdown>
         </div>
 
-        <div class="d-flex flex-row" v-if!="user">
+        <div class="d-flex flex-row" v-if="!user">
         <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary" id="barbutton">เข้าสู่ระบบ</button></router-link></b-nav-item>
         <b-nav-item ><router-link to="/regis"><button class="btn btn-primary" id="barbutton">สร้างบัญชี</button></router-link></b-nav-item>
         </div>
@@ -41,7 +41,7 @@ export default {
     data() {
     return {
       user : store.state.user,
-      email : "lalida.tan@gmail.com"
+      email : "lalida.tan@gmail.com",
     }
   },
 
