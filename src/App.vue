@@ -2,7 +2,6 @@
     <div id="app">
       <div id="background">
         <Bar/>
-        <h1>Hello Firebase</h1>
         <Content/>
       </div>
     </div>
