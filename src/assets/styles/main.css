@@ -65,11 +65,26 @@ h6 { font-size: 18px; }
   padding-left: 16px;
 }
 
-#bar a:hover,
-#bar a.router-link-exact-active {
+#bar .nav-item a:hover,
+#bar .nav-item a.router-link-exact-active {
   color: #57A3B3;
   cursor: pointer;
   text-decoration: none;
+}
+
+.dropdown .dropdown-item:hover {
+  color: #57A3B3 !important;
+  cursor: pointer;
+  background-color: #F4F9FA;
+}
+
+.navbar .dropdown .btn-secondary,
+.navbar .dropdown .btn-primary:hover,
+.navbar .dropdown .btn-primary:focus {
+  background-color: #ffffff !important; 
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+  color: #49474A !important;
 }
 
 /*------------- card -------------*/
@@ -97,7 +112,6 @@ h6 { font-size: 18px; }
 
 .card-title {
   padding-bottom: 24px;
-  /* background-color: #b17377; */
 }
 
 .card-body {
@@ -115,12 +129,11 @@ h6 { font-size: 18px; }
 
 /*------------- button -------------*/
 
-#barbutton,
-#fullbutton {
-  width: 100%;
+#twobutton {
+  width: 406px;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #175E7A !important;
   border-color: #175E7A !important;
   box-shadow: none !important;
@@ -129,8 +142,7 @@ h6 { font-size: 18px; }
 .btn-primary,
 .btn-primary:focus {
   background-color: #57A3B3;
-  /* width: 100%; */
-  width: 180px;
+  width: 100%;
   border-color: #57A3B3;
   box-shadow: none;
 }
@@ -146,15 +158,13 @@ h6 { font-size: 18px; }
 .btn-outline-primary:focus{
   border-color: #57A3B3;
   color: #57A3B3;
-  /* width: 100%; */
-  width: 180px;
+  width: 100%;
   box-shadow: none;
 }
 
 #facebook {
   background-color: #1877f2!important;
   border-color: #1877f2!important;
-  width: 100%;
   /* background-color: #3B5998 !important;
   border-color: #3B5998 !important; */
 }

@@ -11,15 +11,21 @@
           <b-nav-item><router-link to="/suggestion">แนะนำการลงทุน</router-link></b-nav-item>
           <b-nav-item><router-link to="/question">แบบทดสอบความเสี่ยง</router-link></b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
 
-          <!-- {{user.email}}  -->
-          <!-- <b-nav-item ><span><button class="btn btn-outline-primary">ออกจากระบบ</button></span></b-nav-item> -->
+        <b-navbar-nav class="ml-auto" v-if="user">
+        <div>
+          <b-dropdown class="m-md-2" right>
+            <template #button-content>{{email}} </template>
+            <b-dropdown-item to="/profile">บัญชีของฉัน</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>ออกจากระบบ</b-dropdown-item>
+          </b-dropdown>
+        </div>
 
-          <!-- <div v-if!="user"> -->
-          <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary" id="barbutton">เข้าสู่ระบบ</button></router-link></b-nav-item>
-          <b-nav-item ><router-link to="/regis"><button class="btn btn-primary" id="barbutton">สร้างบัญชี</button></router-link></b-nav-item>
-          <!-- </div> -->
+        <div v-if!="user">
+        <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary" id="barbutton">เข้าสู่ระบบ</button></router-link></b-nav-item>
+        <b-nav-item ><router-link to="/regis"><button class="btn btn-primary" id="barbutton">สร้างบัญชี</button></router-link></b-nav-item>
+        </div>
           
         </b-navbar-nav>
       </b-collapse>
@@ -34,7 +40,8 @@ export default {
   name: "Bar",
     data() {
     return {
-      user : store.state.user
+      user : store.state.user,
+      email : "lalida.tan@gmail.com"
     }
   },
 
