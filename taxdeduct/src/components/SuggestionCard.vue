@@ -20,91 +20,171 @@
                 <b-col class="ml-5 mr-5" >
                   <h6 class="text-center">การลงทุนที่แนะนำ</h6><p/>
                   <b-img center fluid alt="Responsive image" src="../assets/steptax/step1.svg"></b-img><p/>
-                  <p>การลงทุน</p>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto" >ลงทุน RMF</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">ลงทุน SSF</b-col>
-                    <b-col class="text-right">0</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row><p/>
-                  <p>ประกันภัย</p>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">เบี้ยประกันชีวิต</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">เบี้ยประกันสุขภาพ</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" >เบี้ยประกันชีวิตแบบบำนาญ</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row><p/>
-                  <b-form-row>
+                  <b>การลงทุน</b><p/>
+                  <b-form-group><b-form-row>
+                      <b-col cols = "5" md="auto"><label class="col-form-label">ลงทุน RMF</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
+                      <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                              <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row>
+                      <b-col cols = "5" md="auto"><label class="col-form-label">ลงทุน SSF</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
+                      <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                              <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <p/><b>ประกันภัย</b><p/>
+                  <b-form-group><b-form-row>
+                      <b-col cols = "5" md="auto"><label class="col-form-label">เบี้ยประกันชีวิต</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                      <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                              <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                              <li>รวมทุกกรมธรรม์</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row>
+                      <b-col cols = "5"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div>
+                      <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                              <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                              <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
+                              <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
+                              <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row class="mt-3">
                     <b-col cols = "5" md="auto">ต้องจ่ายภาษีเพียง</b-col>
                     <b-col class="text-right">10,000</b-col>
                     <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
+                  </b-form-row></b-form-group>
                 </b-col>
+
                 <!-- yours -->
                 <b-col class="mr-5">
                   <h6 class="text-center">การลงทุนของฉัน</h6><p/>
                   <b-img center fluid alt="Responsive image" src="../assets/steptax/step1.svg"></b-img><p/>
-                  <p>การลงทุน</p>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">ลงทุน RMF</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">ลงทุน SSF</b-col>
-                    <b-col class="text-right">0</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row><p/>
-                  <p>ประกันภัย</p>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">เบี้ยประกันชีวิต</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" md="auto">เบี้ยประกันสุขภาพ</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
-                  <b-form-row>
-                    <b-col cols = "5" >เบี้ยประกันชีวิตแบบบำนาญ</b-col>
-                    <b-col class="text-right">10,000</b-col>
-                    <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row><p/>
-                  <b-form-row>
+                  <b>การลงทุน</b><p/>
+                  <b-form-group><b-form-row>
+                      <b-col cols = "6"><label class="col-form-label">ลงทุน RMF</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
+                      <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                              <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col cols = "4" class="text-right">
+                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                      </b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row>
+                      <b-col cols = "6"><label class="col-form-label">ลงทุน SSF</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
+                      <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                              <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right">
+                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                      </b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <p/><b>ประกันภัย</b><p/>
+                  <b-form-group><b-form-row>
+                      <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label>
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                      <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                              <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                              <li>รวมทุกกรมธรรม์</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right">
+                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                      </b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row>
+                      <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div>
+                      <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                              <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                              <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
+                              <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
+                              <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
+                          </ul>
+                      </b-popover></b-col>
+                      <b-col class="text-right">
+                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                      </b-col>
+                      <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+                  </b-form-row></b-form-group>
+
+                  <b-form-group><b-form-row class="mt-3">
                     <b-col cols = "5" md="auto">ต้องจ่ายภาษีเพียง</b-col>
                     <b-col class="text-right">10,000</b-col>
                     <b-col cols = "2" class="text-right">บาท</b-col>
-                  </b-form-row>
+                  </b-form-row></b-form-group>
                 </b-col>
               </b-row><p/>
 
-              <!-- id="twobutton" -->
-              <b-row class="mt-4">
-                <b-col>
-                  <router-link to = "/taxDeduct"><button type="button" class="btn btn-outline-primary">
-                    ย้อนกลับ
-                  </button></router-link>
-                </b-col>
-                <b-col>
-                  <router-link to = "/"><button @click="next" class="btn btn-primary">
-                    เสร็จสิน
-                  </button></router-link> 
-                </b-col>
-              </b-row>
+              <div class="d-flex justify-content-md-center">
+                <router-link to = "/result" class="pr-4">
+                    <button type="button" class="btn btn-outline-primary" id="regularbutton">
+                        ย้อนกลับ
+                    </button>
+                </router-link>  
+                <!-- @click="next" -->
+                <router-link to = "/taxCalculate">
+                  <button class="btn btn-primary" id="regularbutton">
+                      เสร็จสิ้น
+                  </button>
+                </router-link> 
+              </div>
+
 
             </b-col>
             
