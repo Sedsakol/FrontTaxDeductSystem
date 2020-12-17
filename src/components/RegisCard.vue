@@ -118,7 +118,7 @@ export default {
             currentObj.msg = response.data.msg;
             console.log(response.data);
             if(currentObj.msg === 'created user'){
-              await currentObj.axios.post('http://161.246.5.140:8000/auth/obtain_token/', {
+              await currentObj.axios.post('obtain_token/', {
                     email: this.user.email,
                     password: this.user.password
               })

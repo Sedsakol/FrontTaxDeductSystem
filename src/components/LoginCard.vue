@@ -53,6 +53,7 @@
 
 <script>
 import firebase from "firebase";
+import store from "../store/index.js";
 export default {
   name: "LoginCard",
   data() {
@@ -73,7 +74,7 @@ export default {
     async user_login() {
       let currentObj = this;
       await this.axios
-        .post("http://161.246.5.140:8000/auth/obtain_token/", {
+        .post("/auth/obtain_token/", {
           email: this.user.email,
           password: this.user.password
         })
@@ -81,6 +82,7 @@ export default {
           currentObj.output = response.data.token;
           currentObj.$cookies.set("token", currentObj.output);
           console.log("Login Success");
+          store.state
           currentObj.$router.push("/");
         })
         .catch(function() {
@@ -91,8 +93,9 @@ export default {
     },
     async facebook_login() {
       console.log('facebook login')
+      let currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
-      firebase
+      await firebase
         .auth()
         .signInWithPopup(provide)
         .then(result => {
@@ -110,6 +113,8 @@ export default {
             user_type_id: 1
           };
           console.log(result);
+
+
         })
         .catch(err => {
           console.log('fail')

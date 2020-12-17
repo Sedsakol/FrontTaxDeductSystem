@@ -160,7 +160,7 @@ export default {
         disable_edit: true,
         maxDate: today,
         // disabledDates: maxdate,
-        user: store.state.user
+        user: store.state.profile
       }
     },
     

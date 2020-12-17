@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user:[
+    profile:[
       {
       email: '1234@12374.com',
       gender: 'ชาย',
@@ -51,16 +51,17 @@ export default new Vuex.Store({
         net_income : 0,
         tax : 0,
       }
-    ]
+    ],
+    is_login: false
   },
   mutations: {
     profile_change(state,payload) {
-      state.user[0].gender = payload.gender
-      state.user[0].birthdate = payload.birthdate
-      state.user[0].salary = payload.salary
-      state.user[0].other_income = payload.other_income
-      state.user[0].parent_num = payload.parent_num
-      state.user[0].child_num = payload.child_num
+      state.profile[0].gender = payload.gender
+      state.profile[0].birthdate = payload.birthdate
+      state.profile[0].salary = payload.salary
+      state.profile[0].other_income = payload.other_income
+      state.profile[0].parent_num = payload.parent_num
+      state.profile[0].child_num = payload.child_num
     },
     tax_change(state,payload) {
       state.tax[0] = payload
@@ -70,6 +71,9 @@ export default new Vuex.Store({
     },
     result_tax_change(state,payload){
       state.result_tax[0] = payload
+    },
+    is_login_change(state,payload){
+      state.is_login = payload
     }
 
   },

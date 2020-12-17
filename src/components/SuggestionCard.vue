@@ -190,7 +190,7 @@
             
             <!-- right side -->
             <b-col cols="4" class="bg-mainblue" id = "rightside">
-              <b-img center fluid alt="Responsive image" src="../assets/images/undraw_2.svg"></b-img><p/>
+              <b-img center fluid alt="Responsive image" class="rounded" src="../assets/images/undraw_2.svg"></b-img><p/>
               <h6 class="text-center text-white pt-4">รูปแบบการลงทุนที่เหมาะสมกับคุณ</h6>
               <h5 class="text-center"><span class="text-lightyell">แบบป้องกันความเสี่ยง{{ this.type }}</span></h5>
               <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>

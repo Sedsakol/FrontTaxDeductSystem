@@ -1,5 +1,5 @@
 <template>
-  <div class="align-content-center" id="bar">
+  <div class="align-content-center" id="bar" :key="is_login">
     <b-navbar variant="faded" class="mx-auto">
       <b-navbar-brand>
         <router-link to="/"><b-img src="../assets/images/logo.svg"></b-img></router-link>
@@ -51,7 +51,7 @@ export default {
       if (this.$cookies.get('token')){
         console.log("Not Null");
         await this.axios
-        .get("http://161.246.5.140:8000/profile/", {
+        .get("/profile/", {
           headers: {
             'Authorization': this.$cookies.get('token')
           }
@@ -72,6 +72,11 @@ export default {
         console.log("Null");
       }
       await console.log(this.$cookies.get('user'))
+    },
+    sign_out(){
+      console.log('sign_out')
+      this.$cookies.remove('token')
+      this.is_login = false
     }
   }
   
