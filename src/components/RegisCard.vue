@@ -6,7 +6,7 @@
           <h4 class="text-center card-title">สร้างบัญชี</h4>
           <form @submit.prevent = "user_regis" id = "form-regis">
             <b-form-group>
-              <button id="facebook" block class="btn btn-primary">
+              <button id="facebook" block class="btn btn-primary" disabled>
               Login with Facebook</button>
             </b-form-group>
 

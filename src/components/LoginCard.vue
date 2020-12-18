@@ -13,7 +13,7 @@
               <span class="hr-title">หรือ</span>
           </div>
 
-          <form @submit.prevent="user_login" id="form-login">
+          <form id="form-login">
             <b-form-group>
               <b-form-input
                 v-model="user.email"
@@ -34,16 +34,16 @@
               />
             </b-form-group>
 
-            <button type="submit" class="btn btn-primary" block id="fullbutton">
+            <button class="btn btn-primary" block id="fullbutton" v-on:click="user_login(user.email,user.password)">
               เข้าสู่ระบบ
             </button>
 
-            <div class="text-center mt-2">
-              <p>ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
-            </div>
-
           </form>
+
+          <div class="text-center mt-2">
+            <p>ยังไม่มีบัญชีผู้ใช้งาน?
+            <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
+          </div>
           
         </div>
       </div>
@@ -61,7 +61,8 @@ export default {
       user: {
         email: "",
         password: ""
-      }
+      },
+      profile: store.state.profile
     };
   },
 
@@ -70,20 +71,45 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
+    async get_profile(){
+      let currentObj = this
+      if (this.$cookies.get('token')){
+        await this.axios
+        .get("profile/", {
+          headers: {
+            'Authorization': this.$cookies.get('token')
+          }
+        })
+        .then(async function(response) {
+          console.log("get profile");
+          currentObj.profile = JSON.stringify(response.data);
+          await currentObj.$cookies.set('profile',currentObj.profile);
+          await store.commit('profile_change',currentObj.profile);
+          currentObj.$router.push("/");
+        })
+        .catch(function(error) {
+          currentObj.profile = null;
+          console.log(error);
+        });
+      }
+      else{
+        console.log("Pls Login");
+      }
+    },
 
-    async user_login() {
+    async user_login(email = this.user.email,password= this.user.email) {
       let currentObj = this;
       await this.axios
-        .post("/auth/obtain_token/", {
-          email: this.user.email,
-          password: this.user.password
+        .post("auth/obtain_token/", {
+          email: email,
+          password: password
         })
-        .then(function(response) {
+        .then(async function(response) {
           currentObj.output = response.data.token;
-          currentObj.$cookies.set("token", currentObj.output);
-          console.log("Login Success");
-          store.state
-          currentObj.$router.push("/");
+          await currentObj.$cookies.set("token", currentObj.output);
+          await store.commit('is_login_change', true);
+          await console.log("Login Success");
+          await currentObj.get_profile();
         })
         .catch(function() {
           currentObj.output = "error";
@@ -98,22 +124,40 @@ export default {
       await firebase
         .auth()
         .signInWithPopup(provide)
-        .then(result => {
-          // create user in db
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          
-          let obj = {
-            facebook_id: result.additionalUserInfo.profile.id,
-            fullname: result.additionalUserInfo.profile.name,
-            email: result.additionalUserInfo.profile.email,
-            birthday: result.additionalUserInfo.profile.birthday,
-            profile_image: result.user.photoURL + "?height=500",
-            user_type_id: 1
-          };
-          console.log(result);
+        .then(result  => {
 
+          var bd = null
+          if (result.additionalUserInfo.profile.birthday){
+            bd = result.additionalUserInfo.profile.birthday
+            a = bd.split("/")
+            bd = a[1] + "/" + a[0] + "/" + a[2]
+          }
+
+          let obj = {
+            email: result.additionalUserInfo.profile.email,
+            gender: null,
+            birthdate: bd,
+            facebook_id: result.additionalUserInfo.profile.id,
+            uid: result.user.uid,
+            token: result.credential.accessToken,
+            fullname: result.additionalUserInfo.profile.name
+          };
+
+          currentObj.axios
+          .post("facebook_login/",obj)
+          .then(async function(response) {
+            console.log("OK");
+            currentObj.facebook_login_res = JSON.stringify(response.data);
+            if (currentObj.facebook_login_res.status == 200){
+              await currentObj.user_login(obj.email,obj.uid)
+            }
+            else{
+              console.log(currentObj.facebook_login_res)
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
 
         })
         .catch(err => {

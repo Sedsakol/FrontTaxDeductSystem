@@ -6,71 +6,72 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    profile:[
-      {
+    profile: {
       email: '1234@12374.com',
       gender: 'ชาย',
       birthdate : 'วัน/เดือน/ปี',
-      salary : 'asdasd',
-      other_income : 'asdasd',
-      parent_num_dis : '0',
-      child_num : '0',
-      risk : '8',
-      facebook_id : 'asdasd'
-      }
-    ],
-    tax:[
-      {
-        salary: 0,
-        other_income: 0,
-        marital: 1,
-        parent_num_dis: 0,
-        child_before_2561: 0,
-        child_after_2561: 0,
-        protege: 0,
-      }
-    ],
-    allowance:[
-      {
-        rmf : 0,
-        ssf : 0,
-        life_insurance : 0,
-        pension_insurance : 0,
-        donation : 0,
-        edu_donation : 0,
-        home_loans : 0,
-        provident_fund : 0,
-        social_security : 0,
-        other : 0,
-      }
-    ],
-    result_tax:[
-      { 
-        allowance_100k : 0,
-        other_allowance : 0,
-        net_income : 0,
-        tax : 0,
-      }
-    ],
+      salary : 0,
+      other_income : 0,
+      parent_num_dis : 0,
+      child_num : 0,
+      risk : 0,
+      facebook_id : 'abc'
+    },
+    tax: {
+      salary: 0,
+      other_income: 0,
+      marital: 1,
+      parent_num_dis: 0,
+      child_before_2561: 0,
+      child_after_2561: 0,
+      protege: 0,
+    },
+    allowance: {
+      rmf : 0,
+      ssf : 0,
+      life_insurance : 0,
+      pension_insurance : 0,
+      donation : 0,
+      edu_donation : 0,
+      home_loans : 0,
+      provident_fund : 0,
+      social_security : 0,
+      other : 0,
+    },
+    result_tax: { 
+      allowance_100k : 0,
+      other_allowance : 0,
+      net_income : 0,
+      tax : 0,
+    },
     is_login: false
   },
   mutations: {
     profile_change(state,payload) {
-      state.profile[0].gender = payload.gender
-      state.profile[0].birthdate = payload.birthdate
-      state.profile[0].salary = payload.salary
-      state.profile[0].other_income = payload.other_income
-      state.profile[0].parent_num = payload.parent_num
-      state.profile[0].child_num = payload.child_num
+      state.profile.gender = (payload.gender) ? payload.gender : 'ชาย'
+      state.profile.salary = (payload.salary) ? payload.salary : 0
+      state.profile.other_income = (payload.other_income) ? payload.other_income : 0
+      state.profile.parent_num = (payload.parent_num) ? payload.parent_num : 0
+      state.profile.child_num = (payload.child_num) ? payload.child_num : 0
+
+      if (payload.birthdate) {
+        state.profile.birthdate = payload.birthdate
+      }
+      if (payload.facebook_id) {
+        state.profile.facebook_id = payload.facebook_id
+      }
+      if (payload.email) {
+        state.profile.email = payload.email
+      }
     },
     tax_change(state,payload) {
-      state.tax[0] = payload
+      state.tax = payload
     },
     allowance_change(state,payload) {
-      state.allowance[0] = payload
+      state.allowance = payload
     },
     result_tax_change(state,payload){
-      state.result_tax[0] = payload
+      state.result_tax = payload
     },
     is_login_change(state,payload){
       state.is_login = payload
