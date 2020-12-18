@@ -130,7 +130,7 @@ export default {
           var bd = null
           if (result.additionalUserInfo.profile.birthday){
             bd = result.additionalUserInfo.profile.birthday
-            a = bd.split("/")
+            let a = bd.split("/")
             bd = a[1] + "/" + a[0] + "/" + a[2]
           }
 
