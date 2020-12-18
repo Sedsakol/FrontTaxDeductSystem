@@ -98,6 +98,22 @@
                 </b-form-row>
             </b-form-group>
 
+            <b-form-group>
+                <b-form-row>
+                    <b-col cols = "6"><label class="col-form-label">ปกติ/พิการ/ทุพพลภาพ</label></b-col>
+                    <b-col cols = "5">
+                      <b-form-select 
+                      class="form-control" 
+                      v-model= "user.infirm" 
+                      :value=user.infirm 
+                      value-field="value"
+                      text-field="text"
+                      :disabled=disable_edit 
+                      :options="infirm_ops"/>
+                    </b-col>
+                </b-form-row>
+            </b-form-group>
+
             <!-- <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พิการ/ทุพพลภาพ</label></b-col>
@@ -113,8 +129,8 @@
                     <b-col>
                       <b-form-select 
                       class="form-control" 
-                      v-model= "user.parent_num_dis" 
-                      :value=user.parent_num_dis 
+                      v-model= "user.parent_num" 
+                      :value=user.parent_num
                       value-field="value"
                       text-field="text"
                       :disabled=disable_edit 
@@ -189,6 +205,7 @@ export default {
         marital_ops: [
           { value: '1', text: 'โสด' },
           { value: '2', text: 'สมรสแล้ว' },
+          { value: '3', text: 'หย่า' },
         ],
         parent_ops: [
           { value: '0', text: '0' },
@@ -197,7 +214,11 @@ export default {
           { value: '3', text: '3' },
           { value: '4', text: '4' }
         ],
-
+        infirm_ops: [
+          { value: '0', text: 'ปกติ' },
+          { value: '1', text: 'พิการ' },
+          { value: '2', text: 'ทุพพลภาพ' },
+        ]
       }
     },
     
