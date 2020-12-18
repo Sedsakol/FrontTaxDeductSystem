@@ -129,14 +129,11 @@ h6 { font-size: 18px; }
 
 /*------------- button -------------*/
 
-#twobutton {
-  width: 406px;
-}
-
 #regularbutton {
   width: 180px;
 }
 
+#barbutton,
 #fullbutton {
   width: 100%;
 }
@@ -166,7 +163,7 @@ h6 { font-size: 18px; }
 .btn-outline-primary:focus{
   border-color: #57A3B3;
   color: #57A3B3;
-  width: 100%;
+  width: 180px;
   box-shadow: none;
 }
 
