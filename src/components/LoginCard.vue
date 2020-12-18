@@ -100,6 +100,10 @@ export default {
 
     async user_login(email = this.user.email,password= this.user.email) {
       let currentObj = this;
+      console.log({
+          email: email,
+          password: password
+        })
       await this.axios
         .post("auth/obtain_token/", {
           email: email,
@@ -120,7 +124,7 @@ export default {
     },
     async facebook_login() {
       console.log('facebook login')
-      let currentObj = this;
+      var currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
       await firebase
         .auth()
@@ -130,11 +134,11 @@ export default {
           var bd = null
           if (result.additionalUserInfo.profile.birthday){
             bd = result.additionalUserInfo.profile.birthday
-            let a = bd.split("/")
-            bd = a[1] + "/" + a[0] + "/" + a[2]
+            var birthdate_split = bd.split("/")
+            bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
           }
-
-          let obj = {
+          
+          var obj = {
             email: result.additionalUserInfo.profile.email,
             gender: null,
             birthdate: bd,
@@ -144,13 +148,14 @@ export default {
             fullname: result.additionalUserInfo.profile.name
           };
 
+          console.log(obj)
+
           currentObj.axios
-          .post("facebook_login/",obj)
-          .then(async function(response) {
-            console.log("OK");
-            currentObj.facebook_login_res = JSON.stringify(response.data);
+          .post("facebook_login/",JSON.stringify(obj))
+          .then(function(response) {
+            currentObj.facebook_login_res = response.data;
             if (currentObj.facebook_login_res.status == 200){
-              await currentObj.user_login(obj.email,obj.uid)
+               currentObj.user_login(obj.email,obj.uid)
             }
             else{
               console.log(currentObj.facebook_login_res)

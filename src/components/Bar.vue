@@ -66,6 +66,7 @@ export default {
       this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       this.is_login = false
       this.$router.push("/");
+      this.$router.go();
     }
   }
   
