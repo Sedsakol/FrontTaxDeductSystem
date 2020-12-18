@@ -220,27 +220,27 @@ export default {
 
         store.commit('allowance_change', new_allowance)
         this.allowance = store.state.allowance
-        console.log(this.tax[0])
+        console.log(this.tax)
         
         let a = {
-            salary: this.tax[0].salary,
-            other_income: this.tax[0].other_income,
-            marital: this.tax[0].marital,
-            parent_num_dis: this.tax[0].parent_num_dis,
-            child_before_2561: this.tax[0].child_before_2561,
-            child_after_2561: this.tax[0].child_after_2561,
-            protege: this.tax[0].protege,
+            salary: this.tax.salary,
+            other_income: this.tax.other_income,
+            marital: this.tax.marital,
+            parent_num_dis: this.tax.parent_num_dis,
+            child_before_2561: this.tax.child_before_2561,
+            child_after_2561: this.tax.child_after_2561,
+            protege: this.tax.protege,
 
-            rmf: this.allowance[0].rmf,
-            ssf: this.allowance[0].ssf,
-            life_insurance: this.allowance[0].life_insurance,
-            pension_insurance: this.allowance[0].pension_insurance,
-            donation: this.allowance[0].donation,
-            edu_donation: this.allowance[0].edu_donation,
-            home_loans: this.allowance[0].home_loans,
-            provident_fund: this.allowance[0].provident_fund,
-            social_security: this.allowance[0].social_security,
-            other: this.allowance[0].other
+            rmf: this.allowance.rmf,
+            ssf: this.allowance.ssf,
+            life_insurance: this.allowance.life_insurance,
+            pension_insurance: this.allowance.pension_insurance,
+            donation: this.allowance.donation,
+            edu_donation: this.allowance.edu_donation,
+            home_loans: this.allowance.home_loans,
+            provident_fund: this.allowance.provident_fund,
+            social_security: this.allowance.social_security,
+            other: this.allowance.other
 
         }
         console.log(a)
