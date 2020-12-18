@@ -15,7 +15,7 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
-                  <b-col cols = "5"><b-form-input :value=user[0].email disabled /></b-col>
+                  <b-col cols = "5"><b-form-input :value=user.email disabled /></b-col>
               </b-form-row> 
             </b-form-group>
 
@@ -23,7 +23,10 @@
               <b-form-row>
                   
                   <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
-                  <b-col cols = "5"><button id="facebook" size="sm" block class="btn btn-primary">เชื่อมต่อ Facebook</button></b-col>
+                  <b-col cols = "5">
+                    <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login">เชื่อมต่อ Facebook</button>
+                    <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
+                  </b-col>
                   <!-- <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" /></b-col> -->
               </b-form-row> 
             </b-form-group>
@@ -32,7 +35,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model="gender" :value=user[0].gender :disabled=disable_edit >
+                    <b-form-select class="form-control" v-model="gender" :value=user.gender :disabled=disable_edit >
                       
                     </b-form-select>
                   </b-col>
@@ -43,8 +46,8 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
                   <b-col cols = "5"><b-form-datepicker
-                    :value = user[0].birthdate
-                    :placeholder= user[0].birthdate
+                    :value = user.birthdate
+                    :placeholder= user.birthdate
                     :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}"
                     locale="th"
                     hide-header = "true"
@@ -62,7 +65,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" :value=user[0].salary  :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" :value=user.salary  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -70,7 +73,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" :value=user[0].other_income  :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" :value=user.other_income  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -79,7 +82,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "marital" :value=user[0].marital :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "marriage" :value=user.marriage :disabled=disable_edit />
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -97,7 +100,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "parent_num" :value=user[0].parent_num :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "parent_num" :value=user.parent_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -107,7 +110,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "child_num" :value=user[0].child_num :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "child_num" :value=user.child_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -142,7 +145,8 @@
 </template>
 
 <script>
-import store from "../store/index.js"
+import store from "../store/index.js";
+import firebase from "firebase";
 export default {
     name: "ProfileCard",
     data() {
@@ -154,9 +158,9 @@ export default {
         birthdate: '',
         salary: '',
         other_income: '',
-        marital: '0',
-        parent_num: '0',
-        child_num: '0',
+        marriage: 0,
+        parent_num: 0,
+        child_num: 0,
         disable_edit: true,
         maxDate: today,
         // disabledDates: maxdate,
@@ -176,18 +180,71 @@ export default {
       },
       async save_profile(){
         let new_user = {
+          email: user.email,
           gender: this.gender,
           birthdate : this.birthdate,
           salary : this.salary,
           other_income : this.other_income,
           parent_num: this.parent_num,
-          child_num : this.child_num
+          child_num : this.child_num,
+          infirm: this.infirm,
+          marriage: this.marriage,
+          facebook_id: user.facebook_id
         }
 
+        // ส่ง api ไปsave ที่ back ด้วย
         await store.commit('profile_change', new_user)
+        await this.$cookies.set("profile", new_user);
         await this.edit_profile_change()
+      },
+      async facebook_login() {
+        console.log('facebook login still development pls we will be back as soon as posible')
+        /* let currentObj = this;
+        var provide = new firebase.auth.FacebookAuthProvider();
+        await firebase
+          .auth()
+          .signInWithPopup(provide)
+          .then(result  => {
 
-        
+            var bd = null
+            if (result.additionalUserInfo.profile.birthday){
+              bd = result.additionalUserInfo.profile.birthday
+              a = bd.split("/")
+              bd = a[1] + "/" + a[0] + "/" + a[2]
+            }
+
+            let obj = {
+              email: result.additionalUserInfo.profile.email,
+              gender: null,
+              birthdate: bd,
+              facebook_id: result.additionalUserInfo.profile.id,
+              uid: result.user.uid,
+              token: result.credential.accessToken,
+              fullname: result.additionalUserInfo.profile.name
+            };
+
+            currentObj.axios
+            .post("facebook_login/",obj)
+            .then(async function(response) {
+              console.log("OK");
+              currentObj.facebook_login_res = JSON.stringify(response.data);
+              if (currentObj.facebook_login_res.status == 200){
+                //check profile
+                if ()
+              }
+              else{
+                console.log(currentObj.facebook_login_res)
+              }
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+
+          })
+          .catch(err => {
+            console.log('fail')
+            console.log(err)
+          }); */
       }
     }
 }

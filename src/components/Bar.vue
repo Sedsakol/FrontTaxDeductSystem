@@ -65,6 +65,7 @@ export default {
       console.log('sign_out')
       this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       this.is_login = false
+      this.$router.push("/");
     }
   }
   

@@ -15,7 +15,8 @@ export default new Vuex.Store({
       parent_num_dis : 0,
       child_num : 0,
       risk : 0,
-      facebook_id : 'abc'
+      marriage : 0,
+      facebook_id : null
     },
     tax: {
       salary: 0,
@@ -48,14 +49,26 @@ export default new Vuex.Store({
   },
   mutations: {
     profile_change(state,payload) {
-      state.profile.gender = (payload.gender) ? payload.gender : 'ชาย'
-      state.profile.salary = (payload.salary) ? payload.salary : 0
-      state.profile.other_income = (payload.other_income) ? payload.other_income : 0
-      state.profile.parent_num = (payload.parent_num) ? payload.parent_num : 0
-      state.profile.child_num = (payload.child_num) ? payload.child_num : 0
-
+      if (payload.gender) {
+        state.profile.gender = payload.gender
+      }
       if (payload.birthdate) {
         state.profile.birthdate = payload.birthdate
+      }
+      if (payload.salary) {
+        state.profile.salary = payload.salary
+      }
+      if (payload.other_income) {
+        state.profile.other_income = payload.other_income
+      }
+      if (payload.parent_num) {
+        state.profile.parent_num = payload.parent_num
+      }
+      if (payload.child_num) {
+        state.profile.child_num = payload.child_num
+      }
+      if (payload.marriage) {
+        state.profile.marriage = payload.marriage
       }
       if (payload.facebook_id) {
         state.profile.facebook_id = payload.facebook_id
