@@ -138,6 +138,7 @@ export default {
             bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
           }
           
+          //รออัพเดท gender
           var obj = {
             email: result.additionalUserInfo.profile.email,
             gender: null,
