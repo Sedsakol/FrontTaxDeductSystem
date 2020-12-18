@@ -13,7 +13,7 @@
               <span class="hr-title">หรือ</span>
           </div>
 
-          <form id="form-login">
+          <div id="form-login">
             <b-form-group>
               <b-form-input
                 v-model="user.email"
@@ -38,7 +38,7 @@
               เข้าสู่ระบบ
             </button>
 
-          </form>
+          </div>
 
           <div class="text-center mt-2">
             <p>ยังไม่มีบัญชีผู้ใช้งาน?
@@ -86,6 +86,7 @@ export default {
           await currentObj.$cookies.set('profile',currentObj.profile);
           await store.commit('profile_change',currentObj.profile);
           currentObj.$router.push("/");
+          currentObj.$router.go();
         })
         .catch(function(error) {
           currentObj.profile = null;

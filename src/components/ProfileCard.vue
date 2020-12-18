@@ -82,7 +82,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "marriage" :value=user.marriage :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "user.marriage" :value=user.marriage :disabled=disable_edit />
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -100,7 +100,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "parent_num" :value=user.parent_num :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "user.parent_num" :value=user.parent_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -110,7 +110,7 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "child_num" :value=user.child_num :disabled=disable_edit />
+                      <b-form-select class="form-control" v-model= "user.child_num" :value=user.child_num :disabled=disable_edit />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -154,7 +154,7 @@ export default {
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
       return {
-        gender: '',
+        gender: 'ชาย',
         birthdate: '',
         salary: '',
         other_income: '',
