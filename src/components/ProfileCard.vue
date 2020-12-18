@@ -114,15 +114,6 @@
                 </b-form-row>
             </b-form-group>
 
-            <!-- <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">พิการ/ทุพพลภาพ</label></b-col>
-                    <b-col cols = "5">
-                      <b-form-select class="form-control" disabled/>
-                    </b-col>
-                </b-form-row>
-            </b-form-group> -->
-
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
@@ -186,17 +177,17 @@ export default {
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
       return {
-        birthdate: '',
+        birthdate: 'วัน/เดือน/ปี',
         salary: '',
         other_income: '',
-        marriage: 0,
+        marriage: 1,
         parent_num: 0,
         child_num: 0,
+        infirm: 1,
         disable_edit: true,
         maxDate: today,
         // disabledDates: maxdate,
         user: store.state.profile,
-        tax: store.state.tax,
         
         gender_ops: [
           { value: '1', text: 'หญิง' },
@@ -233,23 +224,42 @@ export default {
         return this.disable_edit
       },
       async save_profile(){
-        let new_user = {
+        var new_user = {
           email: user.email,
-          gender: this.gender,
-          birthdate : this.birthdate,
-          salary : this.salary,
-          other_income : this.other_income,
-          parent_num: this.parent_num,
-          child_num : this.child_num,
-          infirm: this.infirm,
-          marriage: this.marriage,
+          gender: user.gender,
+          birthdate : user.birthdate,
+          salary : user.salary,
+          other_income : user.other_income,
+          parent_num: user.parent_num,
+          child_num : user.child_num,
+          infirm: user.infirm,
+          marriage: user.marriage,
           facebook_id: user.facebook_id
         }
 
         // ส่ง api ไป save ที่ back ด้วย
-        await store.commit('profile_change', new_user)
-        await this.$cookies.set("profile", new_user);
-        await this.edit_profile_change()
+        let currentObj = this
+
+        if (this.$cookies.get('token')){
+          await this.axios
+          .get("profile/", new_user, {
+            headers: {
+              'Authorization': this.$cookies.get('token')
+            }
+          })
+          .then(async function(response) {
+            console.log("saved profile");
+            await store.commit('profile_change', new_user)
+            await this.$cookies.set("profile", new_user);
+            await this.edit_profile_change();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        }
+        else{
+          console.log('pls login naja')
+        }
       },
       async facebook_login() {
         console.log('facebook login still development pls we will be back as soon as posible')
