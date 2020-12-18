@@ -8,14 +8,14 @@ export default new Vuex.Store({
   state: {
     profile: {
       email: '1234@12374.com',
-      gender: 'ชาย',
-      birthdate : 'วัน/เดือน/ปี',
+      gender: 1,
+      birthdate : '13/02/1999',
       salary : 0,
       other_income : 0,
       parent_num_dis : 0,
       child_num : 0,
       risk : 0,
-      marriage : 0,
+      marriage : 1,
       facebook_id : null
     },
     tax: {

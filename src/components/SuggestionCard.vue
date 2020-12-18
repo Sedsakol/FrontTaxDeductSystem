@@ -24,13 +24,7 @@
                   <b-form-group><b-form-row>
                       <b-col cols = "5" md="auto"><label class="col-form-label">ลงทุน RMF</label>
                       <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
-                      <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
-                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                          <ul>
-                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                              <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                          </ul>
-                      </b-popover></b-col>
+                      </b-col>
                       <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -105,15 +99,15 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col cols = "4" class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "rmf" min ="0"/>
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
 
                   <b-form-group><b-form-row>
                       <b-col cols = "6"><label class="col-form-label">ลงทุน SSF</label>
-                      <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
-                      <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
+                      <b-icon font-scale="0.75" class="ml-2" id="popover-ssf2" icon="exclamation-circle"/>
+                      <b-popover target="popover-ssf2" triggers="hover" placement= "rightbottom">
                           เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                           <ul>
                               <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
@@ -121,7 +115,7 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "ssf" min ="0"/>
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -139,7 +133,7 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "life_insurance" min ="0"/>
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -225,8 +219,30 @@
 </template>
 
 <script>
+import store from "../store/index.js"
 export default {
-  name: "SuggestionCard",
+    name: "SuggestionCard",
+    data() {
+      return {
+        rmf: this.allowance[0].rmf,
+        ssf: this.allowance[0].ssf,
+        life_insurance: this.allowance[0].life_insurance,
+        pension_insurance: this.allowance[0].pension_insurance,
+
+
+        // allowance_60k == ค่าลดหย่อนส่วนตัว 60k
+        // allowance_100k == ค่าใช้จ่านส่วนบุคคล 100k
+        // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
+        salary_year: store.state.tax[0].salary*12,
+        other_income: store.state.tax[0].other_income,
+        allowance_60k: 60000,
+        allowance_100k: store.state.result_tax[0].personal_allowance,
+        other_allowance: store.state.result_tax[0].allowance, 
+        net_income: store.state.result_tax[0].net_income,
+        tax: store.state.result_tax[0].tax
+
+      }
+    },
 };
 </script>
 

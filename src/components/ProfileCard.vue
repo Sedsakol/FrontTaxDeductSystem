@@ -35,9 +35,13 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model="gender" :value=user.gender :disabled=disable_edit >
-                      
-                    </b-form-select>
+                    <b-form-select 
+                    class="form-control" 
+                    v-model="user.gender" 
+                    :options="gender_ops"
+                    value-field="value"
+                    text-field="text"
+                    :disabled=disable_edit />
                   </b-col>
               </b-form-row> 
             </b-form-group>
@@ -46,6 +50,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
                   <b-col cols = "5"><b-form-datepicker
+                    v-model = "user.birthdate"
                     :value = user.birthdate
                     :placeholder= user.birthdate
                     :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}"
@@ -56,7 +61,6 @@
                     label-current-month = "เดือนนี้"
                     label-next-month = "เดือนถัดไป"
                     label-next-year = "ปีถัดไป"
-                    v-model = "birthdate"
                     :max=maxDate
                     :disabled=disable_edit></b-form-datepicker></b-col>
               </b-form-row> 
@@ -65,7 +69,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" :value=user.salary  :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" v-model="user.salary" :value=user.salary :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -73,7 +77,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" :value=user.other_income  :disabled=disable_edit /></b-col>
+                    <b-col><b-form-input type="number" placeholder="" v-model="user.other_income" :value=user.other_income  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -82,7 +86,14 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                     <b-col cols = "5">
-                      <b-form-select class="form-control" v-model= "user.marriage" :value=user.marriage :disabled=disable_edit />
+                      <b-form-select 
+                      class="form-control" 
+                      v-model= "user.marriage" 
+                      :value=user.marriage 
+                      value-field="value"
+                      text-field="text"
+                      :disabled=disable_edit 
+                      :options="marital_ops"/>
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -100,7 +111,14 @@
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
                     <b-col>
-                      <b-form-select class="form-control" v-model= "user.parent_num" :value=user.parent_num :disabled=disable_edit />
+                      <b-form-select 
+                      class="form-control" 
+                      v-model= "user.parent_num_dis" 
+                      :value=user.parent_num_dis 
+                      value-field="value"
+                      text-field="text"
+                      :disabled=disable_edit 
+                      :options="parent_ops" />
                     </b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
@@ -109,9 +127,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
-                    <b-col>
-                      <b-form-select class="form-control" v-model= "user.child_num" :value=user.child_num :disabled=disable_edit />
-                    </b-col>
+                    <b-col><b-form-input type="number" placeholder="" v-model="user.child_num" :value=user.child_num  :disabled=disable_edit /></b-col>
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -154,7 +170,6 @@ export default {
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
       return {
-        gender: 'ชาย',
         birthdate: '',
         salary: '',
         other_income: '',
@@ -164,7 +179,25 @@ export default {
         disable_edit: true,
         maxDate: today,
         // disabledDates: maxdate,
-        user: store.state.profile
+        user: store.state.profile,
+        tax: store.state.tax,
+        
+        gender_ops: [
+          { value: '1', text: 'หญิง' },
+          { value: '2', text: 'ชาย' },
+        ],
+        marital_ops: [
+          { value: '1', text: 'โสด' },
+          { value: '2', text: 'สมรสแล้ว' },
+        ],
+        parent_ops: [
+          { value: '0', text: '0' },
+          { value: '1', text: '1' },
+          { value: '2', text: '2' },
+          { value: '3', text: '3' },
+          { value: '4', text: '4' }
+        ],
+
       }
     },
     
@@ -192,7 +225,7 @@ export default {
           facebook_id: user.facebook_id
         }
 
-        // ส่ง api ไปsave ที่ back ด้วย
+        // ส่ง api ไป save ที่ back ด้วย
         await store.commit('profile_change', new_user)
         await this.$cookies.set("profile", new_user);
         await this.edit_profile_change()

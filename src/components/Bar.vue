@@ -41,7 +41,8 @@ export default {
   name: "Bar",
     data() {
     return {
-      user : store.state.profile,
+      user : 
+      store.state.profile,
       is_login: false,
     }
   },

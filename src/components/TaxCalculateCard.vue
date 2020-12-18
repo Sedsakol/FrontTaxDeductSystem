@@ -53,45 +53,12 @@
                       </ul>
                     </b-popover>
                   </b-col>
-                  <!-- <b-col cols = "1" align-self="center">
-                    <b-icon class="ml-2" id="popover-1" icon="exclamation-circle"/>
-                    <b-popover target="popover-1" triggers="hover" placement= "rightbottom">
-                    
-                    </b-popover>
-                  </b-col> -->
                   <b-col>
                     <b-form-select class="form-control" v-model= "parent_num_dis" :options= "parent_ops" />
                   </b-col>
                   <b-col cols = "0.75"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
             </b-form-group>
-
-            <!-- <b-form-group>
-              <b-form-row>
-                <b-col cols = "6"> <b><label class="col-form-label">จำนวนลูก</label></b> 
-                <b-icon font-scale="0.75" class="ml-2" id="popover-child" icon="exclamation-circle"/>
-                      <b-popover target="popover-child" triggers="hover" placement= "rightbottom">
-                        เกณฑ์อายุของลูก (<span class="terxt-dange">ข้อใดข้อหนึ่ง</span>)
-                        <ul>
-                          <li>น้อยกว่า 20 ปี (ยังไม่บรรลุนิติภาวะ)</li>
-                          <li>ยังไม่แต่งงาน (ยังไม่บรรลุนิติภาวะ)</li>
-                          <li>20-25 ปี (บรรลุนิติภาวะแล้ว) แต่กำลังศึกษาในระดับ ปวส. / ปวท. ปริญญาตรี และะปริญญาตรีขึ้นไป</li>
-                          <li>ศาลสั่งให้เป็นผู้ไร้ความสามารถ/เสมือนไร้ความสามารถ</li>
-                        </ul>
-                        เกณฑ์รายได้ของลูก (<span class="terxt-dange">ข้อใดข้อหนึ่ง</span>)
-                        <ul>
-                          <li>ไม่มีรายได้</li>
-                          <li>รายได้ทั้งปีน้อยกว่า 30,000 บาท</li>
-                        </ul>
-                        เกณฑ์ความสัมพันธ์
-                        <ul>
-                          <li>ลูกแท้ ๆ ที่ถูกต้องตามกฎหมาย</li>
-                          <li>ลูกบุญธรรมที่จดทะเบียนรับแล้ว</li>
-                        </ul>
-                      </b-popover>
-                </b-col>
-              </b-form-row>
-            </b-form-group> -->
 
             <b-form-group>
               <b-form-row>
@@ -181,8 +148,6 @@
                   </b-popover>
                   </b-col>
                   <b-col>
-                  <!-- <b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model= "protege" min ="0" /></b-col> -->
                     <b-form-select class="form-control" v-model= "protege" :options= "protege_ops" />
                   </b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>

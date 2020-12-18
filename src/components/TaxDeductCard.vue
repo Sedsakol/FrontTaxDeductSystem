@@ -248,7 +248,7 @@ export default {
         this.axios.post('tax/', a)
         .then(async function (response) {
             currentObj.output = response.data;
-            console.log('555555555555555',currentObj.output);
+            // console.log('555555555555555',currentObj.output);
             store.commit('result_tax_change', currentObj.output)
             currentObj.$router.push("/result")
             
