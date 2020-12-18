@@ -24,7 +24,7 @@
                   
                   <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
                   <b-col cols = "5">
-                    <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login">เชื่อมต่อ Facebook</button>
+                    <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
                     <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
                   </b-col>
                   <!-- <b-col cols = "5"><b-form-input value="ไม่ได้ผูกบัญชี" /></b-col> -->
@@ -66,7 +66,6 @@
                       :disabled=disable_edit >
                     </b-form-datepicker>
                   </b-col>
-                    {{user.birthdate}}
               </b-form-row> 
             </b-form-group>
 
@@ -228,13 +227,15 @@ export default {
         return this.disable_edit
       },
       async save_profile(){
-        var bd = this.user.birthdate.split("-")
-        var bd_format = bd[2] + '/' + bd[1] + '/' + bd[0]
+        if (this.user.birthdate === 'วัน/เดือน/ปี'){
+          var bd = this.user.birthdate.split("-")
+          var bd_format = bd[2] + '/' + bd[1] + '/' + bd[0]
+        }
 
         var new_user = {
           email: this.user.email,
           gender: this.user.gender,
-          birthdate : bd_format,
+          birthdate : (this.user.birthdate === 'วัน/เดือน/ปี')? null : bd_format,
           salary : this.user.salary,
           other_income : this.user.other_income,
           parent_num: this.user.parent_num,
@@ -249,13 +250,14 @@ export default {
 
         if (this.$cookies.get('token')){
           await this.axios
-          .get("profile/", {
+          .post("profile/", new_user,{
             headers: {
               'Authorization': currentObj.$cookies.get('token')
             }
-          },new_user)
+          })
           .then(async function(response) {
             console.log("saved profile");
+            console.log(response)
             await store.commit('profile_change', new_user)
             await currentObj.$cookies.set("profile", new_user);
             await currentObj.edit_profile_change();
