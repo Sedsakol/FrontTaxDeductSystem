@@ -227,32 +227,35 @@ export default {
         return this.disable_edit
       },
       async save_profile(){
-        if (this.user.birthdate === 'วัน/เดือน/ปี'){
+        if (this.user.birthdate != 'วัน/เดือน/ปี'){
           var bd = this.user.birthdate.split("-")
+          
           var bd_format = bd[2] + '/' + bd[1] + '/' + bd[0]
+          console.log(bd,bd_format)
         }
 
         var new_user = {
           email: this.user.email,
           gender: this.user.gender,
           birthdate : (this.user.birthdate === 'วัน/เดือน/ปี')? null : bd_format,
-          salary : this.user.salary,
-          other_income : this.user.other_income,
-          parent_num: this.user.parent_num,
-          child_num : this.user.child_num,
-          infirm: this.user.infirm,
-          marriage: this.user.marriage,
+          salary : (this.user.salary) ? this.user.salary : 0,
+          other_income :  (this.user.other_income) ? this.user.other_income : 0,
+          parent_num:  (this.user.parent_num) ? this.user.parent_num : 0,
+          child_num :  (this.user.child_num) ? this.user.child_num : 0,
+          infirm:  (this.user.infirm) ? this.user.infirm : 0,
+          marriage: (this.user.marriage) ? this.user.marriage : 0,
           facebook_id: this.user.facebook_id
         }
 
         // ส่ง api ไป save ที่ back ด้วย
         let currentObj = this
-
+        console.log(new_user)
         if (this.$cookies.get('token')){
           await this.axios
           .post("profile/", new_user,{
             headers: {
-              'Authorization': currentObj.$cookies.get('token')
+              'Authorization': currentObj.$cookies.get('token'),
+              'Content-Type': 'application/json'
             }
           })
           .then(async function(response) {
