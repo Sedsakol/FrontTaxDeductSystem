@@ -49,20 +49,24 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
-                  <b-col cols = "5"><b-form-datepicker
-                    v-model = "user.birthdate"
-                    :value = user.birthdate
-                    :placeholder= user.birthdate
-                    :date-format-options="{year: 'numeric', month: 'numeric', day: 'numeric'}"
-                    locale="th"
-                    hide-header = "true"
-                    label-prev-year = "ปีก่อนหน้า"
-                    label-prev-month = "เดือนก่อนหน้า"
-                    label-current-month = "เดือนนี้"
-                    label-next-month = "เดือนถัดไป"
-                    label-next-year = "ปีถัดไป"
-                    :max=maxDate
-                    :disabled=disable_edit></b-form-datepicker></b-col>
+                  <b-col cols = "5">
+                    <b-form-datepicker
+                      v-model = "user.birthdate"
+                      :value = user.birthdate
+                      :placeholder= user.birthdate
+                      :date-format-options="{day: 'numeric' , month: 'numeric',year: 'numeric'}"
+                      locale="th"
+                      :hide-header = true
+                      label-prev-year = "ปีก่อนหน้า"
+                      label-prev-month = "เดือนก่อนหน้า"
+                      label-current-month = "เดือนนี้"
+                      label-next-month = "เดือนถัดไป"
+                      label-next-year = "ปีถัดไป"
+                      :max=maxDate
+                      :disabled=disable_edit >
+                    </b-form-datepicker>
+                  </b-col>
+                    {{user.birthdate}}
               </b-form-row> 
             </b-form-group>
 
@@ -224,17 +228,20 @@ export default {
         return this.disable_edit
       },
       async save_profile(){
+        var bd = this.user.birthdate.split("-")
+        var bd_format = bd[2] + '/' + bd[1] + '/' + bd[0]
+
         var new_user = {
-          email: user.email,
-          gender: user.gender,
-          birthdate : user.birthdate,
-          salary : user.salary,
-          other_income : user.other_income,
-          parent_num: user.parent_num,
-          child_num : user.child_num,
-          infirm: user.infirm,
-          marriage: user.marriage,
-          facebook_id: user.facebook_id
+          email: this.user.email,
+          gender: this.user.gender,
+          birthdate : bd_format,
+          salary : this.user.salary,
+          other_income : this.user.other_income,
+          parent_num: this.user.parent_num,
+          child_num : this.user.child_num,
+          infirm: this.user.infirm,
+          marriage: this.user.marriage,
+          facebook_id: this.user.facebook_id
         }
 
         // ส่ง api ไป save ที่ back ด้วย
@@ -242,16 +249,16 @@ export default {
 
         if (this.$cookies.get('token')){
           await this.axios
-          .get("profile/", new_user, {
+          .get("profile/", {
             headers: {
-              'Authorization': this.$cookies.get('token')
+              'Authorization': currentObj.$cookies.get('token')
             }
-          })
+          },new_user)
           .then(async function(response) {
             console.log("saved profile");
             await store.commit('profile_change', new_user)
-            await this.$cookies.set("profile", new_user);
-            await this.edit_profile_change();
+            await currentObj.$cookies.set("profile", new_user);
+            await currentObj.edit_profile_change();
           })
           .catch(function(error) {
             console.log(error);
