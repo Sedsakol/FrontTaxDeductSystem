@@ -54,7 +54,6 @@ export default {
       if(this.$cookies.get('token') && this.$cookies.get('profile') ){
         this.is_login = true
         let profile = this.$cookies.get('profile')
-        console.log(profile,555555)
         await store.commit('profile_change',profile)
         this.user = store.state.profile
       }
