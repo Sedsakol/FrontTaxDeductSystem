@@ -28,10 +28,12 @@ const firebaseConfig = {
   projectId: "taxdeduct-2bd59",
   storageBucket: "taxdeduct-2bd59.appspot.com",
   messagingSenderId: "396868824025",
-  appId: "1:396868824025:web:2d5797b88abecceccf07c8"
+  appId: "1:396868824025:web:2d5797b88abecceccf07c8",
+  measurementId: "G-C6D0SRQGCL"
 };
 
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 new Vue({
   router,
