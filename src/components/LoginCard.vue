@@ -99,6 +99,7 @@ export default {
         .catch(function(error) {
           currentObj.profile = null;
           console.log(error);
+          currentObj.$refs['modal-wait'].hideModal()
         });
       }
       else{
@@ -108,6 +109,8 @@ export default {
 
     async user_login(email = this.user.email,password= this.user.email) {
       let currentObj = this;
+      //แสดง modal
+      currentObj.$refs['modal-wait'].show()
       console.log({
           email: email,
           password: password
@@ -137,10 +140,7 @@ export default {
       console.log('facebook login')
       var currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
-      provide.addScope('user_birthday');
-      provide.addScope('user_gender');
-      provide.addScope('user_likes');
-      provide.addScope('user_posts');
+      provide.addScope('user_birthday,user_gender,user_likes,user_posts,email');
       await firebase
         .auth()
         .signInWithPopup(provide)
@@ -166,24 +166,24 @@ export default {
           };
 
           console.log(obj)
-
+          //แสดง modal
+          currentObj.$refs['modal-wait'].show()
+          console.log('show loading')
           currentObj.axios
           .post("facebook_login/",JSON.stringify(obj))
-          .then(function(response) {
+          .then(async function(response) {
             currentObj.facebook_login_res = response.data;
             if (currentObj.facebook_login_res.status == 200){
-              // this.$refs['modal-wait'].show()
-              currentObj.user_login(obj.email,obj.uid)
-              console.log('heyyyyyyyyyyyyyyyyyyyy')
-              //แสดง modal
-              currentObj.$refs['modal-wait'].show()
+              await currentObj.user_login(obj.email,obj.uid)
+
             }
-            else{
+            else {
               console.log(currentObj.facebook_login_res)
             }
           })
           .catch(function(error) {
             console.log(error);
+            currentObj.$refs['modal-wait'].hideModal()
           });
 
         })
