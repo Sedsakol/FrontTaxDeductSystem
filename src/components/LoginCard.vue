@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-          <b-modal :show="modalShow" ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+          <b-modal ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
             <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
             <div class="d-flex justify-content-center mb-3">
               <b-spinner variant="dark"/>
@@ -65,7 +65,6 @@ export default {
   name: "LoginCard",
   data() {
     return {
-      modalShow: false,
       user: {
         email: "",
         password: ""
@@ -79,12 +78,6 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
-    showModal() {
-        this.$refs['modal-wait'].show()
-      },
-    hideModal() {
-        this.$refs['modal-wait'].hide()
-      },
     async get_profile(){
       let currentObj = this
       if (this.$cookies.get('token')){
@@ -106,7 +99,7 @@ export default {
         .catch(function(error) {
           currentObj.profile = null;
           console.log(error);
-          currentObj.$refs['modal-wait'].hideModal()
+          currentObj.$refs['modal-wait'].hide()
         });
       }
       else{
@@ -146,11 +139,11 @@ export default {
     async facebook_login() {
       console.log('facebook login')
       var currentObj = this;
-      var provide = new firebase.auth.FacebookAuthProvider();
-      provide.addScope('user_birthday,user_gender,user_likes,user_posts,email');
+      var provider = new firebase.auth.FacebookAuthProvider();
+      await provider.addScope('public_profile,email,user_birthday,user_gender,user_posts,user_likes');
       await firebase
         .auth()
-        .signInWithPopup(provide)
+        .signInWithPopup(provider)
         .then(result  => {
 
           var bd = null
@@ -190,7 +183,7 @@ export default {
           })
           .catch(function(error) {
             console.log(error);
-            currentObj.$refs['modal-wait'].hideModal()
+            currentObj.$refs['modal-wait'].hide()
           });
 
         })
