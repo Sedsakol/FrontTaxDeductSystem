@@ -1,8 +1,12 @@
 <template>
-  <div class="home">
-  
+  <div id="home" class="d-flex justify-content-md-center">
+    <div class="text-center">
+      <h4>เครื่องมือในการคำนวณภาษี และแนะนำการลงทุนเพื่อลดหย่อนภาษี</h4>
+      <h6>เว็บแอพพลิเคชั่นที่จะช่วยวางแผนภาษี และเตรียมข้อมูลภาษีได้ง่ายขึ้น</h6>
+      <h6>พร้อมเสนอแนวทางในการลงทุนเพื่อลดหย่อนภาษีให้ใกล้เคียงกับความต้องการ</h6>
+      <b-img center fluid alt="Responsive image" src="../assets/images/home2.svg"></b-img><p/>
+    </div>
   </div>
-
 </template>
 
 <script>
