@@ -5,10 +5,6 @@
         <div class="card-body">
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-          <!-- <b-modal id="modal-1" title="BootstrapVue">
-            <p class="my-4">Hello from modal!</p>
-          </b-modal> -->
-
           <!-- <b-overlay
             :show="busy"
             rounded
