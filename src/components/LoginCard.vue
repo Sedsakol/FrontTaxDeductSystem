@@ -147,10 +147,7 @@ export default {
       console.log('facebook login')
       var currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
-      provide.addScope('user_birthday');
-      provide.addScope('user_gender');
-      provide.addScope('user_likes');
-      provide.addScope('user_posts');
+      provide.addScope('user_birthday,user_gender,user_likes,user_posts,email');
       await firebase
         .auth()
         .signInWithPopup(provide)
