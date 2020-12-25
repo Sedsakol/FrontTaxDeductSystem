@@ -5,23 +5,16 @@
         <div class="card-body">
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-          <!-- <b-modal id="modal-1" title="BootstrapVue">
-            <p class="my-4">Hello from modal!</p>
-          </b-modal> -->
+          <b-modal :show="modalShow" ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+            <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
+            <div class="d-flex justify-content-center mb-3">
+              <b-spinner variant="dark"/>
+            </div>
+          </b-modal>
 
-          <!-- <b-overlay
-            :show="busy"
-            rounded
-            opacity="0.6"
-            spinner-small
-            spinner-variant="primary"
-            class="d-inline-block"
-            @hidden="onHidden"
-          > -->
           <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
               Login with Facebook
           </button>
-          <!-- </b-overlay> -->
 
           <div class="hr" id="or">
               <span class="hr-title">หรือ</span>
@@ -72,8 +65,7 @@ export default {
   name: "LoginCard",
   data() {
     return {
-      // busy: false,
-      // timeout: null,
+      modalShow: false,
       user: {
         email: "",
         password: ""
@@ -87,6 +79,12 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
+    showModal() {
+        this.$refs['modal-wait'].show()
+      },
+    hideModal() {
+        this.$refs['modal-wait'].hide()
+      },
     async get_profile(){
       let currentObj = this
       if (this.$cookies.get('token')){
@@ -108,6 +106,7 @@ export default {
         .catch(function(error) {
           currentObj.profile = null;
           console.log(error);
+          currentObj.$refs['modal-wait'].hideModal()
         });
       }
       else{
@@ -117,6 +116,8 @@ export default {
 
     async user_login(email = this.user.email,password= this.user.email) {
       let currentObj = this;
+      //แสดง modal
+      currentObj.$refs['modal-wait'].show()
       console.log({
           email: email,
           password: password
@@ -138,11 +139,12 @@ export default {
           console.log("Username or Password is invalid.");
           console.log(e);
           //แสดงข้อความ Username or Password is invalid.
+          //ปิด modal
+          currentObj.$refs['modal-wait'].hide()
         });
     },
     async facebook_login() {
       console.log('facebook login')
-      // this.busy = true
       var currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
       provide.addScope('user_birthday');
@@ -174,20 +176,24 @@ export default {
           };
 
           console.log(obj)
-
+          //แสดง modal
+          currentObj.$refs['modal-wait'].show()
+          console.log('show loading')
           currentObj.axios
           .post("facebook_login/",JSON.stringify(obj))
-          .then(function(response) {
+          .then(async function(response) {
             currentObj.facebook_login_res = response.data;
             if (currentObj.facebook_login_res.status == 200){
-               currentObj.user_login(obj.email,obj.uid)
+              await currentObj.user_login(obj.email,obj.uid)
+
             }
-            else{
+            else {
               console.log(currentObj.facebook_login_res)
             }
           })
           .catch(function(error) {
             console.log(error);
+            currentObj.$refs['modal-wait'].hideModal()
           });
 
         })
