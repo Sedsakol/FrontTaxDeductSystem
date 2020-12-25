@@ -24,7 +24,13 @@
                   <b-form-group><b-form-row>
                       <b-col cols = "5" md="auto"><label class="col-form-label">ลงทุน RMF</label>
                       <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
-                      </b-col>
+                      <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
+                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                          <ul>
+                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                              <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                          </ul>
+                      </b-popover></b-col>
                       <b-col class="text-right"><label class="col-form-label">10,000</label></b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -90,14 +96,8 @@
                   <b>การลงทุน</b><p/>
                   <b-form-group><b-form-row>
                       <b-col cols = "6"><label class="col-form-label">ลงทุน RMF</label>
-                      <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
-                      <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
-                          เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                          <ul>
-                              <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                              <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                          </ul>
-                      </b-popover></b-col>
+                      <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/> -->
+                      </b-col>
                       <b-col cols = "4" class="text-right">
                         <b-form-input type="number" class="form-control" v-model= "rmf" min ="0"/>
                       </b-col>
@@ -106,7 +106,7 @@
 
                   <b-form-group><b-form-row>
                       <b-col cols = "6"><label class="col-form-label">ลงทุน SSF</label>
-                      <b-icon font-scale="0.75" class="ml-2" id="popover-ssf2" icon="exclamation-circle"/>
+                      <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-ssf2" icon="exclamation-circle"/> -->
                       <b-popover target="popover-ssf2" triggers="hover" placement= "rightbottom">
                           เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                           <ul>
@@ -123,7 +123,7 @@
                   <p/><b>ประกันภัย</b><p/>
                   <b-form-group><b-form-row>
                       <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label>
-                      <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                      <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/> -->
                       <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
                           เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                           <ul>
@@ -139,8 +139,8 @@
                   </b-form-row></b-form-group>
 
                   <b-form-group><b-form-row>
-                      <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ
-                      <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div>
+                      <b-col cols = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ</div>
+                      <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div> -->
                       <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
                           เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                           <ul>
@@ -178,8 +178,6 @@
                   </button>
                 </router-link> 
               </div>
-
-
             </b-col>
             
             <!-- right side -->
