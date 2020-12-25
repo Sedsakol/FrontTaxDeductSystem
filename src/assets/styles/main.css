@@ -15,8 +15,6 @@
   background-color: #d7db98;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Prompt&display=swap'); */
-
 /*------------- overall -------------*/
 #app {
   font-family: 'Sukhumvitset';
@@ -37,12 +35,6 @@ h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 18px; }
 
-/* @font-face {
-  font-family: 'TTInterfaces';
-  src: 
-    url('../fonts/TTInterfaces/TTInterfaces-Regular.ttf')
-    format('truetype');
-} */
 
 #background {
   background: #F4F9FA;
@@ -243,9 +235,26 @@ input[type=number] {
   text-align:right ;
 }
 
+/*------------- popover -------------*/
+
 .popover-body {
   font-family: 'Sukhumvitset';
 }
+
+
+/*------------- modal -------------*/
+.modal .btn-primary {
+  width: 100px;
+}
+
+.modal {
+  font-family: 'Sukhumvitset';
+}
+
+.spinner {
+  padding-left: 50%;
+}
+
 
 /*------------- override text color -------------*/
 .text-danger,
