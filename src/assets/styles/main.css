@@ -32,7 +32,8 @@
     format('truetype');
 }
 
-/* h4 { font-size: 24px; } */
+h3 { font-size: 36px; }
+h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 18px; }
 
@@ -108,6 +109,19 @@ h6 { font-size: 18px; }
   padding-bottom: 32px;
   padding-left: 32px;
   padding-right: 32px;
+}
+
+#home {
+  padding-top: 120px;
+}
+#home h3,
+#home h4 {
+  padding-bottom: 32px;
+}
+
+#home img {
+  padding-top: 32px;
+  padding-bottom: 32px;
 }
 
 .card-title {

@@ -96,7 +96,7 @@
                       value-field="value"
                       text-field="text"
                       :disabled=disable_edit 
-                      :options="marital_ops"/>
+                      :options="marriage_ops"/>
                     </b-col>
                 </b-form-row>
             </b-form-group>
@@ -196,7 +196,7 @@ export default {
           { value: '1', text: 'หญิง' },
           { value: '2', text: 'ชาย' },
         ],
-        marital_ops: [
+        marriage_ops: [
           { value: '1', text: 'โสด' },
           { value: '2', text: 'สมรสแล้ว' },
           { value: '3', text: 'หย่า' },
@@ -209,9 +209,9 @@ export default {
           { value: '4', text: '4' }
         ],
         infirm_ops: [
-          { value: '0', text: 'ปกติ' },
-          { value: '1', text: 'พิการ' },
-          { value: '2', text: 'ทุพพลภาพ' },
+          { value: '1', text: 'ปกติ' },
+          { value: '2', text: 'พิการ' },
+          { value: '3', text: 'ทุพพลภาพ' },
         ]
       }
     },
@@ -242,8 +242,8 @@ export default {
           other_income :  (this.user.other_income) ? this.user.other_income : 0,
           parent_num:  (this.user.parent_num) ? this.user.parent_num : 0,
           child_num :  (this.user.child_num) ? this.user.child_num : 0,
-          infirm:  (this.user.infirm) ? this.user.infirm : 0,
-          marriage: (this.user.marriage) ? this.user.marriage : 0,
+          infirm:  (this.user.infirm) ? this.user.infirm : 1,
+          marriage: (this.user.marriage) ? this.user.marriage : 1,
           facebook_id: this.user.facebook_id
         }
 

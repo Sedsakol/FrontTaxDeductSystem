@@ -5,9 +5,23 @@
         <div class="card-body">
           <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
+          <!-- <b-modal id="modal-1" title="BootstrapVue">
+            <p class="my-4">Hello from modal!</p>
+          </b-modal> -->
+
+          <!-- <b-overlay
+            :show="busy"
+            rounded
+            opacity="0.6"
+            spinner-small
+            spinner-variant="primary"
+            class="d-inline-block"
+            @hidden="onHidden"
+          > -->
           <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
               Login with Facebook
           </button>
+          <!-- </b-overlay> -->
 
           <div class="hr" id="or">
               <span class="hr-title">หรือ</span>
@@ -58,6 +72,8 @@ export default {
   name: "LoginCard",
   data() {
     return {
+      // busy: false,
+      // timeout: null,
       user: {
         email: "",
         password: ""
@@ -82,9 +98,10 @@ export default {
         })
         .then(async function(response) {
           console.log("get profile");
-          currentObj.profile = JSON.stringify(response.data);
-          await currentObj.$cookies.set('profile',currentObj.profile);
-          await store.commit('profile_change',currentObj.profile);
+          currentObj.profile_t = JSON.stringify(response.data);
+          console.log(currentObj.profile_t)
+          await currentObj.$cookies.set('profile',currentObj.profile_t);
+          await store.commit('profile_change',currentObj.profile_t);
           currentObj.$router.push("/");
           currentObj.$router.go();
         })
@@ -116,16 +133,22 @@ export default {
           await console.log("Login Success");
           await currentObj.get_profile();
         })
-        .catch(function() {
+        .catch(function(e) {
           currentObj.output = "error";
           console.log("Username or Password is invalid.");
+          console.log(e);
           //แสดงข้อความ Username or Password is invalid.
         });
     },
     async facebook_login() {
       console.log('facebook login')
+      // this.busy = true
       var currentObj = this;
       var provide = new firebase.auth.FacebookAuthProvider();
+      provide.addScope('user_birthday');
+      provide.addScope('user_gender');
+      provide.addScope('user_likes');
+      provide.addScope('user_posts');
       await firebase
         .auth()
         .signInWithPopup(provide)
@@ -138,10 +161,11 @@ export default {
             bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
           }
           
+          console.log(result.additionalUserInfo)
           //รออัพเดท gender
           var obj = {
             email: result.additionalUserInfo.profile.email,
-            gender: null,
+            gender: (result.additionalUserInfo.profile.gender === 'male') ? 2 : 1,
             birthdate: bd,
             facebook_id: result.additionalUserInfo.profile.id,
             uid: result.user.uid,
