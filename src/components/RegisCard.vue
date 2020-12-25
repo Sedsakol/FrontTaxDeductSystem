@@ -66,7 +66,7 @@
             </div>
           </form>
           
-          <b-modal id="modal-term" size="lg" title="Terms and Conditions" ok-title="ตกลง" cancel-title="ยกเลิก" centered scrollable> 
+          <b-modal id="modal-term" size="lg" title="Terms and Conditions" ok-title="ยอมรับ" cancel-title="ไม่ยอมรับ" centered scrollable> 
             <div>
               <p>Last updated: December 12, 2020</p>
               <p>Please read these terms and conditions carefully before using Our Service.</p>
