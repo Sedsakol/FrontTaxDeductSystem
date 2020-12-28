@@ -217,7 +217,7 @@ export default {
         }
       
       store.commit('tax_change', new_tax)
-      console.log(store.state.tax[0])
+      console.log(store.state.tax)
       this.$router.push("/taxDeduct");
     }
   }
