@@ -87,13 +87,13 @@ export default {
         // allowance_60k == ค่าลดหย่อนส่วนตัว 60k
         // allowance_100k == ค่าใช้จ่านส่วนบุคคล 100k
         // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
-        salary_year: store.state.tax[0].salary*12,
-        other_income: store.state.tax[0].other_income,
+        salary_year: store.state.tax.salary*12,
+        other_income: store.state.tax.other_income,
         allowance_60k: 60000,
-        allowance_100k: store.state.result_tax[0].personal_allowance,
-        other_allowance: store.state.result_tax[0].allowance, 
-        net_income: store.state.result_tax[0].net_income,
-        tax: store.state.result_tax[0].tax
+        allowance_100k: store.state.result_tax.personal_allowance,
+        other_allowance: store.state.result_tax.allowance, 
+        net_income: store.state.result_tax.net_income,
+        tax: store.state.result_tax.tax
 
       }
     },
