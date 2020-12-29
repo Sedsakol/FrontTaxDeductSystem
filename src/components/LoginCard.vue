@@ -140,7 +140,7 @@ export default {
       console.log('facebook login')
       var currentObj = this;
       var provider = new firebase.auth.FacebookAuthProvider();
-      await provider.addScope('public_profile,email,user_birthday,user_gender);
+      await provider.addScope('public_profile,email,user_birthday,user_gender');
       //await provider.addScope('public_profile,email,user_birthday,user_gender,user_posts,user_likes');
       await firebase
         .auth()
