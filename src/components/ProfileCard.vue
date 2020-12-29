@@ -150,18 +150,34 @@
             แก้ไข
           </button>
           
-          <b-row v-else>
-            <b-col>
-              <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
-                ยกเลิก
-              </button>
-            </b-col>
-            <b-col>
-              <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
-                บันทึก
-              </button>
-            </b-col>
-          </b-row>
+          <div v-else>
+
+            <b-row>
+              <b-col>
+                <button @click="delete_account" class="btn btn-danger" block id="fullbutton">
+                  ลบบัญชีผู้ใช้งาน
+                </button>
+              </b-col>
+            </b-row>
+            
+            <br>
+
+            <b-row >
+              <b-col>
+                <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
+                  ยกเลิก
+                </button>
+              </b-col>
+              <b-col>
+                <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
+                  บันทึก
+                </button>
+              </b-col>
+            </b-row>
+
+          </div>
+
+          
           
           
         </div>
@@ -321,6 +337,29 @@ export default {
             console.log('fail')
             console.log(err)
           }); */
+      },
+      delete_account(){
+        console.log('deleting account');
+        let currentObj = this;
+        this.axios
+          .post("delete_account/", {'email': currentObj.user.email },{
+            headers: {
+              'Authorization': currentObj.$cookies.get('token'),
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(async function(response) {
+            console.log(response.data)
+            if (response.data.status == 200) {
+              console.log('delete account complete');
+              currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
+              currentObj.$router.push("/");
+              currentObj.$router.go();
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+        });
       }
     }
 }
