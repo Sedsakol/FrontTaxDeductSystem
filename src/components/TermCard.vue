@@ -4,7 +4,7 @@
       <div class="card w-50 col-md-auto">
         <div class="card-body">
           <h4 class="text-center card-title">Terms and Conditions</h4>
-            <p>Last updated: December 12, 2020</p>
+            <p>Last updated: December 30, 2020</p>
             <p>Please read these terms and conditions carefully before using Our Service.</p>
             <b>Interpretation and Definitions</b>
             <b>Interpretation</b>
@@ -34,7 +34,7 @@
             <p><strong>Third-party Social Media Service</strong> means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.</p>
             </li>
             <li>
-            <p><strong>Website</strong> refers to Tax Deduct, accessible from <a href="http://161.246.5.140/" rel="external nofollow noopener" target="_blank">http://161.246.5.140/</a></p>
+            <p><strong>Website</strong> refers to Tax Deduct, accessible from <a href="https://taxdeduct-2bd59.web.app/" rel="external nofollow noopener" target="_blank">https://taxdeduct-2bd59.web.app/</a></p>
             </li>
             <li>
             <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
@@ -92,7 +92,7 @@
             <ul>
             <li>By email: taxdeduct.kmitl@gmail.com</li>
             <li>By visiting this page on our website: 
-                <a href="http://161.246.5.140/" rel="external nofollow noopener" target="_blank">http://161.246.5.140/
+                <a href="https://taxdeduct-2bd59.web.app/" rel="external nofollow noopener" target="_blank">https://taxdeduct-2bd59.web.app/
                 </a>
             </li>
             </ul>
