@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div id="profilecard">
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
@@ -146,6 +146,7 @@
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
           </form>
+          
           <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
             แก้ไข
           </button>
@@ -162,8 +163,19 @@
               </button>
             </b-col>
           </b-row>
+          <p/>
+          <p class="text-subblue" @click="showModal">ลบบัญชี</p>
           
-          
+          <b-modal ref="modal-delete" 
+            ok-title="ลบ" 
+            cancel-title="ยกเลิก" 
+            ok-variant="outline-danger"
+            cancel-variant="danger"
+            :hide-header=true 
+            centered> 
+            <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
+          </b-modal>
+
         </div>
       </div>
     </div>
@@ -321,8 +333,15 @@ export default {
             console.log('fail')
             console.log(err)
           }); */
-      }
+      },
+      showModal() {
+        this.$refs['modal-delete'].show()
+      },
+      hideModal() {
+        this.$refs['modal-delete'].hide()
+      },
     }
+
 }
 
 </script>

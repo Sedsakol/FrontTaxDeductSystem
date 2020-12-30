@@ -5,7 +5,7 @@
       <h6>เว็บแอพพลิเคชั่นที่จะช่วยวางแผนภาษี และเตรียมข้อมูลภาษีได้ง่ายขึ้น</h6>
       <h6>พร้อมเสนอแนวทางในการลงทุนเพื่อลดหย่อนภาษีให้ใกล้เคียงกับความต้องการ</h6>
       <b-img center fluid alt="Responsive image" src="../assets/images/home2.svg"></b-img><p/>
-      <router-link to = "/taxCalculate" class="pb-4">
+      <router-link to = "/taxCalculate">
         <button block class="btn btn-primary mt-3" id="regularbutton">เริ่มต้นคำนวณภาษี</button>
       </router-link>
     </div>
