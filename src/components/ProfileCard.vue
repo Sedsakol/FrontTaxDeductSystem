@@ -153,16 +153,6 @@
           
           <div v-else>
 
-            <b-row>
-              <b-col>
-                <button @click="delete_account" class="btn btn-danger" block id="fullbutton">
-                  ลบบัญชีผู้ใช้งาน
-                </button>
-              </b-col>
-            </b-row>
-            
-            <br>
-
             <b-row >
               <b-col>
                 <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
@@ -176,16 +166,25 @@
               </b-col>
             </b-row>
 
+            <br>
+
+            <b-row>
+              <b-col>
+                <button @click="showModal" class="btn btn-danger" block id="fullbutton">
+                  ลบบัญชีผู้ใช้งาน
+                </button>
+              </b-col>
+            </b-row>
+
           </div>
 
-          
-          
           <b-modal ref="modal-delete" 
             ok-title="ลบ" 
             cancel-title="ยกเลิก" 
             ok-variant="outline-danger"
             cancel-variant="danger"
             :hide-header=true 
+            @ok ="delete_account"
             centered> 
             <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
           </b-modal>
