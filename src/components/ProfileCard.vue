@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div id="profilecard">
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
@@ -146,21 +146,12 @@
             <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
           </form>
+          
           <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
             แก้ไข
           </button>
           
           <div v-else>
-
-            <b-row>
-              <b-col>
-                <button @click="delete_account" class="btn btn-danger" block id="fullbutton">
-                  ลบบัญชีผู้ใช้งาน
-                </button>
-              </b-col>
-            </b-row>
-            
-            <br>
 
             <b-row >
               <b-col>
@@ -175,11 +166,36 @@
               </b-col>
             </b-row>
 
+            <br>
+
+            <b-row>
+              <b-col>
+                <button @click="showModal" class="btn btn-danger" block id="fullbutton">
+                  ลบบัญชีผู้ใช้งาน
+                </button>
+              </b-col>
+            </b-row>
+
           </div>
 
-          
-          
-          
+          <b-modal ref="modal-delete" 
+            ok-title="ลบ" 
+            cancel-title="ยกเลิก" 
+            ok-variant="outline-danger"
+            cancel-variant="danger"
+            :hide-header=true 
+            @ok ="delete_account"
+            centered> 
+            <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
+          </b-modal>
+
+          <b-modal ref="modal-delete-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+            <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังลบบัญชีให้คุณ</p>
+            <div class="d-flex justify-content-center mb-3">
+              <b-spinner variant="dark"/>
+            </div>
+          </b-modal>
+
         </div>
       </div>
     </div>
@@ -338,9 +354,24 @@ export default {
             console.log(err)
           }); */
       },
-      delete_account(){
+      // modal confirm delete user
+      showModal() {
+        this.$refs['modal-delete'].show()
+      },
+      hideModal() {
+        this.$refs['modal-delete'].hide()
+      },
+      // modal wait
+      showWait() {
+        this.$refs['modal-delete-wait'].show()
+      },
+      hideWait() {
+        this.$refs['modal-delete-wait'].hide()
+      },
+      delete_account() {
         console.log('deleting account');
         let currentObj = this;
+        currentObj.$refs['modal-delete-wait'].show()
         this.axios
           .post("delete_account/", {'email': currentObj.user.email },{
             headers: {
@@ -359,9 +390,11 @@ export default {
           })
           .catch(function(error) {
             console.log(error);
+            currentObj.$refs['modal-delete-wait'].hide()
         });
       }
     }
+
 }
 
 </script>
