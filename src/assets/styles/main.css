@@ -82,17 +82,34 @@ h6 { font-size: 18px; }
   color: #49474A !important;
 }
 
+/*------------- footer -------------*/
+
+#footer {
+  background-color: #ffffff;
+  color: #175E7A;
+  font-size: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#footer a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #175E7A;
+}
+
 /*------------- card -------------*/
-#card{
+#card,
+#profilecard,
+#suggestioncard {
   padding: 120px 0px 120px 0px;
   /* margin: 120px 0px 120px 0px; */
 }
 
-#suggestioncard{
-  padding: 120px 0px 120px 0px;
-}
 
-#card .card {
+#card .card,
+#profilecard .card {
   padding-top: 32px;
   padding-bottom: 32px;
 }
@@ -103,19 +120,6 @@ h6 { font-size: 18px; }
   padding-bottom: 32px;
   padding-left: 32px;
   padding-right: 32px;
-}
-
-#home {
-  padding-top: 120px;
-}
-#home h3,
-#home h4 {
-  padding-bottom: 32px;
-}
-
-#home img {
-  padding-top: 32px;
-  padding-bottom: 32px;
 }
 
 .card-title {
@@ -131,9 +135,27 @@ h6 { font-size: 18px; }
   width: 300px;
 }
 
-/* .card #suggestion {
-  width: 1200px;
-} */
+/* delete accout */
+
+#profilecard .card-body p {
+  text-align: center;
+}
+
+/*------------- home -------------*/
+
+#home {
+  padding-top: 120px;
+  padding-bottom: 64px;
+}
+#home h3,
+#home h4 {
+  padding-bottom: 32px;
+}
+
+#home img {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
 
 /*------------- button -------------*/
 
