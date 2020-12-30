@@ -189,6 +189,13 @@
             <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
           </b-modal>
 
+          <b-modal ref="modal-delete-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+            <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังลบบัญชีให้คุณ</p>
+            <div class="d-flex justify-content-center mb-3">
+              <b-spinner variant="dark"/>
+            </div>
+          </b-modal>
+
         </div>
       </div>
     </div>
@@ -347,15 +354,24 @@ export default {
             console.log(err)
           }); */
       },
+      // modal confirm delete user
       showModal() {
         this.$refs['modal-delete'].show()
       },
       hideModal() {
         this.$refs['modal-delete'].hide()
       },
+      // modal wait
+      showWait() {
+        this.$refs['modal-delete-wait'].show()
+      },
+      hideWait() {
+        this.$refs['modal-delete-wait'].hide()
+      },
       delete_account() {
         console.log('deleting account');
         let currentObj = this;
+        currentObj.$refs['modal-delete-wait'].show()
         this.axios
           .post("delete_account/", {'email': currentObj.user.email },{
             headers: {
@@ -374,6 +390,7 @@ export default {
           })
           .catch(function(error) {
             console.log(error);
+            currentObj.$refs['modal-delete-wait'].hide()
         });
       }
     }
