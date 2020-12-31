@@ -10,8 +10,8 @@ import VueCookies from "vue-cookies";
 import './axios'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import './assets/styles/main.css';
-import firebase from 'firebase'
-
+import firebase from 'firebase/app';
+import 'firebase/analytics'
 // import Vuelidate from 'vuelidate';
 // Vue.use(Vuelidate);
 

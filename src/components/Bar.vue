@@ -9,7 +9,7 @@
           <b-nav-item><router-link to="/">หน้าแรก</router-link></b-nav-item>
           <b-nav-item><router-link to="/taxCalculate">คำนวณภาษี</router-link></b-nav-item>
           <b-nav-item><router-link to="/suggestion">แนะนำการลงทุน</router-link></b-nav-item>
-          <b-nav-item><router-link to="/question">แบบทดสอบความเสี่ยง</router-link></b-nav-item>
+          <b-nav-item hidden><router-link to="/question">แบบทดสอบความเสี่ยง</router-link></b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" >
