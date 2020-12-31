@@ -10,8 +10,8 @@
         </b-col>
         <b-col>
             <b>ช่องทางการติดต่อ</b><p/>
-            email : taxdeduct.kmitl@gmail.com<p/>
-            our website: https://taxdeduct-2bd59.web.app/<p/>
+            email : {{ email_url }}<p/>
+            our website : {{ our_website_url }}<p/>
         </b-col>
     </b-row>
     </b-container>
@@ -21,9 +21,11 @@
 <script>
 export default {
   name: "Footer",
-    data() {
-
+  data() {
+    return {
+      email_url : 'taxdeduct.kmitl@gmail.com',
+      our_website_url : 'https://taxdeduct-2bd59.web.app/'
     }
-
+  }
 };
 </script>
