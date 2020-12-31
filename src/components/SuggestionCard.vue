@@ -184,7 +184,7 @@
             <b-col cols="4" class="bg-mainblue" id = "rightside">
               <b-img center fluid alt="Responsive image" class="rounded" src="../assets/images/undraw_2.svg"></b-img><p/>
               <h6 class="text-center text-white pt-4">รูปแบบการลงทุนที่เหมาะสมกับคุณ</h6>
-              <h5 class="text-center"><span class="text-lightyell">แบบป้องกันความเสี่ยง{{ this.type }}</span></h5>
+              <h5 class="text-center"><span class="text-lightyell">{{ this.plan_type }}</span></h5>
               <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
               <div class="text-white">
                 <b-row>
@@ -222,22 +222,24 @@ export default {
     name: "SuggestionCard",
     data() {
       return {
-        rmf: this.allowance[0].rmf,
-        ssf: this.allowance[0].ssf,
-        life_insurance: this.allowance[0].life_insurance,
-        pension_insurance: this.allowance[0].pension_insurance,
+        rmf: store.state.allowance.rmf,
+        ssf: store.state.allowance.ssf,
+        life_insurance: store.state.allowance.life_insurance,
+        pension_insurance: store.state.allowance.pension_insurance,
 
 
         // allowance_60k == ค่าลดหย่อนส่วนตัว 60k
         // allowance_100k == ค่าใช้จ่านส่วนบุคคล 100k
         // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
-        salary_year: store.state.tax[0].salary*12,
-        other_income: store.state.tax[0].other_income,
+        salary_year: store.state.tax.salary*12,
+        other_income: store.state.tax.other_income,
         allowance_60k: 60000,
-        allowance_100k: store.state.result_tax[0].personal_allowance,
-        other_allowance: store.state.result_tax[0].allowance, 
-        net_income: store.state.result_tax[0].net_income,
-        tax: store.state.result_tax[0].tax
+        allowance_100k: store.state.result_tax.personal_allowance,
+        other_allowance: store.state.result_tax.allowance, 
+        net_income: store.state.result_tax.net_income,
+        tax: store.state.result_tax.tax,
+
+        plan_type: 'แบบป้องกันความเสี่ยง'
 
       }
     },
