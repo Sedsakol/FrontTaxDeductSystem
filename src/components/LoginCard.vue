@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/auth';  
 import store from "../store/index.js";
 export default {
   name: "LoginCard",
@@ -90,7 +91,7 @@ export default {
         .then(async function(response) {
           console.log("get profile");
           currentObj.profile_t = JSON.stringify(response.data);
-          console.log(currentObj.profile_t)
+          //console.log(currentObj.profile_t)
           await currentObj.$cookies.set('profile',currentObj.profile_t);
           await store.commit('profile_change',currentObj.profile_t);
           currentObj.$router.push("/");
@@ -111,10 +112,6 @@ export default {
       let currentObj = this;
       //แสดง modal
       currentObj.$refs['modal-wait'].show()
-      console.log({
-          email: email,
-          password: password
-        })
       await this.axios
         .post("auth/obtain_token/", {
           email: email,
@@ -154,7 +151,7 @@ export default {
             bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
           }
           
-          console.log(result.additionalUserInfo)
+          //console.log(result.additionalUserInfo)
           //รออัพเดท gender
           var obj = {
             email: result.additionalUserInfo.profile.email,
@@ -166,7 +163,7 @@ export default {
             fullname: result.additionalUserInfo.profile.name
           };
 
-          console.log(obj)
+          //console.log(obj)
           //แสดง modal
           currentObj.$refs['modal-wait'].show()
           console.log('show loading')
@@ -179,7 +176,7 @@ export default {
 
             }
             else {
-              console.log(currentObj.facebook_login_res)
+              //console.log(currentObj.facebook_login_res)
             }
           })
           .catch(function(error) {
