@@ -172,7 +172,7 @@ export default {
           .then(async function(response) {
             currentObj.facebook_login_res = response.data;
             if (currentObj.facebook_login_res.status == 200){
-              await currentObj.user_login(obj.email,obj.uid)
+              await currentObj.user_login(obj.email,obj.facebook_id)
 
             }
             else {
