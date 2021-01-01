@@ -12,7 +12,7 @@
             </div>
           </b-modal>
 
-          <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
+          <button id="facebook" v-on:click="test_facebook_login" block class="btn btn-primary">
               Login with Facebook
           </button>
 
@@ -73,8 +73,77 @@ export default {
       profile: store.state.profile
     };
   },
+  mounted() {
 
+  },
   methods: {
+    //facebook experiment
+    test_facebook_login() {
+      let currentObj = this;
+      console.log('facebook_login');
+      FB.login(function(response){
+        //console.log(response);
+        if (response.status === 'connected') {
+          // Logged into your webpage and Facebook.
+          console.log('login complete')
+          FB.api('/'+response.authResponse.userID, {fields: 'id,name,birthday,gender,email'}, function(result) {
+
+            console.log('Successful login for: ' + result.name);
+            //console.log(result)
+            var bd = null
+            if (result.birthday){
+              bd = result.birthday
+              var birthdate_split = bd.split("/")
+              bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
+            }
+
+            var obj = {
+            email: result.email,
+            gender: (result.gender === 'male') ? 2 : 1,
+            birthdate: bd,
+            facebook_id: result.id,
+            token: response.authResponse.accessToken,
+            fullname: result.name
+            
+          };
+
+          //console.log(obj)
+          //แสดง modal
+          currentObj.$refs['modal-wait'].show()
+          console.log('show loading')
+          currentObj.axios
+          .post("facebook_login/",JSON.stringify(obj))
+          .then(async function(response) {
+            currentObj.facebook_login_res = response.data;
+            console.log(currentObj.facebook_login_res.status)
+            if (currentObj.facebook_login_res.status == 200){
+              await FB.logout(function(response) {
+                // facebook user is now logged out
+              });
+              await currentObj.user_login(obj.email,obj.facebook_id)
+
+            }
+            else {
+              //console.log(currentObj.facebook_login_res)
+              currentObj.$refs['modal-wait'].hide()
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+            currentObj.$refs['modal-wait'].hide()
+          });
+
+
+
+          });
+        } else {
+          // The person is not logged into your webpage or we are unable to tell. 
+          console.log('login not complete')
+        }
+      }, {scope: 'public_profile,email,user_gender,user_birthday'});
+
+    },
+
     // to format email -> lowercase
     formatter(value) {
       return value.toLowerCase();
@@ -151,8 +220,7 @@ export default {
             bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
           }
           
-          //console.log(result.additionalUserInfo)
-          //รออัพเดท gender
+          //console.log(result)
           var obj = {
             email: result.additionalUserInfo.profile.email,
             gender: (result.additionalUserInfo.profile.gender === 'male') ? 2 : 1,
@@ -172,11 +240,12 @@ export default {
           .then(async function(response) {
             currentObj.facebook_login_res = response.data;
             if (currentObj.facebook_login_res.status == 200){
-              await currentObj.user_login(obj.email,obj.uid)
+              await currentObj.user_login(obj.email,obj.facebook_id)
 
             }
             else {
               //console.log(currentObj.facebook_login_res)
+              currentObj.$refs['modal-wait'].hide()
             }
           })
           .catch(function(error) {
