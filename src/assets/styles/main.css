@@ -279,6 +279,41 @@ input[type=number] {
   padding-left: 50%;
 }
 
+/*------------- quiz -------------*/
+
+.optionContainer {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.option {
+  border-radius: 290486px;
+  padding: 9px 18px;
+  margin: 0 18px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: transparent 1px solid; 
+}
+
+.option:hover,
+.option:focus,
+.option.is-selected {
+  background-color: #BFD6DB;
+}
+
+input[type="radio"] {
+  visibility:hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.option input:checked + label  {
+  background-color: #BFD6DB;
+}
+
 
 /*------------- override text color -------------*/
 .text-danger,
