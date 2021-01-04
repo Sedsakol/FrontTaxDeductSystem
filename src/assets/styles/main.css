@@ -304,13 +304,12 @@ input[type=number] {
 }
 
 input[type="radio"] {
-  visibility:hidden;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-.option input:checked + label  {
+.option input[type="radio"]:checked + label  {
   background-color: #BFD6DB;
 }
 

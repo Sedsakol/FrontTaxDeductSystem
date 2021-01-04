@@ -11,9 +11,10 @@
             <!-- quizOptions -->
             <b-form-group class="optionContainer">
               <!-- {{q.choice.indexOf(c)+1}}. -->
-              <b-form-radio-group class="option" :id="'q-'+ q.number" v-for="c in q.choice" :key="c" >
-                <!-- <b-form-radio>{{c.text}}</b-form-radio>  -->
-                {{c.text}}
+              <b-form-radio-group class="option" :id="'q-'+ q.number" v-for="c in q.choice" :key="c">
+
+                <b-form-radio>{{c.text}}</b-form-radio> 
+                
               </b-form-radio-group>
             </b-form-group>
           </div>
