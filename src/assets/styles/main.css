@@ -104,7 +104,6 @@ h6 { font-size: 18px; }
 #profilecard,
 #suggestioncard {
   padding: 120px 0px 120px 0px;
-  /* margin: 120px 0px 120px 0px; */
 }
 
 
@@ -295,23 +294,26 @@ input[type=number] {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
   border: transparent 1px solid; 
+  width: 90%;
 }
 
 .option:hover,
-.option:focus,
-.option.is-selected {
+.option:focus {
   background-color: #BFD6DB;
 }
 
 input[type="radio"] {
-  -webkit-appearance: none;
+  -webkit-appearance:none;
   -moz-appearance: none;
   appearance: none;
+  outline:none;
 }
 
-.option input[type="radio"]:checked + label  {
+input[type="radio"]:checked + label  {
   background-color: #BFD6DB;
+  color: #175E7A;
 }
+
 
 
 /*------------- override text color -------------*/
