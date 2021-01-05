@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div id="questioncard">
     <div class="d-flex justify-content-md-center">
       <div class="card w-50 col-md-auto">
         <div class="card-body">
@@ -29,8 +29,8 @@
             <button @click="clear" type="button" class="btn btn-outline-primary" id="regularbutton">
                 ล้าง
             </button><div class="pr-4"/>
-            <button class="btn btn-primary" id="regularbutton">
-                ถัดไป
+            <button @click="submit" class="btn btn-primary" id="regularbutton">
+                คำนวณผล
             </button>
           </div>
 
@@ -73,6 +73,15 @@ export default {
         this.userResponses=[null, null, null, null, null, null, null, null, null];
         // console.log(this.userResponses);
     },
+    submit() {
+      var score = 0;
+      for(let i = 0; i < 10 ; i++) {
+        score = score + Number(this.userResponses[i]);
+      }
+      console.log(score);
+      return score;
+    }
+    
   },
 
 }

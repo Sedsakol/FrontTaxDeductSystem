@@ -102,15 +102,19 @@ h6 { font-size: 18px; }
 /*------------- card -------------*/
 #card,
 #profilecard,
-#suggestioncard {
+#suggestioncard,
+#questioncard {
   padding: 120px 0px 120px 0px;
 }
-
 
 #card .card,
 #profilecard .card {
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+#questioncard .card {
+  padding: 32px 40px;
 }
 
 .card #leftside,
