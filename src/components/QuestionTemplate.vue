@@ -34,6 +34,17 @@
             </button>
           </div>
 
+          <b-modal size="lg" ref="modal-condition" ok-title="ตกลง" title="การทำแบบสอบถามประเมินระดับความเสี่ยง" ok-only centered> 
+            <div>
+              แบบสอบถามประเมินระดับความเสี่ยงในการลงทุนที่เหมาะสมนี้เป็นเพียงการประเมินเบี้องต้นเท่านั้น<br/>
+                โดยผู้จัดทำได้อ้างอิงจาก 
+                <a href="https://www.kasikornasset.com/DownloadDocument/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A5%E0%B8%87%E0%B8%97%E0%B8%B8%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%A1%20(Customer%20Risk%20Profile%20).pdf" 
+                  rel="external nofollow noopener" target="_blank">
+                  แบบสอบถามเพื่อประเมินระดับความเสี่ยงในการลงทุนที่เหมาะสม ธนาคารกสิกรไทย
+                </a>
+            </div>
+          </b-modal>
+
           
         </div>
       </div>
@@ -74,13 +85,20 @@ export default {
         // console.log(this.userResponses);
     },
     submit() {
+      this.$refs['modal-condition'].show()
       var score = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
       }
-      console.log(score);
+      // console.log(score);
       return score;
-    }
+    },
+    showModal() {
+      this.$refs['modal-condition'].show()
+    },
+    hideModal() {
+      this.$refs['modal-condition'].hide()
+    },
     
   },
 

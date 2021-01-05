@@ -282,6 +282,11 @@ input[type=number] {
   padding-left: 50%;
 }
 
+.modal a {
+  color: #57A3B3;
+  cursor: pointer;
+}
+
 /*------------- quiz -------------*/
 
 .optionContainer {
