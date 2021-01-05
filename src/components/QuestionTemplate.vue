@@ -87,11 +87,31 @@ export default {
     submit() {
       this.$refs['modal-condition'].show()
       var score = 0;
+      var risk_level = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
       }
-      // console.log(score);
-      return score;
+      if (score < 15) {
+        risk_level = 1;
+      }
+      //15 - 21
+      else if (score < 22) {
+        risk_level = 4;
+      }
+      //22 - 29 
+      else if (score < 30) {
+        risk_level = 5;
+      }
+      //30 - 36
+      else if (score < 37) {
+        risk_level = 7;
+      }
+      else { //37 ++
+        risk_level = 8;
+      }
+      // console.log('score' + score);
+      // console.log('risk_level' + risk_level);
+      return risk_level;
     },
     showModal() {
       this.$refs['modal-condition'].show()
