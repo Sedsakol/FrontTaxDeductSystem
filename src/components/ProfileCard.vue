@@ -153,7 +153,7 @@
           
           <div v-else>
 
-            <b-row >
+            <b-row>
               <b-col>
                 <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
                   ยกเลิก

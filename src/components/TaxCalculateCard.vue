@@ -19,7 +19,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
                   <b-col><b-form-input type="number" class="form-control" placeholder="0" :value=other_income
-                  v-model= "other_income" min ="0" /></b-col>
+                   min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>

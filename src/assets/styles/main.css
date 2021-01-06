@@ -102,16 +102,19 @@ h6 { font-size: 18px; }
 /*------------- card -------------*/
 #card,
 #profilecard,
-#suggestioncard {
+#suggestioncard,
+#questioncard {
   padding: 120px 0px 120px 0px;
-  /* margin: 120px 0px 120px 0px; */
 }
-
 
 #card .card,
 #profilecard .card {
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+#questioncard .card {
+  padding: 32px 40px;
 }
 
 .card #leftside,
@@ -278,6 +281,48 @@ input[type=number] {
 .spinner {
   padding-left: 50%;
 }
+
+.modal a {
+  color: #57A3B3;
+  cursor: pointer;
+}
+
+/*------------- quiz -------------*/
+
+.optionContainer {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.option {
+  border-radius: 290486px;
+  padding: 9px 18px;
+  margin: 0 18px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: transparent 1px solid; 
+  width: 90%;
+}
+
+.option:hover,
+.option:focus {
+  background-color: #BFD6DB;
+}
+
+input[type="radio"] {
+  -webkit-appearance:none;
+  -moz-appearance: none;
+  appearance: none;
+  outline:none;
+}
+
+input[type="radio"]:checked + label  {
+  background-color: #BFD6DB;
+  color: #175E7A;
+}
+
 
 
 /*------------- override text color -------------*/

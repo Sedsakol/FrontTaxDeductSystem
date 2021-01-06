@@ -12,7 +12,7 @@
             </div>
           </b-modal>
 
-          <button id="facebook" v-on:click="test_facebook_login" block class="btn btn-primary">
+          <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
               Login with Facebook
           </button>
 
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     //facebook experiment
-    test_facebook_login() {
+    facebook_login() {
       let currentObj = this;
       console.log('facebook_login');
       FB.login(function(response){
@@ -86,6 +86,21 @@ export default {
         if (response.status === 'connected') {
           // Logged into your webpage and Facebook.
           console.log('login complete')
+          currentObj.$refs['modal-wait'].show()
+          console.log('show loading')
+
+
+          FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
+            console.log(result)
+            currentObj.axios
+            .post("categories/",result).then(async function(r) {
+              console.log(r)
+            }).catch(function(error) {
+              console.log(error);
+            });
+          });
+
+
           FB.api('/'+response.authResponse.userID, {fields: 'id,name,birthday,gender,email'}, function(result) {
 
             console.log('Successful login for: ' + result.name);
@@ -105,42 +120,39 @@ export default {
             token: response.authResponse.accessToken,
             fullname: result.name
             
-          };
+            };
 
-          //console.log(obj)
-          //แสดง modal
-          currentObj.$refs['modal-wait'].show()
-          console.log('show loading')
-          currentObj.axios
-          .post("facebook_login/",JSON.stringify(obj))
-          .then(async function(response) {
-            currentObj.facebook_login_res = response.data;
-            console.log(currentObj.facebook_login_res.status)
-            if (currentObj.facebook_login_res.status == 200){
-              await FB.logout(function(response) {
-                // facebook user is now logged out
-              });
-              await currentObj.user_login(obj.email,obj.facebook_id)
+            console.log(obj)
+            //แสดง modal
+            
+            currentObj.axios
+            .post("facebook_login/",JSON.stringify(obj))
+            .then(async function(response) {
+              currentObj.facebook_login_res = response.data;
+              console.log(currentObj.facebook_login_res.status)
+              if (currentObj.facebook_login_res.status == 200){
+                await FB.logout(function(response) {
+                  // facebook user is now logged out
+                });
+                await currentObj.user_login(obj.email,obj.facebook_id)
 
-            }
-            else {
-              //console.log(currentObj.facebook_login_res)
+              }
+              else {
+                //console.log(currentObj.facebook_login_res)
+                currentObj.$refs['modal-wait'].hide()
+              }
+            })
+            .catch(function(error) {
+              console.log(error);
               currentObj.$refs['modal-wait'].hide()
-            }
-          })
-          .catch(function(error) {
-            console.log(error);
-            currentObj.$refs['modal-wait'].hide()
-          });
-
-
+            });
 
           });
         } else {
           // The person is not logged into your webpage or we are unable to tell. 
           console.log('login not complete')
         }
-      }, {scope: 'public_profile,email,user_gender,user_birthday'});
+      }, {scope: 'public_profile,email,user_gender,user_birthday,user_likes'});
 
     },
 
@@ -201,64 +213,8 @@ export default {
           //ปิด modal
           currentObj.$refs['modal-wait'].hide()
         });
-    },
-    async facebook_login() {
-      console.log('facebook login')
-      var currentObj = this;
-      var provider = new firebase.auth.FacebookAuthProvider();
-      await provider.addScope('public_profile,email,user_birthday,user_gender');
-      //await provider.addScope('public_profile,email,user_birthday,user_gender,user_posts,user_likes');
-      await firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then(result  => {
-
-          var bd = null
-          if (result.additionalUserInfo.profile.birthday){
-            bd = result.additionalUserInfo.profile.birthday
-            var birthdate_split = bd.split("/")
-            bd = birthdate_split[1] + "/" + birthdate_split[0] + "/" + birthdate_split[2]
-          }
-          
-          //console.log(result)
-          var obj = {
-            email: result.additionalUserInfo.profile.email,
-            gender: (result.additionalUserInfo.profile.gender === 'male') ? 2 : 1,
-            birthdate: bd,
-            facebook_id: result.additionalUserInfo.profile.id,
-            uid: result.user.uid,
-            token: result.credential.accessToken,
-            fullname: result.additionalUserInfo.profile.name
-          };
-
-          //console.log(obj)
-          //แสดง modal
-          currentObj.$refs['modal-wait'].show()
-          console.log('show loading')
-          currentObj.axios
-          .post("facebook_login/",JSON.stringify(obj))
-          .then(async function(response) {
-            currentObj.facebook_login_res = response.data;
-            if (currentObj.facebook_login_res.status == 200){
-              await currentObj.user_login(obj.email,obj.facebook_id)
-
-            }
-            else {
-              //console.log(currentObj.facebook_login_res)
-              currentObj.$refs['modal-wait'].hide()
-            }
-          })
-          .catch(function(error) {
-            console.log(error);
-            currentObj.$refs['modal-wait'].hide()
-          });
-
-        })
-        .catch(err => {
-          console.log('fail')
-          console.log(err)
-        });
     }
+    
   }
 };
 </script>
