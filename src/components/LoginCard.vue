@@ -93,7 +93,11 @@ export default {
           FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
             console.log(result)
             currentObj.axios
-            .post("categories/",result)
+            .post("categories/",result).then(async function(r) {
+              console.log(r)
+            }).catch(function(error) {
+              console.log(error);
+            });
           });
 
 
