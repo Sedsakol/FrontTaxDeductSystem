@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-md-center">
       <div class="card w-50 col-md-auto">
         <div class="card-body">
-          <h4 class="text-center card-title mb-4 mt-1">แบบสอบถามเพื่อประเมินระดับความเสี่ยงในการลงทุนที่เหมาะสม</h4>
+          <h4 class="text-center card-title mb-4 mt-1">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
 
           <div v-for="(q, index) in question" :key="q.number">
             <!-- questionTitle -->
@@ -36,12 +36,12 @@
 
           <b-modal size="lg" ref="modal-condition" ok-title="ตกลง" title="การทำแบบสอบถามประเมินระดับความเสี่ยง" ok-only centered> 
             <div>
-              แบบสอบถามประเมินระดับความเสี่ยงในการลงทุนที่เหมาะสมนี้เป็นเพียงการประเมินเบี้องต้นเท่านั้น<br/>
-                โดยผู้จัดทำได้อ้างอิงจาก 
-                <a href="https://www.kasikornasset.com/DownloadDocument/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A5%E0%B8%87%E0%B8%97%E0%B8%B8%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%A1%20(Customer%20Risk%20Profile%20).pdf" 
-                  rel="external nofollow noopener" target="_blank">
-                  แบบสอบถามเพื่อประเมินระดับความเสี่ยงในการลงทุนที่เหมาะสม ธนาคารกสิกรไทย
-                </a>
+              แบบทดสอบระดับความเสี่ยงที่ยอมรับได้นี้เป็นเพียงการประเมินเบี้องต้นเท่านั้น ระดับความเสี่ยงที่ยอมรับได้จะแตกต่างกันไปตามลักษณะเฉพาะของแต่ละบุคคล
+              โดยผู้จัดทำได้อ้างอิงจาก 
+              <a href="https://www.set.or.th/education/th/online_classroom/risk.html" 
+                rel="external nofollow noopener" target="_blank">
+                แบบทดสอบระดับความเสี่ยงที่ยอมรับได้ (TSI Risk Profile Questionnaire) SET
+              </a>
             </div>
           </b-modal>
 
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       userResponses: [
-        null, //score1
+        null, //score1 Accumulator, Consolidator, Spender
         null, //score2
         null, //score3
         null, //score4
@@ -87,31 +87,28 @@ export default {
     submit() {
       this.$refs['modal-condition'].show()
       var score = 0;
-      var risk_level = 0;
-      for(let i = 0; i < 10 ; i++) {
+      var type = '';
+      var risk_level = '';
+      type = this.userResponses[0];
+      for(let i = 1; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
       }
-      if (score < 15) {
-        risk_level = 1;
+      //0 - 20
+      if (score < 21) {
+        risk_level = 'low';
       }
-      //15 - 21
-      else if (score < 22) {
-        risk_level = 4;
+      //21 - 28
+      else if (score < 29) {
+        risk_level = 'medium';
       }
-      //22 - 29 
-      else if (score < 30) {
-        risk_level = 5;
+      //29++
+      else {
+        risk_level = 'high';
       }
-      //30 - 36
-      else if (score < 37) {
-        risk_level = 7;
-      }
-      else { //37 ++
-        risk_level = 8;
-      }
-      // console.log('score' + score);
-      // console.log('risk_level' + risk_level);
-      return risk_level;
+      console.log('score =' + score);
+      console.log('type =' + type);
+      console.log('risk_level =' + risk_level);
+      return type, risk_level;
     },
     showModal() {
       this.$refs['modal-condition'].show()
