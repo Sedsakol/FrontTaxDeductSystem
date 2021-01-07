@@ -144,7 +144,7 @@ h6 { font-size: 18px; }
   text-align: center;
 }
 
-/*------------- home -------------*/
+/*------------- home page -------------*/
 
 #home {
   padding-top: 120px;
@@ -158,6 +158,12 @@ h6 { font-size: 18px; }
 #home img {
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+/*------------- question page -------------*/
+
+#questioncard h6 {
+  line-height: 1.6;
 }
 
 /*------------- button -------------*/
