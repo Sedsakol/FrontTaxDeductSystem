@@ -80,11 +80,10 @@ export default {
 
   },
   methods: {
-    //facebook experiment
     facebook_login() {
       let currentObj = this;
       console.log('facebook_login');
-      FB.login(function(response){
+      FB.login(async function(response){
         //console.log(response);
         if (response.status === 'connected') {
           // Logged into your webpage and Facebook.
@@ -93,7 +92,7 @@ export default {
           console.log('show loading')
 
 
-          FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
+          await FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
             console.log(result)
             currentObj.axios
             .post("categories/",result).then(async function(r) {
@@ -104,7 +103,7 @@ export default {
           });
 
 
-          FB.api('/'+response.authResponse.userID, {fields: 'id,name,birthday,gender,email'}, function(result) {
+          await FB.api('/'+response.authResponse.userID, {fields: 'id,name,birthday,gender,email'}, function(result) {
 
             console.log('Successful login for: ' + result.name);
             //console.log(result)
