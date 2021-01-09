@@ -18,8 +18,8 @@
                                             <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col><b-form-input type="number" class="form-control"  
-                                    v-model= "rmf" min ="0"/></b-col>
+                                    <b-col><b-form-input type="number" class="form-control"  placeholder="0" 
+                                    v-model= "rmf"  min ="0" /></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -35,7 +35,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "ssf" min ="0"/></b-col>
+                                    v-model= "ssf"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -52,7 +52,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "life_insurance" min ="0"/></b-col>
+                                    v-model= "life_insurance"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -71,7 +71,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "pension_insurance" min ="0"/></b-col>
+                                    v-model= "pension_insurance"   min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -86,7 +86,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "donation" min ="0"/></b-col>
+                                    v-model= "donation"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -101,7 +101,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "edu_donation" min ="0"/></b-col>
+                                    v-model= "edu_donation"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -119,7 +119,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "home_loans" min ="0"/></b-col>
+                                    v-model= "home_loans"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -133,7 +133,7 @@
                                         </ul>
                                     </b-popover></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "provident_fund" min ="0"/></b-col>
+                                    v-model= "provident_fund"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -141,7 +141,7 @@
                                 <b-form-row>
                                     <b-col cols = "6"><label class="col-form-label">ประกันสังคม (ต่อปี)</label></b-col>
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "social_security" min ="0"/></b-col>
+                                    v-model= "social_security"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -155,7 +155,7 @@
                                         </ul>
                                     </b-popover></b-col> -->
                                     <b-col><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "other" min ="0"/></b-col>
+                                    v-model= "other"  min ="0"/></b-col>
                                     <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -220,6 +220,8 @@ export default {
                 social_security: this.social_security,
                 other: this.other,
             }
+
+            console.log(new_allowance)
             
             this.$cookies.set('new_allowance',new_allowance)
             store.commit('allowance_change', new_allowance)
@@ -241,6 +243,7 @@ export default {
                 other: this.other,
             }
             
+            console.log(new_allowance)
             this.$cookies.set('new_allowance',new_allowance);
             store.commit('allowance_change', new_allowance)
             
@@ -266,14 +269,14 @@ export default {
                 other: new_allowance.other
 
             }
-            
+
             let currentObj = this;
             this.axios.post('tax/', a)
             .then(async function (response) {
                 currentObj.output = response.data;
                 currentObj.$cookies.set('result_tax',currentObj.output);
                 store.commit('result_tax_change', currentObj.output)
-                console.log(currentObj.output)
+                //console.log(currentObj.output)
                 currentObj.change_component_key += 1
                 currentObj.$router.push("/result")
                 

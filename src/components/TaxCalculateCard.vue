@@ -238,6 +238,10 @@ export default {
         
         this.change_component_key += 1
       }
+      else{
+        this.salary= store.state.profile.salary
+        this.other_income= store.state.profile.other_income
+      }
     }
   }
 };
