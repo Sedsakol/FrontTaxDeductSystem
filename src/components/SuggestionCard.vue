@@ -1,5 +1,5 @@
 <template>
-  <div id="suggestioncard">
+  <div id="suggestioncard" :key="change_component_key">
     <div class="d-flex justify-content-md-center">
       <div class="card w-75 col-md-auto">
         <!-- <div class="card-body" id="suggestion"> -->
@@ -99,7 +99,7 @@
                       <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/> -->
                       </b-col>
                       <b-col cols = "4" class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "rmf" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model="rmf" min ="0"/>
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -159,7 +159,7 @@
 
                   <b-form-group><b-form-row class="mt-3">
                     <b-col cols = "5" md="auto">ต้องจ่ายภาษีเพียง</b-col>
-                    <b-col class="text-right">10,000</b-col>
+                    <b-col class="text-right">{{ this.tax }}</b-col>
                     <b-col cols = "2" class="text-right">บาท</b-col>
                   </b-form-row></b-form-group>
                 </b-col>
@@ -233,16 +233,68 @@ export default {
         // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
         salary_year: store.state.tax.salary*12,
         other_income: store.state.tax.other_income,
+        total_income: this.salary_year + this.other_income,
+
+
         allowance_60k: 60000,
         allowance_100k: store.state.result_tax.personal_allowance,
         other_allowance: store.state.result_tax.allowance, 
         net_income: store.state.result_tax.net_income,
         tax: store.state.result_tax.tax,
 
-        plan_type: 'แบบป้องกันความเสี่ยง'
+        plan_type: 'แบบป้องกันความเสี่ยง',
+
+
+        change_component_key : 1
 
       }
     },
+    mounted(){
+      this.load_result_tax_from_cookie()
+      this.load_new_allowance_from_cookie()
+      this.load_new_tax_from_cookie()
+    },
+    methods : {
+        load_result_tax_from_cookie(){
+            if (this.$cookies.isKey("result_tax")){
+                let result_tax = this.$cookies.get("result_tax")
+                store.commit('result_tax_change', result_tax)
+                
+                this.allowance_100k = store.state.result_tax.personal_allowance
+                this.other_allowance = store.state.result_tax.allowance,
+                this.net_income = store.state.result_tax.net_income
+
+                this.tax = store.state.result_tax.tax
+
+                this.change_component_key += 1
+            }
+        },
+        load_new_allowance_from_cookie(){
+            if (this.$cookies.isKey("new_allowance")){
+                let new_allowance = this.$cookies.get("new_allowance")
+                store.commit('allowance_change', new_allowance)
+
+                this.rmf = store.state.allowance.rmf
+                this.ssf = store.state.allowance.ssf
+                this.life_insurance = store.state.allowance.life_insurance
+                this.pension_insurance = store.state.allowance.pension_insurance
+                
+                this.change_component_key += 1
+                
+            }
+        },
+        load_new_tax_from_cookie(){
+            if (this.$cookies.isKey("new_tax")){
+                let new_tax = this.$cookies.get("new_tax")
+                store.commit('tax_change', new_tax)
+                this.salary_year = store.state.tax.salary*12
+                this.other_income = store.state.tax.other_income
+                this.total_income = this.salary_year + this.other_income
+
+                this.change_component_key += 1
+            }
+        }
+    }
 };
 </script>
 

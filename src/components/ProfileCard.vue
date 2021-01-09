@@ -393,7 +393,7 @@ export default {
             console.log(error);
             currentObj.$refs['modal-delete-wait'].hide()
         });
-      }
+      },
     }
 
 }
