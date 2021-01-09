@@ -76,9 +76,6 @@ export default {
       profile: store.state.profile
     };
   },
-  mounted() {
-
-  },
   methods: {
     facebook_login() {
       let currentObj = this;
@@ -115,12 +112,12 @@ export default {
             }
 
             var obj = {
-            email: result.email,
-            gender: (result.gender === 'male') ? 2 : 1,
-            birthdate: bd,
-            facebook_id: result.id,
-            token: response.authResponse.accessToken,
-            fullname: result.name
+              email: result.email,
+              gender: (result.gender === 'male') ? 2 : 1,
+              birthdate: bd,
+              facebook_id: result.id,
+              token: response.authResponse.accessToken,
+              fullname: result.name
             
             };
 
