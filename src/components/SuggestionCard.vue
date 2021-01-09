@@ -10,8 +10,8 @@
               <!-- top -->
               <b-row class="justify-content-md-center mb-4">
                 <b-col cols = "6" class="bg-lightblue pt-3">
-                  <p class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >100,000{{ this.net_income }}</span> บาท</p>
-                  <p class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">100,000{{ this.tax }}</span> บาท</p>
+                  <p class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.net_income }}</span> บาท</p>
+                  <p class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.tax }}</span> บาท</p>
                 </b-col>
               </b-row>
               <!-- down -->
@@ -99,7 +99,7 @@
                       <!-- <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/> -->
                       </b-col>
                       <b-col cols = "4" class="text-right">
-                        <b-form-input type="number" class="form-control" v-model="rmf" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model="rmf" min ="0" @change="data_change_update" />
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -115,7 +115,7 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "ssf" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "ssf" min ="0" @change="data_change_update" />
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -133,7 +133,7 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "life_insurance" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "life_insurance" min ="0" @change="data_change_update" />
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -152,7 +152,7 @@
                           </ul>
                       </b-popover></b-col>
                       <b-col class="text-right">
-                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0"/>
+                        <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0" @change="data_change_update" />
                       </b-col>
                       <b-col cols = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                   </b-form-row></b-form-group>
@@ -255,6 +255,49 @@ export default {
       this.load_new_tax_from_cookie()
     },
     methods : {
+        data_change_update(){
+          let b = {
+            rmf: this.rmf,
+            ssf: this.ssf,
+            life_insurance: this.life_insurance,
+            pension_insurance: this.pension_insurance
+          }
+          console.log(b)
+
+          let a = {
+                salary: store.state.tax.salary,
+                other_income: store.state.tax.other_income,
+                marital: store.state.tax.marital,
+                parent_num_dis: store.state.tax.parent_num_dis,
+                child_before_2561: store.state.tax.child_before_2561,
+                child_after_2561: store.state.tax.child_after_2561,
+                protege: store.state.tax.protege,
+
+                rmf: this.rmf,
+                ssf: this.ssf,
+                life_insurance: this.life_insurance,
+                pension_insurance: this.pension_insurance,
+
+                donation: store.state.allowance.donation,
+                edu_donation: store.state.allowance.edu_donation,
+                home_loans: store.state.allowance.home_loans,
+                provident_fund: store.state.allowance.provident_fund,
+                social_security: store.state.allowance.social_security,
+                other: store.state.allowance.other
+
+            }
+
+            let currentObj = this;
+            this.axios.post('tax/', a)
+            .then(function (response) {
+                currentObj.output = response.data;
+                console.log(currentObj.output)
+                currentObj.tax = currentObj.output.tax
+            })
+            .catch(function (error) {
+                currentObj.msg = error;
+            });
+        },
         load_result_tax_from_cookie(){
             if (this.$cookies.isKey("result_tax")){
                 let result_tax = this.$cookies.get("result_tax")
