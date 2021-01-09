@@ -90,7 +90,7 @@ export default {
 
 
           await FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
-            console.log(result)
+            //console.log(result)
             currentObj.axios
             .post("categories/",result).then(async function(r) {
               console.log(r)
@@ -121,14 +121,14 @@ export default {
             
             };
 
-            console.log(obj)
+            //console.log(obj)
             //แสดง modal
             
             currentObj.axios
             .post("facebook_login/",JSON.stringify(obj))
             .then(async function(response) {
               currentObj.facebook_login_res = response.data;
-              console.log(currentObj.facebook_login_res.status)
+              //console.log(currentObj.facebook_login_res.status)
               if (currentObj.facebook_login_res.status == 200){
                 await FB.logout(function(response) {
                   // facebook user is now logged out
