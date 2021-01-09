@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div id="card" :key="change_component_key">
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
@@ -89,14 +89,46 @@ export default {
         // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
         salary_year: store.state.tax.salary*12,
         other_income: store.state.tax.other_income,
+
         allowance_60k: 60000,
         allowance_100k: store.state.result_tax.personal_allowance,
         other_allowance: store.state.result_tax.allowance, 
         net_income: store.state.result_tax.net_income,
-        tax: store.state.result_tax.tax
+        tax: store.state.result_tax.tax,
+
+        change_component_key : 0
 
       }
     },
+    mounted(){
+      this.load_result_tax_from_cookie()
+      this.load_new_tax_from_cookie()
+    },
+    methods : {
+        load_result_tax_from_cookie(){
+            if (this.$cookies.isKey("result_tax")){
+                let result_tax = this.$cookies.get("result_tax")
+                store.commit('result_tax_change', result_tax)
+                
+                this.allowance_100k = store.state.result_tax.personal_allowance
+                this.other_allowance = store.state.result_tax.allowance,
+                this.net_income = store.state.result_tax.net_income
+                this.tax = store.state.result_tax.tax
+
+                this.change_component_key += 1
+            }
+        },
+        load_new_tax_from_cookie(){
+          if (this.$cookies.isKey("new_tax")){
+            let new_tax = this.$cookies.get("new_tax")
+            store.commit('tax_change', new_tax)
+            this.salary_year = store.state.tax.salary*12
+            this.other_income = store.state.tax.other_income
+
+            this.change_component_key += 1
+          }
+        }
+    }
 }
 
 </script>

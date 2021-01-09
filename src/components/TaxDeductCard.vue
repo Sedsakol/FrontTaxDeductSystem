@@ -1,5 +1,5 @@
 <template>
-    <div id="card">
+    <div id="card" :key="change_component_key">
     <div class="d-flex justify-content-md-center">
         <div class="card w-50 col-md-auto">
             <div class="card-body">
@@ -165,11 +165,10 @@
                 </form>
 
                 <div class="d-flex justify-content-md-center">
-                    <router-link to = "/taxCalculate" class="pr-4">
-                        <button type="button" class="btn btn-outline-primary" id="regularbutton">
-                            ย้อนกลับ
-                        </button>
-                    </router-link>  
+                    <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
+                        ย้อนกลับ
+                    </button>
+                    <div class="pl-4"/>
                     <button @click="next" class="btn btn-primary" id="regularbutton">
                         ถัดไป
                     </button>
@@ -187,77 +186,133 @@ export default {
     name: "TaxDeductCard",
     data() {
         return {
-            rmf: 0,
-            ssf: 0,
-            life_insurance: 0,
-            pension_insurance: 0,
-            donation: 0,
-            edu_donation: 0,
-            home_loans: 0,
-            provident_fund: 0,
-            social_security: 0,
-            other: 0,
+            rmf: store.state.allowance.rmf,
+            ssf: store.state.allowance.ssf,
+            life_insurance: store.state.allowance.life_insurance,
+            pension_insurance: store.state.allowance.pension_insurance,
+            donation: store.state.allowance.donation,
+            edu_donation: store.state.allowance.edu_donation,
+            home_loans: store.state.allowance.home_loans,
+            provident_fund: store.state.allowance.provident_fund,
+            social_security: store.state.allowance.social_security,
+            other: store.state.allowance.other,
 
             tax : store.state.tax,
-            allowance : store.state.allowance,
+
+            change_component_key: 0,
         }
     },
+    mounted(){
+        this.load_new_tax_from_cookie()
+        this.load_new_allowance_from_cookie()
+    },
     methods: {
-    async next() {
-        let new_allowance = {
-            rmf: this.rmf,
-            ssf: this.ssf,
-            life_insurance: this.life_insurance,
-            pension_insurance: this.pension_insurance,
-            donation: this.donation,
-            edu_donation: this.edu_donation,
-            home_loans: this.home_loans,
-            provident_fund: this.provident_fund,
-            social_security: this.social_security,
-            other: this.other,
-        }
-        
-
-        store.commit('allowance_change', new_allowance)
-        this.allowance = store.state.allowance
-        console.log(this.tax)
-        
-        let a = {
-            salary: this.tax.salary,
-            other_income: this.tax.other_income,
-            marital: this.tax.marital,
-            parent_num_dis: this.tax.parent_num_dis,
-            child_before_2561: this.tax.child_before_2561,
-            child_after_2561: this.tax.child_after_2561,
-            protege: this.tax.protege,
-
-            rmf: this.allowance.rmf,
-            ssf: this.allowance.ssf,
-            life_insurance: this.allowance.life_insurance,
-            pension_insurance: this.allowance.pension_insurance,
-            donation: this.allowance.donation,
-            edu_donation: this.allowance.edu_donation,
-            home_loans: this.allowance.home_loans,
-            provident_fund: this.allowance.provident_fund,
-            social_security: this.allowance.social_security,
-            other: this.allowance.other
-
-        }
-        console.log(a)
-        let currentObj = this;
-        this.axios.post('tax/', a)
-        .then(async function (response) {
-            currentObj.output = response.data;
-            store.commit('result_tax_change', currentObj.output)
-            currentObj.$router.push("/result")
+        async back(){
+            let new_allowance = {
+                rmf: this.rmf,
+                ssf: this.ssf,
+                life_insurance: this.life_insurance,
+                pension_insurance: this.pension_insurance,
+                donation: this.donation,
+                edu_donation: this.edu_donation,
+                home_loans: this.home_loans,
+                provident_fund: this.provident_fund,
+                social_security: this.social_security,
+                other: this.other,
+            }
             
-        })
-        .catch(function (error) {
-            currentObj.msg = error;
-        });
-        
+            this.$cookies.set('new_allowance',new_allowance)
+            store.commit('allowance_change', new_allowance)
+
+            this.change_component_key += 1
+            this.$router.push("/taxCalculate")
+        },
+        async next() {
+            let new_allowance = {
+                rmf: this.rmf,
+                ssf: this.ssf,
+                life_insurance: this.life_insurance,
+                pension_insurance: this.pension_insurance,
+                donation: this.donation,
+                edu_donation: this.edu_donation,
+                home_loans: this.home_loans,
+                provident_fund: this.provident_fund,
+                social_security: this.social_security,
+                other: this.other,
+            }
+            
+            this.$cookies.set('new_allowance',new_allowance);
+            store.commit('allowance_change', new_allowance)
+            
+            
+            let a = {
+                salary: this.tax.salary,
+                other_income: this.tax.other_income,
+                marital: this.tax.marital,
+                parent_num_dis: this.tax.parent_num_dis,
+                child_before_2561: this.tax.child_before_2561,
+                child_after_2561: this.tax.child_after_2561,
+                protege: this.tax.protege,
+
+                rmf: new_allowance.rmf,
+                ssf: new_allowance.ssf,
+                life_insurance: new_allowance.life_insurance,
+                pension_insurance: new_allowance.pension_insurance,
+                donation: new_allowance.donation,
+                edu_donation: new_allowance.edu_donation,
+                home_loans: new_allowance.home_loans,
+                provident_fund: new_allowance.provident_fund,
+                social_security: new_allowance.social_security,
+                other: new_allowance.other
+
+            }
+            
+            let currentObj = this;
+            this.axios.post('tax/', a)
+            .then(async function (response) {
+                currentObj.output = response.data;
+                currentObj.$cookies.set('result_tax',currentObj.output);
+                store.commit('result_tax_change', currentObj.output)
+                console.log(currentObj.output)
+                currentObj.change_component_key += 1
+                currentObj.$router.push("/result")
+                
+            })
+            .catch(function (error) {
+                currentObj.msg = error;
+            });
+            
+        },
+        load_new_allowance_from_cookie(){
+            if (this.$cookies.isKey("new_allowance")){
+                let new_allowance = this.$cookies.get("new_allowance")
+                store.commit('allowance_change', new_allowance)
+
+                this.rmf = store.state.allowance.rmf
+                this.ssf = store.state.allowance.ssf
+                this.life_insurance = store.state.allowance.life_insurance
+                this.pension_insurance = store.state.allowance.pension_insurance
+                this.donation = store.state.allowance.donation
+                this.edu_donation = store.state.allowance.edu_donation
+                this.home_loans = store.state.allowance.home_loans
+                this.provident_fund = store.state.allowance.provident_fund
+                this.social_security = store.state.allowance.social_security
+                this.other = store.state.allowance.other
+
+                this.change_component_key += 1
+                
+            }
+        },
+        load_new_tax_from_cookie(){
+            if (this.$cookies.isKey("new_tax")){
+                let new_tax = this.$cookies.get("new_tax")
+                store.commit('tax_change', new_tax)
+                this.tax = store.state.tax
+
+                this.change_component_key += 1
+            }
+        }
     }
-  }
 };
 </script>
 
