@@ -1,5 +1,5 @@
 <template>
-    <div id="card">
+    <div id="card" :key="change_component_key">
     <div class="d-flex justify-content-md-center"> 
       <div class="card w-50 col-md-auto">
         <div class="card-body">
@@ -10,7 +10,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
                   <b-col><b-form-input type="number" class="form-control" :value=salary
-                  v-model= "salary" min ="0" /></b-col>
+                  v-model="salary" min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -18,7 +18,7 @@
             <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col><b-form-input type="number" class="form-control" placeholder="0" :value=other_income
+                  <b-col><b-form-input type="number" class="form-control" placeholder="0" :value=other_income v-model="other_income"
                    min ="0" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
@@ -28,7 +28,7 @@
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">สถานะภาพการสมรส</label></b-col>
                   <b-col cols = "5">
-                    <b-form-select class="form-control" v-model= "marital" :options= "marital_ops"/>
+                    <b-form-select class="form-control" v-model="marital" :options= "marital_ops"/>
                   </b-col>
               </b-form-row>
             </b-form-group>
@@ -54,7 +54,7 @@
                     </b-popover>
                   </b-col>
                   <b-col>
-                    <b-form-select class="form-control" v-model= "parent_num_dis" :options= "parent_ops" />
+                    <b-form-select class="form-control" v-model="parent_num_dis" :options= "parent_ops" />
                   </b-col>
                   <b-col cols = "0.75"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -84,7 +84,7 @@
                   </b-popover>
                   </b-col>
                   <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model= "child_before_2561" min ="0" /></b-col>
+                  v-model="child_before_2561" min ="0" /></b-col>
                   <!-- <b-col>
                     <b-form-select class="form-control" v-model= "child_before_2561" :options= "child_ops" />
                   </b-col> -->
@@ -116,7 +116,7 @@
                   </b-popover>
                   </b-col>
                   <b-col><b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model= "child_after_2561" min ="0" /></b-col>
+                  v-model="child_after_2561" min ="0" /></b-col>
                   <!-- <b-col>
                     <b-form-select class="form-control" v-model= "child_after_2561" :options= "child_ops" />
                   </b-col> -->
@@ -148,7 +148,7 @@
                   </b-popover>
                   </b-col>
                   <b-col>
-                    <b-form-select class="form-control" v-model= "protege" :options= "protege_ops" />
+                    <b-form-select class="form-control" v-model="protege" :options= "protege_ops" />
                   </b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -173,15 +173,15 @@ export default {
     },
   data() {
     return {
-      salary: 0,
-      other_income: 0,
-      marital: 1,
-      parent_num_dis: 0,
-      child_before_2561: 0,
-      child_after_2561: 0,
-      protege: 0,
+      salary: store.state.tax.salary,
+      other_income: store.state.tax.other_income,
+      marital: store.state.tax.marital,
+      parent_num_dis: store.state.tax.parent_num_dis,
+      child_before_2561: store.state.tax.child_before_2561,
+      child_after_2561: store.state.tax.child_after_2561,
+      protege: store.state.tax.protege,
 
-      tax : store.state.tax,
+      change_component_key: 0,
 
       marital_ops: [
         { value: '1', text: 'โสด' },
@@ -204,6 +204,9 @@ export default {
       
     }
   },
+  mounted(){
+    this.load_new_tax_from_cookie()
+  },
   methods: {
     next() {
       let new_tax = {
@@ -216,9 +219,25 @@ export default {
           protege: this.protege,
         }
       
+      this.$cookies.set('new_tax',new_tax);
       store.commit('tax_change', new_tax)
-      console.log(store.state.tax)
+      this.change_component_key += 1
       this.$router.push("/taxDeduct");
+    },
+    load_new_tax_from_cookie(){
+      if (this.$cookies.isKey("new_tax")){
+        let new_tax = this.$cookies.get("new_tax")
+        store.commit('tax_change', new_tax)
+        this.salary= store.state.tax.salary
+        this.other_income= store.state.tax.other_income
+        this.marital= store.state.tax.marital
+        this.parent_num_dis=  store.state.tax.parent_num_dis
+        this.child_before_2561= store.state.tax.child_before_2561
+        this.child_after_2561= store.state.tax.child_after_2561
+        this.protege= store.state.tax.protege
+        
+        this.change_component_key += 1
+      }
     }
   }
 };
