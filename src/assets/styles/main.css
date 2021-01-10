@@ -160,12 +160,6 @@ h6 { font-size: 18px; }
   padding-bottom: 32px;
 }
 
-/*------------- question page -------------*/
-
-#questioncard h6 {
-  line-height: 1.6;
-}
-
 /*------------- button -------------*/
 
 #regularbutton {
@@ -293,7 +287,12 @@ input[type=number] {
   cursor: pointer;
 }
 
-/*------------- quiz -------------*/
+/*------------- question page -------------*/
+
+#questioncard h6 {
+  line-height: 1.6;
+  margin-bottom: 0px;
+}
 
 .optionContainer {
   margin-top: 24px;

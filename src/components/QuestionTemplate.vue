@@ -9,6 +9,7 @@
             <!-- questionTitle -->
             <div v-for="(q, index) in question" :key="q.number">
               <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
+              <b-img center fluid :src="q.img" alt=""/>
               <!-- quizOptions -->
               <b-form-group class="optionContainer">
                 <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
@@ -53,11 +54,12 @@
 
           <!-- start result -->
           <div id="quizresult" v-if="!doingquiz">
-            <h4 class="text-center card-title mb-4 mt-1">
-              คุณอยู่ใน <span>"ระยะ{{type}}"</span> และ <span>"ยอมรับความเสี่ยงได้{{quizresult[risk_level].text}}"</span>
+            <h4 class="text-center card-title mb-3 mt-1">
+              คุณยอมรับความเสี่ยงได้ในระดับ <span>"{{quizresult[result].text}}"</span>
             </h4>
             <h6>คำอธิบาย</h6>
-            <p class="pb-5">{{quizresult[risk_level].descrip}}</p>
+            <!-- {{quizresult[risk_level].descrip}} -->
+            <p class="mb-5">{{quizresult[result].descrip}}</p>
 
             <div class="d-flex justify-content-md-center">
               <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
@@ -98,12 +100,14 @@ export default {
         null, //score9
         null  //score10
       ], 
-      type: '',
+      result: '0',
       risk_level: '0',
       quizresult: [
-        { text: 'น้อย', descrip: 'คุณชอบการลงทุนที่มีความปลอดภัยสูง ต้องการเห็นเงินต้นอยู่ครบ คุณควรกระจายการลงทุนไปยังสินทรัพย์ที่มีความผันผวนต่ำ แม้ว่าผลตอบแทนอาจจะไม่มาก แต่ก็รู้ค่อนข้างแน่นอนว่าจะได้ผลตอบแทนเท่าไหร่และเมื่อไหร่ คุ้มค่าและปลอดภัยกับเงินลงทุนของคุณ' },
-        { text: 'ปานกลาง', descrip: 'คุณยอมรับความเสี่ยงจากการลงทุนได้ปานกลาง ยอมรับความผันผวนได้ในระดับหนึ่งแต่ต้องไม่มากเกินไป เพื่อแลกกับผลตอบแทนที่มากกว่าเงินฝากธนาคารคุณควรกระจายการลุงทุนไปยังสินทรัพย์ที่ให้ได้ทั้งการเพิ่มมูลค่าในระยะยาวและกระแสเงินสดที่สม่ำเสมอจากการลงทุน' },
-        { text: 'สูง', descrip: 'คุณยอมรับความเสี่ยงจากกการลงทุนได้ระดับสูง ไม่กังวลกับความผันผวนที่จะเกิดขึ้นระหว่างการลงทุนเท่าไหร่ และมีโอกาสจะได้รับผลตอบแทนในระดับที่สูงขึ้นด้วย แต่อย่างไรก็ไม่ควรประมาท คุณอาจกระจายการลงทุนไปยังสินทรัพย์ที่มีการเพิ่มมูลค่าได้สูงในระยะยาว' },
+        { text: 'ต่ำ', descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงต่ำ ต้องการผลตอบแทนมากกว่าการฝากเงินธนาคาร ไม่ต้องการความเสี่ยง และมีวัตถุประสงค์การลงทุนในระยะสั้น' },
+        { text: 'ปานกลางค่อนข้างต่ำ', descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงปานกลางค่อนข้างต่ำ ยอมรับความเสี่ยงได้น้อย เน้นปกป้องเงินลงทุน มุ่งหวังรายได้สม่ำเสมอจากการลงทุน' },
+        { text: 'ปานกลางค่อนข้างสูง', descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงปานกลางค่อนข้างสูง สามารถยอมรับมูลค่าการลงทุนที่ลดลงเป็นครั้งคราวได้ ยอมรับความผันผวนได้ในระดับหนึ่งแต่ต้องไม่มากเกินไป' },
+        { text: 'สูง', descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงสูง ยอมรับความเสี่ยงได้สูง รับความผันผวนของตลาดได้ สามารถยอมรับการขาดทุนได้ โดยมุ่งหวังการเติบโตของเงินลงทุนและผลตอบแทนระยะยาว' },
+        { text: 'สูงมาก', descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงสูง ยอมรับความเสี่ยงได้สูงมาก ต้องการได้รับโอกาสที่จะได้รับผลตอบแทนสูง แม้จะมีความเสี่ยงสูงและยอมรับการขาดทุนได้ในระดับสูงพอสมควร' },
       ],
     }
   },
@@ -113,32 +117,40 @@ export default {
   methods: {
     clear() {
       this.userResponses = [null, null, null, null, null, null, null, null, null, null];
-      this.type = '';
-      this.risk_level = '0';
+      this.risk_level = 0;
+      this.result = 0;
     },
     submit() {
       this.$refs['modal-condition'].show()
-      var score = 0;
-      var type = '';
-      var risk_level = '';
-      type = this.userResponses[0];
-      for(let i = 1; i < 10 ; i++) {
+      var score, result, risk_level  = 0;
+      for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
       }
-      //0 - 20
-      if (score < 21) {
-        risk_level = '0';
+      if (score < 15) {
+        risk_level = 1;
+        result = 0;
       }
-      //21 - 28
-      else if (score < 29) {
-        risk_level = '1';
+      //15 - 21
+      else if (score < 22) {
+        risk_level = 4;
+        result = 1;
       }
-      //29++
-      else {
-        risk_level = '2';
+      //22 - 29 
+      else if (score < 30) {
+        risk_level = 5;
+        result = 2;
       }
-      this.type = type;
-      this.risk_level = risk_level;
+      //30 - 36
+      else if (score < 37) {
+        risk_level = 7;
+        result = 3;
+      }
+      else { //37 ++
+        risk_level = 8;
+        result = 4;
+      }
+      this.result = result
+      this.risk_level = risk_level
       this.doingquiz = false
     },
     back() {
@@ -153,8 +165,7 @@ export default {
     },
     hideModal() {
       this.$refs['modal-condition'].hide()
-    },
-    
+    }, 
   },
 
 }
