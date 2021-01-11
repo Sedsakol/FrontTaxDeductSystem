@@ -45,6 +45,7 @@ export default new Vuex.Store({
       other_allowance : 0,
       net_income : 0,
       tax : 0,
+      stair: 0
     },
     is_login: false
   },

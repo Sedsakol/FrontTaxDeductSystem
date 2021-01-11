@@ -95,6 +95,7 @@ export default {
         other_allowance: store.state.result_tax.allowance, 
         net_income: store.state.result_tax.net_income,
         tax: store.state.result_tax.tax,
+        stair: store.state.result_tax.stair,
 
         change_component_key : 0
 
@@ -114,6 +115,7 @@ export default {
                 this.other_allowance = store.state.result_tax.allowance,
                 this.net_income = store.state.result_tax.net_income
                 this.tax = store.state.result_tax.tax
+                this.stair = store.state.result_tax.stair
 
                 this.change_component_key += 1
             }

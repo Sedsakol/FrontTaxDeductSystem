@@ -241,6 +241,7 @@ export default {
         other_allowance: store.state.result_tax.allowance, 
         net_income: store.state.result_tax.net_income,
         tax: store.state.result_tax.tax,
+        stair: store.state.result_tax.stair,
 
         plan_type: 'แบบป้องกันความเสี่ยง',
 
@@ -304,10 +305,12 @@ export default {
                 store.commit('result_tax_change', result_tax)
                 
                 this.allowance_100k = store.state.result_tax.personal_allowance
-                this.other_allowance = store.state.result_tax.allowance,
+                this.other_allowance = store.state.result_tax.allowance
                 this.net_income = store.state.result_tax.net_income
-
+                
                 this.tax = store.state.result_tax.tax
+                this.stair = store.state.result_tax.stair
+                
 
                 this.change_component_key += 1
             }
