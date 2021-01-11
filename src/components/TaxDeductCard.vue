@@ -169,9 +169,11 @@
                         ย้อนกลับ
                     </button>
                     <div class="pl-4"/>
-                    <button @click="next" class="btn btn-primary" id="regularbutton">
-                        ถัดไป
-                    </button>
+                    <b-overlay :show="busy" opacity="0.5" spinner-small @hidden="onHidden" >
+                        <button @click="next" class="btn btn-primary" id="regularbutton" ref="nextbutton">
+                            ถัดไป
+                        </button>
+                    </b-overlay>
                 </div>
 
             </div>
@@ -200,6 +202,8 @@ export default {
             tax : store.state.tax,
 
             change_component_key: 0,
+
+            busy: false,
         }
     },
     mounted(){
@@ -242,12 +246,9 @@ export default {
                 social_security: this.social_security,
                 other: this.other,
             }
-            
             console.log(new_allowance)
             this.$cookies.set('new_allowance',new_allowance);
-            store.commit('allowance_change', new_allowance)
-            
-            
+            store.commit('allowance_change', new_allowance) 
             let a = {
                 salary: this.tax.salary,
                 other_income: this.tax.other_income,
@@ -267,10 +268,9 @@ export default {
                 provident_fund: new_allowance.provident_fund,
                 social_security: new_allowance.social_security,
                 other: new_allowance.other
-
             }
-
             let currentObj = this;
+            this.busy = true
             this.axios.post('tax/', a)
             .then(async function (response) {
                 currentObj.output = response.data;
@@ -279,10 +279,10 @@ export default {
                 //console.log(currentObj.output)
                 currentObj.change_component_key += 1
                 currentObj.$router.push("/result")
-                
             })
             .catch(function (error) {
                 currentObj.msg = error;
+                this.busy = false
             });
             
         },
@@ -314,7 +314,11 @@ export default {
 
                 this.change_component_key += 1
             }
-        }
+        },
+        onHidden() {
+        // Return focus to the button once hidden
+        this.$refs.nextbutton.focus()
+      },
     }
 };
 </script>
