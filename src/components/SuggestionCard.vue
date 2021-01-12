@@ -245,12 +245,15 @@ export default {
 
         plan_type: 'แบบป้องกันความเสี่ยง',
 
+        plan_type_list : '',
+
 
         change_component_key : 1
 
       }
     },
     mounted(){
+      this.load_plan_type_list()
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
@@ -339,6 +342,24 @@ export default {
 
                 this.change_component_key += 1
             }
+        },
+        load_plan_type_list(){
+          let currentObj = this;
+          if (this.$cookies.isKey("token")){
+              currentObj.axios.get('plan_types/', {
+                headers: {
+                  'Authorization': currentObj.$cookies.get('token')
+                }
+              })
+              .then(function (response) {
+                  currentObj.plan_type_list = JSON.stringify(response.data).plan_type_list;
+                  console.log(JSON.stringify(response.data))
+                  currentObj.change_component_key += 1
+              })
+              .catch(function (error) {
+                  currentObj.msg = error;
+              });
+          }
         }
     }
 };
