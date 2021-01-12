@@ -244,7 +244,7 @@ export default {
         stair: store.state.result_tax.stair,
 
         plan_type: 'แบบป้องกันความเสี่ยง',
-
+        user_plan_type : 1,
         plan_type_list : '',
 
 
@@ -257,6 +257,7 @@ export default {
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
+      this.get_user_plan_type()
     },
     methods : {
         data_change_update(){
@@ -352,8 +353,29 @@ export default {
                 }
               })
               .then(function (response) {
-                  currentObj.plan_type_list = JSON.stringify(response.data).plan_type_list;
-                  console.log(JSON.stringify(response.data))
+                  currentObj.plan_type_list = response.data.plan_type_list;
+                  console.log(currentObj.plan_type_list)
+                  currentObj.change_component_key += 1
+              })
+              .catch(function (error) {
+                  currentObj.msg = error;
+              });
+          }
+        },
+        get_user_plan_type(){
+          let currentObj = this;
+          if (this.$cookies.isKey("token")){
+              currentObj.axios.post('plan_types/', store.state.profile ,{
+                headers: {
+                  'Authorization': currentObj.$cookies.get('token'),
+                  'Content-Type': 'application/json'
+                }
+              })
+              .then(function (response) {
+                  currentObj.user_plan_type = response.data.user_plan_type ;
+                  console.log(response.data)
+                  console.log(currentObj.user_plan_type)
+
                   currentObj.change_component_key += 1
               })
               .catch(function (error) {
@@ -364,6 +386,7 @@ export default {
     }
 };
 </script>
+
 
 <style>
 
