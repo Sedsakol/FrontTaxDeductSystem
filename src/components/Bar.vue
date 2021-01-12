@@ -1,10 +1,11 @@
 <template>
   <div class="align-content-center" id="bar" :key="is_login">
-    <b-navbar variant="faded" class="mx-auto">
+    <b-navbar variant="faded" class="mx-auto" toggleable="xl">
       <b-navbar-brand>
         <router-link to="/"><b-img src="../assets/images/logo.svg"></b-img></router-link>
       </b-navbar-brand>
-      <b-collapse is-nav>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse is-nav id = "nav-collapse">
         <b-navbar-nav>
           <b-nav-item><router-link to="/">หน้าแรก</router-link></b-nav-item>
           <b-nav-item><router-link to="/taxCalculate">คำนวณภาษี</router-link></b-nav-item>
