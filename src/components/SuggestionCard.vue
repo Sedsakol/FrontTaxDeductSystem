@@ -184,29 +184,17 @@
             <b-col cols="4" class="bg-mainblue" id = "rightside">
               <b-img center fluid alt="Responsive image" class="rounded" src="../assets/images/undraw_2.svg"></b-img><p/>
               <h6 class="text-center text-white pt-4">รูปแบบการลงทุนที่เหมาะสมกับคุณ</h6>
-              <h5 class="text-center"><span class="text-lightyell">{{ this.plan_type }}</span></h5>
-              <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
-              <div class="text-white">
-                <b-row>
-                  <b-col cols = "6">ประกันชีวิต</b-col>
-                  <b-col cols = "4" class="text-right ">50,000</b-col>
-                  <b-col cols = "2">บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">ประกันชีวิตแบบบำนาญ</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2" >บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">กองทุน SSF</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2" >บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">กองทุน RMF</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2">บาท</b-col>
-                </b-row>
+              <div v-for=" ptl in plan_type_list" :key="ptl.id" v-if="ptl.id==user_plan_type">
+                <h5 class="text-center"><span class="text-lightyell">{{ ptl.plan_type_name }}</span></h5>
+                <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
+                <div class="text-white">
+                  <b-row v-for=" (d,index) in ptl.plan_data" :key="index">
+                    <b-col cols = "6">{{index}}</b-col>
+                    <b-col cols = "4" class="text-right ">{{d}}</b-col>
+                    <b-col cols = "2">บาท</b-col>
+                  </b-row>
+                </div>
+
               </div>
             </b-col>
           </b-row>
@@ -354,7 +342,10 @@ export default {
               })
               .then(function (response) {
                   currentObj.plan_type_list = response.data.plan_type_list;
-                  console.log(currentObj.plan_type_list)
+                  console.log(currentObj.plan_type_list[0].plan_data)
+                  let t = currentObj.plan_type_list[0].plan_data
+                  console.log(Object.keys(t)[0])
+                  
                   currentObj.change_component_key += 1
               })
               .catch(function (error) {
@@ -373,7 +364,6 @@ export default {
               })
               .then(function (response) {
                   currentObj.user_plan_type = response.data.user_plan_type ;
-                  console.log(response.data)
                   console.log(currentObj.user_plan_type)
 
                   currentObj.change_component_key += 1
