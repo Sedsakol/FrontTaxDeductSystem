@@ -184,29 +184,17 @@
             <b-col cols="4" class="bg-mainblue" id = "rightside">
               <b-img center fluid alt="Responsive image" class="rounded" src="../assets/images/ป้องกันความเสี่ยง.svg"></b-img><p/>
               <h6 class="text-center text-white pt-4">รูปแบบการลงทุนที่เหมาะสมกับคุณ</h6>
-              <h5 class="text-center"><span class="text-lightyell">{{ this.plan_type }}</span></h5>
-              <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
-              <div class="text-white">
-                <b-row>
-                  <b-col cols = "6">ประกันชีวิต</b-col>
-                  <b-col cols = "4" class="text-right ">50,000</b-col>
-                  <b-col cols = "2">บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">ประกันชีวิตแบบบำนาญ</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2" >บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">กองทุน SSF</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2" >บาท</b-col>
-                </b-row>
-                <b-row>
-                  <b-col cols = "6">กองทุน RMF</b-col>
-                  <b-col cols = "4" class="text-right">25,000</b-col>
-                  <b-col cols = "2">บาท</b-col>
-                </b-row>
+              <div v-for=" ptl in plan_type_list" :key="ptl.id" v-if="ptl.id==user_plan_type">
+                <h5 class="text-center"><span class="text-lightyell">{{ ptl.plan_type_name }}</span></h5>
+                <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
+                <div class="text-white">
+                  <b-row v-for=" (d,index) in ptl.plan_data" :key="index">
+                    <b-col cols = "6">{{index}}</b-col>
+                    <b-col cols = "4" class="text-right ">{{d}}</b-col>
+                    <b-col cols = "2">บาท</b-col>
+                  </b-row>
+                </div>
+
               </div>
             </b-col>
           </b-row>
@@ -244,7 +232,7 @@ export default {
         stair: store.state.result_tax.stair,
 
         plan_type: 'แบบป้องกันความเสี่ยง',
-
+        user_plan_type : 1,
         plan_type_list : '',
 
 
@@ -257,6 +245,7 @@ export default {
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
+      this.get_user_plan_type()
     },
     methods : {
         data_change_update(){
@@ -352,8 +341,31 @@ export default {
                 }
               })
               .then(function (response) {
-                  currentObj.plan_type_list = JSON.stringify(response.data).plan_type_list;
-                  console.log(JSON.stringify(response.data))
+                  currentObj.plan_type_list = response.data.plan_type_list;
+                  console.log(currentObj.plan_type_list[0].plan_data)
+                  let t = currentObj.plan_type_list[0].plan_data
+                  console.log(Object.keys(t)[0])
+                  
+                  currentObj.change_component_key += 1
+              })
+              .catch(function (error) {
+                  currentObj.msg = error;
+              });
+          }
+        },
+        get_user_plan_type(){
+          let currentObj = this;
+          if (this.$cookies.isKey("token")){
+              currentObj.axios.post('plan_types/', store.state.profile ,{
+                headers: {
+                  'Authorization': currentObj.$cookies.get('token'),
+                  'Content-Type': 'application/json'
+                }
+              })
+              .then(function (response) {
+                  currentObj.user_plan_type = response.data.user_plan_type ;
+                  console.log(currentObj.user_plan_type)
+
                   currentObj.change_component_key += 1
               })
               .catch(function (error) {
@@ -364,6 +376,7 @@ export default {
     }
 };
 </script>
+
 
 <style>
 
