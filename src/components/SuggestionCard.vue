@@ -2,14 +2,14 @@
   <div id="suggestioncard" :key="change_component_key">
     <div class="d-flex justify-content-md-center">
 
-      <div class="text-center" v-if="!is_login" id="suggestion">
+      <div class="text-center" v-if="!is_facebook_login" id="suggestion">
         <h4>แนะนำการลงทุนเพื่อลดหย่อนภาษี</h4>
         <h6>ให้เราช่วยเสนอแนวทางในการลงทุนเพื่อลดหย่อนภาษีที่ใกล้เคียงกับความต้องการ</h6>
-        <h6>กรุณาเข้าสู่ระบบเพื่อเข้าใช้งานในส่วนการแนะนำ</h6>
+        <h6>กรุณาเข้าสู่ระบบด้วย facebook เพื่อเข้าใช้งานในส่วนการแนะนำ</h6>
         <b-img center fluid alt="Responsive image" src="../assets/images/loginfrist.svg"></b-img><p/>
       </div>
 
-      <div class="card w-75 col-md-auto" v-if="is_login">
+      <div class="card w-75 col-md-auto" v-if="is_facebook_login">
 
         <!-- start suggestion -->
         <b-row>
@@ -221,17 +221,15 @@ export default {
         plan_type_list : '',
 
         change_component_key : 1,
-
-        is_login : false
+        is_facebook_login : false
 
       }
     },
     mounted(){
-      this.load_plan_type_list()
+      this.check_user_login()
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
-      this.get_user_plan_type()
     },
     methods : {
         data_change_update(){
@@ -356,6 +354,19 @@ export default {
               });
           }
         },
+        check_user_login(){
+          let currentObj = this;
+          if (this.$cookies.isKey("token")){
+              if (store.state.profile.facebook_id){
+                this.is_facebook_login = true;
+                this.load_plan_type_list()
+                this.get_user_plan_type()
+              }
+              else{
+                this.is_facebook_login = false;
+              }
+          }
+        }
 
     }
 };
