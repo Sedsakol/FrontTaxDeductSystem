@@ -9,41 +9,41 @@
           <form  id = "form-result">
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน) x 12</label></b-col>
-                    <b-col><b-form-input type="number" :value=salary_year disabled/></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+                    <b-col col lg= "6"><label class="col-form-label">เงินเดือน (ต่อเดือน) x 12</label></b-col>
+                    <b-col cols = "5"><b-form-input type="number" :value=salary_year disabled/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" :value=other_income disabled/></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+                    <b-col col lg= "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
+                    <b-col cols = "5"><b-form-input type="number" :value=other_income disabled/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
-                    <b-col><b-form-input class="text-danger" type="number" :value=allowance_60k disabled/></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+                    <b-col col lg= "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=allowance_60k disabled/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
-                    <b-col><b-form-input class="text-danger" type="number" :value=allowance_100k disabled/></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+                    <b-col col lg= "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=allowance_100k disabled/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
             <b-form-group>
                 <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">ค่าลดหย่อนอื่น ๆ</label></b-col>
-                    <b-col><b-form-input class="text-danger" type="number" :value=other_allowance disabled/></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+                    <b-col col lg= "6"><label class="col-form-label">ค่าลดหย่อนอื่น ๆ</label></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=other_allowance disabled/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
 
