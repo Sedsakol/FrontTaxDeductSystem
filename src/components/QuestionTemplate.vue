@@ -1,7 +1,7 @@
 <template>
   <div id="questioncard">
     <div class="d-flex justify-content-md-center">
-      <div class="card w-50 col-md-auto">
+      <div class="card col-md-auto">
         <div class="card-body">
           <!-- start quiz -->
           <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">

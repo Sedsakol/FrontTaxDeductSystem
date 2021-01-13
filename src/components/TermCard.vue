@@ -1,7 +1,7 @@
 <template>
   <div id="card">
     <div class="d-flex justify-content-md-center">
-      <div class="card w-50 col-md-auto">
+      <div class="card col-md-auto">
         <div class="card-body">
           <h4 class="text-center card-title">Terms and Conditions</h4>
             <p>Last updated: December 30, 2020</p>

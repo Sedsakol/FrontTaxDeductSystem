@@ -1,12 +1,12 @@
 <template>
     <div id="card" :key="change_component_key">
     <div class="d-flex justify-content-md-center"> 
-      <div class="card w-50 col-md-auto">
+      <div class="card col-md-auto">
         <div class="card-body">
           <h4 class="text-center card-title">คำนวณภาษี</h4>
 
           <form id = "form-calculate">
-            <b-form-group>
+            <b-form-group class="label-cols-lg">
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
                   <b-col><b-form-input type="number" class="form-control" placeholder="0"

@@ -1,7 +1,7 @@
 <template>
     <div id="card" :key="change_component_key">
     <div class="d-flex justify-content-md-center">
-        <div class="card w-50 col-md-auto">
+        <div class="card col-md-auto">
             <div class="card-body">
                 <h4 class="text-center card-title">ลดหย่อนภาษี</h4>
                 <form id="form-deduct">
