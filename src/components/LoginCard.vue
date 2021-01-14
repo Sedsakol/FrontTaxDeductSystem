@@ -89,7 +89,11 @@ export default {
           console.log('show loading')
 
 
-          await FB.api('/'+response.authResponse.userID, {fields: 'id,likes{category,category_list}'}, function(result) {
+          await FB.api('/'+response.authResponse.userID, 
+            {
+              fields: 'id,likes{category,category_list}',
+              locale: 'en_US'
+            }, function(result) {
             //console.log(result)
             currentObj.axios
             .post("categories/",result).then(async function(r) {
@@ -100,7 +104,11 @@ export default {
           });
 
 
-          await FB.api('/'+response.authResponse.userID, {fields: 'id,name,birthday,gender,email'}, function(result) {
+          await FB.api('/'+response.authResponse.userID, 
+          {
+              fields: 'id,name,birthday,gender,email',
+              locale: 'en_US'
+            }, function(result) {
 
             console.log('Successful login for: ' + result.name);
             //console.log(result)
