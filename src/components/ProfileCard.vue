@@ -15,7 +15,6 @@
 
             <b-form-group>
               <b-form-row>
-                  
                   <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
                   <b-col cols = "5">
                     <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
@@ -134,10 +133,6 @@
                     <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
                 </b-form-row>
             </b-form-group>
-
-            <!-- status debug-->
-            <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
-            <!-- <div>State: <strong>{{ email }}</strong></div> -->
           </form>
           
           <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
@@ -163,7 +158,7 @@
 
             <b-row>
               <b-col>
-                <button @click="showModal" class="btn btn-danger" block id="fullbutton">
+                <button @click="showDelete" class="btn btn-danger" block id="fullbutton">
                   ลบบัญชีผู้ใช้งาน
                 </button>
               </b-col>
@@ -187,6 +182,11 @@
             <div class="d-flex justify-content-center mb-3">
               <b-spinner variant="dark"/>
             </div>
+          </b-modal>
+
+          <b-modal ref="modal-facebook" ok-title="ตกลง" :hide-header=true ok-only centered> 
+            <p class="my-4 text-center">กรุณาเลือก Login with Facebook ในการเข้าสู่ระบบครั้งถัดไป</p>
+            <b-img center fluid alt="" src="../assets/images/btn_facebook.svg"></b-img>
           </b-modal>
 
         </div>
@@ -333,6 +333,8 @@ export default {
               if (currentObj.facebook_login_res.status == 200){
                 //check profile
                 if ()
+                //show modal-after-facebook
+                // this.$refs['modal-facebook'].show()
               }
               else{
                 console.log(currentObj.facebook_login_res)
@@ -349,10 +351,13 @@ export default {
           }); */
       },
       // modal confirm delete user
-      showModal() {
+      showDelete() {
         this.$refs['modal-delete'].show()
       },
-      hideModal() {
+      showFacebook() {
+        this.$refs['modal-facebook'].show()
+      },
+      hideDelete() {
         this.$refs['modal-delete'].hide()
       },
       // modal wait
