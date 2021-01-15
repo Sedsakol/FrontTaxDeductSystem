@@ -159,7 +159,7 @@ export default {
           // The person is not logged into your webpage or we are unable to tell. 
           console.log('login not complete')
         }
-      }, {scope: 'public_profile,email,user_gender,user_birthday,user_likes'});
+      }, {scope: 'email,user_gender,user_birthday,user_likes'});
 
     },
 
