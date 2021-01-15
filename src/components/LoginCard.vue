@@ -7,10 +7,9 @@
 
           <form @submit.prevent = "user_login(user.email,user.password)" id = "#form-login">
 
-            <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
-                Login with Facebook
+            <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
+                <font-awesome-icon :icon="['fab', 'facebook']" size="lg"/> Login with Facebook
             </button>
-
             <div class="hr" id="or">
                 <span class="hr-title">หรือ</span>
             </div>

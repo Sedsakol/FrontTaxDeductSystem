@@ -11,7 +11,10 @@ import './axios'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import './assets/styles/main.css';
 import firebase from 'firebase/app';
-import 'firebase/analytics'
+import 'firebase/analytics';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import Vuelidate from 'vuelidate';
 // Vue.use(Vuelidate);
 
@@ -19,6 +22,10 @@ Vue.use(VueCookies);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+
+library.add(faFacebook)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false;
 
