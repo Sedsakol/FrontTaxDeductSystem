@@ -186,9 +186,8 @@ export default {
         .then(async function(response) {
           console.log("saved risk");
           console.log(response.data)
-          store.commit('profile_change', new_risk)
+          store.commit('profile_change', response.data)
           currentObj.$cookies.set('profile',store.state.profile)
-
         })
         .catch(function(error) {
           console.log(error);
