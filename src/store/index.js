@@ -14,7 +14,7 @@ export default new Vuex.Store({
       other_income : 0,
       parent_num : 0,
       child_num : 0,
-      risk : 0,
+      risk : [],
       marriage : 1, // 1:โสด, 2:สมรส, 3:หย่า
       infirm: 1, // 1: ปกติ , 2: พิการ , 3:ทุพลลภาพ
       facebook_id : null
@@ -51,32 +51,35 @@ export default new Vuex.Store({
   },
   mutations: {
     profile_change(state,payload) {
-      if (payload.gender) {
+      if (payload.hasOwnProperty('gender')) {
         state.profile.gender = payload.gender
       }
-      if (payload.birthdate) {
+      if (payload.hasOwnProperty('birthdate')) {
         state.profile.birthdate = payload.birthdate
       }
-      if (payload.salary) {
+      if (payload.hasOwnProperty('salary')) {
         state.profile.salary = payload.salary
       }
-      if (payload.other_income) {
+      if (payload.hasOwnProperty('other_income')) {
         state.profile.other_income = payload.other_income
       }
-      if (payload.parent_num) {
+      if (payload.hasOwnProperty('parent_num')) {
         state.profile.parent_num = payload.parent_num
       }
-      if (payload.child_num) {
+      if (payload.hasOwnProperty('child_num')) {
         state.profile.child_num = payload.child_num
       }
-      if (payload.marriage) {
+      if (payload.hasOwnProperty('marriage')) {
         state.profile.marriage = payload.marriage
       }
-      if (payload.facebook_id) {
+      if (payload.hasOwnProperty('facebook_id')) {
         state.profile.facebook_id = payload.facebook_id
       }
-      if (payload.email) {
+      if (payload.hasOwnProperty('email')) {
         state.profile.email = payload.email
+      }
+      if (payload.hasOwnProperty('risk')) {
+        state.profile.risk = payload.risk
       }
     },
     tax_change(state,payload) {

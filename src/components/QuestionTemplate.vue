@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import store from "../store/index.js"
 export default {
   name: "QuestionTemplate",
   props: {
@@ -122,6 +123,7 @@ export default {
     },
     submit() {
       this.$refs['modal-condition'].show()
+      this.save_risk()
       var score, result, risk_level  = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
@@ -166,6 +168,36 @@ export default {
     hideModal() {
       this.$refs['modal-condition'].hide()
     }, 
+    async save_risk(){
+
+      let new_risk = {
+        risk: this.userResponses
+      }
+      console.log(new_risk)
+      let currentObj = this
+      if (this.$cookies.get('token')){
+        await this.axios
+        .post("profile/", new_risk,{
+          headers: {
+            'Authorization': currentObj.$cookies.get('token'),
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(async function(response) {
+          console.log("saved risk");
+          console.log(response.data)
+          store.commit('profile_change', new_risk)
+          currentObj.$cookies.set('profile',store.state.profile)
+
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+      else{
+        console.log('pls login naja')
+      }
+    },
   },
 
 }
