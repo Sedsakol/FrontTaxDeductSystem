@@ -27,7 +27,7 @@
               <!-- suggest -->
               <b-col class="ml-5 mr-5" >
                 <h6 class="text-center">การลงทุนที่แนะนำ</h6><p/>
-                <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/><p/>
+                <b-img center fluid :src="require('../assets/steptax/step' + suggest_stair + '.svg')" alt=""/><p/>
                 <b>การลงทุน</b><p/>
                 <b-form-group><b-form-row>
                     <b-col col lg = "6" md="auto"><label class="col-form-label">ลงทุน RMF</label>
@@ -39,7 +39,7 @@
                             <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                         </ul>
                     </b-popover></b-col>
-                    <b-col cols = "4" class="text-right"><label class="col-form-label">10,000</label></b-col>
+                    <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_rmf}}</label></b-col>
                     <b-col col lg = "2" md = "auto" class="text-right"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row></b-form-group>
 
@@ -53,7 +53,7 @@
                             <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                         </ul>
                     </b-popover></b-col>
-                    <b-col cols = "4" class="text-right"><label class="col-form-label">10,000</label></b-col>
+                    <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_ssf}}</label></b-col>
                     <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row></b-form-group>
 
@@ -69,7 +69,7 @@
                             <li>รวมทุกกรมธรรม์</li>
                         </ul>
                     </b-popover></b-col>
-                    <b-col cols = "4" class="text-right"><label class="col-form-label">10,000</label></b-col>
+                    <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_life_insurance}}</label></b-col>
                     <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row></b-form-group>
 
@@ -86,15 +86,15 @@
                             <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
                         </ul>
                     </b-popover></b-col>
-                    <b-col cols = "4" class="text-right"><label class="col-form-label">10,000</label></b-col>
+                    <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_pension_insurance}}</label></b-col>
                     <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row></b-form-group>
 
-                <!-- <b-form-group><b-form-row class="mt-3">
+                <b-form-group><b-form-row class="mt-3">
                   <b-col col lg = "6" md="auto">ต้องจ่ายภาษีเพียง</b-col>
-                  <b-col cols = "4" class="text-right">10,000</b-col>
+                  <b-col cols = "4" class="text-right">{{this.suggest_tax}}</b-col>
                   <b-col col lg = "2" class="text-right">บาท</b-col>
-                </b-form-row></b-form-group> -->
+                </b-form-row></b-form-group>
               </b-col>
 
               <!-- yours -->
@@ -176,7 +176,7 @@
                 <div class="text-white">
                   <b-row v-for=" (d,index) in ptl.plan_data" :key="index" class="ml-1 mr-1">
                     <b-col col lg = "6">{{index}}</b-col>
-                    <b-col cols = "4" class="text-right">{{d}}</b-col>
+                    <b-col cols = "4" class="text-right">{{d*100000/100}}</b-col>
                     <b-col col lg = "2">บาท</b-col>
                   </b-row>
                 </div>
@@ -207,7 +207,7 @@ export default {
         // other_allowance == ค่าลดหย่อนอื่น ๆ ที่เหลือ
         salary_year: store.state.tax.salary*12,
         other_income: store.state.tax.other_income,
-        total_income: this.salary_year + this.other_income,
+        total_income: store.state.tax.salary*12 + store.state.tax.other_income,
 
         allowance_60k: 60000,
         allowance_100k: store.state.result_tax.personal_allowance,
@@ -215,6 +215,14 @@ export default {
         net_income: store.state.result_tax.net_income,
         tax: store.state.result_tax.tax,
         stair: store.state.result_tax.stair,
+
+        suggest_stair: 2,
+        suggest_rmf : 0,
+        suggest_ssf : 0,
+        suggest_life_insurance: 0,
+        suggest_pension_insurance: 0,
+        suggest_tax : 1000,
+
 
         plan_type: 'แบบป้องกันความเสี่ยง',
         user_plan_type : 1,
@@ -226,10 +234,11 @@ export default {
       }
     },
     mounted(){
-      this.check_user_login()
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
+      this.check_user_login()
+      
     },
     methods : {
         data_change_update(){
@@ -266,9 +275,8 @@ export default {
             let currentObj = this;
             this.axios.post('tax/', a)
             .then(function (response) {
-                currentObj.output = response.data;
-                console.log(currentObj.output)
-                currentObj.tax = currentObj.output.tax
+                currentObj.tax = response.data.tax;
+                currentObj.stair = response.data.stair
             })
             .catch(function (error) {
                 currentObj.msg = error;
@@ -323,9 +331,6 @@ export default {
               })
               .then(function (response) {
                   currentObj.plan_type_list = response.data.plan_type_list;
-                  console.log(currentObj.plan_type_list[0].plan_data)
-                  let t = currentObj.plan_type_list[0].plan_data
-                  console.log(Object.keys(t)[0])
                   
                   currentObj.change_component_key += 1
               })
@@ -345,22 +350,71 @@ export default {
               })
               .then(function (response) {
                   currentObj.user_plan_type = response.data.user_plan_type ;
-                  console.log(currentObj.user_plan_type)
+                  currentObj.plan_type_list.every((item, index) =>{
+                      let t = item.plan_data
+                      if (item.id == currentObj.user_plan_type){
+                        Object.keys(t).forEach(function(key) {
+                          if (key == "ลงทุน RMF"){
+                              currentObj.suggest_rmf = t[key] * currentObj.total_income / 100
+                          }
+                          if (key == "ลงทุน SSF"){
+                              currentObj.suggest_ssf = t[key] * currentObj.total_income / 100
+                          }
+                          if (key =="ประกันชีวิต"){
+                              currentObj.suggest_life_insurance = t[key] * currentObj.total_income / 100
+                          }
+                          if (key == "ประกันชีวิตแบบบำนาญ"){
+                              currentObj.suggest_pension_insurance= t[key] * currentObj.total_income / 100
+                          }
+            
+                        })
+                        return false
+                        
+                      }
+                      
+                  })
+                  let a = {
+                    salary: store.state.tax.salary,
+                    other_income: store.state.tax.other_income,
+                    marital: store.state.tax.marital,
+                    parent_num_dis: store.state.tax.parent_num_dis,
+                    child_before_2561: store.state.tax.child_before_2561,
+                    child_after_2561: store.state.tax.child_after_2561,
+                    protege: store.state.tax.protege,
 
-                  currentObj.change_component_key += 1
+                    rmf: currentObj.suggest_rmf,
+                    ssf: currentObj.suggest_ssf,
+                    life_insurance: currentObj.suggest_life_insurance,
+                    pension_insurance: currentObj.suggest_pension_insurance,
+
+                    donation: store.state.allowance.donation,
+                    edu_donation: store.state.allowance.edu_donation,
+                    home_loans: store.state.allowance.home_loans,
+                    provident_fund: store.state.allowance.provident_fund,
+                    social_security: store.state.allowance.social_security,
+                    other: store.state.allowance.other
+                }
+
+                currentObj.axios.post('tax/', a)
+                .then(async function (r) {
+                    currentObj.suggest_stair = r.data.stair
+                    currentObj.suggest_tax = r.data.tax
+                    currentObj.change_component_key += 1
+                })
+            
               })
               .catch(function (error) {
                   currentObj.msg = error;
               });
           }
         },
-        check_user_login(){
+        async check_user_login(){
           let currentObj = this;
           if (this.$cookies.isKey("token")){
               if (store.state.profile.facebook_id){
                 this.is_facebook_login = true;
-                this.load_plan_type_list()
-                this.get_user_plan_type()
+                await this.load_plan_type_list()
+                await this.get_user_plan_type()
               }
               else{
                 this.is_facebook_login = false;
