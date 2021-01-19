@@ -184,6 +184,15 @@
         <!-- close tag blue side -->
       </b-row>
     </div>
+
+    <b-modal ref="modal-do-quiz" :hide-header=true ok-only centered> 
+      <p class="my-4 text-center">กรุณาทำแบบทดสอบความเสี่ยงก่อน เพื่อการแนะนำการลงทุนที่ดีขึ้น</p>
+      <template #modal-footer>
+        <button @click="go_quiz()" class="btn btn-primary" id="regularbutton">
+          ทำแบบทดสอบ
+        </button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -219,14 +228,13 @@ export default {
         suggest_pension_insurance: 0,
         suggest_tax : 1000,
 
-
         plan_type: 'แบบป้องกันความเสี่ยง',
         user_plan_type : 1,
         plan_type_list : '',
 
         change_component_key : 1,
-        is_facebook_login : false
-
+        is_facebook_login : false,
+        do_quiz : false
       }
     },
     mounted(){
@@ -234,7 +242,7 @@ export default {
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
       this.check_user_login()
-      
+      this.check_do_quiz()
     },
     methods : {
         data_change_update(){
@@ -416,6 +424,22 @@ export default {
                 this.is_facebook_login = false;
               }
           }
+        },
+        async check_do_quiz(){
+          let currentObj = this;
+          if (this.$cookies.isKey("token")){
+              if (store.state.profile.risk.length == 0){
+                this.do_quiz = false;
+                this.$refs['modal-do-quiz'].show()
+              }
+              else{
+                this.do_quiz = true;
+              }
+          }
+        },
+        go_quiz(){
+          this.$router.push("/question");
+          this.$router.go();
         }
 
     }

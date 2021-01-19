@@ -163,6 +163,7 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
+    
     async get_profile(){
       let currentObj = this
       if (this.$cookies.get('token')){

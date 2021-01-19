@@ -186,7 +186,8 @@ h6 { font-size: 18px; }
   width: 180px;
 }
 
-#barbutton {
+#barbutton,
+#modalbutton {
   width: 100%;
 }
 
@@ -203,7 +204,6 @@ h6 { font-size: 18px; }
 .btn-primary,
 .btn-primary:focus {
   background-color: #57A3B3;
-  width: 180px;
   border-color: #57A3B3;
   box-shadow: none;
 }
@@ -219,7 +219,6 @@ h6 { font-size: 18px; }
 .btn-outline-primary:focus{
   border-color: #57A3B3;
   color: #57A3B3;
-  width: 180px;
   box-shadow: none;
 }
 

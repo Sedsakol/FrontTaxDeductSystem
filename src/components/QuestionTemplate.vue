@@ -165,7 +165,6 @@ export default {
       this.$refs['modal-condition'].hide()
     }, 
     async save_risk(){
-
       let new_risk = {
         risk: this.userResponses
       }
