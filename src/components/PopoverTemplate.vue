@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <div>
     <b-icon id="popover-1" icon="exclamation-circle"/>

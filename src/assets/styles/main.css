@@ -16,8 +16,18 @@
 }
 
 /*------------- overall -------------*/
-#app {
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+@font-face {
   font-family: 'Sukhumvitset';
+  src: 
+    url('../fonts/Sukhumvitset/Sukhumvitset-text.ttf')
+    format('truetype');
+}
+
+#app {
+  /* font-family: 'Sukhumvitset'; */
+  font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -30,13 +40,6 @@ body,
   background: #F4F9FA;
   width: 100%;
   height: 100%;
-}
-
-@font-face {
-  font-family: 'Sukhumvitset';
-  src: 
-    url('../fonts/Sukhumvitset/Sukhumvitset-text.ttf')
-    format('truetype');
 }
 
 h3 { font-size: 36px; }
@@ -100,24 +103,26 @@ h6 { font-size: 18px; }
 }
 
 /*------------- card -------------*/
-.card {
-  width: 50%;
-}
 #card,
 #profilecard,
 #suggestioncard,
 #questioncard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 120px 0px 120px 0px;
 }
 
-#card .card,
-#profilecard .card {
-  padding-top: 32px;
-  padding-bottom: 32px;
+.card {
+  width: 50%;
+  align-items: center;
+  /* background-color: antiquewhite; */
 }
 
-#questioncard .card {
-  padding: 32px 40px;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card #leftside,
@@ -132,27 +137,27 @@ h6 { font-size: 18px; }
   padding-bottom: 24px;
 }
 
-.card-body {
-  align-self: center;
-}
-
 .card-body #form-login,
 .card-body #form-regis {
   width: 300px;
 }
 
-/* delete accout */
-
-#profilecard .card-body p {
-  text-align: center;
+#card .card,
+#profilecard .card {
+  padding: 32px 0px 32px 0px;
 }
+
+#questioncard .card {
+  padding: 32px 40px;
+}
+
 
 /*------------- home page -------------*/
 
 #home {
-  padding-top: 120px;
-  padding-bottom: 64px;
+  padding: 120px 0px 120px 0px;
 }
+
 #home h3,
 #home h4 {
   padding-bottom: 32px;
@@ -181,9 +186,12 @@ h6 { font-size: 18px; }
   width: 180px;
 }
 
-#barbutton,
-#fullbutton {
+#barbutton {
   width: 100%;
+}
+
+#fullbutton {
+  width: 300px;
 }
 
 .btn-primary:hover {
@@ -224,18 +232,17 @@ h6 { font-size: 18px; }
 }
 
 /*------------- input and form control -------------*/
-.form-control{
-  width: 100%;
-}
+
 .form-control:focus {
   border-color: #57A3B3;
   box-shadow: none;
 }
-#form-profile .form-row,
-#form-result .form-row,
-#form-calculate .form-row,
-#form-deduct .form-row {
-  width: 406px;
+
+#form-profile,
+#form-result,
+#form-deduct,
+#form-calculate {
+  width: 90%;
 }
 
 /*create -or- line */
@@ -278,19 +285,19 @@ input[type=number] {
 }
 
 /*------------- popover -------------*/
-
 .popover-body {
-  font-family: 'Sukhumvitset';
+  /* font-family: 'Sukhumvitset'; */
+  font-family: 'Prompt', sans-serif;
 }
-
 
 /*------------- modal -------------*/
-.modal .btn-primary {
-  width: 100px;
+.modal {
+  /* font-family: 'Sukhumvitset'; */
+  font-family: 'Prompt', sans-serif;
 }
 
-.modal {
-  font-family: 'Sukhumvitset';
+.modal .btn-primary {
+  width: 100px;
 }
 
 .spinner {

@@ -1,195 +1,191 @@
 <template>
   <div id="profilecard">
-    <div class="d-flex justify-content-md-center"> 
-      <div class="card col-md-auto">
-        <div class="card-body">
-          <h4 class="text-center card-title">โปรไฟล์</h4>
-          
-          <form  id = "form-profile">
-            <b-form-group>
-              <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
-                  <b-col cols = "5"><b-form-input :value=user.email disabled /></b-col>
-              </b-form-row> 
-            </b-form-group>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-center card-title">โปรไฟล์</h4>
+        
+        <form id = "form-profile">
+          <b-form-group>
+            <b-form-row>
+                <b-col cols = "6"><label class="col-form-label">อีเมล</label></b-col>
+                <b-col cols = "5"><b-form-input :value=user.email disabled /></b-col>
+            </b-form-row> 
+          </b-form-group>
 
-            <b-form-group>
-              <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
-                  <b-col cols = "5">
-                    <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
-                    <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
-                  </b-col>
-              </b-form-row> 
-            </b-form-group>
+          <b-form-group>
+            <b-form-row>
+                <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
+                <b-col cols = "5">
+                  <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
+                  <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
+                </b-col>
+            </b-form-row> 
+          </b-form-group>
 
-            <b-form-group>
+          <b-form-group>
+            <b-form-row>
+                <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
+                <b-col cols = "5">
+                  <b-form-select 
+                  class="form-control" 
+                  v-model="user.gender" 
+                  :options="gender_ops"
+                  value-field="value"
+                  text-field="text"
+                  :disabled=disable_edit />
+                </b-col>
+            </b-form-row> 
+          </b-form-group>
+
+          <b-form-group>
+            <b-form-row>
+                <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
+                <b-col cols = "5">
+                  <b-form-datepicker
+                    v-model = "user.birthdate"
+                    :value = user.birthdate
+                    :placeholder= user.birthdate
+                    :date-format-options="{day: 'numeric' , month: 'numeric',year: 'numeric'}"
+                    locale="th"
+                    :hide-header = true
+                    label-prev-year = "ปีก่อนหน้า"
+                    label-prev-month = "เดือนก่อนหน้า"
+                    label-current-month = "เดือนนี้"
+                    label-next-month = "เดือนถัดไป"
+                    label-next-year = "ปีถัดไป"
+                    :max=maxDate
+                    :disabled=disable_edit >
+                  </b-form-datepicker>
+                </b-col>
+            </b-form-row> 
+          </b-form-group>
+
+          <b-form-group>
               <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
+                  <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
+                  <b-col><b-form-input type="number" placeholder="" v-model="user.salary" :value=user.salary :disabled=disable_edit /></b-col>
+                  <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+              </b-form-row>
+          </b-form-group>
+
+          <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
+                  <b-col><b-form-input type="number" placeholder="" v-model="user.other_income" :value=user.other_income  :disabled=disable_edit /></b-col>
+                  <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
+              </b-form-row>
+          </b-form-group>
+
+          <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
                   <b-col cols = "5">
                     <b-form-select 
                     class="form-control" 
-                    v-model="user.gender" 
-                    :options="gender_ops"
+                    v-model= "user.marriage" 
+                    :value=user.marriage 
                     value-field="value"
                     text-field="text"
-                    :disabled=disable_edit />
+                    :disabled=disable_edit 
+                    :options="marriage_ops"/>
                   </b-col>
-              </b-form-row> 
-            </b-form-group>
+              </b-form-row>
+          </b-form-group>
 
-            <b-form-group>
+          <b-form-group>
               <b-form-row>
-                  <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
+                  <b-col cols = "6"><label class="col-form-label">ปกติ/พิการ/ทุพพลภาพ</label></b-col>
                   <b-col cols = "5">
-                    <b-form-datepicker
-                      v-model = "user.birthdate"
-                      :value = user.birthdate
-                      :placeholder= user.birthdate
-                      :date-format-options="{day: 'numeric' , month: 'numeric',year: 'numeric'}"
-                      locale="th"
-                      :hide-header = true
-                      label-prev-year = "ปีก่อนหน้า"
-                      label-prev-month = "เดือนก่อนหน้า"
-                      label-current-month = "เดือนนี้"
-                      label-next-month = "เดือนถัดไป"
-                      label-next-year = "ปีถัดไป"
-                      :max=maxDate
-                      :disabled=disable_edit >
-                    </b-form-datepicker>
+                    <b-form-select 
+                    class="form-control" 
+                    v-model= "user.infirm" 
+                    :value=user.infirm 
+                    value-field="value"
+                    text-field="text"
+                    :disabled=disable_edit 
+                    :options="infirm_ops"/>
                   </b-col>
-              </b-form-row> 
-            </b-form-group>
+              </b-form-row>
+          </b-form-group>
 
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" v-model="user.salary" :value=user.salary :disabled=disable_edit /></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
-                </b-form-row>
-            </b-form-group>
+          <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
+                  <b-col>
+                    <b-form-select 
+                    class="form-control" 
+                    v-model= "user.parent_num" 
+                    :value=user.parent_num
+                    value-field="value"
+                    text-field="text"
+                    :disabled=disable_edit 
+                    :options="parent_ops" />
+                  </b-col>
+                  <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
+              </b-form-row>
+          </b-form-group>
 
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" v-model="user.other_income" :value=user.other_income  :disabled=disable_edit /></b-col>
-                    <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
-                </b-form-row>
-            </b-form-group>
+          <b-form-group>
+              <b-form-row>
+                  <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
+                  <b-col><b-form-input type="number" placeholder="" v-model="user.child_num" :value=user.child_num  :disabled=disable_edit /></b-col>
+                  <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
+              </b-form-row>
+          </b-form-group>
+        </form>
+        
+        <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
+          แก้ไข
+        </button>
+        
+        <div v-else>
+          <b-row>
+            <b-col>
+              <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
+                ยกเลิก
+              </button>
+            </b-col>
+            <b-col>
+              <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
+                บันทึก
+              </button>
+            </b-col>
+          </b-row>
 
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">สถานะการสมรส</label></b-col>
-                    <b-col cols = "5">
-                      <b-form-select 
-                      class="form-control" 
-                      v-model= "user.marriage" 
-                      :value=user.marriage 
-                      value-field="value"
-                      text-field="text"
-                      :disabled=disable_edit 
-                      :options="marriage_ops"/>
-                    </b-col>
-                </b-form-row>
-            </b-form-group>
+          <br>
 
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">ปกติ/พิการ/ทุพพลภาพ</label></b-col>
-                    <b-col cols = "5">
-                      <b-form-select 
-                      class="form-control" 
-                      v-model= "user.infirm" 
-                      :value=user.infirm 
-                      value-field="value"
-                      text-field="text"
-                      :disabled=disable_edit 
-                      :options="infirm_ops"/>
-                    </b-col>
-                </b-form-row>
-            </b-form-group>
-
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
-                    <b-col>
-                      <b-form-select 
-                      class="form-control" 
-                      v-model= "user.parent_num" 
-                      :value=user.parent_num
-                      value-field="value"
-                      text-field="text"
-                      :disabled=disable_edit 
-                      :options="parent_ops" />
-                    </b-col>
-                    <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
-                </b-form-row>
-            </b-form-group>
-
-            <b-form-group>
-                <b-form-row>
-                    <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
-                    <b-col><b-form-input type="number" placeholder="" v-model="user.child_num" :value=user.child_num  :disabled=disable_edit /></b-col>
-                    <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
-                </b-form-row>
-            </b-form-group>
-          </form>
-          
-          <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
-            แก้ไข
-          </button>
-          
-          <div v-else>
-
-            <b-row>
-              <b-col>
-                <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
-                  ยกเลิก
-                </button>
-              </b-col>
-              <b-col>
-                <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
-                  บันทึก
-                </button>
-              </b-col>
-            </b-row>
-
-            <br>
-
-            <b-row>
-              <b-col>
-                <button @click="showDelete" class="btn btn-danger" block id="fullbutton">
-                  ลบบัญชีผู้ใช้งาน
-                </button>
-              </b-col>
-            </b-row>
-
-          </div>
-
-          <b-modal ref="modal-delete" 
-            ok-title="ลบ" 
-            cancel-title="ยกเลิก" 
-            ok-variant="outline-danger"
-            cancel-variant="danger"
-            :hide-header=true 
-            @ok ="delete_account"
-            centered> 
-            <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
-          </b-modal>
-
-          <b-modal ref="modal-delete-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
-            <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังลบบัญชีให้คุณ</p>
-            <div class="d-flex justify-content-center mb-3">
-              <b-spinner variant="dark"/>
-            </div>
-          </b-modal>
-
-          <b-modal ref="modal-facebook" ok-title="ตกลง" :hide-header=true ok-only centered> 
-            <p class="my-4 text-center">กรุณาเลือก Login with Facebook ในการเข้าสู่ระบบครั้งถัดไป</p>
-            <b-img center fluid alt="" src="../assets/images/btn_facebook.svg"></b-img>
-          </b-modal>
-
+          <b-row>
+            <b-col>
+              <button @click="showDelete" class="btn btn-danger" block id="fullbutton">
+                ลบบัญชีผู้ใช้งาน
+              </button>
+            </b-col>
+          </b-row>
         </div>
+
+        <b-modal ref="modal-delete" 
+          ok-title="ลบ" 
+          cancel-title="ยกเลิก" 
+          ok-variant="outline-danger"
+          cancel-variant="danger"
+          :hide-header=true 
+          @ok ="delete_account"
+          centered> 
+          <p class="my-4 text-center">ต้องการจะลบบัญชีผู้ใช้งาน และข้อมูลทั้งหมด ?</p>
+        </b-modal>
+ 
+        <b-modal ref="modal-delete-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+          <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังลบบัญชีให้คุณ</p>
+          <div class="d-flex justify-content-center mb-3">
+            <b-spinner variant="dark"/>
+          </div>
+        </b-modal>
+
+        <b-modal ref="modal-facebook" ok-title="ตกลง" :hide-header=true ok-only centered> 
+          <p class="my-4 text-center">กรุณาเลือก Login with Facebook ในการเข้าสู่ระบบครั้งถัดไป</p>
+          <b-img center fluid alt="" src="../assets/images/btn_facebook.svg"></b-img>
+        </b-modal>
+
       </div>
     </div>
   </div>

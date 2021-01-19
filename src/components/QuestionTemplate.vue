@@ -1,80 +1,76 @@
 <template>
   <div id="questioncard">
-    <div class="d-flex justify-content-md-center">
-      <div class="card col-md-auto">
-        <div class="card-body">
-          <!-- start quiz -->
-          <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
-            <h4 class="text-center card-title mb-4 mt-1">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
-            <!-- questionTitle -->
-            <div v-for="(q, index) in question" :key="q.number">
-              <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
-              <b-img center fluid :src="q.img" alt=""/>
-              <!-- quizOptions -->
-              <b-form-group class="optionContainer">
-                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
-                  <input type="radio" 
-                    :name="'name' + index"
-                    :id="'id' + index + c.value" 
-                    v-model=" userResponses[index]"
-                    :value="c.value" 
-                    required />
-                  <label class="option" 
-                    :for="'id' + index + c.value" >
-                    {{ c.text }}
-                  </label>
-                </b-form-radio-group>
-              </b-form-group>
-            </div>
-
-            <div class="d-flex justify-content-md-center">
-              <button @click="clear" type="button" class="btn btn-outline-primary" id="regularbutton">
-                  ล้าง
-              </button><div class="pr-4"/>
-              <button type="submit" class="btn btn-primary" id="regularbutton">
-                  คำนวณผล
-              </button>
-            </div>
-
-          </form>
-          <!-- end quiz -->
-          
-          <!-- start modal -->
-          <b-modal size="lg" ref="modal-condition" ok-title="ตกลง" title="การทำแบบสอบถามประเมินระดับความเสี่ยง" ok-only centered> 
-            <div>
-              แบบทดสอบระดับความเสี่ยงที่ยอมรับได้นี้เป็นเพียงการประเมินเบี้องต้นเท่านั้น ระดับความเสี่ยงที่ยอมรับได้จะแตกต่างกันไปตามลักษณะเฉพาะของแต่ละบุคคล
-              โดยผู้จัดทำได้อ้างอิงจาก 
-              <a href="https://www.set.or.th/education/th/online_classroom/risk.html" 
-                rel="external nofollow noopener" target="_blank">
-                แบบทดสอบระดับความเสี่ยงที่ยอมรับได้ (TSI Risk Profile Questionnaire) SET
-              </a>
-            </div>
-          </b-modal>
-          <!-- end modal -->
-
-          <!-- start result -->
-          <div id="quizresult" v-if="!doingquiz">
-            <h4 class="text-center card-title mb-3 mt-1">
-              คุณยอมรับความเสี่ยงได้ในระดับ <span>"{{quizresult[result].text}}"</span>
-            </h4>
-            <h6>คำอธิบาย</h6>
-            <!-- {{quizresult[risk_level].descrip}} -->
-            <p class="mb-5">{{quizresult[result].descrip}}</p>
-
-            <div class="d-flex justify-content-md-center">
-              <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
-                  กลับ
-              </button><div class="pr-4"/>
-              <button @click="restart" class="btn btn-primary" id="regularbutton">
-                  ทำใหม่อีกครั้ง
-              </button>
-            </div>
+    <div class="card">
+      <div class="card-body">
+        <!-- start quiz -->
+        <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
+          <h4 class="text-center card-title mb-4 mt-1">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
+          <!-- questionTitle -->
+          <div v-for="(q, index) in question" :key="q.number">
+            <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
+            <b-img center fluid :src="q.img" alt=""/>
+            <!-- quizOptions -->
+            <b-form-group class="optionContainer">
+              <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                <input type="radio" 
+                  :name="'name' + index"
+                  :id="'id' + index + c.value" 
+                  v-model=" userResponses[index]"
+                  :value="c.value" 
+                  required />
+                <label class="option" 
+                  :for="'id' + index + c.value" >
+                  {{ c.text }}
+                </label>
+              </b-form-radio-group>
+            </b-form-group>
           </div>
 
-          
-        </div>
-      </div>
+          <div class="d-flex justify-content-md-center">
+            <button @click="clear" type="button" class="btn btn-outline-primary" id="regularbutton">
+                ล้าง
+            </button><div class="pr-4"/>
+            <button type="submit" class="btn btn-primary" id="regularbutton">
+                คำนวณผล
+            </button>
+          </div>
 
+        </form>
+        <!-- end quiz -->
+        
+        <!-- start modal -->
+        <b-modal size="lg" ref="modal-condition" ok-title="ตกลง" title="การทำแบบสอบถามประเมินระดับความเสี่ยง" ok-only centered> 
+          <div>
+            แบบทดสอบระดับความเสี่ยงที่ยอมรับได้นี้เป็นเพียงการประเมินเบี้องต้นเท่านั้น ระดับความเสี่ยงที่ยอมรับได้จะแตกต่างกันไปตามลักษณะเฉพาะของแต่ละบุคคล
+            โดยผู้จัดทำได้อ้างอิงจาก 
+            <a href="https://www.set.or.th/education/th/online_classroom/risk.html" 
+              rel="external nofollow noopener" target="_blank">
+              แบบทดสอบระดับความเสี่ยงที่ยอมรับได้ (TSI Risk Profile Questionnaire) SET
+            </a>
+          </div>
+        </b-modal>
+        <!-- end modal -->
+
+        <!-- start result -->
+        <div id="quizresult" v-if="!doingquiz">
+          <h4 class="text-center card-title mb-3 mt-1">
+            คุณยอมรับความเสี่ยงได้ในระดับ <span>"{{quizresult[result].text}}"</span>
+          </h4>
+          <h6>คำอธิบาย</h6>
+          <!-- {{quizresult[risk_level].descrip}} -->
+          <p class="mb-5">{{quizresult[result].descrip}}</p>
+
+          <div class="d-flex justify-content-md-center">
+            <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
+                กลับ
+            </button><div class="pr-4"/>
+            <button @click="restart" class="btn btn-primary" id="regularbutton">
+                ทำใหม่อีกครั้ง
+            </button>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
 </template>
@@ -90,7 +86,7 @@ export default {
     return {
       doingquiz: true,
       userResponses: [
-        null, //score1 Accumulator, Consolidator, Spender
+        null, //score1
         null, //score2
         null, //score3
         null, //score4

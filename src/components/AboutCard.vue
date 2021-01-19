@@ -1,11 +1,9 @@
 <template>
   <div id="card">
-    <div class="d-flex justify-content-md-center">
-      <div class="card col-md-auto">
-        <div class="card-body">
-          <h4 class="text-center card-title">ติดต่อเรา</h4>
-          
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-center card-title">ติดต่อเรา</h4>
+        
       </div>
     </div>
   </div>

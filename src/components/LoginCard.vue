@@ -1,60 +1,58 @@
 <template>
   <div id="card">
-    <div class="d-flex justify-content-md-center">
-      <div class="card col-md-auto">
-        <div class="card-body">
-          <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-          <form @submit.prevent = "user_login(user.email,user.password)" id = "#form-login">
+        <form @submit.prevent = "user_login(user.email,user.password)" id = "#form-login">
 
-            <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
-                <b-icon icon="facebook"/> Login with Facebook 
+          <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
+              <b-icon icon="facebook"/> Login with Facebook 
+          </button>
+          <div class="hr" id="or">
+              <span class="hr-title">หรือ</span>
+          </div>
+
+          <div id="form-login">
+            <b-form-group>
+              <b-form-input
+                v-model="user.email"
+                type="email"
+                placeholder="อีเมล"
+                lazy-formatter
+                :formatter="formatter"
+                required
+              />
+            </b-form-group>
+
+            <b-form-group>
+              <b-form-input
+                v-model="user.password"
+                type="password"
+                placeholder="รหัสผ่าน"
+                required
+              />
+            </b-form-group>
+
+            <button class="btn btn-primary" id="fullbutton" type="submit">
+              เข้าสู่ระบบ
             </button>
-            <div class="hr" id="or">
-                <span class="hr-title">หรือ</span>
-            </div>
 
-            <div id="form-login">
-              <b-form-group>
-                <b-form-input
-                  v-model="user.email"
-                  type="email"
-                  placeholder="อีเมล"
-                  lazy-formatter
-                  :formatter="formatter"
-                  required
-                />
-              </b-form-group>
+          </div>
 
-              <b-form-group>
-                <b-form-input
-                  v-model="user.password"
-                  type="password"
-                  placeholder="รหัสผ่าน"
-                  required
-                />
-              </b-form-group>
+          <div class="text-center mt-2">
+            <p>ยังไม่มีบัญชีผู้ใช้งาน?
+            <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
+          </div>
+        </form>
 
-              <button class="btn btn-primary" block id="fullbutton" type="submit">
-                เข้าสู่ระบบ
-              </button>
-
-            </div>
-
-            <div class="text-center mt-2">
-              <p>ยังไม่มีบัญชีผู้ใช้งาน?
-              <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
-            </div>
-          </form>
-
-          <b-modal ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
-            <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
-            <div class="d-flex justify-content-center mb-3">
-              <b-spinner variant="dark"/>
-            </div>
-          </b-modal>
-          
-        </div>
+        <b-modal ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+          <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
+          <div class="d-flex justify-content-center mb-3">
+            <b-spinner variant="dark"/>
+          </div>
+        </b-modal>
+        
       </div>
     </div>
   </div>
@@ -86,7 +84,6 @@ export default {
           console.log('login complete')
           currentObj.$refs['modal-wait'].show()
           console.log('show loading')
-
 
           await FB.api('/'+response.authResponse.userID, 
             {

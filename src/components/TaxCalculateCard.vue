@@ -1,7 +1,6 @@
 <template>
     <div id="card" :key="change_component_key">
-    <div class="d-flex justify-content-md-center"> 
-      <div class="card col-md-auto">
+      <div class="card">
         <div class="card-body">
           <h4 class="text-center card-title">คำนวณภาษี</h4>
 
@@ -147,12 +146,12 @@
               </b-form-row>
             </b-form-group>
           </form>
+
           <button @click="next" class="btn btn-primary" id="fullbutton">
             ถัดไป
           </button>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
