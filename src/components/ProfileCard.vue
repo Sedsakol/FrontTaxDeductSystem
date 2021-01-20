@@ -42,6 +42,7 @@
                 <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
                 <b-col cols = "5">
                   <b-form-datepicker
+                    class="form-control" 
                     v-model = "user.birthdate"
                     :value = user.birthdate
                     :placeholder= user.birthdate
