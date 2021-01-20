@@ -1,3 +1,20 @@
+.bg-lightblue {
+  background-color: #F4F9FA;
+}
+.bg-mainblue {
+  background-color: #57A3B3;
+}
+
+.bg-1 {
+  background-color: #b17377;
+}
+.bg-2 {
+  background-color: #98dbb7;
+}
+.bg-3 {
+  background-color: #d7db98;
+}
+
 /*------------- overall -------------*/
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
@@ -87,7 +104,6 @@ h6 { font-size: 18px; }
 
 /*------------- card -------------*/
 #card,
-#collect,
 #profilecard,
 #suggestioncard,
 #questioncard {
@@ -99,15 +115,8 @@ h6 { font-size: 18px; }
 
 .card {
   width: 50%;
-  min-width: 50%;
   align-items: center;
   /* background-color: antiquewhite; */
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card-body {
@@ -140,11 +149,6 @@ h6 { font-size: 18px; }
 
 #questioncard .card {
   padding: 32px 40px;
-}
-
-#collect .card {
-  padding: 0px;
-  margin: 0px;
 }
 
 
@@ -237,7 +241,7 @@ h6 { font-size: 18px; }
 #form-result,
 #form-deduct,
 #form-calculate {
-  width: 100%;
+  width: 90%;
 }
 
 /*create -or- line */
@@ -277,22 +281,6 @@ input::-webkit-inner-spin-button {
 }
 input[type=number] { 
   text-align:right ;
-}
-
-/* remove and change arrow in select input  */
-select {
-  background-image:
-    url("../icon/arrow-down.svg") !important;
-  background-size: 10px 10px !important;
-  background-repeat: no-repeat;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-select:focus {
-  background-image:
-    url("../icon/arrow-down-blue.svg") !important;
-  background-size: 10px 10px !important;
 }
 
 /*------------- popover -------------*/
@@ -361,6 +349,8 @@ input[type="radio"]:checked + label  {
   color: #175E7A;
 }
 
+
+
 /*------------- override text color -------------*/
 .text-danger,
 .text-danger::-webkit-input-placeholder {
@@ -391,22 +381,3 @@ input[type="radio"]:checked + label  {
   color: #FFFFFF !important;
 }
 
-.bg-white {
-  background-color: #ffffff;
-}
-.bg-lightblue {
-  background-color: #F4F9FA;
-}
-.bg-mainblue {
-  background-color: #57A3B3;
-}
-
-.bg-1 {
-  background-color: #b17377;
-}
-.bg-2 {
-  background-color: #98dbb7;
-}
-.bg-3 {
-  background-color: #d7db98;
-}
