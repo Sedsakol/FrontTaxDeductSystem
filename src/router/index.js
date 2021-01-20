@@ -14,6 +14,7 @@ import Policy from "../views/Policy.vue";
 import About from "../views/About.vue";
 import Howtodelete from "../views/Howtodelete.vue";
 import Login2 from "../views/Login2.vue";
+import Profile2 from "../views/Profile2.vue";
 
 Vue.use(VueRouter);
 
@@ -87,6 +88,11 @@ const routes = [
     path: "/collectdata/login",
     name: "Login2",
     component: Login2
+  },
+  {
+    path: "/collectdata/profile",
+    name: "Profile2",
+    component: Profile2
   },
 ];
 
