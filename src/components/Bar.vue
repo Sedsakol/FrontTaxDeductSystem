@@ -11,6 +11,9 @@
           <b-nav-item><router-link to="/taxCalculate">คำนวณภาษี</router-link></b-nav-item>
           <b-nav-item><router-link to="/question">แบบทดสอบความเสี่ยง</router-link></b-nav-item>
           <b-nav-item><router-link to="/suggestion">แนะนำการลงทุน</router-link></b-nav-item>
+          <b-nav-item><router-link to="/collectdata/login">เก็บข้อมูลกลุ่มทดสอบ
+          <b-icon icon="exclamation" animation="cylon-vertical" font-scale="1" shift-h="-8" />
+          </router-link></b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" >

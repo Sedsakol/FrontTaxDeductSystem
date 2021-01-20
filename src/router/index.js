@@ -13,6 +13,7 @@ import Term from "../views/Term.vue";
 import Policy from "../views/Policy.vue";
 import About from "../views/About.vue";
 import Howtodelete from "../views/Howtodelete.vue";
+import Login2 from "../views/Login2.vue";
 
 Vue.use(VueRouter);
 
@@ -81,6 +82,11 @@ const routes = [
     path: "/how_to_delete",
     name: "Howtodelete",
     component: Howtodelete
+  },
+  {
+    path: "/collectdata/login",
+    name: "Login2",
+    component: Login2
   },
 ];
 
