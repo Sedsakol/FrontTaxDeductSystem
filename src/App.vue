@@ -30,12 +30,6 @@ export default {
       });
 
       console.log('facebook init')
-      //This function should be here, inside window.fbAsyncInit
-      /*
-      FB.getLoginStatus(function(response) {
-        console.log(response);
-      });
-      */
     };
 
     (function(d, s, id){
