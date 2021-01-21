@@ -132,7 +132,7 @@
         </form>
 
         <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
-          บันทึก
+          ถัดไป
         </button>
 
       </div>
@@ -224,7 +224,7 @@ export default {
             console.log(response)
             await store.commit('profile_change', new_user)
             await currentObj.$cookies.set("profile", new_user);
-            currentObj.$router.push("/collectdata/question");
+            currentObj.$router.push("/question");
             currentObj.$router.go();
           })
           .catch(function(error) {
