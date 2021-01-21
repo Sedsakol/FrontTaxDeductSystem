@@ -12,6 +12,7 @@
             </b-form-row> 
           </b-form-group>
 
+          <!--
           <b-form-group>
             <b-form-row>
                 <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
@@ -21,6 +22,7 @@
                 </b-col>
             </b-form-row> 
           </b-form-group>
+          -->
 
           <b-form-group>
             <b-form-row>
