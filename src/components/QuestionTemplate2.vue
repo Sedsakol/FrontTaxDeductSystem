@@ -63,12 +63,12 @@
           <p class="mb-5">{{quizresult[result].descrip}}</p>
 
           <div class="d-flex justify-content-md-center">
-            <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
-                กลับ
+            <button @click="restart" class="btn btn-outline-primary" id="regularbutton">
+              ทำใหม่อีกครั้ง
             </button><div class="pr-4"/>
-            <button @click="restart" class="btn btn-primary" id="regularbutton">
-                ทำใหม่อีกครั้ง
-            </button>
+            <button class="btn btn-primary" id="regularbutton"><router-link to="/collectdata/selecttype" class="text-white">
+              ถัดไป
+            </router-link></button>
           </div>
         </div>
         
@@ -80,7 +80,7 @@
 <script>
 import store from "../store/index.js"
 export default {
-  name: "QuestionTemplate",
+  name: "QuestionTemplate2",
   props: {
     question : Array,
   },

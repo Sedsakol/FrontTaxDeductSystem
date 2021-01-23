@@ -13,8 +13,10 @@ import Term from "../views/Term.vue";
 import Policy from "../views/Policy.vue";
 import About from "../views/About.vue";
 import Howtodelete from "../views/Howtodelete.vue";
+// collect data
 import Login2 from "../views/Login2.vue";
 import Profile2 from "../views/Profile2.vue";
+import Question2 from "../views/Question2.vue";
 import Thank from "../views/Thank.vue";
 
 Vue.use(VueRouter);
@@ -94,6 +96,11 @@ const routes = [
     path: "/collectdata/profile",
     name: "Profile2",
     component: Profile2
+  },
+  {
+    path: "/collectdata/question",
+    name: "Question2",
+    component: Question2
   },
   {
     path: "/collectdata/thankyou",
