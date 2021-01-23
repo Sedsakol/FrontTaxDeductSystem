@@ -1,9 +1,9 @@
 <template>
   <div id="collect">
-    <b-card no-body>
-      <b-row class="w-100" align-v="stretch">
+    <b-card no-body id="login2">
+      <b-row class="w-100 h-100" align-v="stretch">
         <b-col col xl="6" class="bg-mainblue center">
-          <b-img src="../assets/images/collect_login.svg" alt="Image" class="rounded-0"></b-img>
+          <b-img src="../assets/images/collect_login.svg" alt="Image" class="rounded-0 card-img"></b-img>
         </b-col>
         <b-col col xl="6" class="center">
           <b-card-body class="text-center">
