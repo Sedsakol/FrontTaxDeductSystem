@@ -12,18 +12,6 @@
             </b-form-row> 
           </b-form-group>
 
-          <!--
-          <b-form-group>
-            <b-form-row>
-                <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
-                <b-col cols = "5">
-                  <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" disabled >เชื่อมต่อ Facebook</button>
-                  <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
-                </b-col>
-            </b-form-row> 
-          </b-form-group>
-          -->
-
           <b-form-group>
             <b-form-row>
                 <b-col cols = "6"><label class="col-form-label">เพศ</label></b-col>
@@ -226,7 +214,7 @@ export default {
             console.log(response)
             await store.commit('profile_change', new_user)
             await currentObj.$cookies.set("profile", new_user);
-            currentObj.$router.push("/question");
+            currentObj.$router.push("/collectdata/question");
             currentObj.$router.go();
           })
           .catch(function(error) {
