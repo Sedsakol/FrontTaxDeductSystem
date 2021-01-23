@@ -82,7 +82,7 @@ export default {
         }
         console.log(obj)
         await this.axios
-        .post("collectdataset/", obj,{
+        .post("collect_dataset/", obj,{
           headers: {
             'Authorization': currentObj.$cookies.get('token'),
             'Content-Type': 'application/json'
