@@ -17,6 +17,7 @@ import Howtodelete from "../views/Howtodelete.vue";
 import Login2 from "../views/Login2.vue";
 import Profile2 from "../views/Profile2.vue";
 import Question2 from "../views/Question2.vue";
+import SelectType from "../views/SelectType.vue";
 import Thank from "../views/Thank.vue";
 
 Vue.use(VueRouter);
@@ -101,6 +102,11 @@ const routes = [
     path: "/collectdata/question",
     name: "Question2",
     component: Question2
+  },
+  {
+    path: "/collectdata/selecttype",
+    name: "SelectType",
+    component: SelectType
   },
   {
     path: "/collectdata/thankyou",

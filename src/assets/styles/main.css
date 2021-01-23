@@ -103,7 +103,6 @@ h6 { font-size: 18px; }
   width: 50%;
   min-width: 50%;
   align-items: center;
-  /* background-color: antiquewhite; */
 }
 
 .center {
@@ -339,20 +338,27 @@ select:focus {
 }
 
 .option {
-  border-radius: 290486px;
-  padding: 9px 18px;
-  margin: 0 18px;
-  margin-bottom: 12px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin: 0 16px;
+  margin-bottom: 16px;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
   border: transparent 1px solid; 
   width: 90%;
 }
 
+
 .option:hover,
 .option:focus {
   background-color: #BFD6DB;
 }
+
+#group {
+  /* width: 100%; */
+  margin: 0px 16px;
+}
+
 
 input[type="radio"] {
   -webkit-appearance:none;
