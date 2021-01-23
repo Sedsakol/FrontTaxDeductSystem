@@ -6,9 +6,9 @@
         <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
           <h4 class="text-center card-title">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
           <!-- questionTitle -->
-          <div v-for="(q, index) in question" :key="q.number">
+          <div v-for="(q, index) in question" :key="q.number" class="quizcontain">
             <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
-            <b-img center fluid :src="q.img" alt=""/>
+            <b-img center fluid :src="q.img" />
             <!-- quizOptions -->
             <b-form-group class="optionContainer">
               <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
@@ -27,7 +27,7 @@
           </div>
 
           <div class="d-flex justify-content-md-center">
-            <button @click="clear" type="button" class="btn btn-outline-primary" id="regularbutton">
+            <button @click="clear" class="btn btn-outline-primary" id="regularbutton">
                 ล้าง
             </button><div class="pr-4"/>
             <button type="submit" class="btn btn-primary" id="regularbutton">
@@ -54,21 +54,22 @@
         <!-- end modal -->
 
         <!-- start result -->
-        <div id="quizresult" v-if="!doingquiz">
+        <div id="quizresult" class="quizcontain" v-if="!doingquiz">
           <h4 class="text-center card-title mb-3 mt-1">
             คุณยอมรับความเสี่ยงได้ในระดับ <span>"{{quizresult[result].text}}"</span>
           </h4>
-          <h6>คำอธิบาย</h6>
-          <!-- {{quizresult[risk_level].descrip}} -->
-          <p class="mb-5">{{quizresult[result].descrip}}</p>
+          <div id="group">
+            <h6>คำอธิบาย</h6>
+            <p class="mb-5">{{quizresult[result].descrip}}</p>
+          </div>
 
           <div class="d-flex justify-content-md-center">
             <button @click="restart" class="btn btn-outline-primary" id="regularbutton">
               ทำใหม่อีกครั้ง
             </button><div class="pr-4"/>
-            <button class="btn btn-primary" id="regularbutton" ><router-link to="/collectdata/selecttype" class="text-white">
+            <router-link to="/collectdata/selecttype"><button class="btn btn-primary" id="regularbutton">
               ถัดไป
-            </router-link></button>
+            </button></router-link>
           </div>
         </div>
         

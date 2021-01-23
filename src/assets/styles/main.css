@@ -98,11 +98,11 @@ h6 { font-size: 18px; }
 #collect,
 #profilecard,
 #suggestioncard,
-#questioncard {
+#questioncard,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 0px 120px 0px;
+  padding-top: 56px;
 }
 
 .card {
@@ -338,39 +338,45 @@ select:focus {
 }
 
 .optionContainer {
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
   flex-grow: 1;
 }
 
 .option {
   border-radius: 20px;
   padding: 8px 16px;
-  margin: 0 16px;
-  margin-bottom: 16px;
+  margin: 0px 16px 8px 16px;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
   border: transparent 1px solid; 
   width: 90%;
 }
 
-
 .option:hover,
 .option:focus {
   background-color: #BFD6DB;
 }
 
+.quizcontain,
+.quizcontain h4 {
+  margin: 0px 24px;
+}
+
+.quizcontain img {
+  background-color: #ffffff;
+}
+
 #group {
-  /* width: 100%; */
   margin: 0px 16px;
 }
 
-
 input[type="radio"] {
-  -webkit-appearance:none;
-  -moz-appearance: none;
-  appearance: none;
-  outline:none;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  border: none !important;
 }
 
 input[type="radio"]:checked + label  {
