@@ -126,7 +126,6 @@ export default {
     },
     submit() {
       this.$refs['modal-condition'].show()
-      this.save_risk()
       var score, result, risk_level  = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
@@ -157,6 +156,7 @@ export default {
       this.result = result
       this.risk_level = risk_level
       this.doingquiz = false
+      this.save_risk()
     },
     back() {
       this.doingquiz = true

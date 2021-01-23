@@ -66,7 +66,7 @@
             <button @click="restart" class="btn btn-outline-primary" id="regularbutton">
               ทำใหม่อีกครั้ง
             </button><div class="pr-4"/>
-            <button class="btn btn-primary" id="regularbutton"><router-link to="/collectdata/selecttype" class="text-white">
+            <button class="btn btn-primary" id="regularbutton" ><router-link to="/collectdata/selecttype" class="text-white">
               ถัดไป
             </router-link></button>
           </div>
@@ -126,7 +126,6 @@ export default {
     },
     submit() {
       this.$refs['modal-condition'].show()
-      this.save_risk()
       var score, result, risk_level  = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
@@ -157,6 +156,7 @@ export default {
       this.result = result
       this.risk_level = risk_level
       this.doingquiz = false
+      this.save_risk()
     },
     back() {
       this.doingquiz = true
@@ -190,6 +190,8 @@ export default {
           console.log(response.data)
           store.commit('profile_change', response.data)
           currentObj.$cookies.set('profile',store.state.profile)
+          currentObj.$router.push("/collectdata/selecttype");
+          
         })
         .catch(function(error) {
           console.log(error);

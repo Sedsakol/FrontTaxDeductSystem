@@ -64,7 +64,6 @@
 </template>
 
 <script>
-
 import store from "../store/index.js";
 export default {
   name: "SelectTypeCard",
@@ -75,7 +74,30 @@ export default {
   },
   methods: {
     async save_plan_type(){
-
+      
+      let currentObj = this
+      if (this.$cookies.get('token') && this.userResponses){
+        let obj = {
+          'plan_type' : this.userResponses
+        }
+        console.log(obj)
+        await this.axios
+        .post("collectdataset/", obj,{
+          headers: {
+            'Authorization': currentObj.$cookies.get('token'),
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(async function(response) {
+          console.log("saved dataset complete");
+          console.log(response.data)
+          currentObj.$router.push("/collectdata/thankyou");
+          
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
     },
   }
 };
