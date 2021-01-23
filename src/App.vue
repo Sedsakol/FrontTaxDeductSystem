@@ -1,9 +1,10 @@
 <template>
     <div id="app">
       <div id="background">
-        <Bar/>
+        <!-- <Bar/> -->
         <Content/>
-        <Footer/>
+        <!-- <Footer/> -->
+        <Footer2/>
       </div>
     </div>
 </template>
@@ -12,12 +13,14 @@
 import Bar from "@/components/Bar.vue"
 import Content from "@/components/Content.vue"
 import Footer from "@/components/Footer.vue"
+import Footer2 from "@/components/Footer2.vue"
 export default {
   name: "app",
   components : {
         Bar,
         Content,
         Footer,
+        Footer2,
   },
   created(){
     console.log('created main');
