@@ -1,7 +1,7 @@
 <template>
     <div id="app">
       <div id="background">
-        <!-- <Bar/> -->
+        <Bar hidden/>
         <Content/>
         <!-- <Footer/> -->
         <Footer2/>

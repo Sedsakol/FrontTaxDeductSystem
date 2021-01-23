@@ -11,7 +11,7 @@
               <b-icon icon="check-circle-fill" font-scale="4" class="text-success"/><p/>
               <h4><b>กรอกข้อมูลเสร็จสิ้น !</b></h4>
               <p/>
-              <h6><b>ออกจากระบบเรียบร้อยแล้ว<br>ขอบคุณสำหรับการกรอกข้อมูล</b></h6>
+              <h6><b>ขอบคุณสำหรับการกรอกข้อมูล</b><br></h6>
               <p/>
               <button v-on:click="again" class="btn btn-primary" id="regularbutton">
                 เก็บข้อมูลอีกครั้ง
