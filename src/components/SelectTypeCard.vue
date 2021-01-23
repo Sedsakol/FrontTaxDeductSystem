@@ -104,9 +104,10 @@ export default {
         })
         .catch(function(error) {
           console.log(error);
+          currentObj.$refs['modal-save-plan-type'].hide()
         });
       }
-      currentObj.$refs['modal-save-plan-type'].hide()
+      
     },
   }
 };
