@@ -191,7 +191,6 @@ export default {
           console.log(response.data)
           store.commit('profile_change', response.data)
           currentObj.$cookies.set('profile',store.state.profile)
-          currentObj.$router.push("/collectdata/selecttype");
           
         })
         .catch(function(error) {

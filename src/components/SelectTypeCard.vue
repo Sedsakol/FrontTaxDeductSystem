@@ -91,9 +91,8 @@ export default {
         .then(async function(response) {
           console.log("saved dataset complete");
           console.log(response.data)
-          currentObj.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
-          currentObj.is_login = false
-          currentObj.$router.push("/collectdata/thankyou");
+          await currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
+          await currentObj.$router.push("/collectdata/thankyou");
           
         })
         .catch(function(error) {
