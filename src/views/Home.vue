@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="d-flex justify-content-md-center">
+  <div id="home">
     <div class="text-center">
       <h4>เครื่องมือในการคำนวณภาษี และแนะนำการลงทุนเพื่อลดหย่อนภาษี</h4>
       <h6>เว็บแอพพลิเคชั่นที่จะช่วยวางแผนภาษี และเตรียมข้อมูลภาษีได้ง่ายขึ้น</h6>
@@ -19,7 +19,7 @@ export default {
   name: "Home",
   data(){
     return{
-      // user: null,
+
     }
   },
   // async hello_member() {
@@ -33,3 +33,8 @@ export default {
 
 };
 </script>
+
+<style scoped>
+
+  
+</style>
