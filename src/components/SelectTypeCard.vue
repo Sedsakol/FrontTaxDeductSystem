@@ -57,6 +57,13 @@
         <button @click="save_plan_type" class="btn btn-primary" block id="fullbutton">
           ถัดไป
         </button>
+
+        <b-modal ref="modal-save-plan-type" ok-title="ตกลง" :hide-header=true ok-only centered> 
+          <p class="my-4 text-center">กรุณารอสักครู่ ระบบกำลังบันทึกข้อมูลของคุณ</p>
+          <div class="d-flex justify-content-center mb-3">
+            <b-spinner variant="dark"/>
+          </div>
+        </b-modal>
         
       </div>
     </div>
@@ -74,8 +81,8 @@ export default {
   },
   methods: {
     async save_plan_type(){
-      
       let currentObj = this
+      currentObj.$refs['modal-save-plan-type'].show()
       if (this.$cookies.get('token') && this.userResponses){
         let obj = {
           'plan_type' : this.userResponses
@@ -99,6 +106,7 @@ export default {
           console.log(error);
         });
       }
+      currentObj.$refs['modal-save-plan-type'].hide()
     },
   }
 };
