@@ -33,8 +33,7 @@
                     :name="'name' + index"
                     :id="'id' + index + c.value" 
                     v-model="userResponses[index]"
-                    :value="c.value" 
-                    required />
+                    :value="c.value" />
                   <label class="option" 
                     :for="'id' + index + c.value" >
                     {{ c.text }}
@@ -148,8 +147,15 @@ export default {
       var score  = 0;
       var result = 0;
       var risk_level = 0;
+      console.log(this.userResponses)
       for(let i = 0; i < 10 ; i++) {
-        score = score + Number(this.userResponses[i]);
+        var length = this.userResponses[i].length;
+        if(length > 1){ //checkbox
+          score = score + Number(this.userResponses[i][length-1]);
+        }
+        else {
+          score = score + Number(this.userResponses[i]);
+        }
       }
       if (score < 15) {
         risk_level = 1;
