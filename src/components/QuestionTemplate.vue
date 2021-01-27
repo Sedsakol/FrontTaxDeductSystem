@@ -107,16 +107,16 @@ export default {
     return {
       doingquiz: true,
       userResponses: [
-        null, //score1
-        null, //score2
-        null, //score3
-        null, //score4
-        null, //score5
-        null, //score6
-        null, //score7
-        null, //score8
-        null, //score9
-        null  //score10
+        [], //score1
+        [], //score2
+        [], //score3
+        [], //score4
+        [], //score5
+        [], //score6
+        [], //score7
+        [], //score8
+        [], //score9
+        []  //score10
       ], 
       result: '0',
       risk_level: '0',
