@@ -127,7 +127,9 @@ export default {
     },
     submit() {
       this.$refs['modal-condition'].show()
-      var score, result, risk_level  = 0;
+      var score  = 0;
+      var result = 0;
+      var risk_level = 0;
       for(let i = 0; i < 10 ; i++) {
         score = score + Number(this.userResponses[i]);
       }
