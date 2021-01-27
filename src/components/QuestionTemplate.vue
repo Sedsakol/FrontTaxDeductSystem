@@ -28,7 +28,7 @@
               </div>
               <!-- if type == checkbox question -->
               <div v-else-if="q.type === 1">
-                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                <b-form-checkbox-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
                   <input type="checkbox" 
                     :name="'name' + index"
                     :id="'id' + index + c.value" 
@@ -38,7 +38,7 @@
                     :for="'id' + index + c.value" >
                     {{ c.text }}
                   </label>
-                </b-form-radio-group>
+                </b-form-checkbox-group>
               </div>
             </b-form-group>
           </div>
@@ -106,16 +106,16 @@ export default {
     return {
       doingquiz: true,
       userResponses: [
-        [], //score1
-        [], //score2
-        [], //score3
-        [], //score4
-        [], //score5
-        [], //score6
-        [], //score7
-        [], //score8
-        [], //score9
-        []  //score10
+        null, //score1
+        null, //score2
+        null, //score3
+        [],   //score4
+        null, //score5
+        null, //score6
+        null, //score7
+        null, //score8
+        null, //score9
+        null  //score10
       ], 
       result: '0',
       risk_level: '0',
@@ -138,7 +138,7 @@ export default {
   },
   methods: {
     clear() {
-      this.userResponses = [[], [], [], [], [], [], [], [], [], []];
+      this.userResponses = [null,null,null,[],null,null,null,null,null,null];
       this.risk_level = 0;
       this.result = 0;
     },
@@ -149,14 +149,14 @@ export default {
       var risk_level = 0;
       console.log(this.userResponses)
       for(let i = 0; i < 10 ; i++) {
-        var length = this.userResponses[i].length;
-        if(length > 1){ //checkbox
-          score = score + Number(this.userResponses[i][length-1]);
-        }
-        else {
+        if (i != 3 ){
           score = score + Number(this.userResponses[i]);
         }
+        else{
+          score = score + this.userResponses[i].length
+        }
       }
+      console.log(score)
       if (score < 15) {
         risk_level = 1;
         result = 0;
