@@ -6,24 +6,45 @@
         <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
           <h4 class="text-center card-title">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
           <!-- questionTitle -->
-          <div v-for="(q, index) in question" :key="q.number" class="quizcontain">
+          <!-- {{userResponses}} -->
+          
+          <div v-for="(q, index) in question" :key="index" class="quizcontain">
             <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
             <b-img center fluid :src="q.img" />
             <!-- quizOptions -->
             <b-form-group class="optionContainer">
-              <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
-                <input type="radio" 
-                  :name="'name' + index"
-                  :id="'id' + index + c.value" 
-                  v-model=" userResponses[index]"
-                  :value="c.value" 
-                  required />
-                <label class="option" 
-                  :for="'id' + index + c.value" >
-                  {{ c.text }}
-                </label>
-              </b-form-radio-group>
+              <!-- if type == select question -->
+              <div v-if="q.type === 0"> 
+                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                  <input type="radio" 
+                    :name="'name' + index"
+                    :id="'id' + index + c.value" 
+                    v-model="userResponses[index]"
+                    :value="c.value" 
+                    required />
+                  <label class="option" 
+                    :for="'id' + index + c.value" >
+                    {{ c.text }}
+                  </label>
+                </b-form-radio-group>
+              </div>
+              <!-- if type == checkbox question -->
+              <div v-else-if="q.type === 1">
+                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                  <input type="checkbox" 
+                    :name="'name' + index"
+                    :id="'id' + index + c.value" 
+                    v-model="userResponses[index]"
+                    :value="c.value" 
+                    required />
+                  <label class="option" 
+                    :for="'id' + index + c.value" >
+                    {{ c.text }}
+                  </label>
+                </b-form-radio-group>
+              </div>
             </b-form-group>
+              
           </div>
 
           <div class="d-flex justify-content-md-center">
@@ -89,16 +110,16 @@ export default {
     return {
       doingquiz: true,
       userResponses: [
-        null, //score1
-        null, //score2
-        null, //score3
-        null, //score4
-        null, //score5
-        null, //score6
-        null, //score7
-        null, //score8
-        null, //score9
-        null  //score10
+        [], //score1
+        [], //score2
+        [], //score3
+        [], //score4
+        [], //score5
+        [], //score6
+        [], //score7
+        [], //score8
+        [], //score9
+        []  //score10
       ], 
       result: '0',
       risk_level: '0',

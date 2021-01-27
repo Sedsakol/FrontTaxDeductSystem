@@ -294,7 +294,7 @@ input[type=number] {
   text-align:right !important;
 }
 
-/* remove and change arrow in select input  */
+/* remove and change arrow in select input (dropdown) */
 select {
   background-image:
     url("../icon/arrow-down.svg") !important;
@@ -376,7 +376,9 @@ select:focus {
   margin: 0px 16px;
 }
 
-input[type="radio"] {
+/* remove radio in radio input */
+.optionContainer input[type="radio"],
+.optionContainer input[type="checkbox"] {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
@@ -384,10 +386,12 @@ input[type="radio"] {
   border: none !important;
 }
 
-input[type="radio"]:checked + label  {
+.optionContainer input[type="radio"]:checked + label,
+.optionContainer input[type="checkbox"]:checked + label  {
   background-color: #BFD6DB;
   color: #175E7A;
 }
+
 
 /*------------- override text color -------------*/
 .text-danger,

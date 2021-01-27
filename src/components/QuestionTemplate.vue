@@ -11,18 +11,36 @@
             <b-img center fluid :src="q.img" />
             <!-- quizOptions -->
             <b-form-group class="optionContainer">
-              <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
-                <input type="radio" 
-                  :name="'name' + index"
-                  :id="'id' + index + c.value" 
-                  v-model=" userResponses[index]"
-                  :value="c.value" 
-                  required />
-                <label class="option" 
-                  :for="'id' + index + c.value" >
-                  {{ c.text }}
-                </label>
-              </b-form-radio-group>
+              <!-- if type == select question -->
+              <div v-if="q.type === 0"> 
+                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                  <input type="radio" 
+                    :name="'name' + index"
+                    :id="'id' + index + c.value" 
+                    v-model="userResponses[index]"
+                    :value="c.value" 
+                    required />
+                  <label class="option" 
+                    :for="'id' + index + c.value" >
+                    {{ c.text }}
+                  </label>
+                </b-form-radio-group>
+              </div>
+              <!-- if type == checkbox question -->
+              <div v-else-if="q.type === 1">
+                <b-form-radio-group v-for="c in q.choice" :key="c.value" :id="'q'+ index">
+                  <input type="checkbox" 
+                    :name="'name' + index"
+                    :id="'id' + index + c.value" 
+                    v-model="userResponses[index]"
+                    :value="c.value" 
+                    required />
+                  <label class="option" 
+                    :for="'id' + index + c.value" >
+                    {{ c.text }}
+                  </label>
+                </b-form-radio-group>
+              </div>
             </b-form-group>
           </div>
 
