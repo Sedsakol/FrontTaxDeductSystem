@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     clear() {
-      this.userResponses = [null, null, null, null, null, null, null, null, null, null];
+      this.userResponses = [[], [], [], [], [], [], [], [], [], []];
       this.risk_level = 0;
       this.result = 0;
     },
