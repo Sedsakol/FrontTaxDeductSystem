@@ -16,8 +16,8 @@
           <!-- top -->
           <b-row class="justify-content-md-center mb-4">
             <b-col col lg = "6" class="bg-lightblue pt-3">
-              <p class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.net_income }}</span> บาท</p>
-              <p class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.tax }}</span> บาท</p>
+              <p class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.valueFormatter(this.net_income) }}</span> บาท</p>
+              <p class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.valueFormatter(this.tax) }}</span> บาท</p>
             </b-col>
           </b-row>
           <!-- down -->
@@ -37,7 +37,7 @@
                           <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                       </ul>
                   </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_rmf}}</label></b-col>
+                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_rmf) }}</label></b-col>
                   <b-col col lg = "2" md = "auto" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
@@ -51,7 +51,7 @@
                           <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                       </ul>
                   </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_ssf}}</label></b-col>
+                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_ssf) }}</label></b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
@@ -67,7 +67,7 @@
                           <li>รวมทุกกรมธรรม์</li>
                       </ul>
                   </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_life_insurance}}</label></b-col>
+                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_life_insurance) }}</label></b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
@@ -84,13 +84,13 @@
                           <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
                       </ul>
                   </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{suggest_pension_insurance}}</label></b-col>
+                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_pension_insurance) }}</label></b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
               <b-form-group><b-form-row class="mt-3">
                 <b-col col lg = "6" md="auto">ต้องจ่ายภาษีเพียง</b-col>
-                <b-col cols = "4" class="text-right">{{this.suggest_tax}}</b-col>
+                <b-col cols = "4" class="text-right">{{ this.valueFormatter(this.suggest_tax) }}</b-col>
                 <b-col col lg = "2" class="text-right">บาท</b-col>
               </b-form-row></b-form-group>
             </b-col>
@@ -105,7 +105,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">ลงทุน RMF</label></b-col>
                   <b-col cols = "4" class="text-right">
-                    <b-form-input type="number" class="form-control" v-model="rmf" min ="0" @change="data_change_update" />
+                    <b-form-input type="text" class="form-control text-right" v-model="rmf" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -113,7 +113,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">ลงทุน SSF</label></b-col>
                   <b-col cols = "4" class="text-right">
-                    <b-form-input type="number" class="form-control" v-model= "ssf" min ="0" @change="data_change_update" />
+                    <b-form-input type="text" class="form-control text-right" v-model= "ssf" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -122,7 +122,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label></b-col>
                   <b-col cols = "4" class="text-right">
-                    <b-form-input type="number" class="form-control" v-model= "life_insurance" min ="0" @change="data_change_update" />
+                    <b-form-input type="text" class = "text-control text-right" v-model= "life_insurance" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -130,14 +130,14 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ</div></b-col>
                   <b-col cols = "4" class="text-right">
-                    <b-form-input type="number" class="form-control" v-model= "pension_insurance" min ="0" @change="data_change_update" />
+                    <b-form-input type="text" class = "text-control text-right" v-model= "pension_insurance" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
               <b-form-group><b-form-row class="mt-3">
                 <b-col col lg = "6" md="auto">ต้องจ่ายภาษีเพียง</b-col>
-                <b-col cols = "4" class="text-right">{{ this.tax }}</b-col>
+                <b-col cols = "4" class="text-right">{{ this.valueFormatter(this.tax) }}</b-col>
                 <b-col col lg = "2" class="text-right">บาท</b-col>
               </b-form-row></b-form-group>
             </b-col>
@@ -174,7 +174,7 @@
               <div class="text-white">
                 <b-row v-for=" (d,index) in ptl.plan_data" :key="index" class="ml-1 mr-1">
                   <b-col col lg = "6">{{index}}</b-col>
-                  <b-col cols = "4" class="text-right">{{d*100000/100}}</b-col>
+                  <b-col cols = "4" class="text-right">{{ d*100000/100 }}</b-col>
                   <b-col col lg = "2">บาท</b-col>
                 </b-row>
               </div>
@@ -247,10 +247,10 @@ export default {
     methods : {
         data_change_update(){
           let b = {
-            rmf: this.rmf,
-            ssf: this.ssf,
-            life_insurance: this.life_insurance,
-            pension_insurance: this.pension_insurance
+            rmf: this.valueFormatter2(this.rmf),
+            ssf: this.valueFormatter2(this.ssf),
+            life_insurance: this.valueFormatter2(this.life_insurance),
+            pension_insurance: this.valueFormatter2(this.pension_insurance)
           }
           console.log(b)
 
@@ -263,10 +263,10 @@ export default {
                 child_after_2561: store.state.tax.child_after_2561,
                 protege: store.state.tax.protege,
 
-                rmf: this.rmf,
-                ssf: this.ssf,
-                life_insurance: this.life_insurance,
-                pension_insurance: this.pension_insurance,
+                rmf: this.valueFormatter2(this.rmf),
+                ssf: this.valueFormatter2(this.ssf),
+                life_insurance: this.valueFormatter2(this.life_insurance),
+                pension_insurance: this.valueFormatter2(this.pension_insurance),
 
                 donation: store.state.allowance.donation,
                 edu_donation: store.state.allowance.edu_donation,
@@ -306,10 +306,10 @@ export default {
                 let new_allowance = this.$cookies.get("new_allowance")
                 store.commit('allowance_change', new_allowance)
 
-                this.rmf = store.state.allowance.rmf
-                this.ssf = store.state.allowance.ssf
-                this.life_insurance = store.state.allowance.life_insurance
-                this.pension_insurance = store.state.allowance.pension_insurance
+                this.rmf = this.valueFormatter(store.state.allowance.rmf)
+                this.ssf = this.valueFormatter(store.state.allowance.ssf)
+                this.life_insurance = this.valueFormatter(store.state.allowance.life_insurance)
+                this.pension_insurance = this.valueFormatter(store.state.allowance.pension_insurance)
                 
                 this.change_component_key += 1
             }
@@ -440,6 +440,17 @@ export default {
         go_quiz(){
           this.$router.push("/question");
           this.$router.go();
+        },
+        valueFormatter(value) {
+          // any character that's not a digit
+          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+          var formatValue = Number(fixedValue).toLocaleString();
+          return formatValue;
+        },
+        valueFormatter2(value) { 
+          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+          var formatValue = Number(fixedValue)
+          return formatValue;
         }
 
     }

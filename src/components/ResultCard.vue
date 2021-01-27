@@ -9,7 +9,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">เงินเดือน (ต่อเดือน) x 12</label></b-col>
-                    <b-col cols = "5"><b-form-input type="number" :value=salary_year disabled/></b-col>
+                    <b-col cols = "5"><b-form-input type="text" class="text-right" :value=salary_year disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -17,7 +17,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col cols = "5"><b-form-input type="number" :value=other_income disabled/></b-col>
+                    <b-col cols = "5"><b-form-input type="text" class="text-right" :value=other_income disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -25,7 +25,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=allowance_60k disabled/></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=allowance_60k disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -33,7 +33,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=allowance_100k disabled/></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=allowance_100k disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -41,7 +41,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ค่าลดหย่อนอื่น ๆ</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger" type="number" :value=other_allowance disabled/></b-col>
+                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=other_allowance disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -87,7 +87,7 @@ export default {
         salary_year: store.state.tax.salary*12,
         other_income: store.state.tax.other_income,
 
-        allowance_60k: 60000,
+        allowance_60k: this.valueFormatter(60000),
         allowance_100k: store.state.result_tax.personal_allowance,
         other_allowance: store.state.result_tax.allowance, 
         net_income: store.state.result_tax.net_income,
@@ -108,10 +108,10 @@ export default {
                 let result_tax = this.$cookies.get("result_tax")
                 store.commit('result_tax_change', result_tax)
                 
-                this.allowance_100k = store.state.result_tax.personal_allowance
-                this.other_allowance = store.state.result_tax.allowance,
-                this.net_income = store.state.result_tax.net_income
-                this.tax = store.state.result_tax.tax
+                this.allowance_100k = this.valueFormatter(store.state.result_tax.personal_allowance)
+                this.other_allowance = this.valueFormatter(store.state.result_tax.allowance)
+                this.net_income = this.valueFormatter(store.state.result_tax.net_income)
+                this.tax = this.valueFormatter(store.state.result_tax.tax)
                 this.stair = store.state.result_tax.stair
 
                 this.change_component_key += 1
@@ -121,12 +121,18 @@ export default {
           if (this.$cookies.isKey("new_tax")){
             let new_tax = this.$cookies.get("new_tax")
             store.commit('tax_change', new_tax)
-            this.salary_year = store.state.tax.salary*12
-            this.other_income = store.state.tax.other_income
+            this.salary_year = this.valueFormatter(store.state.tax.salary*12)
+            this.other_income = this.valueFormatter(store.state.tax.other_income)
 
             this.change_component_key += 1
           }
-        }
+        },
+        valueFormatter(value) {
+          // any character that's not a digit
+          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+          var formatValue = Number(fixedValue).toLocaleString();
+          return formatValue;
+        },
     }
 }
 

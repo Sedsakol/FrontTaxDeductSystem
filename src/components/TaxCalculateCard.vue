@@ -8,8 +8,8 @@
             <b-form-group class="label-cols-lg">
               <b-form-row>
                   <b-col col lg= "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                  <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                  v-model="salary" min ="0" /></b-col>
+                  <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                  v-model="salary" :formatter="valueFormatter" /></b-col>
                   <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -17,8 +17,8 @@
             <b-form-group>
               <b-form-row>
                   <b-col col lg= "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" v-model="other_income"
-                   min ="0" /></b-col>
+                  <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                  v-model="other_income" :formatter="valueFormatter" /></b-col>
                   <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
             </b-form-group>
@@ -202,15 +202,14 @@ export default {
   methods: {
     next() {
       let new_tax = {
-          salary: this.salary,
-          other_income: this.other_income,
+          salary: this.valueFormatter2(this.salary),
+          other_income: this.valueFormatter2(this.other_income),
           marital: this.marital,
           parent_num_dis: this.parent_num_dis,
           child_before_2561: this.child_before_2561,
           child_after_2561: this.child_after_2561,
           protege: this.protege,
         }
-      
       this.$cookies.set('new_tax',new_tax);
       store.commit('tax_change', new_tax)
       this.change_component_key += 1
@@ -220,8 +219,8 @@ export default {
       if (this.$cookies.isKey("new_tax")){
         let new_tax = this.$cookies.get("new_tax")
         store.commit('tax_change', new_tax)
-        this.salary= store.state.tax.salary
-        this.other_income= store.state.tax.other_income
+        this.salary= this.valueFormatter(store.state.tax.salary)
+        this.other_income= this.valueFormatter(store.state.tax.other_income)
         this.marital= store.state.tax.marital
         this.parent_num_dis=  store.state.tax.parent_num_dis
         this.child_before_2561= store.state.tax.child_before_2561
@@ -234,6 +233,17 @@ export default {
         this.salary= store.state.profile.salary
         this.other_income= store.state.profile.other_income
       }
+    },
+    valueFormatter(value) {
+      // any character that's not a digit
+      var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+      var formatValue = Number(fixedValue).toLocaleString();
+      return formatValue;
+    },
+    valueFormatter2(value) { 
+      var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+      var formatValue = Number(fixedValue)
+      return formatValue;
     }
   }
 };

@@ -291,7 +291,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 input[type=number] { 
-  text-align:right ;
+  text-align:right !important;
 }
 
 /* remove and change arrow in select input  */

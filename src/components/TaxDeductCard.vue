@@ -17,8 +17,8 @@
                                           <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control"  placeholder="0" 
-                                    v-model= "rmf"  min ="0" /></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                                    v-model= "rmf" :formatter="valueFormatter" /></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -33,8 +33,8 @@
                                             <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "ssf"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                                    v-model= "ssf"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -50,8 +50,8 @@
                                             <li>รวมทุกกรมธรรม์</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "life_insurance"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                                    v-model= "life_insurance"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -69,8 +69,8 @@
                                             <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "pension_insurance"   min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                                    v-model= "pension_insurance"   :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -84,8 +84,8 @@
                                             <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "donation"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                                    v-model= "donation"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -99,8 +99,8 @@
                                             <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "edu_donation"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                                    v-model= "edu_donation"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -117,8 +117,8 @@
                                             <li>ระยะเวลาจำนอง ต้องเท่ากับระยะเวลากู้ยืม</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                                    v-model= "home_loans"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                                    v-model= "home_loans"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -131,24 +131,24 @@
                                             <li>เงินสมบทของนายจ้าง ใช้ลดหย่อนภาษีไม่ได้</li>
                                         </ul>
                                     </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "provident_fund"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                                    v-model= "provident_fund"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col col lg= "6"><label class="col-form-label">ประกันสังคม (ต่อปี)</label></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "social_security"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                                    v-model= "social_security"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
                             <b-form-group>
                                 <b-form-row>
                                     <b-col col lg= "6"><label class="col-form-label">อื่น ๆ (ต่อปี)</label></b-col>
-                                    <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0"
-                                    v-model= "other"  min ="0"/></b-col>
+                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                                    v-model= "other"  :formatter="valueFormatter"/></b-col>
                                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                                 </b-form-row>
                             </b-form-group>
@@ -205,16 +205,16 @@ export default {
     methods: {
         async back(){
             let new_allowance = {
-                rmf: this.rmf,
-                ssf: this.ssf,
-                life_insurance: this.life_insurance,
-                pension_insurance: this.pension_insurance,
-                donation: this.donation,
-                edu_donation: this.edu_donation,
-                home_loans: this.home_loans,
-                provident_fund: this.provident_fund,
-                social_security: this.social_security,
-                other: this.other,
+                rmf: this.valueFormatter2(this.rmf),
+                ssf: this.valueFormatter2(this.ssf),
+                life_insurance: this.valueFormatter2(this.life_insurance),
+                pension_insurance: this.valueFormatter2(this.pension_insurance),
+                donation: this.valueFormatter2(this.donation),
+                edu_donation: this.valueFormatter2(this.edu_donation),
+                home_loans: this.valueFormatter2(this.home_loans),
+                provident_fund: this.valueFormatter2(this.provident_fund),
+                social_security: this.valueFormatter2(this.social_security),
+                other: this.valueFormatter2(this.other),
             }
 
             console.log(new_allowance)
@@ -227,16 +227,16 @@ export default {
         },
         async next() {
             let new_allowance = {
-                rmf: this.rmf,
-                ssf: this.ssf,
-                life_insurance: this.life_insurance,
-                pension_insurance: this.pension_insurance,
-                donation: this.donation,
-                edu_donation: this.edu_donation,
-                home_loans: this.home_loans,
-                provident_fund: this.provident_fund,
-                social_security: this.social_security,
-                other: this.other,
+                rmf: this.valueFormatter2(this.rmf),
+                ssf: this.valueFormatter2(this.ssf),
+                life_insurance: this.valueFormatter2(this.life_insurance),
+                pension_insurance: this.valueFormatter2(this.pension_insurance),
+                donation: this.valueFormatter2(this.donation),
+                edu_donation: this.valueFormatter2(this.edu_donation),
+                home_loans: this.valueFormatter2(this.home_loans),
+                provident_fund: this.valueFormatter2(this.provident_fund),
+                social_security: this.valueFormatter2(this.social_security),
+                other: this.valueFormatter2(this.other),
             }
             console.log(new_allowance)
             this.$cookies.set('new_allowance',new_allowance);
@@ -283,16 +283,16 @@ export default {
                 let new_allowance = this.$cookies.get("new_allowance")
                 store.commit('allowance_change', new_allowance)
 
-                this.rmf = store.state.allowance.rmf
-                this.ssf = store.state.allowance.ssf
-                this.life_insurance = store.state.allowance.life_insurance
-                this.pension_insurance = store.state.allowance.pension_insurance
-                this.donation = store.state.allowance.donation
-                this.edu_donation = store.state.allowance.edu_donation
-                this.home_loans = store.state.allowance.home_loans
-                this.provident_fund = store.state.allowance.provident_fund
-                this.social_security = store.state.allowance.social_security
-                this.other = store.state.allowance.other
+                this.rmf = this.valueFormatter(store.state.allowance.rmf)
+                this.ssf = this.valueFormatter(store.state.allowance.ssf)
+                this.life_insurance = this.valueFormatter(store.state.allowance.life_insurance)
+                this.pension_insurance = this.valueFormatter(store.state.allowance.pension_insurance)
+                this.donation = this.valueFormatter(store.state.allowance.donation)
+                this.edu_donation = this.valueFormatter(store.state.allowance.edu_donation)
+                this.home_loans = this.valueFormatter(store.state.allowance.home_loans)
+                this.provident_fund = this.valueFormatter(store.state.allowance.provident_fund)
+                this.social_security = this.valueFormatter(store.state.allowance.social_security)
+                this.other = this.valueFormatter(store.state.allowance.other)
 
                 this.change_component_key += 1
                 
@@ -308,9 +308,20 @@ export default {
             }
         },
         onHidden() {
-        // Return focus to the button once hidden
-        this.$refs.nextbutton.focus()
-      },
+            // Return focus to the button once hidden
+            this.$refs.nextbutton.focus()
+        },
+        valueFormatter(value) {
+            // any character that's not a digit
+            var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+            var formatValue = Number(fixedValue).toLocaleString();
+            return formatValue;
+        },
+        valueFormatter2(value) {
+            var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+            var formatValue = Number(fixedValue)
+            return formatValue;
+        }
     }
 };
 </script>

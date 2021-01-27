@@ -64,7 +64,8 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                  <b-col><b-form-input type="number" placeholder="" v-model="user.salary" :value=user.salary :disabled=disable_edit /></b-col>
+                  <b-col><b-form-input type="text" placeholder="" v-model="user.salary" :value=user.salary 
+                  :disabled=disable_edit :formatter="valueFormatter" class="text-right" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
           </b-form-group>
@@ -72,7 +73,8 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col><b-form-input type="number" placeholder="" v-model="user.other_income" :value=user.other_income  :disabled=disable_edit /></b-col>
+                  <b-col><b-form-input type="text" placeholder="" v-model="user.other_income" :value=user.other_income 
+                  :disabled=disable_edit :formatter="valueFormatter" class="text-right" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
           </b-form-group>
@@ -252,17 +254,22 @@ export default {
       async save_profile(){
         if (this.user.birthdate != 'วัน/เดือน/ปี'){
           var bd = this.user.birthdate.split("-")
-          
           var bd_format = bd[2] + '/' + bd[1] + '/' + bd[0]
           console.log(bd,bd_format)
+        }
+        if (this.user.salary) {
+          var salary_format = Number(String(this.user.salary).replace(/[^0-9]/g, ""))
+        }
+        if (this.user.other_income) {
+          var other_income_format = Number(String(this.user.other_income).replace(/[^0-9]/g, ""))
         }
 
         var new_user = {
           email: this.user.email,
           gender: this.user.gender,
           birthdate : (this.user.birthdate === 'วัน/เดือน/ปี')? null : bd_format,
-          salary : (this.user.salary) ? this.user.salary : 0,
-          other_income :  (this.user.other_income) ? this.user.other_income : 0,
+          salary : (this.user.salary) ? salary_format : 0,
+          other_income :  (this.user.other_income) ? other_income_format : 0,
           parent_num:  (this.user.parent_num) ? this.user.parent_num : 0,
           child_num :  (this.user.child_num) ? this.user.child_num : 0,
           infirm:  (this.user.infirm) ? this.user.infirm : 1,
@@ -388,6 +395,18 @@ export default {
             console.log(error);
             currentObj.$refs['modal-delete-wait'].hide()
         });
+      },
+      valueFormatter(value) {
+        // any character that's not a digit
+        var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+        var formatValue = Number(fixedValue).toLocaleString();
+        return formatValue;
+      },
+      valueFormatter2(value) {
+        // any character that's not a digit
+        var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+        var formatValue = Number(fixedValue)
+        return formatValue;
       },
     }
 
