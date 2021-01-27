@@ -20,7 +20,7 @@
                     :name="'name' + index"
                     :id="'id' + index + c.value" 
                     v-model="userResponses[index]"
-                    :value="c.value" 
+                    :value="Number(c.value)" 
                     required />
                   <label class="option" 
                     :for="'id' + index + c.value" >
@@ -35,7 +35,7 @@
                     :name="'name' + index"
                     :id="'id' + index + c.value" 
                     v-model="userResponses[index]"
-                    :value="c.value" />
+                    :value="Number(c.value)" />
                   <label class="option" 
                     :for="'id' + index + c.value" >
                     {{ c.text }}

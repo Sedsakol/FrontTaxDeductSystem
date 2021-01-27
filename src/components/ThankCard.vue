@@ -38,8 +38,10 @@ export default {
     };
   },
   methods: {
-    sign_out(){
+    again(){
       console.log('Thank you again')
+      let currentObj = this
+      currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
       this.$router.push("/collectdata/login");
       this.$router.go();
     }
