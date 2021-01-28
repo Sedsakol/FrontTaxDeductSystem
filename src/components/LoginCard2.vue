@@ -111,11 +111,7 @@ export default {
               currentObj.facebook_login_res = response.data;
               //console.log(currentObj.facebook_login_res.status)
               if (currentObj.facebook_login_res.status == 200){
-                await FB.logout(function(response) {
-                  // facebook user is now logged out
-                });
                 await currentObj.user_login(obj.email,obj.facebook_id)
-
               }
               else {
                 //console.log(currentObj.facebook_login_res)
@@ -150,7 +146,7 @@ export default {
           currentObj.profile_t = JSON.stringify(response.data);
           //console.log(currentObj.profile_t)
           await currentObj.$cookies.set('profile',currentObj.profile_t);
-          await store.commit('profile_change',currentObj.profile_t);
+          store.commit('profile_change',currentObj.profile_t);
           currentObj.$router.push("/collectdata/profile");
           currentObj.$router.go();
         })
@@ -177,8 +173,8 @@ export default {
         .then(async function(response) {
           currentObj.output = response.data.token;
           await currentObj.$cookies.set("token", currentObj.output);
-          await store.commit('is_login_change', true);
-          await console.log("Login Success");
+          store.commit('is_login_change', true);
+          console.log("Login Success");
           await currentObj.get_profile();
         })
         .catch(function(e) {
