@@ -234,14 +234,14 @@ export default {
       if (this.$v.user.$anyError) {
         console.log("validation error");
         this.submitStatus.value = false
-        if (this.$v.user.$error) {
+        if (!(this.$v.user.email.required && this.$v.user.password.required)) {
           this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน และกดยอมรับข้อตกลง"
         }
-        else if (this.$v.user.confirm_password.$error && this.$v.user.confirm_password.$dirty) { 
-          this.submitStatus.descrip = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน" 
+        else if (!this.$v.user.password.minLength) { 
+          this.submitStatus.descrip = "รหัสผ่านต้องมีมากกว่า 6 ตัวอักษร"
         }
-        else if (!this.$v.user.confirm_password.minLength) {
-          this.submitStatus.descrip = "รหัสผ่านต้องมีมากกว่า 6 ตัวอักษร" 
+        else if (!this.$v.user.confirm_password.sameAsPassword) {
+          this.submitStatus.descrip = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน" 
         }
       }
       else {
