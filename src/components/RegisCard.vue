@@ -4,7 +4,7 @@
       <div class="card-body">
         <h4 class="text-center card-title">สร้างบัญชี</h4>
 
-        <form @submit.prevent = "user_regis" id = "form-regis">
+        <form @submit.stop.prevent = "user_regis" id = "form-regis">
           <!-- <b-form-group>
             <button id="facebook" block class="btn btn-primary" disabled>
             Login with Facebook</button>
@@ -15,40 +15,39 @@
             -->
           <b-form-group>
             <b-form-input 
-              v-model = "user.email" 
+              v-model.trim="$v.user.email.$model"
               type = "email"
               placeholder = "อีเมล"
               lazy-formatter
               :formatter = "formatter"
-              required
+              :state="submitStatus.value"
             />
           </b-form-group>
 
           <b-form-group>
             <b-form-input 
-              v-model = "user.password" 
+              v-model="$v.user.password.$model"
               type = "password"
               placeholder = "รหัสผ่าน"
-              :state = "password_match"
-              required
+              :state="submitStatus.value"
             />
           </b-form-group>
 
           <b-form-group
           invalid-feedback = "">
             <b-form-input 
-              v-model = "user.confirm_password" 
+              v-model="$v.user.confirm_password.$model"
               type = "password"
               placeholder = "ยืนยันรหัสผ่าน"
-              :state = "password_match"
-              required
+              :state="submitStatus.value"
             />
+            <b-form-invalid-feedback id="input-1-live-feedback">{{ submitStatus.descrip }}</b-form-invalid-feedback>
           </b-form-group>
 
           <b-form-checkbox
             v-b-modal.modal-term
             class = "checkbox text-center"
-            v-model = "user.term_status"
+            v-model = "$v.user.term_status.$model"
             value = "accepted"
             unchecked-value = "not_accepted"
             required
@@ -185,9 +184,11 @@
 </template>
 
 <script>
-
+import { validationMixin } from "vuelidate";
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 export default {
   name: "RegisCard",
+    mixins: [validationMixin],
   data(){
     return{
       user: {
@@ -195,34 +196,58 @@ export default {
         password: '',
         confirm_password: '',
         term_status: '',
+      },
+      submitStatus: {
+        value: null,
+        descrip: ""
       }
     }
   },
+  validations: {
+    user: {
+      email: { required, email },
+      password: { required, minLength: minLength(6)},
+      confirm_password: { sameAsPassword: sameAs('password') },
+      term_status: { required }
+    }
+  },
   computed: {
-    password_match(){
-      if(this.user.password !== '' && this.user.confirm_password !== '' && this.user.password === this.user.confirm_password){
-        return true
-      }
-      else if(this.user.password !== this.user.confirm_password){
-        return false
-      }
-      return null
-    },
-
+    // password_match(){
+    //   if(this.user.password !== '' && this.user.confirm_password !== '' && this.user.password === this.user.confirm_password){
+    //     return true
+    //   }
+    //   else if(this.user.password !== this.user.confirm_password){
+    //     return false
+    //   }
+    //   return null
+    // },
   },
   methods: {
-    validateState(value) {
-      const { $dirty, $error } = this.$v.form[value];
-      return $dirty ? !$error : null;
-    },
     // to format email -> lowercase
     formatter(value) {
       return value.toLowerCase();
     },
-
     async user_regis(){
+      console.log("submit regis!");
+      this.$v.user.$touch();
       let currentObj = this;
-      if(this.user !== '' && this.password_match === true && this.user.term_status === 'accepted'){
+      if (this.$v.user.$anyError) {
+        console.log("validation error");
+        this.submitStatus.value = false
+        if (this.$v.user.$error) {
+          this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน และกดยอมรับข้อตกลง"
+        }
+        else if (this.$v.user.confirm_password.$error && this.$v.user.confirm_password.$dirty) { 
+          this.submitStatus.descrip = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน" 
+        }
+        else if (!this.$v.user.confirm_password.minLength) {
+          this.submitStatus.descrip = "รหัสผ่านต้องมีมากกว่า 6 ตัวอักษร" 
+        }
+      }
+      else {
+        this.submitStatus.value = null
+        this.submitStatus.descrip = ""
+        console.log("here");
         await this.axios.post('register/', {
             username: this.user.email,
             password: this.user.password
@@ -233,39 +258,38 @@ export default {
             if(currentObj.msg === 'created user'){
               currentObj.$refs['modal-wait'].show()
               await currentObj.axios.post('obtain_token/', {
-                    email: this.user.email,
-                    password: this.user.password
+                email: this.user.email,
+                password: this.user.password
               })
               .then(function (res) {
-                  currentObj.output = res.data.token;
-                  currentObj.$cookies.set("token",currentObj.output);
-                  currentObj.$router.push('/');
+                currentObj.output = res.data.token;
+                currentObj.$cookies.set("token",currentObj.output);
+                currentObj.$router.push('/');
               })
               .catch(function () {
-                  currentObj.output = 'error';
+                currentObj.output = 'error';
               });
             }
             else if(currentObj.msg === 'email is already')
             {
               console.log(currentObj.msg)
+              this.submitStatus.value = false
+              this.submitStatus.descrip = "อีเมลนี้ถูกใช้งานแล้ว"
               currentObj.$refs['modal-wait'].hide()
             }
             else if(currentObj.msg === 'field not complete')
             {
               console.log(currentObj.msg)
+              this.submitStatus.value = false
               currentObj.$refs['modal-wait'].hide()
             }
         })
         .catch(function (error) {
             currentObj.msg = error;
+            this.submitStatus.value = false
             currentObj.$refs['modal-wait'].hide()
         });
-        // this.dispatch('user_regis',{email: this.email, password: this.password})
       }
-      else if(this.password_match !== true){
-        console.log('password not match');
-      }
-
     }
   },
   
