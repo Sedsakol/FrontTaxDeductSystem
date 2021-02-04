@@ -12,13 +12,13 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import './assets/styles/main.css';
 import firebase from 'firebase/app';
 import 'firebase/analytics';
-// import Vuelidate from 'vuelidate';
-// Vue.use(Vuelidate);
+import Vuelidate from 'vuelidate';
 
 Vue.use(VueCookies);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 
