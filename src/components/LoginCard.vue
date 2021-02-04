@@ -4,7 +4,7 @@
       <div class="card-body">
         <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-        <form @submit.prevent = "user_login(user.email,user.password)" id = "#form-login">
+        <form @submit.stop.prevent="user_login(user.email,user.password)" id = "#form-login">
 
           <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
               <b-icon icon="facebook"/> Login with Facebook 
@@ -16,22 +16,23 @@
           <div id="form-login">
             <b-form-group>
               <b-form-input
-                v-model="user.email"
+                v-model.trim="$v.user.email.$model"
                 type="email"
                 placeholder="อีเมล"
                 lazy-formatter
                 :formatter="formatter"
-                required
+                :state="submitStatus.value"
               />
             </b-form-group>
 
             <b-form-group>
               <b-form-input
-                v-model="user.password"
+                v-model="$v.user.password.$model"
                 type="password"
                 placeholder="รหัสผ่าน"
-                required
+                :state="submitStatus.value"
               />
+              <b-form-invalid-feedback id="input-1-live-feedback">{{ submitStatus.descrip }}</b-form-invalid-feedback>
             </b-form-group>
 
             <button class="btn btn-primary" id="fullbutton" type="submit">
@@ -59,19 +60,32 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
+import { validationMixin } from "vuelidate";
+import { required, email } from "vuelidate/lib/validators";
 import 'firebase/auth';  
 import store from "../store/index.js";
+
 export default {
   name: "LoginCard",
+  mixins: [validationMixin],
   data() {
     return {
       user: {
         email: "",
         password: ""
       },
-      profile: store.state.profile
+      profile: store.state.profile,
+      submitStatus: {
+        value: null,
+        descrip: ""
+      }
     };
+  },
+  validations: {
+    user: {
+      email: { required , email},
+      password: { required }
+    }
   },
   methods: {
     facebook_login() {
@@ -155,12 +169,10 @@ export default {
       }, {scope: 'email,user_gender,user_birthday,user_likes'});
 
     },
-
     // to format email -> lowercase
     formatter(value) {
       return value.toLowerCase();
     },
-    
     async get_profile(){
       let currentObj = this
       if (this.$cookies.get('token')){
@@ -189,33 +201,42 @@ export default {
         console.log("Pls Login");
       }
     },
-
     async user_login(email = this.user.email,password= this.user.email) {
-      let currentObj = this;
-      //แสดง modal
-      currentObj.$refs['modal-wait'].show()
-      await this.axios
-        .post("auth/obtain_token/", {
-          email: email,
-          password: password
-        })
-        .then(async function(response) {
-          currentObj.output = response.data.token;
-          await currentObj.$cookies.set("token", currentObj.output);
-          store.commit('is_login_change', true);
-          console.log("Login Success");
-          await currentObj.get_profile();
-        })
-        .catch(function(e) {
-          currentObj.output = "error";
-          console.log("Username or Password is invalid.");
-          console.log(e);
-          //แสดงข้อความ Username or Password is invalid.
-          //ปิด modal
-          currentObj.$refs['modal-wait'].hide()
-        });
-    }
-    
+      console.log("submit login!");
+      this.$v.user.$touch();
+      if (this.$v.user.$anyError) {
+        console.log("validation error");
+        this.submitStatus.value = false
+        this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
+      }
+      else {
+        this.submitStatus.value = null
+        this.submitStatus.descrip = ""
+        let currentObj = this;
+        //แสดง modal
+        currentObj.$refs['modal-wait'].show()
+        await this.axios
+          .post("auth/obtain_token/", {
+            email: email,
+            password: password
+          })
+          .then(async function(response) {
+            currentObj.output = response.data.token;
+            await currentObj.$cookies.set("token", currentObj.output);
+            store.commit('is_login_change', true);
+            console.log("Login Success");
+            await currentObj.get_profile();
+          })
+          .catch(function(e) {
+            currentObj.output = "error";
+            console.log("Username or Password is invalid.");
+            this.submitStatus.value = false
+            this.submitStatus.descrip = "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง"
+            // console.log(e);
+            currentObj.$refs['modal-wait'].hide()
+          });
+        }
+    },
   }
 };
 </script>
