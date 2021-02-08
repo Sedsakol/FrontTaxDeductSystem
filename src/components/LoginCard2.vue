@@ -190,7 +190,8 @@ export default {
       this.$refs['modal-profile'].show()
     },
     clear_cookie() {
-
+      let currentObj = this
+      currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
       console.log('clear cookie success!')
     }
   }
