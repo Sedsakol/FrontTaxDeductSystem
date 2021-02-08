@@ -37,6 +37,16 @@ h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 18px; }
 
+.relative {
+  position: relative;
+}
+
+#bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 /*------------- bar -------------*/
 #bar {
   background: #ffffff;
@@ -232,6 +242,10 @@ h6 { font-size: 18px; }
   box-shadow: none;
 }
 
+.btn {
+  box-shadow: none !important;
+}
+
 #facebook {
   background-color: #1877f2!important;
   border-color: #1877f2!important;
@@ -405,6 +419,10 @@ select:focus {
 
 .text-primary{
   color: #49474A !important;
+}
+
+.text-secondary{
+  color: #9D9D9D !important;
 }
 
 .text-mainblue{

@@ -15,7 +15,10 @@
               <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
                 <b-icon icon="facebook"/> Login with Facebook 
               </button>
+
+              <!-- <b-button variant="link" class="text-subblue">Clear</b-button> -->
             </b-card-text>
+            <b-button variant="link" class="text-secondary" id="bottom" v-on:click="clear_cookie">Clear</b-button>
           </b-card-body>
         </b-col>
       </b-row>
@@ -28,9 +31,6 @@
         <b-spinner variant="dark"/>
       </div>
     </b-modal>
-
-    <!-- profile modal -->
-
 
   </div>
 </template>
@@ -131,7 +131,6 @@ export default {
       }, {scope: 'email,user_gender,user_birthday,user_likes'});
 
     },
-    
     async get_profile(){
       let currentObj = this
       if (this.$cookies.get('token')){
@@ -160,7 +159,6 @@ export default {
         console.log("Pls Login");
       }
     },
-
     async user_login(email = this.user.email,password= this.user.email) {
       let currentObj = this;
       //แสดง modal
@@ -189,7 +187,10 @@ export default {
     showWait() {
       this.$refs['modal-profile'].show()
     },
-    
+    clear_cookie() {
+      
+      console.log('clear cookie success!')
+    }
   }
 };
 </script>
