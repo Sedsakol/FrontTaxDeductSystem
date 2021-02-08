@@ -18,7 +18,9 @@
 
               <!-- <b-button variant="link" class="text-subblue">Clear</b-button> -->
             </b-card-text>
-            <b-button variant="link" class="text-secondary" id="bottom" v-on:click="clear_cookie">Clear</b-button>
+            <b-button variant="link" class="text-secondary" id="topright" v-on:click="clear_cookie">
+              <b-icon icon="arrow-clockwise"/>
+            </b-button>
           </b-card-body>
         </b-col>
       </b-row>
@@ -188,7 +190,7 @@ export default {
       this.$refs['modal-profile'].show()
     },
     clear_cookie() {
-      
+
       console.log('clear cookie success!')
     }
   }

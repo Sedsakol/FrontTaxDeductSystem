@@ -41,9 +41,15 @@ h6 { font-size: 18px; }
   position: relative;
 }
 
-#bottom {
+#bottomright {
   position: absolute;
   bottom: 0;
+  right: 0;
+}
+
+#topright {
+  position: absolute;
+  top: 0;
   right: 0;
 }
 
