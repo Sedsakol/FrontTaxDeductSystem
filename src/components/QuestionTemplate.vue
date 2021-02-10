@@ -8,6 +8,7 @@
           <!-- questionTitle -->
           <div v-for="(q, index) in question" :key="q.number" class="quizcontain">
             <h6>ข้อ {{index + 1}}. {{q.ask}}</h6>
+            <span class="text-danger" v-if="(!$v.userResponses.$each[index].required && completeStatus.value === false)" >*กรุณาตอบคำถามข้อนี้</span>
             <b-img center fluid :src="q.img" />
             <!-- quizOptions -->
             <b-form-group class="optionContainer">
@@ -18,12 +19,13 @@
                     :name="'name' + index"
                     :id="'id' + index + c.value" 
                     v-model="userResponses[index]"
-                    :value="Number(c.value)" 
-                    required />
+                    :value="Number(c.value)" />
                   <label class="option" 
                     :for="'id' + index + c.value" >
                     {{ c.text }}
                   </label>
+                  <!-- {{ $v.userResponses.$each[index].$model }} -->
+                  <!-- {{ $v.userResponses.$each[index].required }} -->
                 </b-form-radio-group>
               </div>
               <!-- if type == checkbox question -->
@@ -44,10 +46,10 @@
           </div>
 
           <div class="d-flex justify-content-md-center">
-            <button @click="clear" class="btn btn-outline-primary" id="regularbutton">
+            <button @click="clear" type="reset" class="btn btn-outline-primary" id="regularbutton">
                 ล้าง
             </button><div class="pr-4"/>
-            <button type="submit" class="btn btn-primary" id="regularbutton">
+            <button @click="submit" type="submit" class="btn btn-primary" id="regularbutton">
                 คำนวณผล
             </button>
           </div>
@@ -96,9 +98,12 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import { required, minLength } from "vuelidate/lib/validators";
 import store from "../store/index.js"
 export default {
   name: "QuestionTemplate",
+  mixins: [validationMixin],
   props: {
     question : Array,
   },
@@ -131,59 +136,85 @@ export default {
         { text: 'สูงมาก', 
           descrip: 'คุณเป็นนักลงทุนประเภทเสี่ยงสูงมาก ยอมรับความเสี่ยงได้สูงมาก ต้องการได้รับโอกาสที่จะได้รับผลตอบแทนสูง แม้จะมีความเสี่ยงสูงและยอมรับการขาดทุนได้ในระดับสูงพอสมควร' },
       ],
+      completeStatus: {
+        value: null,
+        descrip: ""
+      }
     }
+  },
+  validations: {
+    userResponses: {
+      required, // array cannot be left empty
+      minLength: minLength(10), // "userResponses" array has to have at least 1 elements
+      $each: {
+        required,
+        minLength: minLength(1), // each field of "userResponses" array has to have at least 1 characters (or be an array of at least 1 elements)
+      }
+    }, 
   },
   computed: {
 
   },
   methods: {
     clear() {
-      this.userResponses = [null,null,null,[],null,null,null,null,null,null];
+      this.userResponses = [null, null, null, [], null, null, null, null, null, null];
       this.risk_level = 0;
       this.result = 0;
+      this.completeStatus.value = null
     },
     submit() {
-      this.$refs['modal-condition'].show()
-      var score  = 0;
-      var result = 0;
-      var risk_level = 0;
-      console.log(this.userResponses)
-      for(let i = 0; i < 10 ; i++) {
-        if (i != 3 ){
-          score = score + Number(this.userResponses[i]);
+      console.log('submit next!')
+      this.$v.userResponses.$touch();
+      // console.log(this.userResponses)
+      if (this.$v.userResponses.$anyError) {
+        console.log("validation error");
+        this.completeStatus.value = false
+        this.completeStatus.descrip = "กรุณาตอบคำถามให้ครบทุกข้อ"
+      }
+      else {
+        this.completeStatus.value = null
+        this.completeStatus.descrip = ""
+        this.$refs['modal-condition'].show()
+        var score  = 0;
+        var result = 0;
+        var risk_level = 0;
+        for(let i = 0; i < 10 ; i++) {
+          if (i != 3 ){
+            score = score + Number(this.userResponses[i]);
+          }
+          else{
+            score = score + this.userResponses[i].length
+          }
         }
-        else{
-          score = score + this.userResponses[i].length
+        if (score < 15) {
+          risk_level = 1;
+          result = 0;
         }
+        //15 - 21
+        else if (score < 22) {
+          risk_level = 4;
+          result = 1;
+        }
+        //22 - 29 
+        else if (score < 30) {
+          risk_level = 5;
+          result = 2;
+        }
+        //30 - 36
+        else if (score < 37) {
+          risk_level = 7;
+          result = 3;
+        }
+        else { //37 ++
+          risk_level = 8;
+          result = 4;
+        }
+        this.result = result
+        this.risk_level = risk_level
+        this.doingquiz = false
+        this.save_risk()
       }
-      console.log(score)
-      if (score < 15) {
-        risk_level = 1;
-        result = 0;
-      }
-      //15 - 21
-      else if (score < 22) {
-        risk_level = 4;
-        result = 1;
-      }
-      //22 - 29 
-      else if (score < 30) {
-        risk_level = 5;
-        result = 2;
-      }
-      //30 - 36
-      else if (score < 37) {
-        risk_level = 7;
-        result = 3;
-      }
-      else { //37 ++
-        risk_level = 8;
-        result = 4;
-      }
-      this.result = result
-      this.risk_level = risk_level
-      this.doingquiz = false
-      this.save_risk()
+
     },
     back() {
       this.doingquiz = true
@@ -223,7 +254,7 @@ export default {
         });
       }
       else{
-        console.log('pls login naja')
+        console.log('Please login first.')
       }
     },
   },
