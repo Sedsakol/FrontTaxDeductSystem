@@ -289,7 +289,7 @@ export default {
             }
           })
           .then(async function(response) {
-            console.log("saved profile");
+            console.log("Saved profile");
             console.log(response)
             await store.commit('profile_change', new_user)
             await currentObj.$cookies.set("profile", new_user);
@@ -300,7 +300,7 @@ export default {
           });
         }
         else{
-          console.log('pls login naja')
+          console.log('Please login first.')
         }
       },
       async facebook_login() {
