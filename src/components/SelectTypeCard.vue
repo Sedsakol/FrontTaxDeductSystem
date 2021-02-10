@@ -5,12 +5,14 @@
 
         <!-- start quiz -->
         <form @submit.prevent = "submit" id="quiz">
-          <h4 class="text-center card-title mb-4 mt-1">รูปแบบการลงทุนแบบไหนที่ตรงความต้องการคุณมากที่สุด ?</h4>
+          <h4 class="text-center card-title mb-4 mt-1">กรุณาเลือกรูปแบบการลงทุนที่ตรงความต้องการคุณมากที่สุด</h4>
+          <!-- userResponses = {{ userResponses }} $v.userResponses = {{ $v.userResponses.$model }} -->
+          <span class="text-danger" v-if="(!$v.userResponses.required && completeStatus.value === false)" >*กรุณาตอบคำถามข้อนี้</span>
           <b-form-group class="optionContainer">
             <b-row>
               <b-col lg>
                 <b-form-radio-group>
-                  <input type="radio" id="type1" v-model="userResponses" value="1" />
+                  <input type="radio" id="type1" v-model.trim="$v.userResponses.$model" value="1" />
                   <label class="option" for="type1">
                     <b-img center fluid src="../assets/plan_type/1.svg" alt=""/><p/>
                     <h6 class="text-center"><b>ป้องกันความเสี่ยง</b></h6>
@@ -71,41 +73,62 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import { required, minLength } from "vuelidate/lib/validators";
 import store from "../store/index.js";
 export default {
   name: "SelectTypeCard",
+  mixins: [validationMixin],
   data() {
     return {
       userResponses: null, 
+      completeStatus: {
+        value: null,
+        descrip: ""
+      }
     };
+  },
+  validations: {
+    userResponses: { required }, 
   },
   methods: {
     async save_plan_type(){
-      let currentObj = this
-      currentObj.$refs['modal-save-plan-type'].show()
-      if (this.$cookies.get('token') && this.userResponses){
-        let obj = {
-          'plan_type' : this.userResponses
-        }
-        console.log(obj)
-        await this.axios
-        .post("collect_dataset/", obj,{
-          headers: {
-            'Authorization': currentObj.$cookies.get('token'),
-            'Content-Type': 'application/json'
+      console.log('submit next!')
+      this.$v.userResponses.$touch();
+      if (this.$v.userResponses.$anyError) {
+        console.log("validation error");
+        this.completeStatus.value = false
+        this.completeStatus.descrip = "กรุณาตอบคำถามให้ครบทุกข้อ"
+      }
+      else {
+        this.completeStatus.value = null
+        this.completeStatus.descrip = ""
+        let currentObj = this
+        currentObj.$refs['modal-save-plan-type'].show()
+        if (this.$cookies.get('token') && this.userResponses){
+          let obj = {
+            'plan_type' : this.userResponses
           }
-        })
-        .then(async function(response) {
-          console.log("saved dataset complete");
-          console.log(response.data)
-          await currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
-          await currentObj.$router.push("/collectdata/thankyou");
-          
-        })
-        .catch(function(error) {
-          console.log(error);
-          currentObj.$refs['modal-save-plan-type'].hide()
-        });
+          console.log(obj)
+          await this.axios
+          .post("collect_dataset/", obj,{
+            headers: {
+              'Authorization': currentObj.$cookies.get('token'),
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(async function(response) {
+            console.log("saved dataset complete");
+            console.log(response.data)
+            await currentObj.$cookies.keys().forEach(cookie => currentObj.$cookies.remove(cookie))
+            await currentObj.$router.push("/collectdata/thankyou");
+            
+          })
+          .catch(function(error) {
+            console.log(error);
+            currentObj.$refs['modal-save-plan-type'].hide()
+          });
+        }
       }
       
     },
