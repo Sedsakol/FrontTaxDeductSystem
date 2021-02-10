@@ -21,7 +21,7 @@
                 placeholder="อีเมล"
                 lazy-formatter
                 :formatter="formatter"
-                :state="submitStatus.value"
+                :state="completeStatus.value"
               />
             </b-form-group>
 
@@ -30,9 +30,9 @@
                 v-model="$v.user.password.$model"
                 type="password"
                 placeholder="รหัสผ่าน"
-                :state="submitStatus.value"
+                :state="completeStatus.value"
               />
-              <b-form-invalid-feedback id="input-1-live-feedback">{{ submitStatus.descrip }}</b-form-invalid-feedback>
+              <b-form-invalid-feedback id="input-1-live-feedback">{{ completeStatus.descrip }}</b-form-invalid-feedback>
             </b-form-group>
 
             <button class="btn btn-primary" id="fullbutton" type="submit">
@@ -75,7 +75,7 @@ export default {
         password: ""
       },
       profile: store.state.profile,
-      submitStatus: {
+      completeStatus: {
         value: null,
         descrip: ""
       }
@@ -206,12 +206,12 @@ export default {
       this.$v.user.$touch();
       if (this.$v.user.$anyError) {
         console.log("validation error");
-        this.submitStatus.value = false
-        this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
+        this.completeStatus.value = false
+        this.completeStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
       }
       else {
-        this.submitStatus.value = null
-        this.submitStatus.descrip = ""
+        this.completeStatus.value = null
+        this.completeStatus.descrip = ""
         let currentObj = this;
         //แสดง modal
         currentObj.$refs['modal-wait'].show()
@@ -230,8 +230,8 @@ export default {
           .catch(function(e) {
             currentObj.output = "error";
             console.log("Username or Password is invalid.");
-            this.submitStatus.value = false
-            this.submitStatus.descrip = "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง"
+            this.completeStatus.value = false
+            this.completeStatus.descrip = "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง"
             // console.log(e);
             currentObj.$refs['modal-wait'].hide()
           });
