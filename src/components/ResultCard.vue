@@ -4,7 +4,7 @@
         <div class="card-body">
           <h4 class="text-center card-title">ผลการคำนวณภาษี</h4>
           <!-- example position of tax step -->
-          <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/><p/>
+          <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/><p/><p/>
           <form  id = "form-result">
             <b-form-group>
                 <b-form-row>

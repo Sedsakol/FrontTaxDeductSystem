@@ -35,7 +35,7 @@
 
             <b-form-group>
               <b-form-row>
-                  <b-col col lg= "6"><label class="col-form-label">ลดหย่อนพ่อแม่</label>
+                  <b-col col lg= "6"><label class="col-form-label">จำนวนพ่อแม่ที่ลดหย่อนได้</label>
                     <b-icon font-scale="0.75" class="ml-2" id="popover-parent" icon="exclamation-circle"/>
                     <b-popover target="popover-parent" triggers="hover" placement= "rightbottom">
                       พ่อแม่ของตนเอง (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
@@ -83,10 +83,11 @@
                       </ul>
                     </b-popover>
                   </b-col>
-                  <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model="child_before_2561" min ="0" /></b-col>
+                  <b-col cols = "5"><b-form-input type="text" class="form-control" placeholder="0" 
+                  v-model="child_before_2561" :formatter="valueFormatter" /></b-col>
                   <b-col col lg = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
+              <span class="text-danger" v-if="!$v.child_before_2561.between" >*กรุณากรอกข้อมูลตามจำนวนจริง</span>
             </b-form-group>
 
             <b-form-group>
@@ -112,10 +113,11 @@
                           </ul>
                     </b-popover>
                   </b-col>
-                  <b-col cols = "5"><b-form-input type="number" class="form-control" placeholder="0" 
-                  v-model="child_after_2561" min ="0" /></b-col>
+                  <b-col cols = "5"><b-form-input type="text" class="form-control" placeholder="0" 
+                  v-model="child_after_2561" :formatter="valueFormatter" /></b-col>
                   <b-col col lg = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
+              <span class="text-danger" v-if="!$v.child_after_2561.between" >*กรุณากรอกข้อมูลตามจำนวนจริง</span>
             </b-form-group>
 
             <b-form-group>
@@ -156,10 +158,13 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import { required, between } from "vuelidate/lib/validators";
 import store from "../store/index.js"
 // import PopoverTemplate from "@/components/PopoverTemplate.vue";
 export default {
   name: "TaxCalculateCard",
+  mixins: [validationMixin],
   components : {
         // PopoverTemplate,
     },
@@ -196,6 +201,10 @@ export default {
       
     }
   },
+  validations: {
+    child_before_2561: { between: between (0, 100) },
+    child_after_2561: { between: between (0, 100) }
+  },
   mounted(){
     this.load_new_tax_from_cookie()
   },
@@ -206,8 +215,8 @@ export default {
           other_income: this.valueFormatter2(this.other_income),
           marital: this.marital,
           parent_num_dis: this.parent_num_dis,
-          child_before_2561: this.child_before_2561,
-          child_after_2561: this.child_after_2561,
+          child_before_2561: this.valueFormatter2(child_before_2561),
+          child_after_2561: this.valueFormatter2(child_after_2561),
           protege: this.protege,
         }
       this.$cookies.set('new_tax',new_tax);
@@ -223,8 +232,8 @@ export default {
         this.other_income= this.valueFormatter(store.state.tax.other_income)
         this.marital= store.state.tax.marital
         this.parent_num_dis=  store.state.tax.parent_num_dis
-        this.child_before_2561= store.state.tax.child_before_2561
-        this.child_after_2561= store.state.tax.child_after_2561
+        this.child_before_2561= this.valueFormatter(store.state.tax.child_before_2561)
+        this.child_after_2561= this.valueFormatter(store.state.tax.child_after_2561)
         this.protege= store.state.tax.protege
         
         this.change_component_key += 1

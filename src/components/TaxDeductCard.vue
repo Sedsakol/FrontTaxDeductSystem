@@ -2,7 +2,7 @@
     <div id="card" :key="change_component_key">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center card-title">ลดหย่อนภาษี</h4>
+                <h4 class="text-center card-title">รายการลดหย่อนภาษี</h4>
                 <form id="form-deduct">
                     <b-row>
                         <b-col>

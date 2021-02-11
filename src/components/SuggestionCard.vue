@@ -3,7 +3,7 @@
     <div class="text-center" v-if="!is_facebook_login" id="suggestion">
       <h4>แนะนำการลงทุนเพื่อลดหย่อนภาษี</h4>
       <h6>ให้เราช่วยเสนอแนวทางในการลงทุนเพื่อลดหย่อนภาษีที่ใกล้เคียงกับความต้องการ</h6>
-      <h6>กรุณา <router-link to="/login" class="text-subblue">เข้าสู่ระบบด้วย facebook</router-link> เพื่อเข้าใช้งานในส่วนการแนะนำ</h6>
+      <h6>กรุณา <router-link to="/login" class="text-subblue">เข้าสู่ระบบด้วย facebook</router-link> เพื่อเข้าใช้งานในส่วนการแนะนำการลงทุน</h6>
       <b-img center fluid alt="Responsive image" src="../assets/images/loginfrist.svg"></b-img><p/>
     </div>
 
