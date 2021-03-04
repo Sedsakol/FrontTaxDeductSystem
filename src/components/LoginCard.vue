@@ -9,52 +9,21 @@
           <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
               <b-icon icon="facebook"/> Login with Facebook 
           </button>
-          <div class="hr" id="or">
-              <span class="hr-title">หรือ</span>
-          </div>
-
-          <div id="form-login">
-            <b-form-group>
-              <b-form-input
-                v-model.trim="$v.user.email.$model"
-                type="email"
-                placeholder="อีเมล"
-                lazy-formatter
-                :formatter="formatter"
-                :state="completeStatus.value"
-              />
-            </b-form-group>
-
-            <b-form-group>
-              <b-form-input
-                v-model="$v.user.password.$model"
-                type="password"
-                placeholder="รหัสผ่าน"
-                :state="completeStatus.value"
-              />
-              <b-form-invalid-feedback id="input-1-live-feedback">{{ completeStatus.descrip }}</b-form-invalid-feedback>
-            </b-form-group>
-
-            <button class="btn btn-primary" id="fullbutton" type="submit">
-              เข้าสู่ระบบ
-            </button>
-
-          </div>
-
-          <div class="text-center mt-2">
-            <p>ยังไม่มีบัญชีผู้ใช้งาน?
             <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
-          </div>
-        </form>
+        </div>
 
-        <b-modal ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
-          <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
-          <div class="d-flex justify-content-center mb-3">
-            <b-spinner variant="dark"/>
-          </div>
-        </b-modal>
-        
-      </div>
+        <div class="text-center mt-2">
+          <p>ยังไม่มีบัญชีผู้ใช้งาน?
+        </div>
+      </form>
+
+      <b-modal ref="modal-wait" ok-title="ตกลง" :hide-header=true ok-only centered> 
+        <p class="my-4 text-center">กรุณารอสักครู่ เรากำลังเข้าสู่ระบบให้คุณ</p>
+        <div class="d-flex justify-content-center mb-3">
+          <b-spinner variant="dark"/>
+        </div>
+      </b-modal>
+      
     </div>
   </div>
 </template>

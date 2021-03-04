@@ -39,17 +39,17 @@ const routes = [
     component: Login
   },
   {
-    path: "/regis",
+    path: "/register",
     name: "Regis",
     component: Regis
   },
   {
-    path: "/taxCalculate",
+    path: "/tax/calculate",
     name: "TaxCalculate",
     component: TaxCalculate
   },
   {
-    path: "/taxDeduct",
+    path: "/tax/deduct",
     name: "TaxDeduct",
     component: TaxDeduct
   },
@@ -64,7 +64,7 @@ const routes = [
     component: Profile
   },
   {
-    path: "/result",
+    path: "/tax/result",
     name: "Result",
     component: Result
   },

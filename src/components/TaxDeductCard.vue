@@ -223,7 +223,7 @@ export default {
             store.commit('allowance_change', new_allowance)
 
             this.change_component_key += 1
-            this.$router.push("/taxCalculate")
+            this.$router.push("/tax/calculate")
         },
         async next() {
             let new_allowance = {
@@ -270,7 +270,7 @@ export default {
                 store.commit('result_tax_change', currentObj.output)
                 //console.log(currentObj.output)
                 currentObj.change_component_key += 1
-                currentObj.$router.push("/result")
+                currentObj.$router.push("/tax/result")
             })
             .catch(function (error) {
                 currentObj.msg = error;

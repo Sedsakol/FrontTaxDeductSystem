@@ -55,7 +55,7 @@
             <!-- <div>State: <strong>{{ email }}</strong></div> -->
 
             <div class="d-flex justify-content-md-center">
-              <router-link to = "/taxDeduct" class="pr-4">
+              <router-link to = "/tax/deduct" class="pr-4">
                   <button type="button" class="btn btn-outline-primary" id="regularbutton">
                       ย้อนกลับ
                   </button>

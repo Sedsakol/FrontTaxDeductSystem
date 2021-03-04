@@ -222,7 +222,7 @@ export default {
       this.$cookies.set('new_tax',new_tax);
       store.commit('tax_change', new_tax)
       this.change_component_key += 1
-      this.$router.push("/taxDeduct");
+      this.$router.push("/tax/deduct");
     },
     load_new_tax_from_cookie(){
       if (this.$cookies.isKey("new_tax")){

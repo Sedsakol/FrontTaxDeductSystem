@@ -8,7 +8,7 @@
       <b-collapse is-nav id = "nav-collapse">
         <b-navbar-nav>
           <b-nav-item><router-link to="/">หน้าแรก</router-link></b-nav-item>
-          <b-nav-item><router-link to="/taxCalculate">คำนวณภาษี</router-link></b-nav-item>
+          <b-nav-item><router-link to="/tax/calculate">คำนวณภาษี</router-link></b-nav-item>
           <b-nav-item><router-link to="/question">แบบทดสอบความเสี่ยง</router-link></b-nav-item>
           <b-nav-item><router-link to="/suggestion">แนะนำการลงทุน</router-link></b-nav-item>
           <b-nav-item><router-link to="/collectdata/login">เก็บข้อมูลกลุ่มทดสอบ
@@ -29,7 +29,7 @@
 
           <div class="d-flex flex-row" v-if="!is_login">
             <b-nav-item ><router-link to="/login"><button class="btn btn-outline-primary" id="barbutton">เข้าสู่ระบบ</button></router-link></b-nav-item>
-            <b-nav-item ><router-link to="/regis"><button class="btn btn-primary" id="barbutton">สร้างบัญชี</button></router-link></b-nav-item>
+            <b-nav-item ><router-link to="/register"><button class="btn btn-primary" id="barbutton">สร้างบัญชี</button></router-link></b-nav-item>
           </div>
 
         </b-navbar-nav>
