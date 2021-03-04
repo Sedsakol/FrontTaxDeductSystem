@@ -1,9 +1,8 @@
 <template>
   <div id="profilecard">
-    <div class="card">
-      <div class="card-body">
+    <div class="content-box">
+      <div>
         <h4 class="text-center card-title">โปรไฟล์</h4>
-        
         <form id = "form-profile">
           <b-form-group>
             <b-form-row>
@@ -16,8 +15,8 @@
             <b-form-row>
                 <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
                 <b-col cols = "5">
-                  <button id="facebook" size="sm" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
-                  <button id="facebook" size="sm" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
+                  <button id="facebook" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
+                  <button id="facebook" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
                 </b-col>
             </b-form-row> 
           </b-form-group>
@@ -64,7 +63,7 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">เงินเดือน (ต่อเดือน)</label></b-col>
-                  <b-col><b-form-input type="text" placeholder="" v-model="user.salary" :value=user.salary 
+                  <b-col md="auto"><b-form-input type="text" placeholder="" v-model="user.salary" :value=user.salary 
                   :disabled=disable_edit :formatter="valueFormatter" class="text-right" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
@@ -73,7 +72,7 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                  <b-col><b-form-input type="text" placeholder="" v-model="user.other_income" :value=user.other_income 
+                  <b-col md="auto"><b-form-input type="text" placeholder="" v-model="user.other_income" :value=user.other_income 
                   :disabled=disable_edit :formatter="valueFormatter" class="text-right" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
               </b-form-row>
@@ -114,7 +113,7 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">พ่อ-แม่</label></b-col>
-                  <b-col>
+                  <b-col md="auto">
                     <b-form-select 
                     class="form-control" 
                     v-model= "user.parent_num" 
@@ -131,7 +130,7 @@
           <b-form-group>
               <b-form-row>
                   <b-col cols = "6"><label class="col-form-label">จำนวนลูก</label></b-col>
-                  <b-col><b-form-input type="number" placeholder="" v-model="user.child_num" :value=user.child_num  :disabled=disable_edit /></b-col>
+                  <b-col md="auto"><b-form-input type="number" placeholder="" v-model="user.child_num" :value=user.child_num  :disabled=disable_edit /></b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
           </b-form-group>

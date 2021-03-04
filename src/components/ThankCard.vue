@@ -22,19 +22,22 @@
       </b-row>
     </b-card>
 
-
+    <Footer2/>
   </div>
 </template>
 
 <script>
+import Footer2 from "@/components/Footer2.vue"
 import store from "../store/index.js";
 import firebase from 'firebase/app';
 import 'firebase/auth';  
 export default {
   name: "LoginCard",
+  components : {
+    Footer2,
+  },
   data() {
     return {
-
     };
   },
   methods: {

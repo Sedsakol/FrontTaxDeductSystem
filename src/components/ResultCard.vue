@@ -1,7 +1,7 @@
 <template>
   <div id="card" :key="change_component_key">
-      <div class="card">
-        <div class="card-body">
+      <div class="content-box">
+        <div>
           <h4 class="text-center card-title">ผลการคำนวณภาษี</h4>
           <!-- example position of tax step -->
           <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/><p/><p/>
@@ -9,7 +9,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">เงินเดือน (ต่อเดือน) x 12</label></b-col>
-                    <b-col cols = "5"><b-form-input type="text" class="text-right" :value=salary_year disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="text-right" :value=salary_year disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -17,7 +17,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">รายได้อื่น ๆ (ต่อปี)</label></b-col>
-                    <b-col cols = "5"><b-form-input type="text" class="text-right" :value=other_income disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="text-right" :value=other_income disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -25,7 +25,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=allowance_60k disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=allowance_60k disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -33,7 +33,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=allowance_100k disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=allowance_100k disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -41,20 +41,17 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ค่าลดหย่อนอื่น ๆ</label></b-col>
-                    <b-col cols = "5"><b-form-input class="text-danger text-right" type="text" :value=other_allowance disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=other_allowance disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
+          </form>
 
-            <div id="space">
+          <div class="pb-3">
               <h4 class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.net_income }}</span> บาท</h4>
               <h4 class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.tax }}</span> บาท</h4>
-            </div>
-            <!-- status debug-->
-            <!-- <div>State: <strong>{{ term_status }}</strong></div> -->
-            <!-- <div>State: <strong>{{ email }}</strong></div> -->
-
-            <div class="d-flex justify-content-md-center">
+          </div>
+          <div class="d-flex justify-content-md-center">
               <router-link to = "/tax/deduct" class="pr-4">
                   <button type="button" class="btn btn-outline-primary" id="regularbutton">
                       ย้อนกลับ
@@ -66,9 +63,7 @@
                     ลงทุนเพื่อลดหย่อนภาษี
                 </button>
               </router-link> 
-            </div>
-          </form>
-
+          </div>
         </div>
       </div>
   </div>

@@ -1,8 +1,7 @@
 <template>
-  <div id="card">
-    <div class="card w-75">
-      <div class="card-body">
-
+  <div id="collect">
+    <div class="content-box w-75">
+      <div>
         <!-- start quiz -->
         <form @submit.prevent = "submit" id="quiz">
           <h4 class="text-center card-title mb-4 mt-1">กรุณาเลือกรูปแบบการลงทุนที่ตรงความต้องการคุณมากที่สุด</h4>
@@ -32,7 +31,7 @@
                     <h6 class="text-center"><b>เน้นลงทุน</b></h6>
                     <div id="group">
                       <b-icon icon="check" font-scale="1.5"/>ลดหย่อนภาษี<br>
-                      <b-icon icon="check" font-scale="1.5"/>เน้นกองทุน LTF หรือ SSF<br>
+                      <b-icon icon="check" font-scale="1.5"/>เน้นกองทุน RMF หรือ SSF<br>
                       <b-icon icon="check" font-scale="1.5"/>เพิ่มโอกาสได้ผลตอบแทนที่มากขึ้น<p/>
                     </div>
                   </label>
@@ -69,15 +68,21 @@
         
       </div>
     </div>
+
+    <Footer2/>
   </div>
 </template>
 
 <script>
+import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
 import store from "../store/index.js";
 export default {
   name: "SelectTypeCard",
+  components : {
+    Footer2,
+  },
   mixins: [validationMixin],
   data() {
     return {

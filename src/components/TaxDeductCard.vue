@@ -1,177 +1,171 @@
 <template>
-    <div id="card" :key="change_component_key">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="text-center card-title">รายการลดหย่อนภาษี</h4>
-                <form id="form-deduct">
-                    <b-row>
-                        <b-col>
-                            <b-form-group label="การลงทุน" label-class="font-weight-bold pb-3">
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ลงทุน RMF</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
-                                    <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
-                                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                                        <ul>
-                                          <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                                          <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
-                                    v-model= "rmf" :formatter="valueFormatter" /></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ลงทุน SSF</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
-                                    <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
-                                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                                        <ul>
-                                            <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                                            <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
-                                    v-model= "ssf"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group label="ประกันชีวิต" label-class="font-weight-bold pb-3">
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิต</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
-                                    <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
-                                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                                        <ul>
-                                            <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
-                                            <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
-                                            <li>รวมทุกกรมธรรม์</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
-                                    v-model= "life_insurance"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิตแบบบำนาญ</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/>
-                                    <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
-                                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                                        <ul>
-                                            <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
-                                            <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
-                                            <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
-                                            <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
-                                            <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
-                                    v-model= "pension_insurance"   :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group label="บริจาค" label-class="font-weight-bold pb-3">
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคทั่วไป</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-donation" icon="exclamation-circle"/>
-                                    <b-popover target="popover-donation" triggers="hover" placement= "rightbottom">
-                                        <ul>
-                                            <li>สามารถตรวจสอบรายชื่อองค์กรการกุศลที่มีสิทธ์ขอหักลดหย่อนเงินบริจาคได้ที่ www.rd.go.th</li>
-                                            <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
-                                    v-model= "donation"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>    
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคเพื่อการศึกษา</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-edu_donation" icon="exclamation-circle"/>
-                                    <b-popover target="popover-edu_donation" triggers="hover" placement= "rightbottom">
-                                        <ul>
-                                            <li>เพื่อการศึกษา การกีฬา การพัฒนาสังคม และเพื่อโรงพยาบาลรัฐ</li>
-                                            <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
-                                    v-model= "edu_donation"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group label="อื่น ๆ" label-class="font-weight-bold pb-3">
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ค่าดอกเบี้ยกู้บ้าน</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-home_loans" icon="exclamation-circle"/>
-                                    <b-popover target="popover-home_loans" triggers="hover" placement= "rightbottom">
-                                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                                        <ul>
-                                            <li>นำบ้านไปจำนองเพื่อค้ำประกันหนี้</li>
-                                            <li>เจ้าหนี้จำนองต้องเป็นสถาบันการเงิน หรือผู้ที่กฎหมายอนุญาต</li>
-                                            <li>ต้องอาศัยในบ้านหลังนี้</li>
-                                            <li>ระยะเวลาจำนอง ต้องเท่ากับระยะเวลากู้ยืม</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0" 
-                                    v-model= "home_loans"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">กองทุนสำรองเลี้ยงชีพ</label>
-                                    <b-icon font-scale="0.75" class="ml-2" id="popover-provident_fund" icon="exclamation-circle"/>
-                                    <b-popover target="popover-provident_fund" triggers="hover" placement= "rightbottom">
-                                        <ul>
-                                            <li>เงินสมบทของนายจ้าง ใช้ลดหย่อนภาษีไม่ได้</li>
-                                        </ul>
-                                    </b-popover></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
-                                    v-model= "provident_fund"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">ประกันสังคม (ต่อปี)</label></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
-                                    v-model= "social_security"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                            <b-form-group>
-                                <b-form-row>
-                                    <b-col col lg= "6"><label class="col-form-label">อื่น ๆ (ต่อปี)</label></b-col>
-                                    <b-col cols = "5"><b-form-input type="text" class="form-control text-right" placeholder="0"
-                                    v-model= "other"  :formatter="valueFormatter"/></b-col>
-                                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
-                                </b-form-row>
-                            </b-form-group>
-                        </b-col>
-                    </b-row>
-                    
-                </form>
-
-                <div class="d-flex justify-content-md-center">
-                    <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
-                        ย้อนกลับ
-                    </button>
-                    <div class="pl-4"/>
-                    <b-overlay :show="busy" opacity="0.5" spinner-small @hidden="onHidden" >
-                        <button @click="next" class="btn btn-primary" id="regularbutton" ref="nextbutton">
-                            ถัดไป
-                        </button>
-                    </b-overlay>
-                </div>
-
-            </div>
+  <div id="card" :key="change_component_key">
+    <div class="content-box">
+      <div>
+        <h4 class="text-center card-title">รายการลดหย่อนภาษี</h4>
+        <form id="form-deduct">
+            <b-form-group label="การลงทุน" label-class="font-weight-bold pb-3">
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ลงทุน RMF</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
+                    <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
+                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                        <ul>
+                            <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                            <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                    v-model= "rmf" :formatter="valueFormatter" /></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ลงทุน SSF</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
+                    <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
+                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                        <ul>
+                            <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                            <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                    v-model= "ssf"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group label="ประกันชีวิต" label-class="font-weight-bold pb-3">
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิต</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                    <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
+                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                        <ul>
+                            <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                            <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                            <li>รวมทุกกรมธรรม์</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                    v-model= "life_insurance"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิตแบบบำนาญ</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/>
+                    <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
+                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                        <ul>
+                            <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                            <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                            <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
+                            <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
+                            <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                    v-model= "pension_insurance"   :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group label="บริจาค" label-class="font-weight-bold pb-3">
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคทั่วไป</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-donation" icon="exclamation-circle"/>
+                    <b-popover target="popover-donation" triggers="hover" placement= "rightbottom">
+                        <ul>
+                            <li>สามารถตรวจสอบรายชื่อองค์กรการกุศลที่มีสิทธ์ขอหักลดหย่อนเงินบริจาคได้ที่ www.rd.go.th</li>
+                            <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                    v-model= "donation"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>    
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคเพื่อการศึกษา</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-edu_donation" icon="exclamation-circle"/>
+                    <b-popover target="popover-edu_donation" triggers="hover" placement= "rightbottom">
+                        <ul>
+                            <li>เพื่อการศึกษา การกีฬา การพัฒนาสังคม และเพื่อโรงพยาบาลรัฐ</li>
+                            <li>สามารถบริจาคผ่านระบบอิเล้กทรอนิกส์ได้ (e-Donation)</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                    v-model= "edu_donation"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group label="อื่น ๆ" label-class="font-weight-bold pb-3">
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ค่าดอกเบี้ยกู้บ้าน</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-home_loans" icon="exclamation-circle"/>
+                    <b-popover target="popover-home_loans" triggers="hover" placement= "rightbottom">
+                        เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                        <ul>
+                            <li>นำบ้านไปจำนองเพื่อค้ำประกันหนี้</li>
+                            <li>เจ้าหนี้จำนองต้องเป็นสถาบันการเงิน หรือผู้ที่กฎหมายอนุญาต</li>
+                            <li>ต้องอาศัยในบ้านหลังนี้</li>
+                            <li>ระยะเวลาจำนอง ต้องเท่ากับระยะเวลากู้ยืม</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0" 
+                    v-model= "home_loans"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">กองทุนสำรองเลี้ยงชีพ</label>
+                    <b-icon font-scale="0.75" class="ml-2" id="popover-provident_fund" icon="exclamation-circle"/>
+                    <b-popover target="popover-provident_fund" triggers="hover" placement= "rightbottom">
+                        <ul>
+                            <li>เงินสมบทของนายจ้าง ใช้ลดหย่อนภาษีไม่ได้</li>
+                        </ul>
+                    </b-popover></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                    v-model= "provident_fund"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">ประกันสังคม (ต่อปี)</label></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                    v-model= "social_security"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            <b-form-group>
+                <b-form-row>
+                    <b-col col lg= "6"><label class="col-form-label">อื่น ๆ (ต่อปี)</label></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input type="text" class="form-control text-right" placeholder="0"
+                    v-model= "other"  :formatter="valueFormatter"/></b-col>
+                    <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
+                </b-form-row>
+            </b-form-group>
+            
+        </form>
+        <div class="d-flex justify-content-md-center">
+            <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
+                ย้อนกลับ
+            </button>
+            <div class="pl-4"/>
+            <b-overlay :show="busy" opacity="0.5" spinner-small @hidden="onHidden" >
+                <button @click="next" class="btn btn-primary" id="regularbutton" ref="nextbutton">
+                    ถัดไป
+                </button>
+            </b-overlay>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

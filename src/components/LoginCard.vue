@@ -1,19 +1,48 @@
 <template>
   <div id="card">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
+    <div class="content-box">
+      <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-        <form @submit.stop.prevent="user_login(user.email,user.password)" id = "#form-login">
+      <form @submit.stop.prevent="user_login(user.email,user.password)">
 
-          <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
-              <b-icon icon="facebook"/> Login with Facebook 
+        <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
+            <b-icon icon="facebook"/> Login with Facebook 
+        </button>
+
+        <div class="hr">
+          <span class="hr-title">หรือ</span>
+        </div>
+
+        <div id="form-login">
+          <b-form-group>
+            <b-form-input
+              v-model.trim="$v.user.email.$model"
+              type="email"
+              placeholder="อีเมล"
+              lazy-formatter
+              :formatter="formatter"
+              :state="completeStatus.value"
+            />
+          </b-form-group>
+
+          <b-form-group>
+            <b-form-input
+              v-model="$v.user.password.$model"
+              type="password"
+              placeholder="รหัสผ่าน"
+              :state="completeStatus.value"
+            />
+            <b-form-invalid-feedback id="input-1-live-feedback">{{ completeStatus.descrip }}</b-form-invalid-feedback>
+          </b-form-group>
+
+          <button class="btn btn-primary" id="fullbutton" type="submit">
+            เข้าสู่ระบบ
           </button>
-            <router-link to="/regis" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
         </div>
 
         <div class="text-center mt-2">
           <p>ยังไม่มีบัญชีผู้ใช้งาน?
+          <router-link to="/register" class="text-subblue">สร้างบัญชีตอนนี้</router-link></p>
         </div>
       </form>
 

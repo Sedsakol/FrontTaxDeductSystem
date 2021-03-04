@@ -1,7 +1,7 @@
 <template>
   <div id="profilecard">
-    <div class="card">
-      <div class="card-body">
+    <div class="content-box">
+      <div>
         <h4 class="text-center card-title">กรอกข้อมูลโปรไฟล์</h4>
         
         <form id = "form-profile">
@@ -59,7 +59,7 @@
                   <b-col cols = "6"><label class="col-form-label" :class="{ 'text-danger': completeStatus.value === false }">เงินเดือน (ต่อเดือน)</label>
                     <span :class="{ 'text-danger': !completeStatus.value === false }">*</span>
                   </b-col>
-                  <b-col>
+                  <b-col md="auto">
                   <b-form-input type="text" placeholder="" 
                   v-model.trim="$v.user.salary.$model" :value=user.salary
                   :formatter="valueFormatter" class="text-right" /></b-col>
@@ -72,7 +72,7 @@
                   <b-col cols = "6"><label class="col-form-label" :class="{ 'text-danger': !completeStatus.value === false }">รายได้อื่น ๆ (ต่อปี)</label>
                     <span :class="{ 'text-danger': !completeStatus.value === false }">*</span>
                   </b-col>
-                  <b-col><b-form-input type="text" placeholder="" 
+                  <b-col md="auto"><b-form-input type="text" placeholder="" 
                   v-model.trim="$v.user.other_income.$model" :value=user.other_income
                   :formatter="valueFormatter" class="text-right" /></b-col>
                   <b-col cols = "1"><label class="col-form-label">บาท</label></b-col>
@@ -118,7 +118,7 @@
                   <b-col cols = "6"><label class="col-form-label" :class="{ 'text-danger': !completeStatus.value === false }">จำนวนพ่อ-แม่</label>
                     <span :class="{ 'text-danger': !completeStatus.value === false }">*</span>
                   </b-col>
-                  <b-col>
+                  <b-col md="auto">
                     <b-form-select 
                     class="form-control" 
                     v-model.trim="$v.user.parent_num.$model"
@@ -136,7 +136,7 @@
                   <b-col cols = "6"><label class="col-form-label" :class="{ 'text-danger': !completeStatus.value === false }">จำนวนลูก</label>
                     <span :class="{ 'text-danger': !completeStatus.value === false }">*</span>
                   </b-col>
-                  <b-col><b-form-input type="number" placeholder="" 
+                  <b-col md="auto"><b-form-input type="number" placeholder="" 
                   v-model.trim="$v.user.child_num.$model" :value=user.child_num /></b-col>
                   <b-col cols = "1"><label class="col-form-label">คน</label></b-col>
               </b-form-row>
@@ -150,10 +150,13 @@
 
       </div>
     </div>
+    
+    <Footer2/>
   </div>
 </template>
 
 <script>
+import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 import store from "../store/index.js";
@@ -161,6 +164,9 @@ import firebase from "firebase/app";
 import 'firebase/auth';  
 export default {
     name: "ProfileCard2",
+    components : {
+      Footer2,
+    },
     mixins: [validationMixin],
     data() {
       const now = new Date()

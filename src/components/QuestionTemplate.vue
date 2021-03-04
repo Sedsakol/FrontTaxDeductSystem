@@ -1,7 +1,7 @@
 <template>
   <div id="questioncard">
-    <div class="card">
-      <div class="card-body">
+    <div class="content-box">
+      <div>
         <!-- start quiz -->
         <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
           <h4 class="text-center card-title">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>

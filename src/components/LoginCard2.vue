@@ -12,13 +12,11 @@
               <p/>
               <h6><b>เข้าสู่ระบบด้วยบัญชี Facebook</b></h6>
               <p/>
-              <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary" >
+              <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
                 <b-icon icon="facebook"/> Login with Facebook 
               </button>
-
-              <!-- <b-button variant="link" class="text-subblue">Clear</b-button> -->
             </b-card-text>
-            <b-button variant="link" class="text-secondary" id="topright" v-on:click="clear_cookie">
+            <b-button variant="link" class="text-secondary pt-3" id="topright" v-on:click="clear_cookie">
               <b-icon icon="arrow-clockwise"/>
             </b-button>
           </b-card-body>
@@ -33,16 +31,22 @@
         <b-spinner variant="dark"/>
       </div>
     </b-modal>
-
+    
+    <Footer2/>
   </div>
+  
 </template>
 
 <script>
+import Footer2 from "@/components/Footer2.vue"
 import firebase from 'firebase/app';
 import 'firebase/auth';  
 import store from "../store/index.js";
 export default {
   name: "LoginCard",
+  components : {
+    Footer2,
+  },
   data() {
     return {
       user: {

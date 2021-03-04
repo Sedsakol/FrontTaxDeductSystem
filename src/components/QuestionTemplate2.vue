@@ -1,7 +1,7 @@
 <template>
   <div id="questioncard">
-    <div class="card">
-      <div class="card-body">
+    <div class="content-box">
+      <div>
         <!-- start quiz -->
         <form @submit.prevent = "submit" id="quiz" v-if="doingquiz">
           <h4 class="text-center card-title">แบบทดสอบระดับความเสี่ยงที่ยอมรับได้</h4>
@@ -95,15 +95,21 @@
         
       </div>
     </div>
+
+    <Footer2/>
   </div>
 </template>
 
 <script>
+import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
 import store from "../store/index.js"
 export default {
   name: "QuestionTemplate2",
+  components : {
+    Footer2,
+  },
   mixins: [validationMixin],
   props: {
     question : Array,
