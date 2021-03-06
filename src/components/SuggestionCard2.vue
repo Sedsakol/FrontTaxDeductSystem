@@ -7,42 +7,23 @@
       <b-img center fluid alt="Responsive image" src="../assets/images/loginfrist.svg"></b-img><p/>
     </div>
 
-    <!-- blue -->
-    <div class="content-box bg-mainblue mb-4" v-if="!is_facebook_login">
-      <!-- <h1>blue</h1> -->
-      <b-row>
-        <b-col cols = "7" class="text-white">
-          <p class="text-center">รูปแบบการลงทุนที่เหมาะสมกับคุณคือ</p>
-          <div v-for="ptl in plan_type_list" :key="ptl.id">
-            <div v-if="ptl.id==user_plan_type">
-                <h4 class="text-center text-lightyell"> {{ ptl.plan_type_name }} </h4>
-                <p class="text-center">รายละเอียดการกระจายซื้อ</p>
-                <div class="text-white">
-                    <b-row v-for=" (d,index) in ptl.plan_data" :key="index" class="ml-1 mr-1">
-                      <b-col col lg = "5"> {{index}} </b-col>
-                      <b-col cols = "2" md="auto"> {{d}} </b-col>
-                      <b-col cols = "1">%</b-col>
-                      <b-col cols = "1">≈</b-col>
-                      <b-col cols = "2" md="auto" class="text-right"> {{ d*100000/100 }} </b-col>
-                      <b-col col lg = "1">บาท</b-col>
-                    </b-row>
-                </div>
-            </div>
-          </div>
-        </b-col>
-        <b-col>
-            <b-img center fluid :src="require('../assets/plan_type/' + user_plan_type + '.svg')" alt=""/>
-        </b-col>
-      </b-row>
-    </div>
-
-    <!-- white -->
-    <div class="content-box" v-if="!is_facebook_login">
-      <!-- <h1>white</h1> -->
-      <b-row>
-          <!-- suggest -->
-          <b-col>
-              <h6 class="text-center">การลงทุนที่เราแนะนำ</h6><p/>
+    <div class="content-box col-md-auto" v-if="!is_facebook_login">
+      <!-- start suggestion -->
+      <b-row id="suggestion">
+        <!-- white side -->
+        <b-col cols="8" id = "leftside"> 
+          <!-- top -->
+          <b-row class="justify-content-md-center mb-4">
+            <b-col col lg = "6" class="bg-lightblue pt-3">
+              <p class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.valueFormatter(this.net_income) }}</span> บาท</p>
+              <p class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.valueFormatter(this.tax) }}</span> บาท</p>
+            </b-col>
+          </b-row>
+          <!-- down -->
+          <b-row>
+            <!-- suggest -->
+            <b-col class="ml-5 mr-5" >
+              <h6 class="text-center">การลงทุนที่แนะนำ</h6><p/>
               <b-img center fluid :src="require('../assets/steptax/step' + suggest_stair + '.svg')" alt=""/><p/>
               <b>การลงทุน</b><p/>
               <b-form-group><b-form-row>
@@ -107,16 +88,14 @@
               </b-form-row></b-form-group>
 
               <b-form-group><b-form-row class="mt-3">
-                <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
-                <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.suggest_tax) }}</b-col>
+                <b-col col lg = "6" md="auto">ต้องจ่ายภาษีเพียง</b-col>
+                <b-col cols = "4" class="text-right">{{ this.valueFormatter(this.suggest_tax) }}</b-col>
                 <b-col col lg = "2" class="text-right">บาท</b-col>
               </b-form-row></b-form-group>
-          </b-col>
+            </b-col>
 
-          <div class="hrv"></div>
-          
-          <!-- yours -->
-          <b-col>
+            <!-- yours -->
+            <b-col class="mr-5">
               <h6 class="text-center">การลงทุนของฉัน</h6><p/>
               <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/>
               <!-- <b-img center fluid alt="Responsive image" src="../assets/steptax/step1.svg"></b-img> -->
@@ -125,7 +104,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">ลงทุน RMF</label></b-col>
                   <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class="form-control text-right" v-model="rmf" @change="data_change_update" :formatter="valueFormatter" />
+                    <b-form-input type="text" class="form-control text-right" v-model="rmf" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -133,7 +112,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">ลงทุน SSF</label></b-col>
                   <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class="form-control text-right" v-model= "ssf" @change="data_change_update" :formatter="valueFormatter" />
+                    <b-form-input type="text" class="form-control text-right" v-model= "ssf" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -142,7 +121,7 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label></b-col>
                   <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class = "text-control text-right" v-model= "life_insurance" @change="data_change_update" :formatter="valueFormatter" />
+                    <b-form-input type="text" class = "text-control text-right" v-model= "life_insurance" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
@@ -150,37 +129,61 @@
               <b-form-group><b-form-row>
                   <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ</div></b-col>
                   <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class = "text-control text-right" v-model= "pension_insurance" @change="data_change_update" :formatter="valueFormatter" />
+                    <b-form-input type="text" class = "text-control text-right" v-model= "pension_insurance" @change="data_change_update" :formatter="valueFormatter" />
                   </b-col>
                   <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
               <b-form-group><b-form-row class="mt-3">
-                <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
-                <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.tax) }}</b-col>
+                <b-col col lg = "6" md="auto">ต้องจ่ายภาษีเพียง</b-col>
+                <b-col cols = "4" class="text-right">{{ this.valueFormatter(this.tax) }}</b-col>
                 <b-col col lg = "2" class="text-right">บาท</b-col>
               </b-form-row></b-form-group>
+            </b-col>
+          </b-row><p/>
+          <!-- close tag down -->
 
-          </b-col>
+          <div class="d-flex justify-content-md-center">
+            <router-link to = "/result" class="pr-4">
+                <button type="button" class="btn btn-outline-primary" id="regularbutton">
+                    ย้อนกลับ
+                </button>
+            </router-link>  
+            <!-- @click="next" -->
+            <router-link to = "/taxCalculate">
+              <button class="btn btn-primary" id="regularbutton">
+                  เสร็จสิ้น
+              </button>
+            </router-link> 
+          </div>
+        <!-- close tag white side -->
+        </b-col>
+        
+        <!-- blue side -->
+        <b-col cols="4" class="bg-mainblue" id = "rightside">
 
+          <b-img center fluid :src="require('../assets/plan_type/' + user_plan_type + '.svg')" alt=""/><p/>
+          <h6 class="text-center text-white pt-4">รูปแบบการลงทุนที่เหมาะสมกับคุณ</h6>
+
+          <div v-for="ptl in plan_type_list" :key="ptl.id">
+            <div v-if="ptl.id==user_plan_type">
+
+              <h5 class="text-center"><span class="text-lightyell">{{ ptl.plan_type_name }}</span></h5>
+              <p class="text-center text-white">รายละเอียดการกระจายซื้อ</p>
+              <div class="text-white">
+                <b-row v-for=" (d,index) in ptl.plan_data" :key="index" class="ml-1 mr-1">
+                  <b-col col lg = "6">{{index}}</b-col>
+                  <b-col cols = "4" class="text-right">{{ d*100000/100 }}</b-col>
+                  <b-col col lg = "2">บาท</b-col>
+                </b-row>
+              </div>
+
+            </div>
+          </div>
+        </b-col>
+        <!-- close tag blue side -->
       </b-row>
-
-      <b-row class="d-flex justify-content-md-center pt-4">
-        <router-link to = "/result" class="pr-4">
-            <button type="button" class="btn btn-outline-primary" id="regularbutton">
-                ย้อนกลับ
-            </button>
-        </router-link>  
-        <!-- @click="next" -->
-        <router-link to = "/taxCalculate">
-          <button class="btn btn-primary" id="regularbutton">
-              เสร็จสิ้น
-          </button>
-        </router-link> 
-      </b-row>
-
     </div>
-
 
     <b-modal ref="modal-do-quiz" :hide-header=true ok-only centered> 
       <p class="my-4 text-center">กรุณาทำแบบทดสอบความเสี่ยงก่อน เพื่อการแนะนำการลงทุนที่ดีขึ้น</p>

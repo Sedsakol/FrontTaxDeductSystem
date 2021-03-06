@@ -16,7 +16,7 @@
   --hover:    #BFD6DB;
   --lightblue:#F4F9FA;
   --white:    #FFFFFF;
-  --lightyell:#E7DDC2;
+  --lightyell:#FBDC8E;
   --primary:  #49474A;
   --secondary:#9D9D9D;
   --outline:  #BDBDBD;
@@ -64,6 +64,13 @@ h3 { font-size: 36px; }
 h4 { font-size: 24px; }
 h5 { font-size: 20px; }
 h6 { font-size: 18px; }
+
+/* ---------------------------- input OVERRIDE ---------------------------- */
+
+/* .row in bootstrap is giving a margin right and left of -15px, override it with a in-line style="margin: auto" */
+.row {
+  margin: auto;
+}
 
 /* ---------------------------- input OVERRIDE ---------------------------- */
 
@@ -223,6 +230,15 @@ div.hr {
   padding: 0 8px;
 }
 
+/*create -or- line @ LOGIN PAGE VERTICAL*/
+
+div.hrv {
+  margin-right: 40px;
+  margin-left: 40px;
+  border-left: 1px solid var(--outline);
+  height: 100;
+}
+
 /* ---------------------------- bar ---------------------------- */
 
 #bar {
@@ -288,7 +304,6 @@ div.hr {
   background-color: var(--white);
   border-radius: 10px;
   padding: 48px 40px;
-
   width: 50%;
   max-width: 650px;
   min-width: 420px;
@@ -298,26 +313,14 @@ div.hr {
 }
 
 .card-body,
-.content-box > * {
+.content-box > *:not(.row) {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.card #leftside,
-.card #rightside {
-  padding-top: 32px;
-  padding-bottom: 32px;
-  padding-left: 32px;
-  padding-right: 32px;
-}
-
 .card-title {
   padding-bottom: 24px;
-}
-
-#login2 {
-  height: 512px;
 }
 
 .container {
@@ -348,6 +351,21 @@ div.hr {
   padding-bottom: 32px;
 }
 
+/* @ SUGGESTION PAGE VER.1 */
+/* #suggestioncard .content-box {
+  width: 75%;
+  max-width: 1200px;
+  min-width: 800px;
+  padding: 0px 0px;
+} */
+
+/* @ SUGGESTION PAGE VER.2 */
+#suggestioncard .content-box {
+  width: 75%;
+  max-width: 1000px;
+  min-width: 800px;
+}
+
 #bottomright {
   position: absolute;
   bottom: 0;
@@ -358,6 +376,14 @@ div.hr {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.content-box #leftside,
+.content-box #rightside {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 /* QUESTION PAGE */
@@ -416,6 +442,10 @@ div.hr {
 
 #collect .content-box {
   max-width: 1000px;
+}
+
+#login2 {
+  height: 414px;
 }
 
 /* ---------------------------- footer ---------------------------- */

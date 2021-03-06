@@ -150,8 +150,8 @@
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
-            
         </form>
+
         <div class="d-flex justify-content-md-center">
             <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
                 ย้อนกลับ

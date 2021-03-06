@@ -5,7 +5,7 @@
         <b-col xl class="bg-mainblue center">
           <b-img src="../assets/images/collect_login.svg" alt="Image" class="rounded-0 card-img"></b-img>
         </b-col>
-        <b-col xl class="bg-white center">
+        <b-col xl class="center bg-white">
           <b-card-body class="text-center">
             <b-card-text>
               <h4><b>Welcome to <span class="text-subblue">Tax Deduct</span></b></h4>
