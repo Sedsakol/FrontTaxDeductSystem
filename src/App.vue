@@ -1,10 +1,11 @@
 <template>
     <div id="app">
       <div id="background">
-        <Bar hidden/>
+        <!-- <Bar v-if="!(['Login', 'Regis'].indexOf($route.name) > -1)" />
+        <Bar v-if="!(['/login', '/register'].indexOf($route.path) > -1)" /> -->
+        <Bar v-if="!$route.meta.hideNavigation" />
         <Content/>
-        <!-- <Footer/> -->
-        <Footer2/>
+        <Footer v-if="!$route.meta.hideFooter"/>
       </div>
     </div>
 </template>
@@ -13,15 +14,14 @@
 import Bar from "@/components/Bar.vue"
 import Content from "@/components/Content.vue"
 import Footer from "@/components/Footer.vue"
-import Footer2 from "@/components/Footer2.vue"
 export default {
   name: "app",
   components : {
         Bar,
         Content,
-        Footer,
-        Footer2,
+        Footer
   },
+  
   created(){
     console.log('created main');
     window.fbAsyncInit = () => {
