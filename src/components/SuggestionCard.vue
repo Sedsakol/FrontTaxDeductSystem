@@ -178,15 +178,15 @@
 
     </div>
 
-    <b-button variant="link" class="text-secondary pt-3">
-      ดูกองทุน และประกันภัยเพื่อลดหย่อนภาษี <b-icon shift-v="1" scale="0.8" icon="chevron-right"/>
-    </b-button>
+    <router-link to="##" class="text-secondary pt-3">
+      ดูกองทุน และประกันภัยเพื่อลดหย่อนภาษี <b-icon shift-v="1" icon="chevron-right"/>
+    </router-link>
 
     <b-modal ref="modal-do-quiz" :hide-header=true ok-only centered> 
       <p class="my-4 text-center">กรุณาทำแบบทดสอบความเสี่ยงก่อน เพื่อการแนะนำการลงทุนที่ดีขึ้น</p>
       <template #modal-footer>
         <button @click="go_quiz()" class="btn btn-primary" id="regularbutton">
-          ทำแบบทดสอบ
+          ไปทำแบบทดสอบ
         </button>
       </template>
     </b-modal>

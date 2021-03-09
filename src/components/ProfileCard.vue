@@ -15,8 +15,8 @@
             <b-form-row>
                 <b-col cols = "6"><label class="col-form-label">ผูกบัญชีกับ Facebook</label></b-col>
                 <b-col cols = "5">
-                  <button id="facebook" block class="btn btn-primary" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
-                  <button id="facebook" block class="btn btn-primary" disabled v-if="user.facebook_id">Facebook Connected</button>
+                  <button id="facebook" block class="btn btn-primary caption" v-if="!user.facebook_id" v-on:click="facebook_login" :disabled=disable_edit >เชื่อมต่อ Facebook</button>
+                  <button id="facebook" block class="btn btn-primary caption" disabled v-if="user.facebook_id">เชื่อมต่อ Facebook แล้ว</button>
                 </b-col>
             </b-form-row> 
           </b-form-group>
@@ -136,33 +136,29 @@
           </b-form-group>
         </form>
         
-        <button v-if=disable_edit @click="edit_profile_change" class="btn btn-primary" block id="fullbutton">
-          แก้ไข
-        </button>
-        
-        <div v-else>
-          <b-row>
-            <b-col>
-              <button @click="edit_profile_change" class="btn btn-outline-primary" block id="fullbutton">
+
+
+        <div v-if=disable_edit class="d-flex justify-content-md-center">
+          <button @click="edit_profile_change" class="btn btn-primary" id="fullbutton">
+            แก้ไข
+          </button>
+        </div>
+
+        <div v-else >
+          <div class="center">
+            <button @click="edit_profile_change" class="btn btn-outline-primary" id="regularbutton">
                 ยกเลิก
-              </button>
-            </b-col>
-            <b-col>
-              <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
+            </button>
+            <div class="pr-4"/>
+            <button @click="save_profile" class="btn btn-primary" id="regularbutton">
                 บันทึก
-              </button>
-            </b-col>
-          </b-row>
-
-          <br>
-
-          <b-row>
-            <b-col>
-              <button @click="showDelete" class="btn btn-danger" block id="fullbutton">
-                ลบบัญชีผู้ใช้งาน
-              </button>
-            </b-col>
-          </b-row>
+            </button>
+          </div>
+          <div class="center">
+            <b-button @click="showDelete" variant="link" class="text-secondary pt-3">
+              ลบบัญชีผู้ใช้งานถาวร
+            </b-button>
+          </div>
         </div>
 
         <b-modal ref="modal-delete" 

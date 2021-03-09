@@ -147,6 +147,7 @@
             </b-form-row>
           </b-form-group>
         </form>
+        
         <div class="d-flex justify-content-md-center">
           <button @click="next" class="btn btn-primary" id="fullbutton">
             ถัดไป

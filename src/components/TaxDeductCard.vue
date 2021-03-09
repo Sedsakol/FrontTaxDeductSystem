@@ -156,7 +156,7 @@
             <button @click="back" type="button" class="btn btn-outline-primary" id="regularbutton">
                 ย้อนกลับ
             </button>
-            <div class="pl-4"/>
+            <div class="pr-4"/>
             <b-overlay :show="busy" opacity="0.5" spinner-small @hidden="onHidden" >
                 <button @click="next" class="btn btn-primary" id="regularbutton" ref="nextbutton">
                     ถัดไป

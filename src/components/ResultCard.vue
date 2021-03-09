@@ -51,13 +51,13 @@
               <h4 class="text-center">รวมเงินได้สุทธิ <span class="text-mainblue" >{{ this.net_income }}</span> บาท</h4>
               <h4 class="text-center">ภาษีที่ต้องจ่าย <span class="text-mainblue">{{ this.tax }}</span> บาท</h4>
           </div>
+
           <div class="d-flex justify-content-md-center">
               <router-link to = "/tax/deduct" class="pr-4">
                   <button type="button" class="btn btn-outline-primary" id="regularbutton">
                       ย้อนกลับ
                   </button>
               </router-link>  
-              <!-- @click="next" -->
               <router-link to = "/suggestion">
                 <button class="btn btn-primary" id="regularbutton">
                     ลงทุนเพื่อลดหย่อนภาษี

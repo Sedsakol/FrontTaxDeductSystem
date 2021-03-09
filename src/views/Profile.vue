@@ -1,8 +1,6 @@
 <template>
-  <div class="about">
+  <div>
     <ProfileCard/>
-    
-    <!-- <ResultCard/> -->
   </div>
 </template>
 
