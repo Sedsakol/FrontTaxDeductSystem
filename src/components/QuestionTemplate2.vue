@@ -75,7 +75,7 @@
         <!-- start result -->
         <div id="quizresult" class="quizcontain" v-if="!doingquiz">
           <h4 class="text-center card-title mb-3 mt-1">
-            คุณยอมรับความเสี่ยงได้ในระดับ <span>"{{quizresult[result].text}}"</span>
+            คุณยอมรับความเสี่ยงได้ <span>"{{quizresult[result].text}}"</span>
           </h4>
           <b-img center fluid :src="quizresult[result].img" /><p/>
           <div id="group">
