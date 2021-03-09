@@ -35,7 +35,7 @@
           <b-form-group>
             <b-form-row>
                 <b-col col lg= "6"><label class="col-form-label">จำนวนพ่อแม่ที่ลดหย่อนได้</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-parent" icon="exclamation-circle"/>
+                  <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-parent" icon="exclamation-circle"/>
                   <b-popover target="popover-parent" triggers="hover" placement= "rightbottom">
                     พ่อแม่ของตนเอง (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                     <ul>
@@ -62,7 +62,7 @@
           <b-form-group>
             <b-form-row>
                 <b-col col lg= "6"><label class="col-form-label">ลูกแท้ที่เกิดก่อน พ.ศ.2561</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-child" icon="exclamation-circle"/>
+                  <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-child" icon="exclamation-circle"/>
                   <b-popover target="popover-child" triggers="hover" placement= "rightbottom">
                     เกณฑ์ความสัมพันธ์
                     <ul>
@@ -92,7 +92,7 @@
           <b-form-group>
             <b-form-row>
                 <b-col col lg= "6"><label class="col-form-label">ลูกแท้ที่เกิดหลัง พ.ศ.2561</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-child2" icon="exclamation-circle"/>
+                  <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-child2" icon="exclamation-circle"/>
                   <b-popover target="popover-child2" triggers="hover" placement= "rightbottom">
                         เกณฑ์ความสัมพันธ์
                         <ul>
@@ -122,7 +122,7 @@
           <b-form-group>
             <b-form-row>
                 <b-col col lg= "6"><label class="col-form-label">ลูกบุญธรรม</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-protege" icon="exclamation-circle"/>
+                  <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-protege" icon="exclamation-circle"/>
                   <b-popover target="popover-protege" triggers="hover" placement= "rightbottom">
                         เกณฑ์ความสัมพันธ์
                         <ul>
@@ -147,9 +147,11 @@
             </b-form-row>
           </b-form-group>
         </form>
-        <button @click="next" class="btn btn-primary" id="fullbutton">
-          ถัดไป
-        </button>
+        <div class="d-flex justify-content-md-center">
+          <button @click="next" class="btn btn-primary" id="fullbutton">
+            ถัดไป
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -241,12 +243,14 @@ export default {
         this.other_income= store.state.profile.other_income
       }
     },
+    // adding comma
     valueFormatter(value) {
       // any character that's not a digit
       var fixedValue = String(value).replace(/[^0-9]/g, ""); 
       var formatValue = Number(fixedValue).toLocaleString();
       return formatValue;
     },
+    // removing comma
     valueFormatter2(value) { 
       var fixedValue = String(value).replace(/[^0-9]/g, ""); 
       var formatValue = Number(fixedValue)

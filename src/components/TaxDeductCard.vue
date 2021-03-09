@@ -7,7 +7,7 @@
             <b-form-group label="การลงทุน" label-class="font-weight-bold pb-3">
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ลงทุน RMF</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
                     <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
                         เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                         <ul>
@@ -23,7 +23,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ลงทุน SSF</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
                     <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
                         เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                         <ul>
@@ -39,7 +39,7 @@
             <b-form-group label="ประกันชีวิต" label-class="font-weight-bold pb-3">
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิต</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
                     <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
                         เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                         <ul>
@@ -56,7 +56,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">เบี้ยประกันชีวิตแบบบำนาญ</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/>
                     <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
                         เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                         <ul>
@@ -75,7 +75,7 @@
             <b-form-group label="บริจาค" label-class="font-weight-bold pb-3">
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคทั่วไป</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-donation" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-donation" icon="exclamation-circle"/>
                     <b-popover target="popover-donation" triggers="hover" placement= "rightbottom">
                         <ul>
                             <li>สามารถตรวจสอบรายชื่อองค์กรการกุศลที่มีสิทธ์ขอหักลดหย่อนเงินบริจาคได้ที่ www.rd.go.th</li>
@@ -90,7 +90,7 @@
             <b-form-group>    
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ยอดบริจาคเพื่อการศึกษา</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-edu_donation" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-edu_donation" icon="exclamation-circle"/>
                     <b-popover target="popover-edu_donation" triggers="hover" placement= "rightbottom">
                         <ul>
                             <li>เพื่อการศึกษา การกีฬา การพัฒนาสังคม และเพื่อโรงพยาบาลรัฐ</li>
@@ -105,7 +105,7 @@
             <b-form-group label="อื่น ๆ" label-class="font-weight-bold pb-3">
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ค่าดอกเบี้ยกู้บ้าน</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-home_loans" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-home_loans" icon="exclamation-circle"/>
                     <b-popover target="popover-home_loans" triggers="hover" placement= "rightbottom">
                         เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
                         <ul>
@@ -123,7 +123,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">กองทุนสำรองเลี้ยงชีพ</label>
-                    <b-icon font-scale="0.75" class="ml-2" id="popover-provident_fund" icon="exclamation-circle"/>
+                    <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-provident_fund" icon="exclamation-circle"/>
                     <b-popover target="popover-provident_fund" triggers="hover" placement= "rightbottom">
                         <ul>
                             <li>เงินสมบทของนายจ้าง ใช้ลดหย่อนภาษีไม่ได้</li>
