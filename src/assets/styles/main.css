@@ -18,8 +18,9 @@
   --white:    #FFFFFF;
   --lightyell:#FBDC8E;
   --primary:  #49474A;
-  --secondary:#9D9D9D;
+  --secondary:#747474;
   --outline:  #BDBDBD;
+  --lightoultine: #F3F3F4;
   --facebook: #1877f2;
   
   /* width */
@@ -36,7 +37,7 @@
 }
 
 #content {
-  padding: 72px 0px 72px 0px;
+  padding: 32px 0px 56px 0px;
 }
 
 body,
@@ -60,6 +61,7 @@ body,
 
 /* ---------------------------- font OVERRIDE ---------------------------- */
 
+.caption { font-size: 14px; }
 h3 { font-size: 36px; }
 h4 { font-size: 24px; }
 h5 { font-size: 20px; }
@@ -139,6 +141,8 @@ select:focus {
 
 .btn {
   box-shadow: none !important;
+  border-radius: 8px !important;
+  height: 40px;
 }
 
 /* normal button */
@@ -242,13 +246,37 @@ div.hrv {
 /* ---------------------------- bar ---------------------------- */
 
 #bar {
-    background: var(--white);
+    background: var(--lightblue);
     width: 100%;
-    position: fixed;
-    /* top right bottom left */
-    padding: 0px 40px 0px 40px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-    z-index: 900;
+    position: sticky;
+    -webkit-position: sticky;
+    height: 96px; /* 80 + 16 px */
+    /* negative top allows for 16 pixels of movement before sticking */
+    top: -16px;
+    z-index: 1;
+}
+
+/* PSEUDO ELEMENTS to create drop-shadow */
+#bar::before,
+#bar::after {
+  content: '';
+  display: block;
+  height: 16px;
+  /* make pseudo elements sticky as well */
+  position: sticky;
+  -webkit-position: sticky;
+}
+
+#bar::before {
+  top: 64px; /* shadow is at bottom of element, so at 64 + 16 = 80px */
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.08);
+}
+
+#bar::after {
+  background: var(--lightblue);
+  top: 0;
+  /* cover should fall over shadow */
+  z-index: 2;
 }
 
 #bar a {
@@ -269,6 +297,18 @@ div.hrv {
     background-color: #F4F9FA;
 }
 
+.navbar {
+  background: var(--white);
+  height: 80px;
+  position: sticky;
+  -webkit-position: sticky;
+  border-bottom: 1px solid var(--lightoultine);
+  padding: 0px 40px 0px 40px;
+  top: 0px;
+  margin-top: -16px;
+  z-index: 3;
+}
+
 .navbar .dropdown .btn-secondary,
 .navbar .dropdown .btn-primary:hover,
 .navbar .dropdown .btn-primary:focus {
@@ -281,6 +321,7 @@ div.hrv {
 /* ---------------------------- content ---------------------------- */
 
 #card,
+#lgcard,
 #collect,
 #profilecard,
 #suggestioncard,
@@ -290,14 +331,8 @@ div.hrv {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 56px;
+  padding-top: 0px;
 }
-
-/* .card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
 
 .card,
 .content-box {
@@ -313,7 +348,7 @@ div.hrv {
 }
 
 .card-body,
-.content-box > *:not(.row) {
+.content-box > *:not(div) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -325,6 +360,14 @@ div.hrv {
 
 .container {
   padding: 24px 0px 24px 0px;
+}
+
+/* LARGE CARD */
+
+#lgcard .content-box {
+  width: 50%;
+  max-width: 1000px;
+  min-width: 800px;
 }
 
 /* HOME PAGE */
@@ -446,6 +489,7 @@ div.hrv {
 
 #login2 {
   height: 414px;
+  max-width: 700px;
 }
 
 /* ---------------------------- footer ---------------------------- */
@@ -456,21 +500,14 @@ div.hrv {
     font-size: 16px;
     padding-top: 32px;
     padding-bottom: 32px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    border-top: 1px solid var(--lightoultine);
+    /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); */
 }
 
-#footer2 {
-    color: var(--primary);
-    font-size: 14px;
-    /* if there are in App.vue open this */
-    /* margin-bottom: 32px; */
-}
-
-#footer a,
-#footer2 a {
+#footer a {
     cursor: pointer;
     text-decoration: none;
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 /* ---------------------------- popover ---------------------------- */
@@ -501,9 +538,11 @@ div.hrv {
 /* ---------------------------- color ---------------------------- */
 
 .text-danger,
-.text-danger::-webkit-input-placeholder {
+.text-danger::-webkit-input-placeholder
+ {
   color: var(--danger) !important;
 }
+
 
 .text-success{
   color: var(--success) !important;
