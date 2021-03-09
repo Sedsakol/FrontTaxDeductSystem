@@ -40,129 +40,126 @@
     <div class="content-box" v-if="!is_facebook_login">
       <!-- <h1>white</h1> -->
       <b-row>
-          <!-- suggest -->
-          <b-col>
-              <h6 class="text-center">การลงทุนที่เราแนะนำ</h6><p/>
-              <b-img center fluid :src="require('../assets/steptax/step' + suggest_stair + '.svg')" alt=""/><p/>
-              <b>การลงทุน</b><p/>
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6" md="auto"><label class="col-form-label">ลงทุน RMF</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
-                  <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
-                      เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                      <ul>
-                          <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                          <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                      </ul>
-                  </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_rmf) }}</label></b-col>
-                  <b-col col lg = "2" md = "auto" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+        <!-- suggest -->
+        <b-col>
+            <h6 class="text-center">การลงทุนที่เราแนะนำ</h6><p/>
+            <b-img center fluid :src="require('../assets/steptax/step' + suggest_stair + '.svg')" alt=""/><p/>
+            <b>การลงทุน</b><p/>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6" md="auto"><label class="col-form-label">ลงทุน RMF</label>
+                <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-rmf" icon="exclamation-circle"/>
+                <b-popover target="popover-rmf" triggers="hover" placement= "rightbottom">
+                    เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                    <ul>
+                        <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                        <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                    </ul>
+                </b-popover></b-col>
+                <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_rmf) }}</label></b-col>
+                <b-col col lg = "2" md = "auto" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6" md="auto"><label class="col-form-label">ลงทุน SSF</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
-                  <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
-                      เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                      <ul>
-                          <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
-                          <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
-                      </ul>
-                  </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_ssf) }}</label></b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6" md="auto"><label class="col-form-label">ลงทุน SSF</label>
+                <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-ssf" icon="exclamation-circle"/>
+                <b-popover target="popover-ssf" triggers="hover" placement= "rightbottom">
+                    เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                    <ul>
+                        <li>ซื้อต่อเนื่องทุกปี หรือปีเว้นปี</li>
+                        <li>ถือหน่วยลงทุนอย่างน้อย 10 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
+                    </ul>
+                </b-popover></b-col>
+                <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_ssf) }}</label></b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <p/><b>ประกันภัย</b><p/>
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6" md="auto"><label class="col-form-label">เบี้ยประกันชีวิต</label>
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
-                  <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
-                      เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                      <ul>
-                          <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
-                          <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
-                          <li>รวมทุกกรมธรรม์</li>
-                      </ul>
-                  </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_life_insurance) }}</label></b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <p/><b>ประกันภัย</b><p/>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6" md="auto"><label class="col-form-label">เบี้ยประกันชีวิต</label>
+                <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-life_insurance" icon="exclamation-circle"/>
+                <b-popover target="popover-life_insurance" triggers="hover" placement= "rightbottom">
+                    เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                    <ul>
+                        <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                        <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                        <li>รวมทุกกรมธรรม์</li>
+                    </ul>
+                </b-popover></b-col>
+                <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_life_insurance) }}</label></b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ
-                  <b-icon font-scale="0.75" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div>
-                  <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
-                      เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
-                      <ul>
-                          <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
-                          <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
-                          <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
-                          <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
-                          <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
-                      </ul>
-                  </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_pension_insurance) }}</label></b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ
+                <b-icon font-scale="0.75" shift-v="1" class="ml-2" id="popover-pension_insurance" icon="exclamation-circle"/></div>
+                <b-popover target="popover-pension_insurance" triggers="hover" placement= "rightbottom">
+                    เงื่อนไข (<span class="terxt-dange">ต้องครบเงื่อนไขทุกข้อ</span>)
+                    <ul>
+                        <li>กรมธรรม์มีระยะเวลาคุ้มครอง 10 ปีขึ้นไป</li>
+                        <li>ทำกับบริษัทประกันชีวิตในประเทศไทย</li>
+                        <li>จ่ายผลประโยชน์เป็นรายงวดสม่ำเสมอ โดยจ่ายเท่ากันทุกงวดหรือในสัดส่วนที่เพิ่มขึ้นตามระยะเวลาเอาประกันก็ได้</li>
+                        <li>ช่วงอายุการจ่ายผลประโยชน์ต้องมีอยู่ตั้งแต่ 55-85 ปี หรือมากกว่านั้น</li>
+                        <li>จ่ายเบี้ยประกันครบก่อนได้รับผลประโยชน์</li>
+                    </ul>
+                </b-popover></b-col>
+                <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_pension_insurance) }}</label></b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row class="mt-3">
-                <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
-                <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.suggest_tax) }}</b-col>
-                <b-col col lg = "2" class="text-right">บาท</b-col>
-              </b-form-row></b-form-group>
-          </b-col>
+            <b-form-group><b-form-row class="mt-3">
+              <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
+              <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.suggest_tax) }}</b-col>
+              <b-col col lg = "2" class="text-right">บาท</b-col>
+            </b-form-row></b-form-group>
+        </b-col>
+        <div class="hrv"></div>
+        <!-- yours -->
+        <b-col>
+            <h6 class="text-center">การลงทุนของฉัน</h6><p/>
+            <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/>
+            <!-- <b-img center fluid alt="Responsive image" src="../assets/steptax/step1.svg"></b-img> -->
+            <p/>
+            <b>การลงทุน</b><p/>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6"><label class="col-form-label">ลงทุน RMF</label></b-col>
+                <b-col cols = "4" class="text-right">
+                <b-form-input type="text" class="form-control text-right" v-model="rmf" @change="data_change_update" :formatter="valueFormatter" />
+                </b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-          <div class="hrv"></div>
-          
-          <!-- yours -->
-          <b-col>
-              <h6 class="text-center">การลงทุนของฉัน</h6><p/>
-              <b-img center fluid :src="require('../assets/steptax/step' + stair + '.svg')" alt=""/>
-              <!-- <b-img center fluid alt="Responsive image" src="../assets/steptax/step1.svg"></b-img> -->
-              <p/>
-              <b>การลงทุน</b><p/>
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6"><label class="col-form-label">ลงทุน RMF</label></b-col>
-                  <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class="form-control text-right" v-model="rmf" @change="data_change_update" :formatter="valueFormatter" />
-                  </b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6"><label class="col-form-label">ลงทุน SSF</label></b-col>
+                <b-col cols = "4" class="text-right">
+                <b-form-input type="text" class="form-control text-right" v-model= "ssf" @change="data_change_update" :formatter="valueFormatter" />
+                </b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6"><label class="col-form-label">ลงทุน SSF</label></b-col>
-                  <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class="form-control text-right" v-model= "ssf" @change="data_change_update" :formatter="valueFormatter" />
-                  </b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <p/><b>ประกันภัย</b><p/>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label></b-col>
+                <b-col cols = "4" class="text-right">
+                <b-form-input type="text" class = "text-control text-right" v-model= "life_insurance" @change="data_change_update" :formatter="valueFormatter" />
+                </b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <p/><b>ประกันภัย</b><p/>
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label></b-col>
-                  <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class = "text-control text-right" v-model= "life_insurance" @change="data_change_update" :formatter="valueFormatter" />
-                  </b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <b-form-group><b-form-row>
+                <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ</div></b-col>
+                <b-col cols = "4" class="text-right">
+                <b-form-input type="text" class = "text-control text-right" v-model= "pension_insurance" @change="data_change_update" :formatter="valueFormatter" />
+                </b-col>
+                <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row>
-                  <b-col col lg = "6"><label class="col-form-label">เบี้ยประกันชีวิต</label><div>แบบบำนาญ</div></b-col>
-                  <b-col cols = "4" class="text-right">
-                  <b-form-input type="text" class = "text-control text-right" v-model= "pension_insurance" @change="data_change_update" :formatter="valueFormatter" />
-                  </b-col>
-                  <b-col col lg = "2" class="text-right"><label class="col-form-label">บาท</label></b-col>
-              </b-form-row></b-form-group>
+            <b-form-group><b-form-row class="mt-3">
+              <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
+              <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.tax) }}</b-col>
+              <b-col col lg = "2" class="text-right">บาท</b-col>
+            </b-form-row></b-form-group>
 
-              <b-form-group><b-form-row class="mt-3">
-                <b-col col lg = "6" md="auto">ภาษีที่ต้องจ่าย</b-col>
-                <b-col cols = "4" class="text-right text-subblue">{{ this.valueFormatter(this.tax) }}</b-col>
-                <b-col col lg = "2" class="text-right">บาท</b-col>
-              </b-form-row></b-form-group>
-
-          </b-col>
-
+        </b-col>
       </b-row>
 
       <b-row class="d-flex justify-content-md-center pt-4">
@@ -181,6 +178,9 @@
 
     </div>
 
+    <b-button variant="link" class="text-secondary pt-3">
+      ดูกองทุน และประกันภัยเพื่อลดหย่อนภาษี <b-icon shift-v="1" scale="0.8" icon="chevron-right"/>
+    </b-button>
 
     <b-modal ref="modal-do-quiz" :hide-header=true ok-only centered> 
       <p class="my-4 text-center">กรุณาทำแบบทดสอบความเสี่ยงก่อน เพื่อการแนะนำการลงทุนที่ดีขึ้น</p>
