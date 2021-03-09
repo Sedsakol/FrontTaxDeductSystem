@@ -25,7 +25,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าลดหย่อนส่วนบุคคล</label></b-col>
-                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=allowance_60k disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=valueFormatterMinus(allowance_60k) disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -33,7 +33,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">หักค่าใช้จ่ายส่วนตัว</label></b-col>
-                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=allowance_100k disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=valueFormatterMinus(allowance_100k) disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -41,7 +41,7 @@
             <b-form-group>
                 <b-form-row>
                     <b-col col lg= "6"><label class="col-form-label">ค่าลดหย่อนอื่น ๆ</label></b-col>
-                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=other_allowance disabled/></b-col>
+                    <b-col cols = "5" md="auto"><b-form-input class="text-danger text-right" type="text" :value=valueFormatterMinus(other_allowance) disabled/></b-col>
                     <b-col col lg = "1"><label class="col-form-label">บาท</label></b-col>
                 </b-form-row>
             </b-form-group>
@@ -127,6 +127,13 @@ export default {
           var fixedValue = String(value).replace(/[^0-9]/g, ""); 
           var formatValue = Number(fixedValue).toLocaleString();
           return formatValue;
+        },
+        // adding ( - )
+        valueFormatterMinus(value) {
+          // any character that's not a digit
+          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+          var formatValue = Number(fixedValue).toLocaleString();
+          return "- " + formatValue;
         },
     }
 }
