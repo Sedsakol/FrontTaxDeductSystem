@@ -96,19 +96,22 @@
       </div>
     </div>
 
-    <Footer2/>
+    <!-- collect data footer -->
+    <b-container class="text-center caption">
+      เก็บข้อมูลเพื่อใช้ในการทำโครงงาน ของนักศึกษาคณะวิศวกรรมศาสตร์<br>
+      ภาควิชาวิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      <p/><router-link to="/" class="text-subblue">กลับหน้าหลัก</router-link>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
 import store from "../store/index.js"
 export default {
   name: "QuestionTemplate2",
   components : {
-    Footer2,
   },
   mixins: [validationMixin],
   props: {

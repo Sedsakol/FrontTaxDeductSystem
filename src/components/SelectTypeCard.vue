@@ -55,9 +55,11 @@
           </b-form-group>
         </form>
 
-        <button @click="save_plan_type" class="btn btn-primary" block id="fullbutton">
-          ถัดไป
-        </button>
+        <div class="d-flex justify-content-md-center">
+          <button @click="save_plan_type" class="btn btn-primary" block id="fullbutton">
+            ถัดไป
+          </button>
+        </div>
 
         <b-modal ref="modal-save-plan-type" ok-title="ตกลง" :hide-header=true ok-only centered> 
           <p class="my-4 text-center">กรุณารอสักครู่ ระบบกำลังบันทึกข้อมูลของคุณ</p>
@@ -69,19 +71,21 @@
       </div>
     </div>
 
-    <Footer2/>
+    <!-- collect data footer -->
+    <b-container class="text-center caption">
+      เก็บข้อมูลเพื่อใช้ในการทำโครงงาน ของนักศึกษาคณะวิศวกรรมศาสตร์<br>
+      ภาควิชาวิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      <p/><router-link to="/" class="text-subblue">กลับหน้าหลัก</router-link>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
-import store from "../store/index.js";
 export default {
   name: "SelectTypeCard",
   components : {
-    Footer2,
   },
   mixins: [validationMixin],
   data() {

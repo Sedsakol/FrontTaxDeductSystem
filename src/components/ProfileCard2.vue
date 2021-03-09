@@ -144,28 +144,32 @@
           </b-form-group>
         </form>
 
-        <button @click="save_profile" class="btn btn-primary" block id="fullbutton">
-          ถัดไป
-        </button>
+        <div class="d-flex justify-content-md-center">
+          <button @click="save_profile" class="btn btn-primary" id="fullbutton">
+            ถัดไป
+          </button>
+        </div>
 
       </div>
     </div>
     
-    <Footer2/>
+    <!-- collect data footer -->
+    <b-container class="text-center caption">
+      เก็บข้อมูลเพื่อใช้ในการทำโครงงาน ของนักศึกษาคณะวิศวกรรมศาสตร์<br>
+      ภาควิชาวิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      <p/><router-link to="/" class="text-subblue">กลับหน้าหลัก</router-link>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Footer2 from "@/components/Footer2.vue"
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 import store from "../store/index.js";
-import firebase from "firebase/app";
 import 'firebase/auth';  
 export default {
     name: "ProfileCard2",
     components : {
-      Footer2,
     },
     mixins: [validationMixin],
     data() {

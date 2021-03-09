@@ -22,19 +22,20 @@
       </b-row>
     </b-card>
 
-    <Footer2/>
+    <!-- collect data footer -->
+    <b-container class="text-center caption">
+      เก็บข้อมูลเพื่อใช้ในการทำโครงงาน ของนักศึกษาคณะวิศวกรรมศาสตร์<br>
+      ภาควิชาวิศวกรรมคอมพิวเตอร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      <p/><router-link to="/" class="text-subblue">กลับหน้าหลัก</router-link>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Footer2 from "@/components/Footer2.vue"
-import store from "../store/index.js";
-import firebase from 'firebase/app';
 import 'firebase/auth';  
 export default {
   name: "LoginCard",
   components : {
-    Footer2,
   },
   data() {
     return {
