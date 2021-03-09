@@ -6,7 +6,7 @@
       <form @submit.stop.prevent="user_login(user.email,user.password)">
 
         <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
-            <b-icon icon="facebook"/> Login with Facebook 
+          <b-icon shift-v="1" icon="facebook"/> Log in with Facebook 
         </button>
 
         <div class="hr">
