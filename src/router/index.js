@@ -91,27 +91,32 @@ const routes = [
   {
     path: "/collectdata/login",
     name: "Login2",
-    component: Login2
+    component: Login2,
+    meta: { hideNavigation: true,  hideFooter: true}
   },
   {
     path: "/collectdata/profile",
     name: "Profile2",
-    component: Profile2
+    component: Profile2,
+    meta: { hideNavigation: true,  hideFooter: true }
   },
   {
     path: "/collectdata/question",
     name: "Question2",
-    component: Question2
+    component: Question2,
+    meta: { hideNavigation: true,  hideFooter: true }
   },
   {
     path: "/collectdata/selecttype",
     name: "SelectType",
-    component: SelectType
+    component: SelectType,
+    meta: { hideNavigation: true,  hideFooter: true }
   },
   {
     path: "/collectdata/thankyou",
     name: "Thank",
-    component: Thank
+    component: Thank,
+    meta: { hideNavigation: true,  hideFooter: true }
   },
 ];
 
