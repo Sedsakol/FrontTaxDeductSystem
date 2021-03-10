@@ -411,7 +411,6 @@ export default {
           }
         },
         async check_user_login(){
-          this.$refs['modal-type'].show()
           let currentObj = this;
           if (this.$cookies.isKey("token")){
               if (store.state.profile.facebook_id){
