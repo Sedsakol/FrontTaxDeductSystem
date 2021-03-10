@@ -141,7 +141,7 @@ select:focus {
 
 .btn {
   box-shadow: none !important;
-  border-radius: 8px !important;
+  /* border-radius: 8px !important; */
   height: 40px;
 }
 
