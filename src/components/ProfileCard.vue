@@ -1,7 +1,11 @@
 <template>
   <div id="profilecard">
-    <div class="content-box">
-      <div>
+    <div class="text-center" v-if="!is_login" id="suggestion">
+      <b-img center fluid alt="Responsive image" src="../assets/images/notfound.svg"></b-img><p/>
+    </div>
+
+    <div class="content-box" v-if="is_login">
+      <div >
         <h4 class="text-center card-title">โปรไฟล์</h4>
         <form id = "form-profile">
           <b-form-group>
@@ -136,8 +140,6 @@
           </b-form-group>
         </form>
         
-
-
         <div v-if=disable_edit class="d-flex justify-content-md-center">
           <button @click="edit_profile_change" class="btn btn-primary" id="fullbutton">
             แก้ไข
@@ -183,7 +185,6 @@
           <p class="my-4 text-center">กรุณาเลือก Login with Facebook ในการเข้าสู่ระบบครั้งถัดไป</p>
           <b-img center fluid alt="" src="../assets/images/btn_facebook.svg"></b-img>
         </b-modal>
-
       </div>
     </div>
   </div>
@@ -211,6 +212,7 @@ export default {
         maxDate: today,
         // disabledDates: maxdate,
         user: store.state.profile,
+        is_login: store.state.is_login,
         
         gender_ops: [
           { value: '1', text: 'หญิง' },
@@ -237,6 +239,14 @@ export default {
     },
     
     methods: {
+      async is_login_check() {
+        if(this.$cookies.get('token') && this.$cookies.get('profile') ){
+          this.is_login = true
+        }
+        else{
+          this.is_login = false
+        }
+      },
       edit_profile_change() {
         if (this.disable_edit == true){
           this.disable_edit = false
