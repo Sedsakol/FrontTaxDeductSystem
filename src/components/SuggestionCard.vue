@@ -1,6 +1,6 @@
 <template>
   <div id="suggestioncard" :key="change_component_key">
-    <div class="text-center" v-if="is_facebook_login" id="suggestion">
+    <div class="text-center" v-if="!is_facebook_login" id="suggestion">
       <h4>แนะนำการลงทุนเพื่อลดหย่อนภาษี</h4>
       <h6>ให้เราช่วยเสนอแนวทางในการลงทุนเพื่อลดหย่อนภาษีที่ใกล้เคียงกับความต้องการ</h6>
       <h6>กรุณา <router-link to="/login" class="text-subblue">เข้าสู่ระบบด้วย facebook</router-link> เพื่อเข้าใช้งานในส่วนการแนะนำการลงทุน</h6>
@@ -8,7 +8,7 @@
     </div>
 
     <!-- blue -->
-    <div class="content-box bg-mainblue mb-4" v-if="!is_facebook_login">
+    <div class="content-box bg-mainblue mb-4" v-if="is_facebook_login">
       <!-- <h1>blue</h1> -->
       <b-row>
         <b-col cols = "7" class="text-white">
@@ -37,7 +37,7 @@
     </div>
 
     <!-- white -->
-    <div class="content-box" v-if="!is_facebook_login">
+    <div class="content-box" v-if="is_facebook_login">
       <!-- <h1>white</h1> -->
       <b-row>
         <!-- suggest -->
