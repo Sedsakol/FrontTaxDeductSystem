@@ -178,7 +178,7 @@
 
     </div>
 
-    <router-link to="##" class="text-secondary pt-3">
+    <router-link to="##" class="text-secondary pt-3" v-if="is_facebook_login">
       ดูกองทุน และประกันภัยเพื่อลดหย่อนภาษี <b-icon shift-v="1" icon="chevron-right"/>
     </router-link>
 
