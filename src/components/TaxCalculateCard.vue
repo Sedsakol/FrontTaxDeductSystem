@@ -203,8 +203,8 @@ export default {
     }
   },
   validations: {
-    child_before_2561: { between: between (0, 100) },
-    child_after_2561: { between: between (0, 100) }
+    child_before_2561: { between: between (0, 10) },
+    child_after_2561: { between: between (0, 10) }
   },
   mounted(){
     this.load_new_tax_from_cookie()
@@ -216,8 +216,8 @@ export default {
           other_income: this.valueFormatter2(this.other_income),
           marital: this.marital,
           parent_num_dis: this.parent_num_dis,
-          child_before_2561: this.valueFormatter2(child_before_2561),
-          child_after_2561: this.valueFormatter2(child_after_2561),
+          child_before_2561: this.valueFormatter2(this.child_before_2561),
+          child_after_2561: this.valueFormatter2(this.child_after_2561),
           protege: this.protege,
         }
       this.$cookies.set('new_tax',new_tax);
