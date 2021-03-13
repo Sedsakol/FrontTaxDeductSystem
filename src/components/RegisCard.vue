@@ -204,15 +204,7 @@ export default {
     }
   },
   computed: {
-    // password_match(){
-    //   if(this.user.password !== '' && this.user.confirm_password !== '' && this.user.password === this.user.confirm_password){
-    //     return true
-    //   }
-    //   else if(this.user.password !== this.user.confirm_password){
-    //     return false
-    //   }
-    //   return null
-    // },
+
   },
   methods: {
     // to format email -> lowercase
@@ -220,14 +212,14 @@ export default {
       return value.toLowerCase();
     },
     async user_regis(){
-      console.log("submit regis!");
+      // console.log("submit regis!");
       this.$v.user.$touch();
       let currentObj = this;
       if (this.$v.user.$anyError) {
-        console.log("validation error");
+        // console.log("validation error");
         this.submitStatus.value = false
         if (!(this.$v.user.email.required && this.$v.user.password.required)) {
-          this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน และกดยอมรับข้อตกลง"
+          this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
         }
         else if (!this.$v.user.password.minLength) { 
           this.submitStatus.descrip = "รหัสผ่านต้องมีมากกว่า 6 ตัวอักษร"
@@ -235,11 +227,14 @@ export default {
         else if (!this.$v.user.confirm_password.sameAsPassword) {
           this.submitStatus.descrip = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน" 
         }
+        else if (!this.$v.user.term_status.required) {
+          this.submitStatus.descrip = "กรุณากดยอมรับข้อตกลง และเงื่อนไขการใช้งาน"
+        }
       }
       else {
         this.submitStatus.value = null
         this.submitStatus.descrip = ""
-        console.log("here");
+        // console.log("here");
         await this.axios.post('register/', {
             username: this.user.email,
             password: this.user.password
