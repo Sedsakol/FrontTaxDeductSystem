@@ -200,10 +200,10 @@ export default {
       }
     },
     async user_login(email = this.user.email,password= this.user.email) {
-      console.log("submit login!");
+      // console.log("submit login!");
       this.$v.user.$touch();
       if (this.$v.user.$anyError) {
-        console.log("validation error");
+        // console.log("validation error");
         this.completeStatus.value = false
         this.completeStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
       }
@@ -228,9 +228,8 @@ export default {
           .catch(function(e) {
             currentObj.output = "error";
             console.log("Username or Password is invalid.");
-            this.completeStatus.value = false
-            this.completeStatus.descrip = "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง"
-            // console.log(e);
+            currentObj.completeStatus.value = false
+            currentObj.completeStatus.descrip = "อีเมลหรือรหัสผ่านของคุณไม่ถูกต้อง"
             currentObj.$refs['modal-wait'].hide()
           });
         }
