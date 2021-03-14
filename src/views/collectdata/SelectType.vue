@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import SelectTypeCard from "@/components/SelectTypeCard.vue";
+import SelectTypeCard from "../../components/SelectTypeCard.vue";
 export default {
     name : 'SelectType',
     components : {

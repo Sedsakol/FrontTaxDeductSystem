@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import ProfileCard2 from "@/components/ProfileCard2.vue";
+import ProfileCard2 from "../../components/ProfileCard2.vue";
 export default {
     name : 'Profile2',
     components : {

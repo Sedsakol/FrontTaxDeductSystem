@@ -1,14 +1,14 @@
 <template>
     <div>
-        <LoginCard2/>
+        <ThankCard/>
     </div>
 </template>
 <script>
-import LoginCard2 from "@/components/LoginCard2.vue";
+import ThankCard from "../../components/ThankCard.vue";
 export default {
-    name : 'Login2',
+    name : 'Thank',
     components : {
-        LoginCard2,
+        ThankCard,
     }
 }
 </script>

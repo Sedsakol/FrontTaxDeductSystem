@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import QuestionTemplate2 from "@/components/QuestionTemplate2.vue";
+import QuestionTemplate2 from "../../components/QuestionTemplate2.vue";
 export default {
     name : 'Question2',
     components : {
@@ -81,7 +81,8 @@ export default {
                 {
                     type: 0,
                     ask: 'เมื่อพิจารณารูปตัวอย่างผลตอบแทนของการลงทุนที่อาจเกิดขึ้น (ด้านล่าง) คุณเต็มใจที่จะลงทุนในแบบใด',
-                    img: require('../assets/images/no7.svg'),
+                    // ../../assets/images/no7.svg'
+                    img: require('../../assets/images/no7.svg'),
                     choice: [
                         { text: "แบบที่ 1 มีโอกาสได้รับผลตอบแทนสูงสุด 2.5% โดยไม่ขาดทุนเลย" ,value: "1"},
                         { text: "แบบที่ 2 มีโอกาสได้รับผลตอบแทนสูงสุด 7% แต่อาจขาดทุนได้ถึง 1%" ,value: "2"},

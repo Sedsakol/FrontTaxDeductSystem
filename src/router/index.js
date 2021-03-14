@@ -14,11 +14,11 @@ import Policy from "../views/Policy.vue";
 import About from "../views/About.vue";
 import Howtodelete from "../views/Howtodelete.vue";
 // collect data
-import Login2 from "../views/Login2.vue";
-import Profile2 from "../views/Profile2.vue";
-import Question2 from "../views/Question2.vue";
-import SelectType from "../views/SelectType.vue";
-import Thank from "../views/Thank.vue";
+import Login2 from "../views/collectdata/Login2.vue";
+import Profile2 from "../views/collectdata/Profile2.vue";
+import Question2 from "../views/collectdata/Question2.vue";
+import SelectType from "../views/collectdata/SelectType.vue";
+import Thank from "../views/collectdata/Thank.vue";
 
 Vue.use(VueRouter);
 
@@ -92,7 +92,7 @@ const routes = [
     path: "/collectdata/login",
     name: "Login2",
     component: Login2,
-    meta: { hideNavigation: true,  hideFooter: true}
+    meta: { hideNavigation: true,  hideFooter: true},
   },
   {
     path: "/collectdata/profile",
