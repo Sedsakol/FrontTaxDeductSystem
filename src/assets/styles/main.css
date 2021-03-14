@@ -53,9 +53,21 @@ body,
   position: relative;
 }
 
+.left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -73,8 +85,6 @@ h6 { font-size: 18px; }
 .row {
   margin: auto;
 }
-
-/* ---------------------------- input OVERRIDE ---------------------------- */
 
 /* placeholder */
 input::placeholder,
@@ -162,6 +172,7 @@ select:focus {
 /* outline button */
 .btn-outline-primary,
 .btn-outline-primary:focus{
+  background-color: var(--white) !important;
   border-color: var(--subblue);
   color: var(--subblue);
   box-shadow: none;
@@ -175,7 +186,6 @@ select:focus {
 }
 
 /* facebook button */
-
 #facebook {
   background-color: var(--facebook)!important;
   border-color: var(--facebook)!important;
@@ -183,7 +193,7 @@ select:focus {
   /* background-color: #3B5998 !important;
   border-color: #3B5998 !important; */
 }
-#card #facebook,
+#logincard #facebook,
 #collect #facebook {
   width: var(--fullwidth);
 }
@@ -219,15 +229,12 @@ select:focus {
 }
 
 /*create -or- line @ LOGIN PAGE */
-div.hr {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.hr {
   border: 0;
   border-top: 1px solid var(--outline);
   text-align: center;
   height: 0px;
   line-height: 0px;
-  width: var(--fullwidth);
 }
 .hr-title {
   background-color: var(--white);
@@ -236,7 +243,7 @@ div.hr {
 
 /*create -or- line @ LOGIN PAGE VERTICAL*/
 
-div.hrv {
+.hrv {
   margin-right: 40px;
   margin-left: 40px;
   border-left: 1px solid var(--outline);
@@ -280,10 +287,11 @@ div.hrv {
 }
 
 #bar a {
-    color: var(--primary);
-    padding-left: 16px;
+  color: var(--primary);
+  padding-left: 16px;
 }
 
+.link:hover,
 #bar .nav-item a:hover,
 #bar .nav-item a.router-link-exact-active {
   color: var(--subblue);
@@ -320,7 +328,12 @@ div.hrv {
 
 /* ---------------------------- content ---------------------------- */
 
+.container {
+  padding: 24px 0px 24px 0px;
+}
+
 #card,
+#logincard,
 #lgcard,
 #collect,
 #profilecard,
@@ -334,32 +347,85 @@ div.hrv {
   padding-top: 0px;
 }
 
-.card,
-.content-box {
+.card-title {
+  padding-bottom: 24px;
+}
+
+.wrap-box {
+  width: 50%;
+  max-width: 650px;
+  min-width: 420px;
+  border: none;
+}
+
+.wrap-box > .row {
+  align-items: flex-start;
+}
+
+.content-box,
+.sub-content-box {
   background-color: var(--white);
   border-radius: 10px;
   padding: 48px 40px;
   width: 50%;
   max-width: 650px;
   min-width: 420px;
-  align-items: center;
   border: none;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.card-body,
-.content-box > *:not(div) {
+.content-box > *:not(div),
+.sub-content-box > *:not(div) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
 }
 
-.card-title {
-  padding-bottom: 24px;
+.sub-content-box {
+  padding: 0px;
 }
 
-.container {
-  padding: 24px 0px 24px 0px;
+.sub-content-header {
+  padding: 16px 40px 8px 40px;
+  border-top: 8px solid var(--subblue);
+  border-radius: 8px 8px 0px 0px;
+  color: var(--mainblue);
+}
+
+.sub-content-footer {
+  padding-top: 16px;
+  color: var(--primary);
+}
+
+.sub-content-box:not(:first-child)  {
+  margin-left: 24px;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.table > .row p:first-child {
+  margin-bottom: 8px;
+} 
+
+.table > .row {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--outline);
+}
+
+.table > .row:first-child {
+  border-top: 1px solid var(--outline);
+}
+
+.table > .row:hover {
+  background-color: var(--lightoultine);
+  cursor: pointer;
 }
 
 /* LARGE CARD */
@@ -375,6 +441,13 @@ div.hrv {
 #home h3,
 #home h4 {
   padding-bottom: 32px;
+}
+
+/* LOG IN PAGE */
+#logincard .hr {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: var(--fullwidth);
 }
 
 #home img {
@@ -394,6 +467,17 @@ div.hrv {
   padding-bottom: 32px;
 }
 
+.sub-content-box .hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+} 
+
+.sub-content-box .hr:nth-child(2) {
+  margin-top: 0px;
+}
+
+
 /* @ SUGGESTION PAGE VER.1 */
 /* #suggestioncard .content-box {
   width: 75%;
@@ -403,7 +487,8 @@ div.hrv {
 } */
 
 /* @ SUGGESTION PAGE VER.2 */
-#suggestioncard .content-box {
+#suggestioncard > .content-box,
+#suggestioncard > .wrap-box {
   width: 75%;
   max-width: 1000px;
   min-width: 800px;
