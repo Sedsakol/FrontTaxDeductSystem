@@ -37,7 +37,7 @@
     </div>
 
     <!-- white -->
-    <div class="content-box" v-if="is_facebook_login">
+    <div class="content-box mb-4" v-if="is_facebook_login && !submit_done">
       <!-- <h1>white</h1> -->
       <b-row>
         <!-- suggest -->
@@ -163,24 +163,77 @@
       </b-row>
 
       <b-row class="d-flex justify-content-md-center pt-4">
-        <router-link to = "/result" class="pr-4">
-            <button type="button" class="btn btn-outline-primary" id="regularbutton">
-                ย้อนกลับ
-            </button>
+        <router-link to = "/tax/result" class="pr-4">
+          <button type="button" class="btn btn-outline-primary" id="regularbutton">
+              ย้อนกลับ
+          </button>
         </router-link>  
         <!-- @click="next" -->
-        <router-link to = "/taxCalculate">
+        <button v-on:click="submit_done = !submit_done" class="btn btn-primary" id="regularbutton">
+            เสร็จสิ้น
+        </button>
+      </b-row>
+
+    </div>
+
+    <!-- funds and insure -->
+    <div class="wrap-box" v-if="submit_done">
+      <b-row>
+        <!-- white left -->
+        <b-col class="sub-content-box">
+          <div class="sub-content-header">
+            <h5>กองทุนที่แนะนำ</h5>
+          </div>
+          <div class="table">
+
+            <div v-for="(funds, index) in fund_list" :key="index" class="row">
+              <div class="col-8" v-on:click="goexternal(funds.link)">
+                <p>{{ funds.name }}</p>
+                <span>{{ funds.description }}</span>
+              </div>
+              <div class="col-4 text-center">ระดับความเสี่ยง <h4 class="mt-3">{{ funds.risk }}</h4> </div>
+            </div>
+
+            <div class="sub-content-footer right">
+              <span v-on:click="goexternal(mutual_fund_url)" class="link">ดูกองทุนทั้งหมด <b-icon icon="chevron-right"/></span> 
+            </div>
+          </div>
+        </b-col>
+
+        <!-- white right -->
+        <b-col class="sub-content-box">
+          <div class="sub-content-header">
+            <h5>ประกันที่แนะนำ</h5>
+          </div>
+          <div class="table">
+
+            <div v-for="(insurance, index) in insurance_list" :key="index" class="row">
+              <div class="col-9" v-on:click="goexternal(insurance.link)">
+                <p>{{ insurance.title }}</p>
+                <div v-for="(a, aindex) in insurance.description" :key="aindex">
+                  <span><b-icon icon="dot" />{{ a }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-content-footer right">
+              <span v-on:click="goexternal(insure_url)" class="link">ดูประกันทั้งหมด <b-icon icon="chevron-right"/></span> 
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+
+      <b-row class="d-flex justify-content-md-center pt-4">
+        <button v-on:click="submit_done = !submit_done" class="btn btn-outline-primary" id="regularbutton">
+          ย้อนกลับ
+        </button>
+        <router-link to = "/tax/calculate" class="pl-4">
           <button class="btn btn-primary" id="regularbutton">
               เสร็จสิ้น
           </button>
         </router-link> 
       </b-row>
-
     </div>
-
-    <router-link to="##" class="text-secondary pt-3" v-if="is_facebook_login">
-      ดูกองทุน และประกันภัยเพื่อลดหย่อนภาษี <b-icon shift-v="1" icon="chevron-right"/>
-    </router-link>
 
     <b-modal ref="modal-do-quiz" :hide-header=true ok-only centered> 
       <p class="my-4 text-center">กรุณาทำแบบทดสอบความเสี่ยงก่อน เพื่อการแนะนำการลงทุนที่ดีขึ้น</p>
@@ -198,6 +251,10 @@
 import store from "../store/index.js"
 export default {
     name: "SuggestionCard",
+    props: {
+      fund_list : Array,
+      insurance_list : Array,
+    },
     data() {
       return {
         rmf: store.state.allowance.rmf,
@@ -232,7 +289,11 @@ export default {
 
         change_component_key : 1,
         is_facebook_login : false,
-        do_quiz : false
+        do_quiz : false,
+        submit_done : false,
+
+        mutual_fund_url : 'https://www.kasikornasset.com/th/mutual-fund/pages/index.aspx',
+        insure_url : 'https://kasikornbank.com/th/healthcareprotect'
       }
     },
     mounted(){
@@ -243,214 +304,217 @@ export default {
       this.check_do_quiz()
     },
     methods : {
-        data_change_update(){
-          let b = {
-            rmf: this.valueFormatter2(this.rmf),
-            ssf: this.valueFormatter2(this.ssf),
-            life_insurance: this.valueFormatter2(this.life_insurance),
-            pension_insurance: this.valueFormatter2(this.pension_insurance)
+      data_change_update(){
+        let b = {
+          rmf: this.valueFormatter2(this.rmf),
+          ssf: this.valueFormatter2(this.ssf),
+          life_insurance: this.valueFormatter2(this.life_insurance),
+          pension_insurance: this.valueFormatter2(this.pension_insurance)
+        }
+        console.log(b)
+
+        let a = {
+              salary: store.state.tax.salary,
+              other_income: store.state.tax.other_income,
+              marital: store.state.tax.marital,
+              parent_num_dis: store.state.tax.parent_num_dis,
+              child_before_2561: store.state.tax.child_before_2561,
+              child_after_2561: store.state.tax.child_after_2561,
+              protege: store.state.tax.protege,
+
+              rmf: this.valueFormatter2(this.rmf),
+              ssf: this.valueFormatter2(this.ssf),
+              life_insurance: this.valueFormatter2(this.life_insurance),
+              pension_insurance: this.valueFormatter2(this.pension_insurance),
+
+              donation: store.state.allowance.donation,
+              edu_donation: store.state.allowance.edu_donation,
+              home_loans: store.state.allowance.home_loans,
+              provident_fund: store.state.allowance.provident_fund,
+              social_security: store.state.allowance.social_security,
+              other: store.state.allowance.other
           }
-          console.log(b)
 
-          let a = {
-                salary: store.state.tax.salary,
-                other_income: store.state.tax.other_income,
-                marital: store.state.tax.marital,
-                parent_num_dis: store.state.tax.parent_num_dis,
-                child_before_2561: store.state.tax.child_before_2561,
-                child_after_2561: store.state.tax.child_after_2561,
-                protege: store.state.tax.protege,
+          let currentObj = this;
+          this.axios.post('tax/', a)
+          .then(function (response) {
+              currentObj.tax = response.data.tax;
+              currentObj.stair = response.data.stair
+          })
+          .catch(function (error) {
+              currentObj.msg = error;
+          });
+      },
+      load_result_tax_from_cookie(){
+          if (this.$cookies.isKey("result_tax")){
+              let result_tax = this.$cookies.get("result_tax")
+              store.commit('result_tax_change', result_tax)
+              
+              this.allowance_100k = store.state.result_tax.personal_allowance
+              this.other_allowance = store.state.result_tax.allowance
+              this.net_income = store.state.result_tax.net_income
+              
+              this.tax = store.state.result_tax.tax
+              this.stair = store.state.result_tax.stair
+              
+              this.change_component_key += 1
+          }
+      },
+      load_new_allowance_from_cookie(){
+          if (this.$cookies.isKey("new_allowance")){
+              let new_allowance = this.$cookies.get("new_allowance")
+              store.commit('allowance_change', new_allowance)
 
-                rmf: this.valueFormatter2(this.rmf),
-                ssf: this.valueFormatter2(this.ssf),
-                life_insurance: this.valueFormatter2(this.life_insurance),
-                pension_insurance: this.valueFormatter2(this.pension_insurance),
+              this.rmf = this.valueFormatter(store.state.allowance.rmf)
+              this.ssf = this.valueFormatter(store.state.allowance.ssf)
+              this.life_insurance = this.valueFormatter(store.state.allowance.life_insurance)
+              this.pension_insurance = this.valueFormatter(store.state.allowance.pension_insurance)
+              
+              this.change_component_key += 1
+          }
+      },
+      load_new_tax_from_cookie(){
+          if (this.$cookies.isKey("new_tax")){
+              let new_tax = this.$cookies.get("new_tax")
+              store.commit('tax_change', new_tax)
+              this.salary_year = store.state.tax.salary*12
+              this.other_income = store.state.tax.other_income
+              this.total_income = this.salary_year + this.other_income
 
-                donation: store.state.allowance.donation,
-                edu_donation: store.state.allowance.edu_donation,
-                home_loans: store.state.allowance.home_loans,
-                provident_fund: store.state.allowance.provident_fund,
-                social_security: store.state.allowance.social_security,
-                other: store.state.allowance.other
-            }
-
-            let currentObj = this;
-            this.axios.post('tax/', a)
+              this.change_component_key += 1
+          }
+      },
+      load_plan_type_list(){
+        let currentObj = this;
+        if (this.$cookies.isKey("token")){
+            currentObj.axios.get('plan_types/', {
+              headers: {
+                'Authorization': currentObj.$cookies.get('token')
+              }
+            })
             .then(function (response) {
-                currentObj.tax = response.data.tax;
-                currentObj.stair = response.data.stair
+                currentObj.plan_type_list = response.data.plan_type_list;
+                
+                currentObj.change_component_key += 1
             })
             .catch(function (error) {
                 currentObj.msg = error;
             });
-        },
-        load_result_tax_from_cookie(){
-            if (this.$cookies.isKey("result_tax")){
-                let result_tax = this.$cookies.get("result_tax")
-                store.commit('result_tax_change', result_tax)
-                
-                this.allowance_100k = store.state.result_tax.personal_allowance
-                this.other_allowance = store.state.result_tax.allowance
-                this.net_income = store.state.result_tax.net_income
-                
-                this.tax = store.state.result_tax.tax
-                this.stair = store.state.result_tax.stair
-                
-                this.change_component_key += 1
-            }
-        },
-        load_new_allowance_from_cookie(){
-            if (this.$cookies.isKey("new_allowance")){
-                let new_allowance = this.$cookies.get("new_allowance")
-                store.commit('allowance_change', new_allowance)
+        }
+      },
+      get_user_plan_type(){
+        let currentObj = this;
+        if (this.$cookies.isKey("token")){
+            currentObj.axios.post('plan_types/', store.state.profile ,{
+              headers: {
+                'Authorization': currentObj.$cookies.get('token'),
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(function (response) {
+                currentObj.user_plan_type = response.data.user_plan_type ;
+                currentObj.plan_type_list.every((item, index) =>{
+                    let t = item.plan_data
+                    if (item.id == currentObj.user_plan_type){
+                      Object.keys(t).forEach(function(key) {
+                        if (key == "ลงทุน RMF"){
+                            currentObj.suggest_rmf = t[key] * currentObj.total_income / 100
+                        }
+                        if (key == "ลงทุน SSF"){
+                            currentObj.suggest_ssf = t[key] * currentObj.total_income / 100
+                        }
+                        if (key =="ประกันชีวิต"){
+                            currentObj.suggest_life_insurance = t[key] * currentObj.total_income / 100
+                        }
+                        if (key == "ประกันชีวิตแบบบำนาญ"){
+                            currentObj.suggest_pension_insurance= t[key] * currentObj.total_income / 100
+                        }
+          
+                      })
+                      return false
+                      
+                    }
+                    
+                })
+                let a = {
+                  salary: store.state.tax.salary,
+                  other_income: store.state.tax.other_income,
+                  marital: store.state.tax.marital,
+                  parent_num_dis: store.state.tax.parent_num_dis,
+                  child_before_2561: store.state.tax.child_before_2561,
+                  child_after_2561: store.state.tax.child_after_2561,
+                  protege: store.state.tax.protege,
 
-                this.rmf = this.valueFormatter(store.state.allowance.rmf)
-                this.ssf = this.valueFormatter(store.state.allowance.ssf)
-                this.life_insurance = this.valueFormatter(store.state.allowance.life_insurance)
-                this.pension_insurance = this.valueFormatter(store.state.allowance.pension_insurance)
-                
-                this.change_component_key += 1
-            }
-        },
-        load_new_tax_from_cookie(){
-            if (this.$cookies.isKey("new_tax")){
-                let new_tax = this.$cookies.get("new_tax")
-                store.commit('tax_change', new_tax)
-                this.salary_year = store.state.tax.salary*12
-                this.other_income = store.state.tax.other_income
-                this.total_income = this.salary_year + this.other_income
+                  rmf: currentObj.suggest_rmf,
+                  ssf: currentObj.suggest_ssf,
+                  life_insurance: currentObj.suggest_life_insurance,
+                  pension_insurance: currentObj.suggest_pension_insurance,
 
-                this.change_component_key += 1
-            }
-        },
-        load_plan_type_list(){
-          let currentObj = this;
-          if (this.$cookies.isKey("token")){
-              currentObj.axios.get('plan_types/', {
-                headers: {
-                  'Authorization': currentObj.$cookies.get('token')
-                }
-              })
-              .then(function (response) {
-                  currentObj.plan_type_list = response.data.plan_type_list;
-                  
+                  donation: store.state.allowance.donation,
+                  edu_donation: store.state.allowance.edu_donation,
+                  home_loans: store.state.allowance.home_loans,
+                  provident_fund: store.state.allowance.provident_fund,
+                  social_security: store.state.allowance.social_security,
+                  other: store.state.allowance.other
+              }
+
+              currentObj.axios.post('tax/', a)
+              .then(async function (r) {
+                  currentObj.suggest_stair = r.data.stair
+                  currentObj.suggest_tax = r.data.tax
                   currentObj.change_component_key += 1
               })
-              .catch(function (error) {
-                  currentObj.msg = error;
-              });
-          }
-        },
-        get_user_plan_type(){
-          let currentObj = this;
-          if (this.$cookies.isKey("token")){
-              currentObj.axios.post('plan_types/', store.state.profile ,{
-                headers: {
-                  'Authorization': currentObj.$cookies.get('token'),
-                  'Content-Type': 'application/json'
-                }
-              })
-              .then(function (response) {
-                  currentObj.user_plan_type = response.data.user_plan_type ;
-                  currentObj.plan_type_list.every((item, index) =>{
-                      let t = item.plan_data
-                      if (item.id == currentObj.user_plan_type){
-                        Object.keys(t).forEach(function(key) {
-                          if (key == "ลงทุน RMF"){
-                              currentObj.suggest_rmf = t[key] * currentObj.total_income / 100
-                          }
-                          if (key == "ลงทุน SSF"){
-                              currentObj.suggest_ssf = t[key] * currentObj.total_income / 100
-                          }
-                          if (key =="ประกันชีวิต"){
-                              currentObj.suggest_life_insurance = t[key] * currentObj.total_income / 100
-                          }
-                          if (key == "ประกันชีวิตแบบบำนาญ"){
-                              currentObj.suggest_pension_insurance= t[key] * currentObj.total_income / 100
-                          }
-            
-                        })
-                        return false
-                        
-                      }
-                      
-                  })
-                  let a = {
-                    salary: store.state.tax.salary,
-                    other_income: store.state.tax.other_income,
-                    marital: store.state.tax.marital,
-                    parent_num_dis: store.state.tax.parent_num_dis,
-                    child_before_2561: store.state.tax.child_before_2561,
-                    child_after_2561: store.state.tax.child_after_2561,
-                    protege: store.state.tax.protege,
-
-                    rmf: currentObj.suggest_rmf,
-                    ssf: currentObj.suggest_ssf,
-                    life_insurance: currentObj.suggest_life_insurance,
-                    pension_insurance: currentObj.suggest_pension_insurance,
-
-                    donation: store.state.allowance.donation,
-                    edu_donation: store.state.allowance.edu_donation,
-                    home_loans: store.state.allowance.home_loans,
-                    provident_fund: store.state.allowance.provident_fund,
-                    social_security: store.state.allowance.social_security,
-                    other: store.state.allowance.other
-                }
-
-                currentObj.axios.post('tax/', a)
-                .then(async function (r) {
-                    currentObj.suggest_stair = r.data.stair
-                    currentObj.suggest_tax = r.data.tax
-                    currentObj.change_component_key += 1
-                })
-            
-              })
-              .catch(function (error) {
-                  currentObj.msg = error;
-              });
-          }
-        },
-        async check_user_login(){
-          let currentObj = this;
-          if (this.$cookies.isKey("token")){
-              if (store.state.profile.facebook_id){
-                this.is_facebook_login = true;
-                await this.load_plan_type_list()
-                await this.get_user_plan_type()
-              }
-              else{
-                this.is_facebook_login = false;
-              }
-          }
-        },
-        async check_do_quiz(){
-          let currentObj = this;
-          if (this.$cookies.isKey("token")){
-              if (store.state.profile.risk.length == 0){
-                this.do_quiz = false;
-                this.$refs['modal-do-quiz'].show()
-              }
-              else{
-                this.do_quiz = true;
-              }
-          }
-        },
-        go_quiz(){
-          this.$router.push("/question");
-          this.$router.go();
-        },
-        valueFormatter(value) {
-          // any character that's not a digit
-          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
-          var formatValue = Number(fixedValue).toLocaleString();
-          return formatValue;
-        },
-        valueFormatter2(value) { 
-          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
-          var formatValue = Number(fixedValue)
-          return formatValue;
+          
+            })
+            .catch(function (error) {
+                currentObj.msg = error;
+            });
         }
-
+      },
+      async check_user_login(){
+        let currentObj = this;
+        if (this.$cookies.isKey("token")){
+            if (store.state.profile.facebook_id){
+              this.is_facebook_login = true;
+              await this.load_plan_type_list()
+              await this.get_user_plan_type()
+            }
+            else{
+              this.is_facebook_login = false;
+            }
+        }
+      },
+      async check_do_quiz(){
+        let currentObj = this;
+        if (this.$cookies.isKey("token")){
+            if (store.state.profile.risk.length == 0){
+              this.do_quiz = false;
+              this.$refs['modal-do-quiz'].show()
+            }
+            else{
+              this.do_quiz = true;
+            }
+        }
+      },
+      go_quiz(){
+        this.$router.push("/question");
+        this.$router.go();
+      },
+      valueFormatter(value) {
+        // any character that's not a digit
+        var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+        var formatValue = Number(fixedValue).toLocaleString();
+        return formatValue;
+      },
+      valueFormatter2(value) { 
+        var fixedValue = String(value).replace(/[^0-9]/g, ""); 
+        var formatValue = Number(fixedValue)
+        return formatValue;
+      },
+      goexternal(value) {
+        // console.log(value)
+        window.open(value)
+      }
     }
 };
 </script>
