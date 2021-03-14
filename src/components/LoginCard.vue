@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div id="logincard">
     <div class="content-box">
       <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
