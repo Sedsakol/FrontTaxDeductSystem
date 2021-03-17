@@ -359,7 +359,7 @@ select:focus {
 }
 
 .wrap-box > .row {
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .content-box,

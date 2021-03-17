@@ -165,12 +165,12 @@
       <b-row class="d-flex justify-content-md-center pt-4">
         <router-link to = "/tax/result" class="pr-4">
           <button type="button" class="btn btn-outline-primary" id="regularbutton">
-              ย้อนกลับ
+            ย้อนกลับ
           </button>
         </router-link>  
         <!-- @click="next" -->
         <button v-on:click="submit_done = !submit_done" class="btn btn-primary" id="regularbutton">
-            เสร็จสิ้น
+          ถัดไป
         </button>
       </b-row>
 
@@ -194,7 +194,7 @@
               <div class="col-4 text-center">ระดับความเสี่ยง <h4 class="mt-3">{{ funds.risk }}</h4> </div>
             </div>
 
-            <div class="sub-content-footer right">
+            <div hidden class="sub-content-footer right">
               <span v-on:click="goexternal(mutual_fund_url)" class="link">ดูกองทุนทั้งหมด <b-icon icon="chevron-right"/></span> 
             </div>
           </div>
@@ -216,7 +216,7 @@
               </div>
             </div>
 
-            <div class="sub-content-footer right">
+            <div hidden class="sub-content-footer right">
               <span v-on:click="goexternal(insure_url)" class="link">ดูประกันทั้งหมด <b-icon icon="chevron-right"/></span> 
             </div>
           </div>
