@@ -15,8 +15,14 @@
         <h5>ขั้นตอนการคำนวณภาษี</h5>
         <b-img src="../assets/images/how_to_คำนวณภาษี_horizontal.svg"></b-img><p/>
       </div> -->
-      
     </div>
+
+    <b-alert variant="dark" :show="showDismissibleAlert">
+      This site cookies to provide you with experience. By using TaxDeduct, 
+      <router-link to="/term">you accept our Terms and Condition</router-link>
+      <b-icon class="close" font-scale="1.5" shift-v="-1" icon="x" v-on:click="showAlert()" />
+    </b-alert>
+
   </div>
 </template>
 
@@ -27,18 +33,14 @@ export default {
   name: "Home",
   data(){
     return{
-
+      showDismissibleAlert: true
     }
   },
-  // async hello_member() {
-  //   const response = await axios.get('user',{
-  //     header:{
-  //       Authorization: 'Bearer' + this.$cookies.getIterm('token')
-  //     }
-  //   });
-  //   this.user = response.data;
-  // }
-
+  methods : {
+    showAlert() {
+      this.showDismissibleAlert = !this.showDismissibleAlert;
+    }
+  }
 };
 </script>
 

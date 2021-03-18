@@ -250,6 +250,26 @@ select:focus {
   height: 100;
 }
 
+/* ---------------------------- alert ---------------------------- */
+
+.alert {
+  position: fixed;
+  color: var(--primary) !important;
+  margin: 0px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.alert a {
+  color: var(--primary) !important;
+}
+
+.alert .close {
+  float: right;
+}
+
 /* ---------------------------- bar ---------------------------- */
 
 #bar {
