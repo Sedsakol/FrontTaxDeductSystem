@@ -228,6 +228,12 @@ select:focus {
   width: 180px;
 }
 
+/* id of calendar-grid */
+.b-calendar #__BVID__62__calendar-grid_,
+.b-calendar #__BVID__28__calendar-grid_ {
+  width: 100%;
+}
+
 /*create -or- line @ LOGIN PAGE */
 .hr {
   border: 0;

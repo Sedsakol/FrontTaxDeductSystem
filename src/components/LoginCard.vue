@@ -3,16 +3,16 @@
     <div class="content-box">
       <h4 class="text-center card-title">เข้าสู่ระบบ</h4>
 
-      <form @submit.stop.prevent="user_login(user.email,user.password)">
-
+      <span>
         <button id="facebook" v-on:click="facebook_login" block class="btn btn-primary">
           <b-icon shift-v="1" icon="facebook"/> Log in with Facebook 
         </button>
-
         <div class="hr">
           <span class="hr-title">หรือ</span>
         </div>
+      </span>
 
+      <form @submit.stop.prevent = "user_login">
         <div id="form-login">
           <b-form-group>
             <b-form-input
@@ -35,7 +35,7 @@
             <b-form-invalid-feedback id="input-1-live-feedback">{{ completeStatus.descrip }}</b-form-invalid-feedback>
           </b-form-group>
 
-          <button class="btn btn-primary" id="fullbutton" type="submit">
+          <button class="btn btn-primary" id="fullbutton" v-on:click="user_login(user.email,user.password)" >
             เข้าสู่ระบบ
           </button>
         </div>
@@ -146,8 +146,7 @@ export default {
               currentObj.facebook_login_res = response.data;
               //console.log(currentObj.facebook_login_res.status)
               if (currentObj.facebook_login_res.status == 200){
-                await currentObj.user_login(obj.email,obj.facebook_id)
-
+                await currentObj.user_login(obj.email,obj.facebook_id,true)
               }
               else {
                 //console.log(currentObj.facebook_login_res)
@@ -199,11 +198,12 @@ export default {
         console.log("Pls Login");
       }
     },
-    async user_login(email = this.user.email,password= this.user.email) {
+    async user_login(email = this.user.email,password= this.user.email,is_facebook_login = false) {
       // console.log("submit login!");
       this.$v.user.$touch();
-      if (this.$v.user.$anyError) {
-        // console.log("validation error");
+      console.log(is_facebook_login);
+      if (this.$v.user.$anyError && !is_facebook_login) {
+        console.log("validation error");
         this.completeStatus.value = false
         this.completeStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
       }

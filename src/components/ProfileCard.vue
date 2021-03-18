@@ -43,9 +43,8 @@
           <b-form-group>
             <b-form-row>
                 <b-col cols = "6"><label class="col-form-label" >วันเดือนปีเกิด</label></b-col>
-                <b-col cols = "5">
+                <b-col cols = "5" id="cc">
                   <b-form-datepicker
-                    class="form-control" 
                     v-model = "user.birthdate"
                     :value = user.birthdate
                     :placeholder= user.birthdate
@@ -58,7 +57,9 @@
                     label-next-month = "เดือนถัดไป"
                     label-next-year = "ปีถัดไป"
                     :max=maxDate
-                    :disabled=disable_edit >
+                    :disabled=disable_edit
+                    calendar-width="100%"
+                    menu-class="W-100" >
                   </b-form-datepicker>
                 </b-col>
             </b-form-row> 
@@ -192,7 +193,6 @@
 
 <script>
 import store from "../store/index.js";
-import firebase from "firebase/app";
 import 'firebase/auth';  
 export default {
     name: "ProfileCard",
@@ -237,7 +237,9 @@ export default {
         ]
       }
     },
-    
+    mounted() {
+      this.is_login_check()
+    },
     methods: {
       async is_login_check() {
         if(this.$cookies.get('token') && this.$cookies.get('profile') ){
