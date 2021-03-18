@@ -158,7 +158,7 @@
             </button>
           </div>
           <div class="center">
-            <b-button @click="showDelete" variant="link" class="text-secondary pt-3">
+            <b-button @click="showDelete" variant="link" class="text-danger pt-4">
               ลบบัญชีผู้ใช้งานถาวร
             </b-button>
           </div>
@@ -167,8 +167,8 @@
         <b-modal ref="modal-delete" 
           ok-title="ลบ" 
           cancel-title="ยกเลิก" 
-          ok-variant="outline-danger"
-          cancel-variant="danger"
+          ok-variant="outline-primary"
+          cancel-variant="primary"
           :hide-header=true 
           @ok ="delete_account"
           centered> 
