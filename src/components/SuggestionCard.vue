@@ -23,7 +23,7 @@
                       <b-col cols = "2" md="auto"> {{d}} </b-col>
                       <b-col cols = "1">%</b-col>
                       <b-col cols = "1">≈</b-col>
-                      <b-col cols = "2" md="auto" class="text-right"> {{ d*100000/100 }} </b-col>
+                      <b-col cols = "2" md="auto" class="text-right"> {{ valueFormatter(d*100000/100) }} </b-col>
                       <b-col col lg = "1">บาท</b-col>
                     </b-row>
                 </div>
