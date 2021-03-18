@@ -489,8 +489,6 @@ export default {
       },
       async check_do_quiz(){
         let currentObj = this;
-        // currentObj.$refs['modal-do-quiz'].show()
-        currentObj.show()
         if (currentObj.$cookies.isKey("token")){
             // console.log(store.state.profile.risk.length)
             
