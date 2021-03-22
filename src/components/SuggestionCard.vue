@@ -299,7 +299,6 @@ export default {
       }
     },
     mounted(){
-      this.show()
       this.load_result_tax_from_cookie()
       this.load_new_allowance_from_cookie()
       this.load_new_tax_from_cookie()
@@ -489,21 +488,20 @@ export default {
       },
       async check_do_quiz(){
         let currentObj = this;
+        
         if (currentObj.$cookies.isKey("token")){
-            // console.log(store.state.profile.risk.length)
+                     
             
-            
-            if (store.state.profile.risk.length == 0){
-              
+            if (!store.state.profile.risk){ 
               currentObj.do_quiz = false;
               currentObj.show()
-              console.log(store.state.profile.risk.length)
             }
             else{
               currentObj.do_quiz = true;
             }
             
         }
+        currentObj.change_component_key += 1
       },
       go_quiz(){
         this.$router.push("/question");
@@ -526,6 +524,9 @@ export default {
       },
       show() {
         this.$refs['modal-do-quiz'].show()
+      },
+      hide() {
+        this.$refs['modal-do-quiz'].hide()
       }
     }
 };
