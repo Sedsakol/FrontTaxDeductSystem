@@ -490,14 +490,13 @@ export default {
         let currentObj = this;
         
         if (currentObj.$cookies.isKey("token")){
-                     
-            
+
             if (!store.state.profile.risk){ 
-              currentObj.do_quiz = false;
+              currentObj.do_quiz = true;
               currentObj.show()
             }
             else{
-              currentObj.do_quiz = true;
+              currentObj.do_quiz = false;
             }
             
         }
