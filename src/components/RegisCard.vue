@@ -48,7 +48,7 @@
           ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
           </b-form-checkbox>
 
-          <button block class="btn btn-primary mt-3" type="submit" id="fullbutton">สร้างบัญชี</button>
+          <button block class="btn btn-primary mt-3" id="fullbutton" v-on:click="user_regis">สร้างบัญชี</button>
 
           <div class="text-center mt-2">
             มีบัญชีผู้ใช้งานอยู่แล้ว?
@@ -214,7 +214,6 @@ export default {
     async user_regis(){
       // console.log("submit regis!");
       this.$v.user.$touch();
-      let currentObj = this;
       if (this.$v.user.$anyError) {
         // console.log("validation error");
         this.submitStatus.value = false
@@ -234,19 +233,19 @@ export default {
       else {
         this.submitStatus.value = null
         this.submitStatus.descrip = ""
-        // console.log("here");
+        let currentObj = this;
+        currentObj.$refs['modal-wait'].show()
         await this.axios.post('register/', {
-            username: this.user.email,
-            password: this.user.password
+            username: currentObj.user.email,
+            password: currentObj.user.password
         })
         .then(async function (response) {
             currentObj.msg = response.data.msg;
             console.log(response.data);
             if(currentObj.msg === 'created user'){
-              currentObj.$refs['modal-wait'].show()
-              await currentObj.axios.post('obtain_token/', {
-                email: this.user.email,
-                password: this.user.password
+              await currentObj.axios.post('auth/obtain_token/', {
+                email: currentObj.user.email,
+                password: currentObj.user.password
               })
               .then(function (res) {
                 currentObj.output = res.data.token;
@@ -260,20 +259,21 @@ export default {
             else if(currentObj.msg === 'email is already')
             {
               console.log(currentObj.msg)
-              this.submitStatus.value = false
-              this.submitStatus.descrip = "อีเมลนี้ถูกใช้งานแล้ว"
+              currentObj.submitStatus.value = false
+              currentObj.submitStatus.descrip = "อีเมลนี้ถูกใช้งานแล้ว"
               currentObj.$refs['modal-wait'].hide()
             }
             else if(currentObj.msg === 'field not complete')
             {
               console.log(currentObj.msg)
-              this.submitStatus.value = false
+              currentObj.submitStatus.value = false
+              this.submitStatus.descrip = "กรุณากรอกข้อมูลให้ครบถ้วน"
               currentObj.$refs['modal-wait'].hide()
             }
         })
         .catch(function (error) {
             currentObj.msg = error;
-            this.submitStatus.value = false
+            currentObj.submitStatus.value = false
             currentObj.$refs['modal-wait'].hide()
         });
       }
