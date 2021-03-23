@@ -47,16 +47,16 @@
           >
           ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
           </b-form-checkbox>
-
           <button block class="btn btn-primary mt-3" id="fullbutton" v-on:click="user_regis">สร้างบัญชี</button>
 
           <div class="text-center mt-2">
             มีบัญชีผู้ใช้งานอยู่แล้ว?
             <router-link to="/login" class="text-subblue">เข้าสู่ระบบตอนนี้</router-link>
           </div>
+          
         </div>
       </form>
-      
+
       <b-modal id="modal-term" size="lg" title="Terms and Conditions" ok-title="ยอมรับ" cancel-title="ไม่ยอมรับ" centered scrollable> 
         <div>
           <p>Last updated: December 12, 2020</p>
@@ -178,6 +178,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import store from "../store/index.js";
 export default {
   name: "RegisCard",
     mixins: [validationMixin],
@@ -211,6 +212,34 @@ export default {
     formatter(value) {
       return value.toLowerCase();
     },
+    async get_profile(){
+      let currentObj = this
+      if (this.$cookies.get('token')){
+        await this.axios
+        .get("profile/", {
+          headers: {
+            'Authorization': this.$cookies.get('token')
+          }
+        })
+        .then(async function(response) {
+          console.log("get profile");
+          currentObj.profile_t = JSON.stringify(response.data);
+          //console.log(currentObj.profile_t)
+          await currentObj.$cookies.set('profile',currentObj.profile_t);
+          store.commit('profile_change',currentObj.profile_t);
+          currentObj.$router.push("/");
+          currentObj.$router.go();
+        })
+        .catch(function(error) {
+          currentObj.profile = null;
+          console.log(error);
+          currentObj.$refs['modal-wait'].hide()
+        });
+      }
+      else{
+        console.log("Pls Login");
+      }
+    },
     async user_regis(){
       // console.log("submit regis!");
       this.$v.user.$touch();
@@ -235,25 +264,27 @@ export default {
         this.submitStatus.descrip = ""
         let currentObj = this;
         currentObj.$refs['modal-wait'].show()
-        await this.axios.post('register/', {
+        await currentObj.axios.post('register/', {
             username: currentObj.user.email,
             password: currentObj.user.password
         })
-        .then(async function (response) {
+        .then(function (response) {
             currentObj.msg = response.data.msg;
             console.log(response.data);
             if(currentObj.msg === 'created user'){
-              await currentObj.axios.post('auth/obtain_token/', {
+              currentObj.axios.post("auth/obtain_token/", {
                 email: currentObj.user.email,
                 password: currentObj.user.password
               })
-              .then(function (res) {
+              .then(async function (res) {
                 currentObj.output = res.data.token;
                 currentObj.$cookies.set("token",currentObj.output);
-                currentObj.$router.push('/');
+                await currentObj.get_profile();
+                
               })
-              .catch(function () {
+              .catch(function (err) {
                 currentObj.output = 'error';
+                console.log(err)
               });
             }
             else if(currentObj.msg === 'email is already')
