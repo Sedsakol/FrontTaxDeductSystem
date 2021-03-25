@@ -12,7 +12,7 @@
         </div>
       </span>
 
-      <form @submit.stop.prevent = "user_login">
+      <form @submit.stop.prevent = "user_login(user.email,user.password)">
         <div id="form-login">
           <b-form-group>
             <b-form-input
@@ -35,7 +35,7 @@
             <b-form-invalid-feedback id="input-1-live-feedback">{{ completeStatus.descrip }}</b-form-invalid-feedback>
           </b-form-group>
 
-          <button class="btn btn-primary" id="fullbutton" v-on:click="user_login(user.email,user.password)" >
+          <button class="btn btn-primary" id="fullbutton" >
             เข้าสู่ระบบ
           </button>
         </div>
