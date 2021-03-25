@@ -56,7 +56,7 @@
                           <li>ถือหน่วยลงทุนอย่างน้อย 5 ปี และไม่ขายจนกว่าจะอายุครบ 55 ปี หรือเสียชีวิต หรือทุพพลภาพก่อน</li>
                       </ul>
                   </b-popover></b-col>
-                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(suggest_rmf) }}</label></b-col>
+                  <b-col cols = "4" class="text-right"><label class="col-form-label">{{ this.valueFormatter(this.suggest_rmf) }}</label></b-col>
                   <b-col col lg = "2" md = "auto" class="text-right"><label class="col-form-label">บาท</label></b-col>
               </b-form-row></b-form-group>
 
@@ -415,29 +415,24 @@ export default {
             })
             .then(function (response) {
                 currentObj.user_plan_type = response.data.user_plan_type ;
-                currentObj.plan_type_list.every((item, index) =>{
-                    let t = item.plan_data
-                    if (item.id == currentObj.user_plan_type){
-                      Object.keys(t).forEach(function(key) {
-                        if (key == "ลงทุน RMF"){
-                            currentObj.suggest_rmf = t[key] * currentObj.total_income / 100
-                        }
-                        if (key == "ลงทุน SSF"){
-                            currentObj.suggest_ssf = t[key] * currentObj.total_income / 100
-                        }
-                        if (key =="ประกันชีวิต"){
-                            currentObj.suggest_life_insurance = t[key] * currentObj.total_income / 100
-                        }
-                        if (key == "ประกันชีวิตแบบบำนาญ"){
-                            currentObj.suggest_pension_insurance= t[key] * currentObj.total_income / 100
-                        }
-          
-                      })
-                      return false
-                      
-                    }
-                    
-                })
+                let curr_plan = currentObj.plan_type_list.filter(plan => plan.id == currentObj.user_plan_type)[0]
+                for(var key in curr_plan.plan_data){
+                  console.log(curr_plan.plan_data[key])
+                  let money_value = curr_plan.plan_data[key] * currentObj.total_income / 100
+                  if (key == "ลงทุน RMF"){
+                    currentObj.suggest_rmf = money_value
+                  }
+                  if (key == "ลงทุน SSF"){
+                      currentObj.suggest_ssf = money_value
+                  }
+                  if (key =="ประกันชีวิต"){
+                      currentObj.suggest_life_insurance = money_value
+                  }
+                  if (key == "ประกันชีวิตแบบบำนาญ"){
+                      currentObj.suggest_pension_insurance= money_value
+                  }
+                }
+
                 let a = {
                   salary: store.state.tax.salary,
                   other_income: store.state.tax.other_income,
