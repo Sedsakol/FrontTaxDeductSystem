@@ -47,7 +47,7 @@
           >
           ยอมรับ<span class="text-subblue">ข้อตกลง</span>และ<span class="text-subblue">เงื่อนไขการใช้งาน</span>
           </b-form-checkbox>
-          <button block class="btn btn-primary mt-3" id="fullbutton" v-on:click="user_regis">สร้างบัญชี</button>
+          <button block class="btn btn-primary mt-3" id="fullbutton">สร้างบัญชี</button>
 
           <div class="text-center mt-2">
             มีบัญชีผู้ใช้งานอยู่แล้ว?
