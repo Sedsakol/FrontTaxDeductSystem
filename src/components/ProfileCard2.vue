@@ -169,8 +169,6 @@ import store from "../store/index.js";
 import 'firebase/auth';  
 export default {
     name: "ProfileCard2",
-    components : {
-    },
     mixins: [validationMixin],
     data() {
       const now = new Date()
@@ -188,7 +186,8 @@ export default {
         //
         disable_edit: false,
         maxDate: today,
-        user: store.state.profile,     
+        user: store.state.profile,
+        is_login: store.state.is_login, 
         gender_ops: [
           { value: '1', text: 'หญิง' },
           { value: '2', text: 'ชาย' },
@@ -228,12 +227,21 @@ export default {
         child_num: { required },
       },
     },
-    computed: {
-
+    mounted() {
+      this.load_profile_from_cookie()
     },
-
-    // end computed tag
     methods: {
+      async load_profile_from_cookie() {
+        if(this.$cookies.get('token') && this.$cookies.get('profile') ){
+          this.is_login = true
+          let profile = this.$cookies.get('profile')
+          await store.commit('profile_change',profile)
+          this.user = store.state.profile
+        }
+        else{
+          this.is_login = false
+        }
+      },
       async save_profile(){
         console.log("submit next!");
         this.$v.user.$touch();
