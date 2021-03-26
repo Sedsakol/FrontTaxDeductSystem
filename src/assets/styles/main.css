@@ -332,11 +332,11 @@ select:focus {
 }
 
 .navbar {
-  background: var(--white);
+  background: var(--lightblue);
   height: 80px;
   position: sticky;
   -webkit-position: sticky;
-  border-bottom: 1px solid var(--lightoultine);
+  /* border-bottom: 1px solid var(--lightoultine); */
   padding: 0px 40px 0px 40px;
   top: 0px;
   margin-top: -16px;
@@ -346,8 +346,8 @@ select:focus {
 .navbar .dropdown .btn-secondary,
 .navbar .dropdown .btn-primary:hover,
 .navbar .dropdown .btn-primary:focus {
-  background-color: var(--white) !important; 
-  border-color: var(--white) !important;
+  background-color: var(--lightblue) !important; 
+  border-color: var(--lightblue) !important;
   box-shadow: none !important;
   color: var(--primary) !important;
 }
@@ -609,9 +609,8 @@ select:focus {
     background-color: #ffffff;
     color: var(--primary);
     font-size: 16px;
-    padding-top: 32px;
-    padding-bottom: 32px;
-    border-top: 1px solid var(--lightoultine);
+    padding: 40px 32px 24px 32px;
+    /* border-top: 1px solid var(--lightoultine); */
     /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); */
 }
 

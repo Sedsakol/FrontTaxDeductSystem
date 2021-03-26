@@ -1,7 +1,12 @@
 <template>
   <div id="footer">
-    <b-container>
     <b-row>
+      <b-col cols="5">
+        <b-img src="../assets/images/logo_black.svg" height="30" alt="Image" class="mb-3"></b-img>
+        <br>เครื่องมือในการคำนวณภาษี และแนะนำการลงทุนเพื่อลดหย่อนภาษี
+        <br>จากโครงงานของนักศึกษาชั้นปีที่ 4 สาขาวิศวกรรมคอมพิวเตอร์ 
+        <br>คณะวิศวกรรมศาสตร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      </b-col>
       <b-col>
         <b>ข้อมูลเพิ่มเติม</b><p/>
         <router-link to="/policy">นโยบายความเป็นส่วนตัว</router-link><p/>
@@ -14,7 +19,6 @@
         <p>our website : <a :href="our_website_url">{{ our_website_url }}</a></p>
       </b-col>
     </b-row>
-    </b-container>
   </div>
 </template>
 
