@@ -20,7 +20,7 @@
 
           <div v-if="is_login">
             <b-dropdown class="m-md-2" right>
-              <template #button-content>{{user.email}} </template>
+              <template #button-content>{{user.email}} <b-icon icon="chevron-down" font-scale="0.9" shift-v="4" /></template>
               <b-dropdown-item to="/profile">บัญชีของฉัน</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-item v-on:click="sign_out">ออกจากระบบ</b-dropdown-item>
