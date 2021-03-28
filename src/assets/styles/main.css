@@ -293,10 +293,9 @@ select:focus {
 
 /* ---------------------------- overlay ---------------------------- */
 
-.overlay {
-  position: fixed;
+#overlay {
+  position: fixed !important;
   height: 100%;
-  z-index: 1;
 }
 
 /* ---------------------------- bar ---------------------------- */

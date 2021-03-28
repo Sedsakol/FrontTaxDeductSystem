@@ -246,7 +246,7 @@
       </template>
     </b-modal>
 
-    <b-overlay :show="showoverlay" spinner-type="grow" no-wrap/>
+    <b-overlay id="overlay" :show="showoverlay" spinner-type="grow" no-wrap/>
 
   </div>
 </template>
