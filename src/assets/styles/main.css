@@ -204,10 +204,15 @@ select:focus {
 }
 
 /* ---------------------------- form control ---------------------------- */
+.form-control {
+  box-shadow: none !important;
+}
 
-.form-control:focus {
+.form-control:focus,
+.form-control:hover,
+.form-control:active {
   border-color: var(--subblue);
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 #form-login,
