@@ -210,8 +210,8 @@
 
               <div v-for="(insurance, index) in insurance_list" :key="index" class="row">
                 <div class="col-9" v-on:click="goexternal(insurance.link)">
-                  <p>{{ insurance.title }}</p>
-                  <div v-for="(a, aindex) in insurance.description" :key="aindex">
+                  <p>{{ insurance.display_name }}</p>
+                  <div v-for="(a, aindex) in stringToArrayFormatter(insurance.description)" :key="aindex">
                     <span><b-icon icon="dot" />{{ a }}</span>
                   </div>
                 </div>
@@ -256,8 +256,8 @@ import store from "../store/index.js"
 export default {
     name: "SuggestionCard",
     props: {
-      fund_list : Array,
-      insurance_list : Array,
+      // fund_list : Array,
+      // insurance_list : Array,
     },
     data() {
       return {
@@ -290,6 +290,8 @@ export default {
         plan_type: 'แบบป้องกันความเสี่ยง',
         user_plan_type : 1,
         plan_type_list : '',
+        fund_list : '',
+        insurance_list : '',
 
         change_component_key : 1,
         is_facebook_login : false,
@@ -418,6 +420,12 @@ export default {
             })
             .then(function (response) {
                 currentObj.user_plan_type = response.data.user_plan_type ;
+                currentObj.fund_list = response.data.fund_list;
+                currentObj.insurance_list = response.data.insurance_list;
+                // currentObj.dum = currentObj.insurance_list.description;
+                // currentObj.dum = currentObj.dum.replace(/'/g, '"');
+                // currentObj.dum = JSON.parse(currentObj.dum);
+
                 let curr_plan = currentObj.plan_type_list.filter(plan => plan.id == currentObj.user_plan_type)[0]
                 for(var key in curr_plan.plan_data){
                   console.log(curr_plan.plan_data[key])
@@ -518,6 +526,12 @@ export default {
         var fixedValue = String(value).replace(/[^0-9]/g, ""); 
         var formatValue = Number(fixedValue)
         return formatValue;
+      },
+      stringToArrayFormatter(value) {
+        // any character that's not a digit
+        var string = String(value).replace(/'/g, '"');
+        string = JSON.parse(string);
+        return string;
       },
       goexternal(value) {
         // console.log(value)
