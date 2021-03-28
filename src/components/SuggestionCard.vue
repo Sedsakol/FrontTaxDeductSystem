@@ -246,6 +246,8 @@
       </template>
     </b-modal>
 
+    <b-overlay :show="showoverlay" spinner-type="grow" no-wrap/>
+
   </div>
 </template>
 
@@ -293,6 +295,7 @@ export default {
         is_facebook_login : false,
         do_quiz : false,
         submit_done : false,
+        showoverlay : false,
 
         mutual_fund_url : 'https://www.kasikornasset.com/th/mutual-fund/pages/index.aspx',
         insure_url : 'https://kasikornbank.com/th/healthcareprotect'
@@ -358,7 +361,7 @@ export default {
               
               this.tax = store.state.result_tax.tax
               this.stair = store.state.result_tax.stair
-              
+
               this.change_component_key += 1
           }
       },
@@ -460,19 +463,21 @@ export default {
                   currentObj.suggest_stair = r.data.stair
                   currentObj.suggest_tax = r.data.tax
                   currentObj.change_component_key += 1
+                  currentObj.showoverlay = false; // remove overlay
               })
           
             })
             .catch(function (error) {
                 currentObj.msg = error;
+                currentObj.showoverlay = false; // remove overlay
             });
         }
       },
       async check_user_login(){
-        let currentObj = this;
         if (this.$cookies.isKey("token")){
             if (store.state.profile.facebook_id){
               this.is_facebook_login = true;
+              this.showoverlay = true; // show overlay
               await this.load_plan_type_list()
               await this.get_user_plan_type()
             }
@@ -480,20 +485,22 @@ export default {
               this.is_facebook_login = false;
             }
         }
+        else{
+          this.showoverlay = false
+        }
       },
       async check_do_quiz(){
         let currentObj = this;
         
         if (currentObj.$cookies.isKey("token")){
 
-            if (!store.state.profile.risk){ 
-              currentObj.do_quiz = true;
+            if (!store.state.profile.risk){ //no risk score
+              currentObj.do_quiz = false;
               currentObj.show()
             }
             else{
-              currentObj.do_quiz = false;
+              currentObj.do_quiz = true;
             }
-            
         }
         currentObj.change_component_key += 1
       },
