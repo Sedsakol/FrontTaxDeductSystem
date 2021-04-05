@@ -124,9 +124,9 @@ export default {
         },
         valueFormatter(value) {
           // any character that's not a digit
-          var fixedValue = String(value).replace(/[^0-9]/g, ""); 
-          var formatValue = Number(fixedValue).toLocaleString();
-          return formatValue;
+          var fixedValue = String(value).split( /(?=(?:\d{3})+(?:\.|$))/g ).join( "," );
+          // var formatValue = Number(fixedValue).toLocaleString();
+          return fixedValue;
         },
         // adding ( - )
         valueFormatterMinus(value) {
