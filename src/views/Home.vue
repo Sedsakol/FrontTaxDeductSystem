@@ -19,7 +19,7 @@
     </div>
 
     <b-alert variant="dark" :show="showDismissibleAlert" no-wrap>
-      This site cookies to provide you with experience. By using TaxDeduct, 
+      This site uses cookies to provide you with experience. By using TaxDeduct, 
       you accept our <router-link to="/term">Terms and Condition</router-link>
       <b-icon class="close" font-scale="1.5" shift-v="-1" icon="x" v-on:click="showAlert()" />
     </b-alert>
